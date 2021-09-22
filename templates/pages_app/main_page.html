@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% load static %}
+
+<!-- Title -->
+{% block title %} World {% endblock title %}
+
+<!-- Main Page -->
+{% block content %}
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img
+        src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-lavaux-switzerland-top-25vineyards.jpg"
+        class="d-block w-100"
+        style="max-height: 420px"
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-wine-cellar-25vineyards.jpg"
+        class="d-block w-100"
+        style="max-height: 420px"
+      />
+    </div>
+    <div class="carousel-item">
+      <img
+        src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-alsace-france-top-25vineyards.jpg"
+        class="d-block w-100"
+        style="max-height: 420px"
+      />
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleControls"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleControls"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="container text-center my-3">
+  <h1 class="fw-bold">{{homepage.title}}</h1>
+  <p>{{homepage.content|safe}}</p>
+</div>
+
+<div class="container">
+  <div class="row d-flex">
+    <div class="col col-md-12 col-lg-8">
+      <div class="row d-flex m-2 p-3" style="border: gray solid 2px">
+        {% for vineyard in vineyards %}
+        <div class="col col-md-12 col-lg-6 py-3 d-flex align-items-center">
+          <img src="{{ vineyard.cover.url }}" style="max-width: 320px" />
+        </div>
+        <div class="col col-md-12 col-lg-6 py-3" style="font-size: 14px">
+          <h5 class="fw-bold">{{vineyard.name }}</h5>
+          <p>
+            <strong> Wine Region </strong> : {{ vineyard.region.name }} <br />
+            <strong> Wines </strong> : {{ vineyard.grapes }} <br />
+            <strong> Owner </strong> : {{ vineyard.owner }} <br />
+            {{ vineyard.text|safe|truncatewords:25 }}
+          </p>
+        </div>
+        {% endfor %}
+      </div>
+      <nav class="">
+        <ul class="pagination justify-content-center">
+          {% if vineyards.has_previous %}
+          <li class="page-item">
+            <!-- <a class="page-link" href="?page=1">&laquo First</a> -->
+            <a class="page-link" href="?page={{vineyards.previous_page_number}}">&laquo</a>
+          </li>
+          {% endif %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#"
+              >Page {{vineyards.number}} of {{vineyards.paginator.num_pages}}
+            </a>
+          </li>
+          {% if vineyards.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{vineyards.next_page_number}}">&raquo</a>
+            <!-- <a class="page-link" href="?page={{vineyards.paginator.num_pages}}">Last &raquo</a> -->
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+    <div class="col col-md-12 col-lg-4">
+      <div class="m-2 p-3" style="border: gray solid 2px">
+        <h5>Sidebar's Title</h5>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, aliquam facilis magnam id
+          libero, maxime eligendi officia sed nobis deleniti accusantium dignissimos ducimus quia
+          rem, atque tempora cumque? Ipsa, sequi.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

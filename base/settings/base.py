@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'ckeditor',
+    'pages_app.apps.PagesAppConfig',
+    'vineyards.apps.VineyardsConfig',
 ]
 
 MIDDLEWARE = [
@@ -128,7 +132,7 @@ STATIC_ROOT = BASE_DIR / "static-live" / "static-root"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = "/media/"
+MEDIA_URL = "/top25vineyards/"
 
 MEDIA_ROOT = BASE_DIR / "static-live" / "media-root"
 
@@ -148,3 +152,14 @@ SECURE_HSTS_SECONDS = None
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_FRAME_DENY = False
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker"],
+                    ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter',
+                     'JustifyRight', 'JustifyBlock'],
+                    ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink",
+                        "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
+                    ["Maximize"]],
+    },
+}

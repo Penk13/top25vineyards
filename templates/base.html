@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/t25vy-favicon.png' %}" />
+
+    <title>
+      {% block title %} {% endblock title %} | Top 25 Vineyards - World's Best Vineyards
+    </title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container d-flex">
+        <a class="navbar-brand" href="#">
+          <img
+            src="https://www.top25vineyards.com/static/imgs/world-best-vineyards-wines-wineries-top-25-vineyards.png"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-3">
+            <li class="nav-item">
+              <a class="nav-link" href="#">World's Top 25</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Top By Regions
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Discover
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    {% block content %} {% endblock content %}
+
+    <footer class="bg-dark text-light text-center text-lg-start">
+      <div class="container p-4">
+        <div class="row py-3 text-center">
+          <!-- Footer Image 1 -->
+          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+            <img
+              src="https://www.top25vineyards.com/wp-content/uploads/2020/08/worlds-best-vineyards-top-25-vineyards-footer.png"
+            />
+          </div>
+          <!-- Menu Footer 1 -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled mb-0">
+              <li>
+                <a href="contact-us/" class="text-white-50" style="text-decoration: none"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a href="about-us/" class="text-white-50" style="text-decoration: none">About Us</a>
+              </li>
+              <li>
+                <a href="terms-of-service/" class="text-white-50" style="text-decoration: none"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a href="privacy-statement/" class="text-white-50" style="text-decoration: none"
+                  >Privacy Statement</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Menu Footer 2 -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled">
+              <li>
+                <a href="newsletter/" class="text-white-50" style="text-decoration: none"
+                  >Newsletter</a
+                >
+              </li>
+              <li>
+                <a href="advertise-with-us/" class="text-white-50" style="text-decoration: none"
+                  >Advertise with Us</a
+                >
+              </li>
+              <li>
+                <a href="help-or-faq/" class="text-white-50" style="text-decoration: none"
+                  >Help/FAQ</a
+                >
+              </li>
+              <li>
+                <a href="site-map/" class="text-white-50" style="text-decoration: none">Site Map</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Footer Image 2 -->
+          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+            <img
+              src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travel-and-tourism-foundation-footer.png"
+            />
+            <img
+              src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travelindex-travel-index-logo.png"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="text-center p-3 text-muted" style="background-color: rgba(0, 0, 0, 0.5)">
+        Copyright © 2021 - Top25Vineyards.com & Travelindex. All Rights Reserved |
+        <a class="text-white" href="https://www.travelindex.com/" style="text-decoration: none"
+          >❤Travelindex Group</a
+        >
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
