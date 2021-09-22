@@ -29,7 +29,7 @@
     <!-- Navbar -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <div class="container d-flex">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{% url 'pages_app:mainpage' %}">
           <img
             src="https://www.top25vineyards.com/static/imgs/world-best-vineyards-wines-wineries-top-25-vineyards.png"
           />
@@ -48,7 +48,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-3">
             <li class="nav-item">
-              <a class="nav-link" href="#">World's Top 25</a>
+              <a class="nav-link" href="{% url 'pages_app:mainpage' %}">World's Top 25</a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -62,8 +62,9 @@
                 Top By Regions
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                {% for region in navbar_region %}
+                <li><a class="dropdown-item" href="#">{{ region.name }}</a></li>
+                {% endfor %}
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -184,12 +185,16 @@
           </div>
           <!-- Footer Image 2 -->
           <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
-            <img
-              src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travel-and-tourism-foundation-footer.png"
-            />
-            <img
-              src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travelindex-travel-index-logo.png"
-            />
+            <a href="https://www.travelfoundation.org/">
+              <img
+                src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travel-and-tourism-foundation-footer.png"
+              />
+            </a>
+            <a href="https://www.travelindex.com/">
+              <img
+                src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travelindex-travel-index-logo.png"
+              />
+            </a>
           </div>
         </div>
       </div>
