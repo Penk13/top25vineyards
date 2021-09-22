@@ -5,7 +5,7 @@ from vineyards.models import Vineyard
 
 
 def mainpage(request):
-    homepage = get_object_or_404(ContentPage, pk=1)
+    homepage = get_object_or_404(ContentPage, types="HOME_PAGE")
     p = Paginator(Vineyard.objects.all(), 3)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
@@ -19,17 +19,21 @@ def contact_us(request):
 
 
 def about_us(request):
-    context = {}
+    about_us = get_object_or_404(ContentPage, title="About Us")
+    context = {"about_us": about_us}
     return render(request, "pages_app/about_us.html", context)
 
 
 def terms_of_service(request):
-    context = {}
+    terms_of_service = get_object_or_404(ContentPage, title="Terms of Service")
+    context = {"terms_of_service": terms_of_service}
     return render(request, "pages_app/terms_of_service.html", context)
 
 
 def privacy_statement(request):
-    context = {}
+    privacy_statement = get_object_or_404(
+        ContentPage, title="Privacy Statement")
+    context = {"privacy_statement": privacy_statement}
     return render(request, "pages_app/privacy_statement.html", context)
 
 
@@ -39,15 +43,19 @@ def newsletter(request):
 
 
 def advertise_with_us(request):
-    context = {}
+    advertise_with_us = get_object_or_404(
+        ContentPage, title="Advertise with Us")
+    context = {"advertise_with_us": advertise_with_us}
     return render(request, "pages_app/advertise_with_us.html", context)
 
 
 def help_or_faq(request):
-    context = {}
+    help_or_faq = get_object_or_404(ContentPage, title="Help / FAQ")
+    context = {"help_or_faq": help_or_faq}
     return render(request, "pages_app/help_or_faq.html", context)
 
 
 def site_map(request):
-    context = {}
+    site_map = get_object_or_404(ContentPage, title="Site Map")
+    context = {"site_map": site_map}
     return render(request, "pages_app/site_map.html", context)

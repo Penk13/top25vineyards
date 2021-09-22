@@ -1,1 +1,21 @@
-<h1>Terms of Service</h1>
+{% extends 'base.html' %} {% load static %}
+<!-- Title -->
+{% block title %} {{terms_of_service.title}} {% endblock title %}
+
+<!--  -->
+{% block content %}
+<div class="container">
+  <div class="row d-flex">
+    <div class="col col-md-12 col-lg-8">
+      <div class="m-3 p-5" style="border: gray solid 2px">
+        <h1 class="text-center fw-bold">{{terms_of_service.title}}</h1>
+        <br />
+        {{terms_of_service.content|safe}}
+      </div>
+    </div>
+    <div class="col col-md-12 col-lg-4">
+      <div class="m-3 p-3" style="border: gray solid 2px">sidebar</div>
+    </div>
+  </div>
+</div>
+{% endblock %}
