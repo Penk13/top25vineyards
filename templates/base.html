@@ -46,13 +46,15 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-3">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-3 fw-bold" style="font-size: 12px">
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'pages_app:mainpage' %}">WORLD'S TOP 25</a>
+              <a class="nav-link text-light" href="{% url 'pages_app:mainpage' %}"
+                >WORLD'S TOP 25</a
+              >
             </li>
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle text-light"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -69,7 +71,7 @@
             </li>
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle text-light"
                 href="#"
                 id="navbarDropdown"
                 role="button"
@@ -100,11 +102,11 @@
     {% block content %} {% endblock content %}
 
     <!-- Footer -->
-    <footer class="bg-dark text-light text-center text-lg-start">
-      <div class="container p-4">
-        <div class="row py-3 text-center">
+    <footer class="bg-dark text-light text-center">
+      <div class="container py-4">
+        <div class="row py-3">
           <!-- Footer Image 1 -->
-          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+          <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-start">
             <a href="#">
               <img
                 src="https://www.top25vineyards.com/wp-content/uploads/2020/08/worlds-best-vineyards-top-25-vineyards-footer.png"
@@ -112,8 +114,8 @@
             </a>
           </div>
           <!-- Menu Footer 1 -->
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <ul class="list-unstyled mb-0">
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled mb-0 text-start">
               <li>
                 <a
                   href="{% url 'pages_app:contact_us' %}"
@@ -149,8 +151,8 @@
             </ul>
           </div>
           <!-- Menu Footer 2 -->
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <ul class="list-unstyled">
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <ul class="list-unstyled text-start">
               <li>
                 <a
                   href="{% url 'pages_app:newsletter' %}"
@@ -186,15 +188,17 @@
             </ul>
           </div>
           <!-- Footer Image 2 -->
-          <div class="col-lg-3 col-md-12 mb-4 mb-md-0">
+          <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-end">
             <a href="https://www.travelfoundation.org/">
               <img
                 src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travel-and-tourism-foundation-footer.png"
+                class="px-3"
               />
             </a>
             <a href="https://www.travelindex.com/">
               <img
                 src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travelindex-travel-index-logo.png"
+                class="px-3"
               />
             </a>
           </div>
@@ -202,11 +206,13 @@
       </div>
 
       <!-- Copyright -->
-      <div class="text-center p-3 text-muted" style="background-color: rgba(0, 0, 0, 0.5)">
-        Copyright © 2021 - Top25Vineyards.com & Travelindex. All Rights Reserved |
-        <a class="text-white" href="https://www.travelindex.com/" style="text-decoration: none"
-          >❤Travelindex Group</a
-        >
+      <div class="p-3 text-muted" style="background-color: rgba(0, 0, 0, 0.5)">
+        <div class="container text-start" style="font-size: 14px">
+          Copyright © 2021 - Top25Vineyards.com & Travelindex. All Rights Reserved |
+          <a class="text-white" href="https://www.travelindex.com/" style="text-decoration: none"
+            >❤Travelindex Group</a
+          >
+        </div>
       </div>
     </footer>
 
