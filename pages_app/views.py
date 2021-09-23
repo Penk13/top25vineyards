@@ -8,7 +8,7 @@ from news.models import Post
 def mainpage(request):
     homepage = get_object_or_404(ContentPage, types="HOME_PAGE")
     navbar_region = get_list_or_404(Region)
-    p = Paginator(Vineyard.objects.all(), 10)
+    p = Paginator(Vineyard.objects.all().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     travel_news = get_list_or_404(Post)

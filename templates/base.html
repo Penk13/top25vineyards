@@ -25,9 +25,7 @@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <div class="container d-flex">
         <a class="navbar-brand" href="{% url 'pages_app:mainpage' %}">
-          <img
-            src="https://www.top25vineyards.com/static/imgs/world-best-vineyards-wines-wineries-top-25-vineyards.png"
-          />
+          <img src="{% static 'img/navbrand.png'%}" />
         </a>
         <button
           class="navbar-toggler"
@@ -103,9 +101,7 @@
           <!-- Footer Image 1 -->
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-start">
             <a href="#">
-              <img
-                src="https://www.top25vineyards.com/wp-content/uploads/2020/08/worlds-best-vineyards-top-25-vineyards-footer.png"
-              />
+              <img src="{% static 'img/footer.png' %}" />
             </a>
           </div>
           <!-- Menu Footer 1 -->
@@ -185,16 +181,10 @@
           <!-- Footer Image 2 -->
           <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-end">
             <a href="https://www.travelfoundation.org/">
-              <img
-                src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travel-and-tourism-foundation-footer.png"
-                class="px-3"
-              />
+              <img src="{% static 'img/footer2.png' %}" class="px-3" />
             </a>
             <a href="https://www.travelindex.com/">
-              <img
-                src="https://www.top25vineyards.com/wp-content/uploads/2020/08/travelindex-travel-index-logo.png"
-                class="px-3"
-              />
+              <img src="{% static 'img/footer3.png' %}" class="px-3" />
             </a>
           </div>
         </div>
