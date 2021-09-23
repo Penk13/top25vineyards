@@ -2,16 +2,20 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.core.paginator import Paginator
 from .models import ContentPage
 from vineyards.models import Vineyard, Region
+from news.models import Post
 
 
 def mainpage(request):
     homepage = get_object_or_404(ContentPage, types="HOME_PAGE")
     navbar_region = get_list_or_404(Region)
-    p = Paginator(Vineyard.objects.all(), 3)
+    p = Paginator(Vineyard.objects.all(), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
+    travel_news = get_list_or_404(Post)
     context = {"homepage": homepage,
-               "navbar_region": navbar_region, "vineyards": vineyards}
+               "navbar_region": navbar_region,
+               "vineyards": vineyards,
+               "travel_news": travel_news}
     return render(request, "pages_app/main_page.html", context)
 
 

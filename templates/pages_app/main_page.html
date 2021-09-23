@@ -108,5 +108,47 @@
       </div>
     </div>
   </div>
+  <!-- Global Trael News -->
+  <div class="col col-md-12 col-lg-8">
+    <div class="row d-flex m-2 p-3" style="border: gray solid 2px">
+      <h5 class="fw-bold">Global Travel News</h5>
+      <hr />
+      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <div class="row d-flex py-3">
+              {% for news in travel_news %}
+              <div class="col-12 col-lg-6 px-3 py-2">
+                <img src="{{ news.cover.url }}" style="max-height: 180px" class="img-fluid" />
+                <h6 class="fw-bold py-2">{{news.title}}</h6>
+              </div>
+              {% if forloop.counter|divisibleby:4 %}
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <div class="row d-flex py-3">{% endif %} {% endfor %}</div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'pages_app.apps.PagesAppConfig',
     'vineyards.apps.VineyardsConfig',
+    'news.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
