@@ -6,26 +6,23 @@
 <!-- Main Page -->
 {% block content %}
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
+  <div class="carousel-inner" style="max-height: 500px">
     <div class="carousel-item active">
       <img
         src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-lavaux-switzerland-top-25vineyards.jpg"
         class="d-block w-100"
-        style="max-height: 420px"
       />
     </div>
     <div class="carousel-item">
       <img
         src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-wine-cellar-25vineyards.jpg"
         class="d-block w-100"
-        style="max-height: 420px"
       />
     </div>
     <div class="carousel-item">
       <img
         src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-alsace-france-top-25vineyards.jpg"
         class="d-block w-100"
-        style="max-height: 420px"
       />
     </div>
   </div>
@@ -61,11 +58,11 @@
       <div class="col col-md-12 col-lg-8 ps-0">
         <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
           {% for vineyard in vineyards %}
-          <div class="col col-md-12 col-lg-6 py-3 text-end">
+          <div class="col col-md-12 col-lg-6 py-3 text-center">
             <img src="{{ vineyard.cover.url }}" style="max-width: 340px" / class="text-end">
           </div>
           <div class="col col-md-12 col-lg-6 py-3" style="font-size: 14px">
-            <h5 class="fw-bold">{{vineyard.name }}</h5>
+            <h5 class="fw-bold">{{ vineyard.name }}</h5>
             <p>
               <strong> Wine Region </strong> : {{ vineyard.region.name }} <br />
               <strong> Wines </strong> : {{ vineyard.grapes }} <br />
@@ -99,12 +96,10 @@
       </div>
       <!-- Sidebar -->
       <div class="col col-md-12 col-lg-4 pe-0">
-        <div class="p-3 ms-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+        <div class="p-4 ms-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
           <h5>Sidebar's Title</h5>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, aliquam facilis magnam id
-            libero, maxime eligendi officia sed nobis deleniti accusantium dignissimos ducimus quia
-            rem, atque tempora cumque? Ipsa, sequi.
+            <img src="https://picsum.photos/300/250" class="py-2" />
           </p>
         </div>
       </div>
