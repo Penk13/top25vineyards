@@ -59,7 +59,20 @@
         <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
           {% for vineyard in vineyards %}
           <div class="col col-md-12 col-lg-6 py-3 text-center">
-            <img src="{{ vineyard.cover.url }}" style="max-width: 340px" / class="text-end">
+            <div style="position: absolute; z-index: 1">
+              <p
+                style="z-index: 1; position: absolute; padding-top: 10px"
+                class="text-light fs-4 fw-bold m-4"
+              >
+                TOP <span>{{ vineyard.rating }}</span>
+              </p>
+              <img
+                src="{% static 'img/overlay-icon-bg.png' %} "
+                style="max-width: 125px"
+                class="m-2"
+              />
+            </div>
+            <img src="{{ vineyard.cover.url }}" style="max-width: 340px" />
           </div>
           <div class="col col-md-12 col-lg-6 py-3" style="font-size: 14px">
             <h5 class="fw-bold">{{ vineyard.name }}</h5>
