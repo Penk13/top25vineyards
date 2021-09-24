@@ -5,15 +5,16 @@
 
 <!-- Main Page -->
 {% block content %}
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+<!-- Carousel -->
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner" style="max-height: 500px">
-    <div class="carousel-item active">
+    <div class="carousel-item active" data-bs-interval="5000">
       <img
         src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-lavaux-switzerland-top-25vineyards.jpg"
         class="d-block w-100"
       />
     </div>
-    <div class="carousel-item">
+    <div class="carousel-item" data-bs-interval="3000">
       <img
         src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-wine-cellar-25vineyards.jpg"
         class="d-block w-100"
@@ -29,7 +30,7 @@
   <button
     class="carousel-control-prev"
     type="button"
-    data-bs-target="#carouselExampleControls"
+    data-bs-target="#carouselExampleFade"
     data-bs-slide="prev"
   >
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -38,7 +39,7 @@
   <button
     class="carousel-control-next"
     type="button"
-    data-bs-target="#carouselExampleControls"
+    data-bs-target="#carouselExampleFade"
     data-bs-slide="next"
   >
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
