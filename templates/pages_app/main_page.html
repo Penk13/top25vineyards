@@ -5,52 +5,34 @@
 
 <!-- Main Page -->
 {% block content %}
-<!-- Carousel -->
-<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
-  <div class="carousel-inner" style="max-height: 500px">
-    <div class="carousel-item active" data-bs-interval="5000">
-      <img
-        src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-lavaux-switzerland-top-25vineyards.jpg"
-        class="d-block w-100"
-      />
-    </div>
-    <div class="carousel-item" data-bs-interval="3000">
-      <img
-        src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-wine-cellar-25vineyards.jpg"
-        class="d-block w-100"
-      />
-    </div>
-    <div class="carousel-item">
-      <img
-        src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-alsace-france-top-25vineyards.jpg"
-        class="d-block w-100"
-      />
-    </div>
+<!-- Slick Slider Carousel -->
+<div class="slick-carousel" style="max-height: 480px">
+  <div>
+    <img
+      class="d-block w-100"
+      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-lavaux-switzerland-top-25vineyards.jpg"
+    />
   </div>
-  <button
-    class="carousel-control-prev"
-    type="button"
-    data-bs-target="#carouselExampleFade"
-    data-bs-slide="prev"
-  >
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button
-    class="carousel-control-next"
-    type="button"
-    data-bs-target="#carouselExampleFade"
-    data-bs-slide="next"
-  >
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+  <div>
+    <img
+      class="d-block w-100"
+      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-wine-cellar-25vineyards.jpg"
+    />
+  </div>
+  <div>
+    <img
+      class="d-block w-100"
+      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-alsace-france-top-25vineyards.jpg"
+    />
+  </div>
 </div>
 
-<div class="container text-center my-3">
-  <h1 class="fw-bold">{{homepage.title}}</h1>
-  <p>{{homepage.content|safe}}</p>
-</div>
+<section style="background-color: white; z-index: 1; position: relative">
+  <div class="container text-center my-3 py-3">
+    <h1 class="fw-bold">{{homepage.title}}</h1>
+    <p>{{homepage.content|safe}}</p>
+  </div>
+</section>
 
 <section>
   <div class="container">
