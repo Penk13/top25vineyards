@@ -3,3 +3,9 @@
     padding-top: 80px;
   }
 }
+
+@media (min-width: 978px) {
+  .footer-menu {
+    padding-top: 80px;
+  }
+}
