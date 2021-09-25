@@ -1,8 +1,8 @@
 from django.urls import path
 
-# from .views import (vineyard_list)
+from .views import (vineyard_detail)
 
 app_name = 'vineyards'
 urlpatterns = [
-    # path('list/', vineyard_list, name="list")
+    path('detail/<int:pk>/', vineyard_detail, name="detail")
 ]

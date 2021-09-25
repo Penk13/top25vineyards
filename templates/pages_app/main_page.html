@@ -55,10 +55,18 @@
                 class="m-2"
               />
             </div>
-            <img src="{{ vineyard.cover.url }}" class="img-fluid" />
+            <a href="{% url 'vineyards:detail' vineyard.id %}">
+              <img src="{{ vineyard.cover.url }}" class="img-fluid"
+            /></a>
           </div>
           <div class="col-12 col-md-6 py-3" style="font-size: 14px">
-            <h5 class="fw-bold">{{ vineyard.name }}</h5>
+            <h5 class="fw-bold">
+              <a
+                href="{% url 'vineyards:detail' vineyard.id %}"
+                class="text-decoration-none text-dark"
+                >{{ vineyard.name }}</a
+              >
+            </h5>
             <p>
               <strong> Wine Region </strong> :
               <a href="{{ vineyard.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
