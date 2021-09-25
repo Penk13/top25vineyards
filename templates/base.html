@@ -252,76 +252,31 @@
           </div>
           <!-- Menu Footer 1 -->
           <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-            <ul class="list-unstyled mb-0 text-start">
+            <ul class="list-unstyled text-start">
+              {% for footer in footers1 %}
               <li>
                 <a
-                  href="{% url 'pages_app:contact_us' %}"
+                  href="{% url 'pages_app:footerpage' footer.title|slugify %}"
                   class="text-white-50"
                   style="text-decoration: none"
-                  >Contact Us</a
-                >
+                  >{{ footer.title }}</a
+                ><br />
               </li>
-              <li>
-                <a
-                  href="{% url 'pages_app:about_us' %}"
-                  class="text-white-50"
-                  style="text-decoration: none"
-                  >About Us</a
-                >
-              </li>
-              <li>
-                <a
-                  href="{% url 'pages_app:terms_of_service' %}"
-                  class="text-white-50"
-                  style="text-decoration: none"
-                  >Terms of Service</a
-                >
-              </li>
-              <li>
-                <a
-                  href="{% url 'pages_app:privacy_statement' %}"
-                  class="text-white-50"
-                  style="text-decoration: none"
-                  >Privacy Statement</a
-                >
-              </li>
+              {% endfor %}
             </ul>
           </div>
-          <!-- Menu Footer 2 -->
           <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
             <ul class="list-unstyled text-start">
+              {% for footer in footers2 %}
               <li>
                 <a
-                  href="{% url 'pages_app:newsletter' %}"
+                  href="{% url 'pages_app:footerpage' footer.title|slugify %}"
                   class="text-white-50"
                   style="text-decoration: none"
-                  >Newsletter</a
-                >
+                  >{{ footer.title }}</a
+                ><br />
               </li>
-              <li>
-                <a
-                  href="{% url 'pages_app:advertise_with_us' %}"
-                  class="text-white-50"
-                  style="text-decoration: none"
-                  >Advertise with Us</a
-                >
-              </li>
-              <li>
-                <a
-                  href="{% url 'pages_app:help_or_faq' %}"
-                  class="text-white-50"
-                  style="text-decoration: none"
-                  >Help/FAQ</a
-                >
-              </li>
-              <li>
-                <a
-                  href="{% url 'pages_app:site_map' %}"
-                  class="text-white-50"
-                  style="text-decoration: none"
-                  >Site Map</a
-                >
-              </li>
+              {% endfor %}
             </ul>
           </div>
           <!-- Footer Image 2 -->

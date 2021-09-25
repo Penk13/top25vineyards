@@ -1,16 +1,16 @@
 {% extends 'base.html' %} {% load static %}
 <!-- Title -->
-{% block title %} {{privacy_statement.title}} {% endblock title %}
+{% block title %} {{ page.title }} {% endblock title %}
 
-<!--  -->
+<!-- Footer Page -->
 {% block content %}
 <div class="container footer-menu">
   <div class="row d-flex">
     <div class="col col-md-12 col-lg-8">
       <div class="m-3 p-5" style="border: gray solid 2px">
-        <h1 class="text-center fw-bold">{{privacy_statement.title}}</h1>
+        <h1 class="text-center fw-bold">{{ page.title }}</h1>
         <br />
-        {{privacy_statement.content|safe}}
+        {{ page.content|safe }}
       </div>
     </div>
     <div class="col col-md-12 col-lg-4">
