@@ -24,7 +24,7 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag)
     cover = models.ImageField(upload_to="news/")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, max_length=100)
 
     def __str__(self):
         return "Post : " + self.title
