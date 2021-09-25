@@ -38,10 +38,10 @@
   <div class="container">
     <div class="row d-flex">
       <!-- Main Section -->
-      <div class="col col-md-12 col-lg-8 ps-0">
+      <div class="col-12 col-lg-8 ps-0">
         <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
           {% for vineyard in vineyards %}
-          <div class="col col-md-12 col-lg-6 py-3 text-start">
+          <div class="col-12 col-md-6 py-3 text-start">
             <div style="position: absolute; z-index: 1">
               <p
                 style="z-index: 1; position: absolute; padding-top: 10px"
@@ -55,9 +55,9 @@
                 class="m-2"
               />
             </div>
-            <img src="{{ vineyard.cover.url }}" style="max-width: 340px" />
+            <img src="{{ vineyard.cover.url }}" class="img-fluid" />
           </div>
-          <div class="col col-md-12 col-lg-6 py-3" style="font-size: 14px">
+          <div class="col-12 col-md-6 py-3" style="font-size: 14px">
             <h5 class="fw-bold">{{ vineyard.name }}</h5>
             <p>
               <strong> Wine Region </strong> :
@@ -100,7 +100,7 @@
         </nav>
       </div>
       <!-- Sidebar -->
-      <div class="col col-md-12 col-lg-4">
+      <div class="col-12 col-lg-4">
         <div class="p-4 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
           <h5>Sidebar's Title</h5>
           <img src="https://picsum.photos/300/250" class="py-2 img-fluid" />
@@ -118,7 +118,7 @@
               <div class="carousel-item active" data-bs-interval="10000">
                 <div class="row d-flex py-3">
                   {% for news in travel_news %}
-                  <div class="col-12 col-lg-6 py-2 text-center">
+                  <div class="col-12 col-sm-12 col-md-6 py-2 text-center">
                     <img
                       src="{{ news.cover.url }}"
                       style="max-height: 150px"
