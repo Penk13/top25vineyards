@@ -60,15 +60,24 @@
           <div class="col col-md-12 col-lg-6 py-3" style="font-size: 14px">
             <h5 class="fw-bold">{{ vineyard.name }}</h5>
             <p>
-              <strong> Wine Region </strong> : {{ vineyard.region.name }} <br />
-              <strong> Wines </strong> : {{ vineyard.grapes }} <br />
-              <strong> Owner </strong> : {{ vineyard.owner }} <br />
+              <strong> Wine Region </strong> :
+              <a href="{{ vineyard.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
+                >{{ vineyard.wine_rg }}</a
+              ><br />
+              <strong> Wines </strong> :
+              <a href="{{ vineyard.wines_url }}" style="text-decoration: none; color: #688c3b"
+                >{{ vineyard.wines }}</a
+              ><br />
+              <strong> Owner </strong> :
+              <a href="{{ vineyard.owner_url }}" style="text-decoration: none; color: #688c3b"
+                >{{ vineyard.owner }}</a
+              ><br />
               {{ vineyard.text|safe|truncatewords:25 }}
             </p>
           </div>
           {% endfor %}
         </div>
-        <nav class="">
+        <nav class="nav-pagination">
           <ul class="pagination justify-content-center">
             {% if vineyards.has_previous %}
             <li class="page-item">
