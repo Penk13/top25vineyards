@@ -8,7 +8,7 @@ class Region(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = RichTextField()
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return "Region : " + self.name
@@ -37,7 +37,7 @@ pre_save.connect(pre_save_receiver_region, sender=Region)
 class RegionChild(models.Model):
     name = models.CharField(max_length=255)
     region_parent = models.ForeignKey(Region, on_delete=models.CASCADE)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return "Region : " + self.name + self.region_parent.name
@@ -84,7 +84,7 @@ class Vineyard(models.Model):
     visits = models.CharField(max_length=255)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     cover = models.ImageField(upload_to="vineyard/")
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return "Vineyard : " + self.name

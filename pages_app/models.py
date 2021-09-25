@@ -14,7 +14,7 @@ class ContentPage(models.Model):
     types = models.CharField(max_length=20, choices=TYPE)
     title = models.CharField(max_length=255)
     content = RichTextField(blank=True)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(unique=True)
 
     def __str__(self):
         return self.get_types_display() + " : " + self.title
