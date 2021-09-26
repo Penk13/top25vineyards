@@ -1,6 +1,6 @@
 from django.shortcuts import get_list_or_404
-from vineyards.models import Region
 from .models import ContentPage
+from vineyards.models import Region
 from news.models import Post
 
 

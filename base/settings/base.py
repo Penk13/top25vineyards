@@ -39,9 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'ckeditor',
+    "crispy_forms",
+    "crispy_bootstrap5",
+
     'pages_app.apps.PagesAppConfig',
     'vineyards.apps.VineyardsConfig',
     'news.apps.NewsConfig',
+    'mailing.apps.MailingConfig',
 ]
 
 MIDDLEWARE = [
@@ -165,3 +169,7 @@ CKEDITOR_CONFIGS = {
                     ["Maximize"]],
     },
 }
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
