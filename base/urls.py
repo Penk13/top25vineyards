@@ -21,7 +21,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("pages_app.urls")),
-    path('vineyards/', include("vineyards.urls"))
+    path('vineyards/', include("vineyards.urls")),
+    path('news/', include("news.urls")),
 ]
 
 if settings.DEBUG:

@@ -183,12 +183,14 @@
                     <div class="row d-flex py-3">
                       {% for news in travel_news %}
                       <div class="col-6 col-md-4 py-2 text-center">
-                        <img
-                          src="{{ news.cover.url }}"
-                          style="max-height: 150px"
-                          class="img-fluid mx-2"
-                        />
-                        <h6 class="fw-bold py-2 mx-2 text-start">{{ news.title }}</h6>
+                        <a href="{% url 'news:detail' news.slug %}" style="text-decoration: none">
+                          <img
+                            src="{{ news.cover.url }}"
+                            style="max-height: 150px"
+                            class="img-fluid mx-2"
+                          />
+                          <h6 class="fw-bold py-2 mx-2 text-start text-dark">{{ news.title }}</h6>
+                        </a>
                       </div>
                       {% if forloop.counter|divisibleby:6 %}
                     </div>
