@@ -1,0 +1,120 @@
+{% extends 'base.html' %} {% load static %}
+
+<!-- Title -->
+{% block title %} World {% endblock title %}
+
+<!-- Main Page -->
+{% block content %}
+<!-- Slick Slider Carousel -->
+<div class="slick-carousel" style="max-height: 480px">
+  <div>
+    <img
+      class="d-block w-100"
+      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-lavaux-switzerland-top-25vineyards.jpg"
+    />
+  </div>
+  <div>
+    <img
+      class="d-block w-100"
+      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-wine-cellar-25vineyards.jpg"
+    />
+  </div>
+  <div>
+    <img
+      class="d-block w-100"
+      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-alsace-france-top-25vineyards.jpg"
+    />
+  </div>
+</div>
+
+<section style="background-color: white; z-index: 1; position: relative">
+  <div class="container text-center my-3 py-3">
+    <h1 class="fw-bold">{{ region.title }}</h1>
+    <p>{{ region.description|safe }}</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row d-flex">
+      <!-- Main Section -->
+      <div class="col-12 col-lg-8 ps-0">
+        <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+          {% for vineyard in vineyards %}
+          <div class="col-12 col-md-6 py-3 text-start">
+            <div style="position: absolute; z-index: 1">
+              <p
+                style="z-index: 1; position: absolute; padding-top: 10px"
+                class="text-light fs-5 fw-bold m-4 text-center"
+              >
+                TOP <span style="font-size: 28px">{{ vineyard.rating }}</span>
+              </p>
+              <img
+                src="{% static 'img/overlay-icon-bg.png' %} "
+                style="max-width: 125px"
+                class="m-2"
+              />
+            </div>
+            <a href="{% url 'vineyards:detail' vineyard.id %}">
+              <img src="{{ vineyard.cover.url }}" class="img-fluid"
+            /></a>
+          </div>
+          <div class="col-12 col-md-6 py-3" style="font-size: 14px">
+            <h5 class="fw-bold">
+              <a
+                href="{% url 'vineyards:detail' vineyard.id %}"
+                class="text-decoration-none text-dark"
+                >{{ vineyard.name }}</a
+              >
+            </h5>
+            <p>
+              <strong> Wine Region </strong> :
+              <a href="{{ vineyard.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
+                >{{ vineyard.wine_rg }}</a
+              ><br />
+              <strong> Wines </strong> :
+              <a href="{{ vineyard.wines_url }}" style="text-decoration: none; color: #688c3b"
+                >{{ vineyard.wines }}</a
+              ><br />
+              <strong> Owner </strong> :
+              <a href="{{ vineyard.owner_url }}" style="text-decoration: none; color: #688c3b"
+                >{{ vineyard.owner }}</a
+              ><br />
+              {{ vineyard.text|safe|truncatewords:25 }}
+            </p>
+          </div>
+          {% endfor %}
+        </div>
+        <nav class="nav-pagination">
+          <ul class="pagination justify-content-center">
+            {% if vineyards.has_previous %}
+            <li class="page-item">
+              <!-- <a class="page-link" href="?page=1">&laquo First</a> -->
+              <a class="page-link" href="?page={{vineyards.previous_page_number}}">&laquo</a>
+            </li>
+            {% endif %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#"
+                >Page {{ vineyards.number }} of {{ vineyards.paginator.num_pages }}
+              </a>
+            </li>
+            {% if vineyards.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{vineyards.next_page_number}}">&raquo</a>
+              <!-- <a class="page-link" href="?page={{vineyards.paginator.num_pages}}">Last &raquo</a> -->
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      <!-- Sidebar -->
+      <div class="col-12 col-lg-4">
+        <div class="p-4 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+          <h5>Sidebar's Title</h5>
+          <img src="https://picsum.photos/300/250" class="py-2 img-fluid" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
