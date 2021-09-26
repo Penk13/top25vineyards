@@ -22,7 +22,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     body = RichTextField()
     tags = models.ManyToManyField(Tag)
-    cover = models.ImageField(upload_to="news/")
+    cover = models.ImageField(upload_to="news/", max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, max_length=200)
 
