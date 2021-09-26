@@ -29,77 +29,6 @@
     </title>
   </head>
   <body>
-    <!-- Navbar Dropdown -->
-    <!-- <nav class="navbar fixed-top navbar-dark bg-dark">
-      <div class="container d-flex">
-        <a class="navbar-brand" href="{% url 'pages_app:mainpage' %}">
-          <img src="{% static 'img/navbrand.png'%}" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mx-3 fw-bold" style="font-size: 12px">
-            <li class="nav-item">
-              <a class="nav-link text-light" href="{% url 'pages_app:mainpage' %}"
-                >WORLD'S TOP 25</a
-              >
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle text-light"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                TOP BY REGIONS
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                {% for region in navbar_region %}
-                <li><a class="dropdown-item" href="#">{{ region.name }}</a></li>
-                {% endfor %}
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle text-light"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                DISCOVER
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-light" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav> -->
-
     <!-- Navbar Offcanvas (Double Navbar) -->
     <nav class="navbar navbar-dark bg-dark fixed-top">
       <div class="container">
@@ -239,6 +168,59 @@
     </nav>
 
     {% block content %} {% endblock content %}
+
+    <!-- Global Travel News -->
+    <section>
+      <div class="container">
+        <div class="row d-flex py-5">
+          <div class="col col-md-12 col-lg-8 ps-0">
+            <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+              <h5 class="fw-bold">Global Travel News</h5>
+              <hr />
+              <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="10000">
+                    <div class="row d-flex py-3">
+                      {% for news in travel_news %}
+                      <div class="col-6 col-md-4 py-2 text-center">
+                        <img
+                          src="{{ news.cover.url }}"
+                          style="max-height: 150px"
+                          class="img-fluid mx-2"
+                        />
+                        <h6 class="fw-bold py-2 mx-2 text-start">{{ news.title }}</h6>
+                      </div>
+                      {% if forloop.counter|divisibleby:6 %}
+                    </div>
+                  </div>
+                  <div class="carousel-item" data-bs-interval="2000">
+                    <div class="row d-flex py-3">{% endif %} {% endfor %}</div>
+                  </div>
+                </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide="prev"
+                >
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide="next"
+                >
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-dark text-light text-center">
