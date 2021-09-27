@@ -29,8 +29,8 @@
 
 <section style="background-color: white; z-index: 1; position: relative">
   <div class="container text-center my-3 py-3">
-    <h1 class="fw-bold">{{homepage.title}}</h1>
-    <p>{{homepage.content|safe}}</p>
+    <h1 class="fw-bold">{{ homepage.title }}</h1>
+    <p>{{ homepage.content|safe }}</p>
   </div>
 </section>
 {% endblock topcontent %}
@@ -97,3 +97,9 @@
   </ul>
 </nav>
 {% endblock content %}
+
+<!-- Sidebar -->
+{% block sidebar %} {{ homepage.sidebar|safe }} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {{ homepage.ad_manager|safe }} {% endblock admanager %}

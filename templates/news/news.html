@@ -11,3 +11,9 @@
   {{ news.body|safe }}
 </div>
 {% endblock content %}
+
+<!-- Sidebar -->
+{% block sidebar %} {{ news.sidebar|safe }} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {{ news.ad_manager|safe }} {% endblock admanager %}

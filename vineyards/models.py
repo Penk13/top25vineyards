@@ -8,6 +8,8 @@ class Region(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = RichTextField()
+    sidebar = RichTextField(blank=True)
+    ad_manager = RichTextField(blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -22,7 +24,7 @@ def create_slug_region(instance, new_slug=None):
     exists = qs.exists()
     if exists:
         new_slug = "%s-%s" % (slug, qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
+        return create_slug_region(instance, new_slug=new_slug)
     return slug
 
 
@@ -51,7 +53,7 @@ def create_slug_region_child(instance, new_slug=None):
     exists = qs.exists()
     if exists:
         new_slug = "%s-%s" % (slug, qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
+        return create_slug_region_child(instance, new_slug=new_slug)
     return slug
 
 
@@ -84,6 +86,8 @@ class Vineyard(models.Model):
     visits = models.CharField(max_length=255)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     cover = models.ImageField(upload_to="vineyard/")
+    sidebar = RichTextField(blank=True)
+    ad_manager = RichTextField(blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -98,7 +102,7 @@ def create_slug_vineyard(instance, new_slug=None):
     exists = qs.exists()
     if exists:
         new_slug = "%s-%s" % (slug, qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
+        return create_slug_vineyard(instance, new_slug=new_slug)
     return slug
 
 

@@ -216,12 +216,10 @@
               class="row p-3 text-center mt-lg-0 mt-md-4 mt-sm-4"
               style="border: 1px solid rgba(0, 0, 0, 0.1)"
             >
-              <h5 class="text-start">Sidebar's Title</h5>
-              <img src="https://picsum.photos/300/250" class="py-2 img-fluid" />
+              <div class="text-start">{% block sidebar %} {% endblock sidebar %}</div>
             </div>
             <div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-              <h5 class="text-start">Sidebar's Title</h5>
-              <img src="https://picsum.photos/300/250" class="py-2 img-fluid" />
+              <div class="text-start">{% block admanager %} {% endblock admanager %}</div>
             </div>
           </div>
         </div>

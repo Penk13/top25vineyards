@@ -40,3 +40,9 @@
   {{ vineyard.text|safe }} {{ vineyard.google_map|safe }}
 </div>
 {% endblock content %}
+
+<!-- Sidebar -->
+{% block sidebar %} {{ vineyard.sidebar|safe }} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {{ vineyard.ad_manager|safe }} {% endblock admanager %}

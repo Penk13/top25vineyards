@@ -24,6 +24,8 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag)
     cover = models.ImageField(upload_to="news/", max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    sidebar = RichTextField(blank=True)
+    ad_manager = RichTextField(blank=True)
     slug = models.SlugField(unique=True, max_length=200)
 
     def __str__(self):

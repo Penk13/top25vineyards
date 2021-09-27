@@ -96,3 +96,9 @@
   </ul>
 </nav>
 {% endblock content %}
+
+<!-- Sidebar -->
+{% block sidebar %} {{ region.sidebar|safe }} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {{ region.ad_manager|safe }} {% endblock admanager %}

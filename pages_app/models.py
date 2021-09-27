@@ -14,6 +14,8 @@ class ContentPage(models.Model):
     types = models.CharField(max_length=20, choices=TYPE)
     title = models.CharField(max_length=255)
     content = RichTextField(blank=True)
+    sidebar = RichTextField(blank=True)
+    ad_manager = RichTextField(blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
