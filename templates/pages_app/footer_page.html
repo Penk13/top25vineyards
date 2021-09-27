@@ -23,5 +23,6 @@
     {% csrf_token %} {{ subscriber_form|crispy }}
     <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
   </form>
+  {% endif %}
 </div>
-{% endif %} {% endblock %}
+{% endblock %}
