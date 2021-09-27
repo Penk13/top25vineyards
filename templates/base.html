@@ -66,7 +66,7 @@
                   <a
                     class="dropdown-item text-light fw-bold"
                     href="{% url 'vineyards:region' region.slug %}"
-                    style="text-transform: uppercase;"
+                    style="text-transform: uppercase"
                     >{{ region.name }}</a
                   >
                 </li>
@@ -85,17 +85,20 @@
               >
                 DISCOVER
               </a>
-              <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink" style="font-size: 12px;">
+              <ul
+                class="dropdown-menu bg-dark"
+                aria-labelledby="dropdownMenuLink"
+                style="font-size: 12px"
+              >
                 {% for region in navbar_region %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li>
                   <a
                     class="dropdown-item text-light fw-bold"
                     href="{% url 'vineyards:region' region.slug %}"
-                    style="text-transform: uppercase;"
+                    style="text-transform: uppercase"
                     >{{ region.name }}</a
                   >
-                </li>
                 </li>
                 {% endfor %}
               </ul>
@@ -196,7 +199,27 @@
       </div>
     </nav>
 
-    {% block content %} {% endblock content %}
+    <section>{% block topcontent %} {% endblock topcontent %}</section>
+
+    <section>
+      <div class="container">
+        <div class="row d-flex">
+          <!-- Main Section -->
+          <div class="col-12 col-lg-8 ps-0">
+            <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+              {% block content %} {% endblock content %}
+            </div>
+          </div>
+          <!-- Sidebar -->
+          <div class="col-12 col-lg-4">
+            <div class="p-4 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+              <h5>Sidebar's Title</h5>
+              <img src="https://picsum.photos/300/250" class="py-2 img-fluid" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Global Travel News -->
     <section>

@@ -4,32 +4,24 @@
 
 <!-- Footer Page -->
 {% block content %}
-<div class="container footer-menu">
-  <div class="row d-flex">
-    <div class="col-12 col-lg-8">
-      <div class="m-3 p-5" style="border: gray solid 2px">
-        <h1 class="text-center fw-bold">{{ page.title }}</h1>
-        <br />
-        {{ page.content|safe }}
-        <!-- Contact Us Form -->
-        {% if page.slug == 'contact-us' %}
-        <form method="POST">
-          {% csrf_token %} {{ contact_entry_form|crispy }}
-          <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-        </form>
-        {% endif %}
-        <!-- Newsletter Form -->
-        {% if page.slug == 'newsletter' %}
-        <form method="POST">
-          {% csrf_token %} {{ subscriber_form|crispy }}
-          <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-        </form>
-        {% endif %}
-      </div>
-    </div>
-    <div class="col-12 col-lg-4">
-      <div class="m-3 p-3" style="border: gray solid 2px">sidebar</div>
-    </div>
-  </div>
+<div class="footer-page">
+  <h1 class="text-center fw-bold">{{ page.title }}</h1>
+  <br />
+  {{ page.content|safe }}
+
+  <!-- Contact Us Form -->
+  {% if page.slug == 'contact-us' %}
+  <form method="POST">
+    {% csrf_token %} {{ contact_entry_form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+  </form>
+  {% endif %}
+
+  <!-- Newsletter Form -->
+  {% if page.slug == 'newsletter' %}
+  <form method="POST">
+    {% csrf_token %} {{ subscriber_form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+  </form>
 </div>
-{% endblock %}
+{% endif %} {% endblock %}

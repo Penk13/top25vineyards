@@ -5,10 +5,13 @@
 }
 
 @media (min-width: 978px) {
-  .footer-menu {
+  .footer-page {
     padding-top: 80px;
   }
   .vineyard-detail {
+    padding-top: 80px;
+  }
+  .news-detail {
     padding-top: 80px;
   }
 }
