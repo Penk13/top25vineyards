@@ -55,10 +55,18 @@
               >
                 TOP BY REGIONS
               </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <ul
+                class="dropdown-menu bg-dark"
+                aria-labelledby="dropdownMenuLink"
+                style="font-size: 12px"
+              >
                 {% for region in navbar_region %}
+                <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li>
-                  <a class="dropdown-item" href="{% url 'vineyards:region' region.slug %}"
+                  <a
+                    class="dropdown-item text-light fw-bold"
+                    href="{% url 'vineyards:region' region.slug %}"
+                    style="text-transform: uppercase;"
                     >{{ region.name }}</a
                   >
                 </li>
@@ -77,12 +85,17 @@
               >
                 DISCOVER
               </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuLink" style="font-size: 12px;">
                 {% for region in navbar_region %}
+                <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li>
-                  <a class="dropdown-item" href="{% url 'vineyards:region' region.slug %}"
+                  <a
+                    class="dropdown-item text-light fw-bold"
+                    href="{% url 'vineyards:region' region.slug %}"
+                    style="text-transform: uppercase;"
                     >{{ region.name }}</a
                   >
+                </li>
                 </li>
                 {% endfor %}
               </ul>
@@ -318,6 +331,10 @@
           slidesToShow: 1,
           prevArrow: false,
           nextArrow: false,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 5000,
+          fade: true,
         });
       });
     </script>
