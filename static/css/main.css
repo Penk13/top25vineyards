@@ -1,17 +1,17 @@
 @media (max-width: 978px) {
-  body {
+  .top-content {
     padding-top: 80px;
   }
 }
 
 @media (min-width: 978px) {
   .footer-page {
-    padding-top: 80px;
+    padding-top: 100px;
   }
   .vineyard-detail {
-    padding-top: 80px;
+    padding-top: 100px;
   }
   .news-detail {
-    padding-top: 80px;
+    padding-top: 100px;
   }
 }

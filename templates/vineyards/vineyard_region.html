@@ -3,9 +3,8 @@
 <!-- Title -->
 {% block title %} World {% endblock title %}
 
-<!-- Main Page -->
-{% block topcontent %}
 <!-- Slick Slider Carousel -->
+{% block topcarousel %}
 <div class="slick-carousel" style="max-height: 480px">
   <div>
     <img
@@ -26,14 +25,17 @@
     />
   </div>
 </div>
+{% endblock topcarousel %}
 
-<section style="background-color: white; z-index: 1; position: relative">
+<!-- Top Text -->
+{% block toptext %}
+<section style="background-color: white; z-index: 1; position: relative" class="top-text">
   <div class="container text-center my-3 py-3">
     <h1 class="fw-bold">{{ region.title }}</h1>
     <p>{{ region.description|safe }}</p>
   </div>
 </section>
-{% endblock topcontent %}
+{% endblock toptext %}
 
 <!-- Vineyard by Region -->
 {% block content %} {% for vineyard in vineyards %}

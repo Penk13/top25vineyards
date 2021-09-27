@@ -3,14 +3,16 @@
 <!-- Title -->
 {% block title %} {{ news.title }} {% endblock title %}
 
+<!-- Top Text -->
+{% block toptext %}
+<section class="news-detail"></section>
+{% endblock toptext %}
+
 <!-- News Detail -->
 {% block content %}
-<div class="news-detail">
-  <h6><span class="badge bg-dark">{{ news.category.name }}</span></h6>
-  <h1 class="fw-bold">{{ news.title }}</h1>
-  {{ news.body|safe }}
-</div>
-{% endblock content %}
+<h6><span class="badge bg-dark">{{ news.category.name }}</span></h6>
+<h1 class="fw-bold">{{ news.title }}</h1>
+{{ news.body|safe }} {% endblock content %}
 
 <!-- Sidebar -->
 {% block sidebar %} {{ news.sidebar|safe }} {% endblock sidebar %}

@@ -199,9 +199,14 @@
       </div>
     </nav>
 
-    <section>{% block topcontent %} {% endblock topcontent %}</section>
+    <section class="top-content">
+      <!-- Top Carousel -->
+      {% block topcarousel %} {% endblock topcarousel %}
+      <!-- Top Content -->
+      {% block toptext %} {% endblock toptext %}
+    </section>
 
-    <section>
+    <section class="main-content">
       <div class="container">
         <div class="row d-flex">
           <!-- Main Section -->
@@ -211,9 +216,9 @@
             </div>
           </div>
           <!-- Sidebar -->
-          <div class="col-12 col-lg-4 ps-lg-5 ps-md-0 ps-sm-0">
+          <div class="sidebar col-12 col-lg-4 ps-lg-5 ps-md-0 ps-sm-0">
             <div
-              class="row p-3 text-center mt-lg-0 mt-md-4 mt-sm-4"
+              class="row p-3 text-center mt-lg-0 mt-4"
               style="border: 1px solid rgba(0, 0, 0, 0.1)"
             >
               <div class="text-start">{% block sidebar %} {% endblock sidebar %}</div>

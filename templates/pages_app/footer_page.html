@@ -2,30 +2,33 @@
 <!-- Title -->
 {% block title %} {{ page.title }} {% endblock title %}
 
+<!-- Top Text -->
+{% block toptext %}
+<section class="footer-page"></section>
+{% endblock toptext %}
+
 <!-- Footer Page -->
 {% block content %}
-<div class="footer-page">
-  <h1 class="text-center fw-bold">{{ page.title }}</h1>
-  <br />
-  {{ page.content|safe }}
 
-  <!-- Contact Us Form -->
-  {% if page.slug == 'contact-us' %}
-  <form method="POST">
-    {% csrf_token %} {{ contact_entry_form|crispy }}
-    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-  </form>
-  {% endif %}
+<h1 class="text-center fw-bold">{{ page.title }}</h1>
+<br />
+{{ page.content|safe }}
 
-  <!-- Newsletter Form -->
-  {% if page.slug == 'newsletter' %}
-  <form method="POST">
-    {% csrf_token %} {{ subscriber_form|crispy }}
-    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-  </form>
-  {% endif %}
-</div>
-{% endblock %}
+<!-- Contact Us Form -->
+{% if page.slug == 'contact-us' %}
+<form method="POST">
+  {% csrf_token %} {{ contact_entry_form|crispy }}
+  <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+</form>
+{% endif %}
+
+<!-- Newsletter Form -->
+{% if page.slug == 'newsletter' %}
+<form method="POST">
+  {% csrf_token %} {{ subscriber_form|crispy }}
+  <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+</form>
+{% endif %} {% endblock %}
 
 <!-- Sidebar -->
 {% block sidebar %} {{ page.sidebar|safe }} {% endblock sidebar %}
