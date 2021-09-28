@@ -185,12 +185,14 @@
                   </ul>
                 </li>
               </ul>
-              <form class="d-flex">
+              <form class="d-flex" method="POST" action="{% url 'pages_app:searchpage' %}">
+                {% csrf_token %}
                 <input
                   class="form-control me-2 d-inline"
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  name="searched"
                 />
                 <button class="btn btn-outline-light" type="submit">
                   <i class="bi bi-search"></i>

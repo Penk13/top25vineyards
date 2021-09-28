@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% load static %}
+
+<!-- Meta Keywords -->
+{% block keywords %} <meta name="keywords" content="top 25 vineyards" />
+{% endblock keywords %}
+
+<!-- Title -->
+{% block title %} {% endblock title %}
+
+<!-- Top Text -->
+{% block toptext %}
+<section class="search-page"></section>
+{% endblock toptext %}
+
+<!-- Mainpage -->
+{% block content %} {% if searched %}
+<h1 class="fw-bold">Search Results For: {{ searched }}</h1>
+<hr />
+{% for vineyard in vineyards %}
+<div class="col-12 col-md-6 py-3 text-start">
+  <div style="position: absolute; z-index: 1">
+    <p
+      style="z-index: 1; position: absolute; padding-top: 10px"
+      class="text-light fs-5 fw-bold m-4 text-center"
+    >
+      TOP <span style="font-size: 28px">{{ vineyard.rating }}</span>
+    </p>
+    <img src="{% static 'img/overlay-icon-bg.png' %} " style="max-width: 125px" class="m-2" />
+  </div>
+  <a href="{% url 'vineyards:detail' vineyard.id %}">
+    <img src="{{ vineyard.cover.url }}" class="img-fluid"
+  /></a>
+</div>
+<div class="col-12 col-md-6 py-3" style="font-size: 14px">
+  <h5 class="fw-bold">
+    <a href="{% url 'vineyards:detail' vineyard.id %}" class="text-decoration-none text-dark"
+      >{{ vineyard.name }}</a
+    >
+  </h5>
+  <p>
+    <strong> Wine Region </strong> :
+    <a href="{{ vineyard.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
+      >{{ vineyard.wine_rg }}</a
+    ><br />
+    <strong> Wines </strong> :
+    <a href="{{ vineyard.wines_url }}" style="text-decoration: none; color: #688c3b"
+      >{{ vineyard.wines }}</a
+    ><br />
+    <strong> Owner </strong> :
+    <a href="{{ vineyard.owner_url }}" style="text-decoration: none; color: #688c3b"
+      >{{ vineyard.owner }}</a
+    ><br />
+    {{ vineyard.text|safe|truncatewords:25 }}
+  </p>
+</div>
+{% endfor %}
+<!-- Nav Pagination -->
+<nav class="nav-pagination">
+  <ul class="pagination justify-content-center">
+    {% if vineyards.has_previous %}
+    <li class="page-item">
+      <!-- <a class="page-link" href="?page=1">&laquo First</a> -->
+      <a class="page-link" href="?page={{vineyards.previous_page_number}}">&laquo</a>
+    </li>
+    {% endif %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#"
+        >Page {{vineyards.number}} of {{vineyards.paginator.num_pages}}
+      </a>
+    </li>
+    {% if vineyards.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{vineyards.next_page_number}}">&raquo</a>
+      <!-- <a class="page-link" href="?page={{vineyards.paginator.num_pages}}">Last &raquo</a> -->
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% else %}
+<h1>Please enter the word</h1>
+{% endif %} {% endblock content %}

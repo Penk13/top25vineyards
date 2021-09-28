@@ -42,3 +42,14 @@ def footerpage(request, slug):
                "contact_entry_form": contact_entry_form,
                "subscriber_form": subscriber_form}
     return render(request, "pages_app/footer_page.html", context)
+
+
+def searchpage(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        p = Paginator(Vineyard.objects.filter(
+            text__contains=searched).order_by("-rating"), 10)
+        page = request.GET.get('page')
+        vineyards = p.get_page(page)
+    context = {"searched": searched, "vineyards": vineyards}
+    return render(request, "pages_app/search_page.html", context)
