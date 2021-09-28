@@ -62,7 +62,7 @@
               >
                 {% for region in navbar_region %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
-                <li>
+                <li class="nav-drop">
                   <a
                     class="dropdown-item text-light fw-bold"
                     href="{% url 'vineyards:region' region.slug %}"
@@ -92,7 +92,7 @@
               >
                 {% for region in navbar_region %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
-                <li>
+                <li class="nav-drop">
                   <a
                     class="dropdown-item text-light fw-bold"
                     href="{% url 'vineyards:region' region.slug %}"
