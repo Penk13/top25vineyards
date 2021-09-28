@@ -48,7 +48,7 @@ def searchpage(request):
     if request.method == "POST":
         searched = request.POST['searched']
         p = Paginator(Vineyard.objects.filter(
-            text__contains=searched).order_by("-rating"), 10)
+            text__icontains=searched).order_by("-rating"), 10)
         page = request.GET.get('page')
         vineyards = p.get_page(page)
     context = {"searched": searched, "vineyards": vineyards}
