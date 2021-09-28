@@ -9,7 +9,7 @@ class Region(models.Model):
     title = models.CharField(max_length=255)
     description = RichTextField()
     sidebar = RichTextField(blank=True)
-    ad_manager = RichTextField(blank=True)
+    ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     slug = models.SlugField(unique=True)
 
@@ -88,7 +88,7 @@ class Vineyard(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     cover = models.ImageField(upload_to="vineyard/")
     sidebar = RichTextField(blank=True)
-    ad_manager = RichTextField(blank=True)
+    ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     slug = models.SlugField(unique=True)
 
