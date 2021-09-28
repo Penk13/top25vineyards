@@ -10,6 +10,7 @@ class Region(models.Model):
     description = RichTextField()
     sidebar = RichTextField(blank=True)
     ad_manager = RichTextField(blank=True)
+    meta_keywords = models.TextField(blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -88,6 +89,7 @@ class Vineyard(models.Model):
     cover = models.ImageField(upload_to="vineyard/")
     sidebar = RichTextField(blank=True)
     ad_manager = RichTextField(blank=True)
+    meta_keywords = models.TextField(blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

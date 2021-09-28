@@ -26,6 +26,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sidebar = RichTextField(blank=True)
     ad_manager = RichTextField(blank=True)
+    meta_keywords = models.TextField(blank=True)
     slug = models.SlugField(unique=True, max_length=200)
 
     def __str__(self):

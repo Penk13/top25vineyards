@@ -16,6 +16,7 @@ class ContentPage(models.Model):
     content = RichTextField(blank=True)
     sidebar = RichTextField(blank=True)
     ad_manager = RichTextField(blank=True)
+    meta_keywords = models.TextField(blank=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

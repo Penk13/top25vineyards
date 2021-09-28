@@ -1,5 +1,9 @@
 {% extends 'base.html' %} {% load static %}
 
+<!-- Meta Keywords -->
+{% block keywords %} <meta name="keywords" content="{{ news.meta_keywords }} " />
+{% endblock keywords %}
+
 <!-- Title -->
 {% block title %} {{ news.title }} {% endblock title %}
 

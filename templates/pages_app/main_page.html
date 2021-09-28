@@ -1,7 +1,11 @@
 {% extends 'base.html' %} {% load static %}
 
+<!-- Meta Keywords -->
+{% block keywords %} <meta name="keywords" content="{{ homepage.meta_keywords }}" />
+{% endblock keywords %}
+
 <!-- Title -->
-{% block title %} World {% endblock title %}
+{% block title %} {{ homepage.title }} {% endblock title %}
 
 <!-- Slick Slider Carousel -->
 {% block topcarousel %}
