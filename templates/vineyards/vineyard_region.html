@@ -10,24 +10,11 @@
 <!-- Slick Slider Carousel -->
 {% block topcarousel %}
 <div class="slick-carousel" style="max-height: 480px">
+  {% for image in region_images %}
   <div>
-    <img
-      class="d-block w-100"
-      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-lavaux-switzerland-top-25vineyards.jpg"
-    />
+    <img src="{{ image.region_images.url }}" />
   </div>
-  <div>
-    <img
-      class="d-block w-100"
-      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-wine-cellar-25vineyards.jpg"
-    />
-  </div>
-  <div>
-    <img
-      class="d-block w-100"
-      src="https://www.top25vineyards.com/static/imgs/main_page/worlds-best-vineyards-alsace-france-top-25vineyards.jpg"
-    />
-  </div>
+  {% endfor %}
 </div>
 {% endblock topcarousel %}
 
