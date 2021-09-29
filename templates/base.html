@@ -153,10 +153,13 @@
                   >
                     TOP BY REGIONS
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                  <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
                     {% for region in navbar_region %}
-                    <li>
-                      <a class="dropdown-item" href="{% url 'vineyards:region' region.slug %}"
+                    <li><hr class="dropdown-divider text-light my-1" /></li>
+                    <li class="nav-drop">
+                      <a
+                        class="dropdown-item text-light"
+                        href="{% url 'vineyards:region' region.slug %}"
                         >{{ region.name }}</a
                       >
                     </li>
@@ -174,10 +177,13 @@
                   >
                     DISCOVER
                   </a>
-                  <ul class="dropdown-menu" aria-labelledby="offcanvasNavbarDropdown">
+                  <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
                     {% for region in navbar_region %}
-                    <li>
-                      <a class="dropdown-item" href="{% url 'vineyards:region' region.slug %}"
+                    <li><hr class="dropdown-divider text-light my-1" /></li>
+                    <li class="nav-drop">
+                      <a
+                        class="dropdown-item text-light"
+                        href="{% url 'vineyards:region' region.slug %}"
                         >{{ region.name }}</a
                       >
                     </li>
