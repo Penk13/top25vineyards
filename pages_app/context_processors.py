@@ -5,7 +5,7 @@ from news.models import Post
 
 
 def base_variable(request):
-    navbar_region = get_list_or_404(Region)
+    navbar_region = get_list_or_404(Region, display_on_navbar=True)
     travel_news = get_list_or_404(Post)
     footer_count = ContentPage.objects.filter(types="PAGE").count()
     footer_index = int(footer_count/2)
