@@ -11,6 +11,7 @@ class Region(models.Model):
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
+    logo_on_navbar = models.ImageField(blank=True)
     display_on_navbar = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 

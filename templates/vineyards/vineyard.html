@@ -7,6 +7,17 @@
 <!-- Title -->
 {% block title %} {{ vineyard.name }} {% endblock title %}
 
+<!-- Nadbar Logo -->
+{% block navlogo %} {% if vineyard.region.logo_on_navbar %}
+<a class="navbar-brand px-0 mx-0" href="{% url 'vineyards:region' vineyard.region.slug %}">
+  <img src="{{ vineyard.region.logo_on_navbar.url }}" />
+</a>
+{% else %}
+<a class="navbar-brand" href="{% url 'vineyards:detail' vineyard.pk %}">
+  <img src="{% static 'img/navbrandtop25.png'%}" />
+</a>
+{% endif %} {% endblock navlogo %}
+
 <!-- Top Carousel -->
 {% block topcarousel %}
 <section class="vineyard-detail mt-5"></section>

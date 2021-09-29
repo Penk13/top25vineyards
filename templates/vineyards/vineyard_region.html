@@ -7,6 +7,17 @@
 <!-- Title -->
 {% block title %} {{ region.title }} {% endblock title %}
 
+<!-- Nadbar Logo -->
+{% block navlogo %} {% if region.logo_on_navbar %}
+<a class="navbar-brand px-0 mx-0" href="{% url 'vineyards:region' region.slug %}">
+  <img src="{{ region.logo_on_navbar.url }}" />
+</a>
+{% else %}
+<a class="navbar-brand" href="{% url 'vineyards:region' region.slug %}">
+  <img src="{% static 'img/navbrandtop25.png'%}" />
+</a>
+{% endif %} {% endblock navlogo %}
+
 <!-- Slick Slider Carousel -->
 {% block topcarousel %}
 <section class="vineyard-region">
