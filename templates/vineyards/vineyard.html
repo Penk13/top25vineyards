@@ -18,16 +18,32 @@
 </a>
 {% endif %} {% endblock navlogo %}
 
-<!-- Top Carousel -->
+<!-- Slick Slider Carousel -->
 {% block topcarousel %}
-<section class="vineyard-detail mt-5"></section>
+<section class="vineyard-detail mb-5">
+  {% if vineyard.top_slider %}
+  <div class="slick-carousel">
+    {% for image in yard_images %}
+    <img src="{{ image.image.url }}" style="max-height: 380px" />
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
 {% endblock topcarousel %}
 
 <!-- Vineyard Detail -->
 {% block content %}
 <h1 class="fw-bold">{{ vineyard.name }}</h1>
 <h5><i class="bi bi-geo-alt-fill"></i> {{ vineyard.wine_rg }}</h5>
+{% if vineyard.cover_slider %}
+<div class="slick-carousel-yard-cover my-3">
+  {% for image in yard_cover_images %}
+  <img src="{{ image.image.url }}" />
+  {% endfor %}
+</div>
+{% else %}
 <img src="{{ vineyard.cover.url }}" alt="" class="img-fluid py-3" />
+{% endif %}
 <div class="row d-flex align-items-center mb-3">
   <div
     class="col-4"

@@ -92,6 +92,8 @@ class Vineyard(models.Model):
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
+    top_slider = models.BooleanField(default=True)
+    cover_slider = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -116,3 +118,13 @@ def pre_save_receiver_vineyard(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_receiver_vineyard, sender=Vineyard)
+
+
+class YardImage(models.Model):
+    vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="yard-image/")
+
+
+class YardCoverImage(models.Model):
+    vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="yard-cover-image/")
