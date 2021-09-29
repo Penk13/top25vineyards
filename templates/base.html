@@ -371,7 +371,7 @@
     <script>
       $().ready(function () {
         $(".slick-carousel").slick({
-          centerPadding: "0px",
+          centerPadding: "330px",
           infinite: true,
           slidesToShow: 1,
           prevArrow: false,
@@ -380,6 +380,22 @@
           autoplay: true,
           autoplaySpeed: 5000,
           centerMode: true,
+          responsive: [
+            {
+              breakpoint: 978,
+              settings: {
+                centerPadding: "100px",
+                slidesToShow: 2,
+              },
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                centerPadding: "0px",
+                slidesToShow: 1,
+              },
+            },
+          ],
         });
       });
     </script>

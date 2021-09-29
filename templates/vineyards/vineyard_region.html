@@ -9,13 +9,13 @@
 
 <!-- Slick Slider Carousel -->
 {% block topcarousel %}
-<div class="slick-carousel" style="max-height: 480px">
-  {% for image in region_images %}
-  <div>
-    <img src="{{ image.region_images.url }}" />
+<section class="vineyard-region">
+  <div class="slick-carousel">
+    {% for image in region_images %}
+    <img src="{{ image.region_images.url }}" style="max-height: 380px" />
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
+</section>
 {% endblock topcarousel %}
 
 <!-- Top Text -->

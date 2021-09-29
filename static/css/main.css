@@ -1,18 +1,22 @@
+/* padding top 80px when width smaller than 978px */
 @media (max-width: 978px) {
   .top-content {
     padding-top: 80px;
   }
 }
 
+/* If there is no carousel image on top, padding top 100px */
 @media (min-width: 978px) {
   .footer-page,
   .vineyard-detail,
   .news-detail,
-  .search-page {
-    padding-top: 100px;
+  .search-page,
+  .vineyard-region {
+    padding-top: 80px;
   }
 }
 
+/* Dropdown menu navbar */
 .nav-drop a:hover {
   background-color: black;
 }
