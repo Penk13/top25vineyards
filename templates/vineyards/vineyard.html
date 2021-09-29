@@ -39,11 +39,11 @@
 <div class="slick-carousel-yard-cover my-3">
   {% for image in yard_cover_images %}
   <img src="{{ image.image.url }}" />
-  {% endfor %}
+  {% endfor %} {% else %}
+  <img src="{{ vineyard.cover.url }}" alt="" class="img-fluid py-3" />
+  {% endif %}
 </div>
-{% else %}
-<img src="{{ vineyard.cover.url }}" alt="" class="img-fluid py-3" />
-{% endif %}
+
 <div class="row d-flex align-items-center mb-3">
   <div
     class="col-4"
