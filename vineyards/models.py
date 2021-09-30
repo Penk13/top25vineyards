@@ -97,8 +97,9 @@ class Vineyard(models.Model):
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
-    top_slider = models.BooleanField(default=True)
-    cover_slider = models.BooleanField(default=True)
+    top_slider = models.BooleanField(default=False)
+    cover_slider = models.BooleanField(default=False)
+    under_review = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

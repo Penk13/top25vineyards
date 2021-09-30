@@ -42,6 +42,7 @@
 <!-- Vineyard by Region -->
 {% block content %} {% for vineyard in vineyards %}
 <div class="col-12 col-md-6 py-3 text-start">
+  {% if vineyard.under_review == False %}
   <div style="position: absolute; z-index: 1">
     <p
       style="z-index: 1; position: absolute; padding-top: 10px"
@@ -51,6 +52,7 @@
     </p>
     <img src="{% static 'img/overlay-icon-bg.png' %} " style="max-width: 125px" class="m-2" />
   </div>
+  {% endif %}
   <a href="{{ vineyard.get_absolute_url }}">
     <img src="{{ vineyard.cover.url }}" class="img-fluid"
   /></a>
