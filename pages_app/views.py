@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from .models import ContentPage
+from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard
 
 from mailing.models import ContactEntry, Subscriber
@@ -9,11 +9,13 @@ from mailing.forms import ContactEntryForm, SubscriberForm
 
 def mainpage(request):
     homepage = get_object_or_404(ContentPage, types="HOME_PAGE")
+    image_carousel = ImageUpload.objects.filter(page=homepage)
     p = Paginator(Vineyard.objects.all().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"homepage": homepage,
-               "vineyards": vineyards}
+               "vineyards": vineyards,
+               "image_carousel": image_carousel}
     return render(request, "pages_app/main_page.html", context)
 
 

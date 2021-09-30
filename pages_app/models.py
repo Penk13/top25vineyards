@@ -41,3 +41,8 @@ def pre_save_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_receiver, sender=ContentPage)
+
+
+class ImageUpload(models.Model):
+    page = models.ForeignKey(ContentPage, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="page/")

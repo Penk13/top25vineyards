@@ -18,6 +18,21 @@
 <h1 class="fw-bold">{{ news.title }}</h1>
 {{ news.body|safe }} {% endblock content %}
 
+<!-- Breadcrumb -->
+{% block breadcrumb %}
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size: 13px">
+    <li class="breadcrumb-item">
+      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+        ><i class="bi bi-house-fill"></i> Home</a
+      >
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ news.category.name }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ news.title }}</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
 <!-- Sidebar -->
 {% block sidebar %} {{ news.sidebar|safe }} {% endblock sidebar %}
 
