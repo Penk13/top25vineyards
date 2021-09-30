@@ -77,6 +77,33 @@
 <!--  -->
 {% endblock content %}
 
+<!-- Breadcrumb -->
+{% block breadcrumb %}
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size: 13px">
+    <li class="breadcrumb-item">
+      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+        ><i class="bi bi-house-fill"></i> Home</a
+      >
+    </li>
+    <li class="breadcrumb-item" aria-current="page">
+      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+        >Regions</a
+      >
+    </li>
+    <li class="breadcrumb-item" aria-current="page">
+      <a
+        href="{% url 'vineyards:region' vineyard.region.slug %}"
+        class="text-dark"
+        style="text-decoration: none"
+        >{{ vineyard.region.name }}</a
+      >
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ vineyard.name }}</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
 <!-- Sidebar -->
 {% block sidebar %} {{ vineyard.sidebar|safe }} {% endblock sidebar %}
 
