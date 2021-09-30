@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class Region(models.Model):
@@ -45,7 +46,7 @@ class RegionChild(models.Model):
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return "Region : " + self.name + self.region_parent.name
+        return "Region : " + self.name + ", " + self.region_parent.name
 
 
 def create_slug_region_child(instance, new_slug=None):
@@ -88,6 +89,7 @@ class Vineyard(models.Model):
     owner = models.CharField(max_length=255)
     visits = models.CharField(max_length=255)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    region_child = models.ManyToManyField(RegionChild, blank=True)
     cover = models.ImageField(upload_to="vineyard/")
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
@@ -98,6 +100,9 @@ class Vineyard(models.Model):
 
     def __str__(self):
         return "Vineyard : " + self.name
+
+    def get_absolute_url(self):
+        return reverse('vineyards:detail', kwargs={'region': self.region.slug, 'slug': self.slug})
 
 
 def create_slug_vineyard(instance, new_slug=None):

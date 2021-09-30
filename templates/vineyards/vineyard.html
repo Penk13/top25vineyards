@@ -13,7 +13,7 @@
   <img src="{{ vineyard.region.logo_on_navbar.url }}" />
 </a>
 {% else %}
-<a class="navbar-brand" href="{% url 'vineyards:detail' vineyard.pk %}">
+<a class="navbar-brand" href="{{ vineyard.get_absolute_url }}">
   <img src="{% static 'img/navbrandtop25.png'%}" />
 </a>
 {% endif %} {% endblock navlogo %}

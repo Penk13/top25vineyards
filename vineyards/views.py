@@ -3,8 +3,8 @@ from django.core.paginator import Paginator
 from .models import Vineyard, Region, RegionImage, YardImage, YardCoverImage
 
 
-def vineyard_detail(request, pk):
-    vineyard = get_object_or_404(Vineyard, pk=pk)
+def vineyard_detail(request, region, slug):
+    vineyard = get_object_or_404(Vineyard, slug=slug)
     yard_images = YardImage.objects.filter(vineyard=vineyard)
     yard_cover_images = YardCoverImage.objects.filter(vineyard=vineyard)
     context = {"vineyard": vineyard, "yard_images": yard_images,
