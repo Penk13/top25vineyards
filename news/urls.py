@@ -4,5 +4,5 @@ from .views import (news_detail)
 
 app_name = 'news'
 urlpatterns = [
-    path('<slug:slug>/', news_detail, name='detail'),
+    path('<str:category>/<slug:slug>/', news_detail, name='detail'),
 ]

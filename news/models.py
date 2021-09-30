@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from django.urls import reverse
 
 
 class Category(models.Model):
@@ -31,6 +32,9 @@ class Post(models.Model):
 
     def __str__(self):
         return "Post : " + self.title
+
+    def get_absolute_url(self):
+        return reverse('news:detail', kwargs={'category': self.category.name, 'slug': self.slug})
 
 
 def create_slug(instance, new_slug=None):
