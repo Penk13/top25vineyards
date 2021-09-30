@@ -69,7 +69,7 @@
                 <li class="nav-drop">
                   <a
                     class="dropdown-item text-light fw-bold"
-                    href="{% url 'vineyards:region' region.slug %}"
+                    href="{{ region.get_absolute_url }}"
                     style="text-transform: uppercase"
                     >{{ region.name }}</a
                   >
@@ -99,7 +99,7 @@
                 <li class="nav-drop">
                   <a
                     class="dropdown-item text-light fw-bold"
-                    href="{% url 'vineyards:region' region.slug %}"
+                    href="{{ region.get_absolute_url }}"
                     style="text-transform: uppercase"
                     >{{ region.name }}</a
                   >
@@ -160,9 +160,7 @@
                     {% for region in navbar_region %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
-                      <a
-                        class="dropdown-item text-light"
-                        href="{% url 'vineyards:region' region.slug %}"
+                      <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
                         >{{ region.name }}</a
                       >
                     </li>
@@ -184,9 +182,7 @@
                     {% for region in navbar_region %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
-                      <a
-                        class="dropdown-item text-light"
-                        href="{% url 'vineyards:region' region.slug %}"
+                      <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
                         >{{ region.name }}</a
                       >
                     </li>

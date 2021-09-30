@@ -19,6 +19,9 @@ class Region(models.Model):
     def __str__(self):
         return "Region : " + self.name
 
+    def get_absolute_url(self):
+        return reverse('vineyards:region', kwargs={'slug': self.slug})
+
 
 def create_slug_region(instance, new_slug=None):
     slug = slugify(instance.name)

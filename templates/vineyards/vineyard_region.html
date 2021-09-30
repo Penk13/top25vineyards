@@ -9,11 +9,11 @@
 
 <!-- Nadbar Logo -->
 {% block navlogo %} {% if region.logo_on_navbar %}
-<a class="navbar-brand px-0 mx-0" href="{% url 'vineyards:region' region.slug %}">
+<a class="navbar-brand px-0 mx-0" href="{{ region.get_absolute_url }}">
   <img src="{{ region.logo_on_navbar.url }}" />
 </a>
 {% else %}
-<a class="navbar-brand" href="{% url 'vineyards:region' region.slug %}">
+<a class="navbar-brand" href="{{ region.get_absolute_url }}">
   <img src="{% static 'img/navbrandtop25.png'%}" />
 </a>
 {% endif %} {% endblock navlogo %}
