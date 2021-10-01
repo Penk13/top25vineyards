@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
+from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard
 
@@ -49,8 +50,15 @@ def footerpage(request, slug):
 def searchpage(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        p = Paginator(Vineyard.objects.filter(
-            text__icontains=searched).order_by("-rating"), 10)
+        p = Paginator(
+            Vineyard.objects.filter(
+                Q(name__icontains=searched) |
+                Q(text__icontains=searched) |
+                Q(wine_rg__icontains=searched) |
+                Q(wines__icontains=searched) |
+                Q(grapes__icontains=searched) |
+                Q(owner__icontains=searched)
+            ).order_by("-rating"), 10)
         page = request.GET.get('page')
         vineyards = p.get_page(page)
     context = {"searched": searched, "vineyards": vineyards}
