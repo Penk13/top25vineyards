@@ -16,7 +16,7 @@ def vineyard_region(request, slug):
     region = get_object_or_404(Region, slug=slug)
     region_images = RegionImage.objects.filter(region=region)
     p = Paginator(Vineyard.objects.filter(
-        region=region).order_by("-rating"), 10)
+        regions=region).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"vineyards": vineyards, "region": region,
