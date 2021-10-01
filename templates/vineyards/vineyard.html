@@ -102,6 +102,16 @@
         >Regions</a
       >
     </li>
+    {% if vineyard.region.region_parent %}
+    <li class="breadcrumb-item" aria-current="page">
+      <a
+        href="{% url 'vineyards:region' vineyard.region.region_parent.slug %}"
+        class="text-dark"
+        style="text-decoration: none"
+        >{{ vineyard.region.region_parent.name }}</a
+      >
+    </li>
+    {% endif %}
     <li class="breadcrumb-item" aria-current="page">
       <a
         href="{% url 'vineyards:region' vineyard.region.slug %}"
