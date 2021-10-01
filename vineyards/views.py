@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from .models import Vineyard, Region, RegionImage, TopSliderImage, CoverSliderImage
 
 
-def vineyard_detail(request, region, slug):
+def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
