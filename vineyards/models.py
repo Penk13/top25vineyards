@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 class Region(models.Model):
+    region_parent = models.ManyToManyField("self", blank=True)
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = RichTextField()
@@ -49,7 +50,6 @@ class RegionImage(models.Model):
 
 
 class Vineyard(models.Model):
-    # region_parent = models.ManyToManyField("self", blank=True)
     name = models.CharField(max_length=255)
     text = RichTextField()
     rating = models.FloatField()
