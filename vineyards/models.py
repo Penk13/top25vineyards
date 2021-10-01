@@ -6,7 +6,8 @@ from django.urls import reverse
 
 
 class Region(models.Model):
-    region_parent = models.ManyToManyField("self", blank=True)
+    region_parent = models.ForeignKey(
+        "self", blank=True, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = RichTextField()
@@ -18,7 +19,10 @@ class Region(models.Model):
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return "Region : " + self.name
+        try:
+            return "Region : " + self.name + ', Parent : ' + self.region_parent.name
+        except:
+            return "Region : " + self.name
 
     def get_absolute_url(self):
         return reverse('vineyards:region', kwargs={'slug': self.slug})
@@ -65,6 +69,8 @@ class Vineyard(models.Model):
     owner = models.CharField(max_length=255)
     visits = models.CharField(max_length=255)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    regions = models.ManyToManyField(
+        Region, blank=True, related_name="regions")
     cover = models.ImageField(upload_to="vineyard/")
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
