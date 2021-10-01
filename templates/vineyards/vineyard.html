@@ -46,7 +46,16 @@
 {% endif %}
 
 <div class="row d-flex align-items-center mb-3">
-  {% if vineyard.under_review == False %}
+  {% if vineyard.custom_overlay %}
+  <div
+    class="col-4"
+    style="
+      background: url('{{ vineyard.custom_overlay.url }}') no-repeat center;
+      background-size: 125px;
+      height: 120px;
+    "
+  ></div>
+  {% elif vineyard.hide_rating == False %}
   <div
     class="col-4"
     style="
