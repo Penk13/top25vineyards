@@ -12,7 +12,7 @@ class Region(models.Model):
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
-    logo_on_navbar = models.ImageField(blank=True)
+    logo_on_navbar = models.ImageField(upload_to="logo-on-navbar/", blank=True)
     display_on_navbar = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 
@@ -49,9 +49,11 @@ class RegionImage(models.Model):
 
 
 class Vineyard(models.Model):
+    # region_parent = models.ManyToManyField("self", blank=True)
     name = models.CharField(max_length=255)
     text = RichTextField()
     rating = models.FloatField()
+    custom_overlay = models.ImageField(upload_to="custom-rating/", blank=True)
     google_map = models.TextField()
     wine_rg_url = models.URLField(blank=True)
     wine_rg = models.CharField(max_length=255)
@@ -69,7 +71,7 @@ class Vineyard(models.Model):
     meta_keywords = models.TextField(blank=True)
     top_slider = models.BooleanField(default=False)
     cover_slider = models.BooleanField(default=False)
-    under_review = models.BooleanField(default=False)
+    hide_rating = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -99,11 +101,11 @@ def pre_save_receiver_vineyard(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_receiver_vineyard, sender=Vineyard)
 
 
-class YardImage(models.Model):
+class TopSliderImage(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="yard-image/")
 
 
-class YardCoverImage(models.Model):
+class CoverSliderImage(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="yard-cover-image/")

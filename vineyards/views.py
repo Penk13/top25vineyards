@@ -1,12 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from .models import Vineyard, Region, RegionImage, YardImage, YardCoverImage
+from .models import Vineyard, Region, RegionImage, TopSliderImage, CoverSliderImage
 
 
 def vineyard_detail(request, region, slug):
     vineyard = get_object_or_404(Vineyard, slug=slug)
-    yard_images = YardImage.objects.filter(vineyard=vineyard)
-    yard_cover_images = YardCoverImage.objects.filter(vineyard=vineyard)
+    yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
+    yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     context = {"vineyard": vineyard, "yard_images": yard_images,
                "yard_cover_images": yard_cover_images}
     return render(request, "vineyards/vineyard.html", context)

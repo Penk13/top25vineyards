@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RegionImage, Region, Vineyard, YardImage, YardCoverImage
+from .models import RegionImage, Region, Vineyard, TopSliderImage, CoverSliderImage
 
 
 class RegionImageInline(admin.TabularInline):
@@ -11,16 +11,16 @@ class RegionAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
 
 
-class YardImageInline(admin.TabularInline):
-    model = YardImage
+class TopSliderImageInline(admin.TabularInline):
+    model = TopSliderImage
 
 
-class YardCoverImageInline(admin.TabularInline):
-    model = YardCoverImage
+class CoverSliderImageInline(admin.TabularInline):
+    model = CoverSliderImage
 
 
 class VineyardAdmin(admin.ModelAdmin):
-    inlines = [YardImageInline, YardCoverImageInline]
+    inlines = [TopSliderImageInline, CoverSliderImageInline]
     readonly_fields = ('slug',)
 
 
