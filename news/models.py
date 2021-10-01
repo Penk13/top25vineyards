@@ -23,7 +23,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     body = RichTextField()
     tags = models.ManyToManyField(Tag)
-    cover = models.ImageField(upload_to="news/", max_length=200)
+    cover = models.ImageField(upload_to="news/", max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
