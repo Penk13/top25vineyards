@@ -43,35 +43,6 @@ def pre_save_receiver_region(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_receiver_region, sender=Region)
 
 
-class RegionChild(models.Model):
-    name = models.CharField(max_length=255)
-    region_parent = models.ForeignKey(Region, on_delete=models.CASCADE)
-    slug = models.SlugField(unique=True)
-
-    def __str__(self):
-        return "Region : " + self.name + ", " + self.region_parent.name
-
-
-def create_slug_region_child(instance, new_slug=None):
-    slug = slugify(instance.name)
-    if new_slug is not None:
-        slug = new_slug
-    qs = RegionChild.objects.filter(slug=slug).order_by("-id")
-    exists = qs.exists()
-    if exists:
-        new_slug = "%s-%s" % (slug, qs.first().id)
-        return create_slug_region_child(instance, new_slug=new_slug)
-    return slug
-
-
-def pre_save_receiver_region_child(sender, instance, *args, **kwargs):
-    if not instance.slug:
-        instance.slug = create_slug_region_child(instance)
-
-
-pre_save.connect(pre_save_receiver_region_child, sender=RegionChild)
-
-
 class RegionImage(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     region_images = models.ImageField(upload_to="region-image/")
@@ -92,7 +63,6 @@ class Vineyard(models.Model):
     owner = models.CharField(max_length=255)
     visits = models.CharField(max_length=255)
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
-    region_child = models.ManyToManyField(RegionChild, blank=True)
     cover = models.ImageField(upload_to="vineyard/")
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
