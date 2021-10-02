@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
 
 <!-- Meta Keywords -->
-{% block keywords %} <meta name="keywords" content="{{ page.meta_keywords }}" />
+{% block keywords %} <meta name="keywords" content="{{ content_page.meta_keywords }}" />
 {% endblock keywords %}
 
 <!-- Title -->
-{% block title %} {{ page.title }} {% endblock title %}
+{% block title %} {{ content_page.title }} {% endblock title %}
 
 <!-- Top Carousel -->
 {% block topcarousel %}
@@ -15,12 +15,12 @@
 <!-- Footer Page -->
 {% block content %}
 
-<h1 class="text-center fw-bold">{{ page.title }}</h1>
+<h1 class="text-center fw-bold">{{ content_page.title }}</h1>
 <br />
-{{ page.content|safe }}
+{{ content_page.content|safe }}
 
 <!-- Contact Us Form -->
-{% if page.slug == 'contact-us' %}
+{% if content_page.slug == 'contact-us' %}
 <form method="POST">
   {% csrf_token %} {{ contact_entry_form|crispy }}
   <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
@@ -28,7 +28,7 @@
 {% endif %}
 
 <!-- Newsletter Form -->
-{% if page.slug == 'newsletter' %}
+{% if content_page.slug == 'newsletter' %}
 <form method="POST">
   {% csrf_token %} {{ subscriber_form|crispy }}
   <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
@@ -36,10 +36,10 @@
 {% endif %} {% endblock %}
 
 <!-- Sidebar -->
-{% block sidebar %} {{ page.sidebar|safe }} {% endblock sidebar %}
+{% block sidebar %} {{ content_page.sidebar|safe }} {% endblock sidebar %}
 
 <!-- Additional Content -->
-{% block addcontent %} {{ page.additional_content|safe }} {% endblock addcontent %}
+{% block addcontent %} {{ content_page.additional_content|safe }} {% endblock addcontent %}
 
 <!-- Ad Manager -->
-{% block admanager %} {{ page.ad_manager|safe }} {% endblock admanager %}
+{% block admanager %} {{ content_page.ad_manager|safe }} {% endblock admanager %}

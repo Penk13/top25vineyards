@@ -9,23 +9,23 @@ from mailing.forms import ContactEntryForm, SubscriberForm
 
 
 def mainpage(request):
-    homepage = get_object_or_404(ContentPage, types="HOME_PAGE")
-    image_carousel = ImageUpload.objects.filter(page=homepage)
-    if homepage.category:
+    content_page = get_object_or_404(ContentPage, types="HOME_PAGE")
+    image_carousel = ImageUpload.objects.filter(page=content_page)
+    if content_page.category:
         p = Paginator(Vineyard.objects.filter(
-            regions=homepage.category).order_by("-rating"), 10)
+            regions=content_page.category).order_by("-rating"), 10)
     else:
         p = Paginator(Vineyard.objects.all().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
-    context = {"homepage": homepage,
+    context = {"content_page": content_page,
                "vineyards": vineyards,
                "image_carousel": image_carousel}
     return render(request, "pages_app/main_page.html", context)
 
 
 def footerpage(request, slug):
-    page = get_object_or_404(ContentPage, slug=slug)
+    content_page = get_object_or_404(ContentPage, slug=slug)
     contact_entry_form = ContactEntryForm()
     subscriber_form = SubscriberForm()
 
@@ -45,7 +45,7 @@ def footerpage(request, slug):
                 Subscriber.objects.create(**subscriber_form.cleaned_data)
             return redirect("pages_app:mainpage")
 
-    context = {"page": page,
+    context = {"content_page": content_page,
                "contact_entry_form": contact_entry_form,
                "subscriber_form": subscriber_form}
     return render(request, "pages_app/footer_page.html", context)

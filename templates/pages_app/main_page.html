@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% load static %}
 
 <!-- Meta Keywords -->
-{% block keywords %} <meta name="keywords" content="{{ homepage.meta_keywords }}" />
+{% block keywords %} <meta name="keywords" content="{{ content_page.meta_keywords }}" />
 {% endblock keywords %}
 
 <!-- Title -->
-{% block title %} {{ homepage.title }} {% endblock title %}
+{% block title %} {{ content_page.title }} {% endblock title %}
 
 <!-- Slick Slider Carousel -->
 {% block topcarousel %}
@@ -22,8 +22,8 @@
 {% block toptext %}
 <section style="background-color: white; z-index: 1; position: relative" class="top-text">
   <div class="container text-center my-3 py-3">
-    <h1 class="fw-bold">{{ homepage.title }}</h1>
-    <p>{{ homepage.content|safe }}</p>
+    <h1 class="fw-bold">{{ content_page.title }}</h1>
+    <p>{{ content_page.content|safe }}</p>
   </div>
 </section>
 {% endblock toptext %}
@@ -96,10 +96,10 @@
 {% endblock content %}
 
 <!-- Sidebar -->
-{% block sidebar %} {{ homepage.sidebar|safe }} {% endblock sidebar %}
+{% block sidebar %} {{ content_page.sidebar|safe }} {% endblock sidebar %}
 
 <!-- Additional Content -->
-{% block addcontent %} {{ homepage.additional_content|safe }} {% endblock addcontent %}
+{% block addcontent %} {{ content_page.additional_content|safe }} {% endblock addcontent %}
 
 <!-- Ad Manager -->
-{% block admanager %} {{ homepage.ad_manager|safe }} {% endblock admanager %}
+{% block admanager %} {{ content_page.ad_manager|safe }} {% endblock admanager %}
