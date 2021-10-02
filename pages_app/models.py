@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from vineyards.models import Region
 
 TYPE = (
     ("PAGE", "Page"),
@@ -18,6 +19,9 @@ class ContentPage(models.Model):
     ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     additional_content = RichTextField(blank=True)
+    category = models.ForeignKey(
+        Region, null=True, blank=True, on_delete=models.CASCADE)
+    show_listing = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

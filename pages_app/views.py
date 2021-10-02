@@ -11,7 +11,8 @@ from mailing.forms import ContactEntryForm, SubscriberForm
 def mainpage(request):
     homepage = get_object_or_404(ContentPage, types="HOME_PAGE")
     image_carousel = ImageUpload.objects.filter(page=homepage)
-    p = Paginator(Vineyard.objects.all().order_by("-rating"), 10)
+    p = Paginator(Vineyard.objects.filter(
+        regions=homepage.category).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"homepage": homepage,
