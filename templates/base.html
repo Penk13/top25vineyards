@@ -73,6 +73,13 @@
                     style="text-transform: uppercase"
                     >{{ region.name }}</a
                   >
+                  <ul class="text-light">
+                    {% for child in navbar_region_child %} {% if child.region_parent == region %}
+                    <li>
+                      <a href="{{ child.get_absolute_url }}" class="text-light">{{ child.name }}</a>
+                    </li>
+                    {% endif %} {% endfor %}
+                  </ul>
                 </li>
                 {% endfor %}
               </ul>
@@ -163,6 +170,17 @@
                       <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
                         >{{ region.name }}</a
                       >
+                      <ul class="text-light">
+                        {% for child in navbar_region_child %}
+                        <!--  -->
+                        {% if child.region_parent == region %}
+                        <li>
+                          <a href="{{ child.get_absolute_url }}" class="text-light"
+                            >{{ child.name }}</a
+                          >
+                        </li>
+                        {% endif %} {% endfor %}
+                      </ul>
                     </li>
                     {% endfor %}
                   </ul>
