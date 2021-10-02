@@ -29,7 +29,7 @@
 {% endblock toptext %}
 
 <!-- Vineyard List -->
-{% block content %} {% for vineyard in vineyards %}
+{% block content %} {% if content_page.show_listing == True %} {% for vineyard in vineyards %}
 <div class="col-12 col-md-6 py-3 text-start">
   <div style="position: absolute; z-index: 1">
     {% if vineyard.custom_overlay %}
@@ -93,13 +93,17 @@
     {% endif %}
   </ul>
 </nav>
-{% endblock content %}
+{% else %} {{ content_page.additional_content|safe }} {% endif %} {% endblock content %}
 
 <!-- Sidebar -->
 {% block sidebar %} {{ content_page.sidebar|safe }} {% endblock sidebar %}
 
 <!-- Additional Content -->
-{% block addcontent %} {{ content_page.additional_content|safe }} {% endblock addcontent %}
+{% block addcontent %}
+<!--  -->
+{% if content_page.show_listing == True %} {{ content_page.additional_content|safe }} {% endif %}
+<!--  -->
+{% endblock addcontent %}
 
 <!-- Ad Manager -->
 {% block admanager %} {{ content_page.ad_manager|safe }} {% endblock admanager %}
