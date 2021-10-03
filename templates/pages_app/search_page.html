@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %} {% load static %} {% load class_name %}
 
 <!-- Meta Keywords -->
 {% block keywords %} <meta name="keywords" content="top 25 vineyards" />
@@ -16,44 +16,60 @@
 {% block content %} {% if searched %}
 <h1 class="fw-bold">Search Results For: {{ searched }}</h1>
 <hr />
-{% for vineyard in vineyards %}
+{% for result in results %}
+<!-- Vineyards -->
+{% with result|class_name as model %} {% if model == 'Vineyard' %}
 <div class="col-12 col-md-6 py-3 text-start">
   <div style="position: absolute; z-index: 1">
     <p
       style="z-index: 1; position: absolute; padding-top: 10px"
       class="text-light fs-5 fw-bold m-4 text-center"
     >
-      TOP <span style="font-size: 28px">{{ vineyard.rating }}</span>
+      TOP <span style="font-size: 28px">{{ result.rating }}</span>
     </p>
     <img src="{% static 'img/overlay-icon-bg.png' %} " style="max-width: 125px" class="m-2" />
   </div>
-  <a href="{{ vineyard.get_absolute_url }}">
-    <img src="{{ vineyard.cover.url }}" class="img-fluid"
+  <a href="{{ result.get_absolute_url }}">
+    <img src="{{ result.cover.url }}" class="img-fluid"
   /></a>
 </div>
 <div class="col-12 col-md-6 py-3" style="font-size: 14px">
   <h5 class="fw-bold">
-    <a href="{{ vineyard.get_absolute_url }}" class="text-decoration-none text-dark"
-      >{{ vineyard.name }}</a
+    <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
+      >{{ result.name }}</a
     >
   </h5>
   <p>
     <strong> Wine Region </strong> :
-    <a href="{{ vineyard.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
-      >{{ vineyard.wine_rg }}</a
+    <a href="{{ result.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
+      >{{ result.wine_rg }}</a
     ><br />
     <strong> Wines </strong> :
-    <a href="{{ vineyard.wines_url }}" style="text-decoration: none; color: #688c3b"
-      >{{ vineyard.wines }}</a
+    <a href="{{ result.wines_url }}" style="text-decoration: none; color: #688c3b"
+      >{{ result.wines }}</a
     ><br />
     <strong> Owner </strong> :
-    <a href="{{ vineyard.owner_url }}" style="text-decoration: none; color: #688c3b"
-      >{{ vineyard.owner }}</a
+    <a href="{{ result.owner_url }}" style="text-decoration: none; color: #688c3b"
+      >{{ result.owner }}</a
     ><br />
-    {{ vineyard.text|safe|truncatewords:25 }}
+    {{ result.text|safe|truncatewords:25 }}
   </p>
 </div>
-{% endfor %}
+<!-- News -->
+{% elif model == 'Post' %}
+<div class="col-12 col-md-6 py-3 text-start">
+  <a href="{{ result.get_absolute_url }}">
+    <img src="{{ result.cover.url }}" class="img-fluid"
+  /></a>
+</div>
+<div class="col-12 col-md-6 py-3" style="font-size: 14px">
+  <h5 class="fw-bold">
+    <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
+      >{{ result.title }}</a
+    >
+  </h5>
+</div>
+{% endif %} {% endwith %} {% endfor %}
 <!-- Nav Pagination -->
 <nav class="nav-pagination">
   <ul class="pagination justify-content-center">

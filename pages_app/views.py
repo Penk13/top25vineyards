@@ -3,9 +3,12 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard
+from news.models import Post
 
 from mailing.models import ContactEntry, Subscriber
 from mailing.forms import ContactEntryForm, SubscriberForm
+
+from itertools import chain
 
 
 def mainpage(request):
@@ -54,16 +57,21 @@ def footerpage(request, slug):
 def searchpage(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        p = Paginator(
-            Vineyard.objects.filter(
-                Q(name__icontains=searched) |
-                Q(text__icontains=searched) |
-                Q(wine_rg__icontains=searched) |
-                Q(wines__icontains=searched) |
-                Q(grapes__icontains=searched) |
-                Q(owner__icontains=searched)
-            ).order_by("-rating"), 10)
+        vineyard = Vineyard.objects.filter(
+            Q(name__icontains=searched) |
+            Q(text__icontains=searched) |
+            Q(wine_rg__icontains=searched) |
+            Q(wines__icontains=searched) |
+            Q(grapes__icontains=searched) |
+            Q(owner__icontains=searched)
+        ).order_by("-rating")
+        news = Post.objects.filter(
+            Q(title__icontains=searched) |
+            Q(body__icontains=searched)
+        )
+        result_list = list(chain(vineyard, news))
+        p = Paginator(result_list, 10)
         page = request.GET.get('page')
-        vineyards = p.get_page(page)
-    context = {"searched": searched, "vineyards": vineyards}
+        results = p.get_page(page)
+    context = {"searched": searched, "results": results}
     return render(request, "pages_app/search_page.html", context)
