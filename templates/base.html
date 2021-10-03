@@ -59,7 +59,7 @@
                 aria-labelledby="dropdownMenuLink"
                 style="font-size: 12px"
               >
-                {% for region in navbar_region %}
+                {% for region in navbar.region.all %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li class="nav-drop">
                   <a
@@ -97,12 +97,12 @@
                 aria-labelledby="dropdownMenuLink"
                 style="font-size: 12px"
               >
-                {% for page in navbar_pages %}
+                {% for page in navbar.page.all %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li class="nav-drop">
                   <a
                     class="dropdown-item text-light fw-bold"
-                    href="{{ region.get_absolute_url }}"
+                    href="{{ page.get_absolute_url }}"
                     style="text-transform: uppercase"
                     >{{ page.title }}</a
                   >
@@ -164,7 +164,7 @@
                     {{ navbar.title }}
                   </a>
                   <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
-                    {% for region in navbar_region %}
+                    {% for region in navbar.region.all %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
                       <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
@@ -198,10 +198,10 @@
                     {{ navbar.title }}
                   </a>
                   <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
-                    {% for page in navbar_pages %}
+                    {% for page in navbar.page.all %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
-                      <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
+                      <a class="dropdown-item text-light" href="{{ page.get_absolute_url }}"
                         >{{ page.title }}</a
                       >
                     </li>

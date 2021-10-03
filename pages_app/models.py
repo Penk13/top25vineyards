@@ -2,6 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from django.urls import reverse
 from vineyards.models import Region
 
 TYPE = (
@@ -26,6 +27,12 @@ class ContentPage(models.Model):
 
     def __str__(self):
         return self.get_types_display() + " : " + self.title
+
+    def get_absolute_url(self):
+        if self.types == "HOME_PAGE":
+            return reverse('pages_app:mainpage')
+        else:
+            return reverse('pages_app:footerpage', kwargs={'slug': self.slug})
 
 
 def create_slug(instance, new_slug=None):
