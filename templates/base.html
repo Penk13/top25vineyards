@@ -59,7 +59,7 @@
                 aria-labelledby="dropdownMenuLink"
                 style="font-size: 12px"
               >
-                {% for region in navbar.region.all %}
+                {% for region in navbar.region.all %} {% if region.region_parent is None %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li class="nav-drop">
                   <a
@@ -68,15 +68,17 @@
                     style="text-transform: uppercase"
                     >{{ region.name }}</a
                   >
+                  <!-- Child Region -->
+                  {% for child in navbar.region.all %} {% if child.region_parent == region %}
                   <ul class="text-light">
-                    {% for child in navbar_region_child %} {% if child.region_parent == region %}
                     <li>
                       <a href="{{ child.get_absolute_url }}" class="text-light">{{ child.name }}</a>
                     </li>
-                    {% endif %} {% endfor %}
                   </ul>
                 </li>
-                {% endfor %}
+                {% endif %} {% endfor %}
+                <!--  -->
+                {% endif %} {% endfor %}
               </ul>
             </div>
             {% elif navbar.page.exists %}
@@ -164,25 +166,24 @@
                     {{ navbar.title }}
                   </a>
                   <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
-                    {% for region in navbar.region.all %}
+                    {% for region in navbar.region.all %} {% if region.region_parent is None %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
                       <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
                         >{{ region.name }}</a
                       >
+                      {% for child in navbar.region.all %} {% if child.region_parent == region %}
                       <ul class="text-light">
-                        {% for child in navbar_region_child %}
-                        <!--  -->
-                        {% if child.region_parent == region %}
                         <li>
                           <a href="{{ child.get_absolute_url }}" class="text-light"
                             >{{ child.name }}</a
                           >
                         </li>
-                        {% endif %} {% endfor %}
                       </ul>
                     </li>
-                    {% endfor %}
+                    {% endif %} {% endfor %}
+                    <!--  -->
+                    {% endif %} {% endfor %}
                   </ul>
                 </li>
                 {% elif navbar.page.exists %}
