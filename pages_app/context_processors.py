@@ -1,11 +1,10 @@
-from django.shortcuts import get_list_or_404
 from .models import ContentPage, Navbar
 from vineyards.models import Region
 from news.models import Post
 
 
 def base_variable(request):
-    navbars = Navbar.objects.all()
+    navbars = Navbar.objects.all().order_by("order")
     navbar_region = Region.objects.filter(
         display_on_navbar=True, region_parent=None)
     navbar_region_child = Region.objects.filter(
