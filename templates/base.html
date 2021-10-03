@@ -97,14 +97,14 @@
                 aria-labelledby="dropdownMenuLink"
                 style="font-size: 12px"
               >
-                {% for region in navbar_region %}
+                {% for page in navbar_pages %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li class="nav-drop">
                   <a
                     class="dropdown-item text-light fw-bold"
                     href="{{ region.get_absolute_url }}"
                     style="text-transform: uppercase"
-                    >{{ region.name }}</a
+                    >{{ page.title }}</a
                   >
                 </li>
                 {% endfor %}
@@ -198,11 +198,11 @@
                     {{ navbar.title }}
                   </a>
                   <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
-                    {% for region in navbar_region %}
+                    {% for page in navbar_pages %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
                       <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
-                        >{{ region.name }}</a
+                        >{{ page.title }}</a
                       >
                     </li>
                     {% endfor %}
