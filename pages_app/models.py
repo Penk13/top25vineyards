@@ -6,8 +6,8 @@ from vineyards.models import Region
 
 TYPE = (
     ("PAGE", "Page"),
+    ("FOOTER", "Footer"),
     ("HOME_PAGE", "Home Page"),
-    ("HOME_PAGE_SIDEBAR", "Home Page Sidebar")
 )
 
 
@@ -51,3 +51,14 @@ pre_save.connect(pre_save_receiver, sender=ContentPage)
 class ImageUpload(models.Model):
     page = models.ForeignKey(ContentPage, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="page/", max_length=255)
+
+
+class Navbar(models.Model):
+    title = models.CharField(max_length=255)
+    link = models.URLField(blank=True)
+    region = models.ManyToManyField(Region, blank=True)
+    page = models.ManyToManyField(ContentPage, blank=True)
+    order = models.IntegerField(unique=True)
+
+    def __str__(self):
+        return self.title

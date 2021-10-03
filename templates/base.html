@@ -41,12 +41,7 @@
         {% endif %} {% endblock navlogo %}
         <div class="navbar d-flex">
           <div class="d-flex my-auto d-none d-md-none d-lg-flex fw-bold" style="font-size: 12px">
-            <a
-              class="nav-item text-light me-4"
-              href="{% url 'pages_app:mainpage' %}"
-              style="text-decoration: none"
-              >WORLD'S TOP 25</a
-            >
+            {% for navbar in navbars %} {% if navbar.region.exists %}
             <div class="dropdown">
               <a
                 class="nav-item text-light me-4 dropdown-toggle"
@@ -57,7 +52,7 @@
                 aria-expanded="false"
                 style="text-decoration: none"
               >
-                TOP BY REGIONS
+                {{ navbar.title }}
               </a>
               <ul
                 class="dropdown-menu bg-dark"
@@ -84,6 +79,7 @@
                 {% endfor %}
               </ul>
             </div>
+            {% elif navbar.page.exists %}
             <div class="dropdown">
               <a
                 class="nav-item text-light me-4 dropdown-toggle"
@@ -94,7 +90,7 @@
                 aria-expanded="false"
                 style="text-decoration: none"
               >
-                DISCOVER
+                {{ navbar.title }}
               </a>
               <ul
                 class="dropdown-menu bg-dark"
@@ -114,6 +110,14 @@
                 {% endfor %}
               </ul>
             </div>
+            {% else %}
+            <a
+              class="nav-item text-light me-4"
+              href="{{ navbar.link }}"
+              style="text-decoration: none"
+              >{{ navbar.title }}</a
+            >
+            {% endif %} {% endfor %}
           </div>
           <button
             class="navbar-toggler navbar-dark d-block px-0"
@@ -147,11 +151,7 @@
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                  <a class="nav-link text-light" href="{% url 'pages_app:mainpage' %}"
-                    >WORLD'S TOP 25</a
-                  >
-                </li>
+                {% for navbar in navbars %} {% if navbar.region.exists %}
                 <li class="nav-item dropdown">
                   <a
                     class="nav-link dropdown-toggle text-light"
@@ -161,7 +161,7 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    TOP BY REGIONS
+                    {{ navbar.title }}
                   </a>
                   <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
                     {% for region in navbar_region %}
@@ -185,6 +185,7 @@
                     {% endfor %}
                   </ul>
                 </li>
+                {% elif navbar.page.exists %}
                 <li class="nav-item dropdown">
                   <a
                     class="nav-link dropdown-toggle text-light"
@@ -194,7 +195,7 @@
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    DISCOVER
+                    {{ navbar.title }}
                   </a>
                   <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
                     {% for region in navbar_region %}
@@ -207,6 +208,11 @@
                     {% endfor %}
                   </ul>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="{{ navbar.link }}">{{ navbar.title }}</a>
+                </li>
+                {% endif %} {% endfor %}
               </ul>
               <form class="d-flex" method="POST" action="{% url 'pages_app:searchpage' %}">
                 {% csrf_token %}
