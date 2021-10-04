@@ -59,7 +59,9 @@
                 aria-labelledby="dropdownMenuLink"
                 style="font-size: 12px"
               >
-                {% for region in navbar.region.all %} {% if region.region_parent is None %}
+                {% for region in navbar.region.all|dictsort:"name" %}
+                <!-- Parent Region -->
+                {% if region.region_parent is None %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li class="nav-drop">
                   <a
@@ -68,8 +70,9 @@
                     style="text-transform: uppercase"
                     >{{ region.name }}</a
                   >
+                  {% for child in navbar.region.all|dictsort:"name" %}
                   <!-- Child Region -->
-                  {% for child in navbar.region.all %} {% if child.region_parent == region %}
+                  {% if child.region_parent == region %}
                   <ul class="text-light">
                     <li>
                       <a href="{{ child.get_absolute_url }}" class="text-light">{{ child.name }}</a>
