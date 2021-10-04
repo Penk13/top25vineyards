@@ -14,32 +14,34 @@
 
 <!-- Footer Page -->
 {% block content %}
+<div class="row d-flex p-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h1 class="text-center fw-bold">{{ content_page.title }}</h1>
+  <br />
+  {{ content_page.content|safe }}
 
-<h1 class="text-center fw-bold">{{ content_page.title }}</h1>
-<br />
-{{ content_page.content|safe }}
+  <!-- Contact Us Form -->
+  {% if content_page.slug == 'contact-us' %}
+  <form method="POST">
+    {% csrf_token %} {{ contact_entry_form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+  </form>
+  {% endif %}
 
-<!-- Contact Us Form -->
-{% if content_page.slug == 'contact-us' %}
-<form method="POST">
-  {% csrf_token %} {{ contact_entry_form|crispy }}
-  <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-</form>
-{% endif %}
-
-<!-- Newsletter Form -->
-{% if content_page.slug == 'newsletter' %}
-<form method="POST">
-  {% csrf_token %} {{ subscriber_form|crispy }}
-  <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-</form>
-{% endif %} {% endblock %}
+  <!-- Newsletter Form -->
+  {% if content_page.slug == 'newsletter' %}
+  <form method="POST">
+    {% csrf_token %} {{ subscriber_form|crispy }}
+    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+  </form>
+  {% endif %}
+</div>
+<div class="row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {{ content_page.additional_content|safe }}
+</div>
+{% endblock %}
 
 <!-- Sidebar -->
 {% block sidebar %} {{ content_page.sidebar|safe }} {% endblock sidebar %}
-
-<!-- Additional Content -->
-{% block addcontent %} {{ content_page.additional_content|safe }} {% endblock addcontent %}
 
 <!-- Ad Manager -->
 {% block admanager %} {{ content_page.ad_manager|safe }} {% endblock admanager %}

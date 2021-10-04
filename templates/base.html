@@ -249,9 +249,7 @@
         <div class="row d-flex">
           <!-- Main Section -->
           <div class="col-12 col-lg-8 ps-0">
-            <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-              {% block content %} {% endblock content %}
-            </div>
+            <div class="row d-flex">{% block content %} {% endblock content %}</div>
           </div>
           <!-- Sidebar -->
           <div class="sidebar col-12 col-lg-4 ps-lg-5 ps-md-0 ps-sm-0">
@@ -264,11 +262,6 @@
             </div>
             <div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
               <div class="text-start">{% block admanager %} {% endblock admanager %}</div>
-            </div>
-          </div>
-          <div class="col-12 col-lg-8 ps-0 my-4">
-            <div class="row d-flex p-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-              {% block addcontent %} {% endblock addcontent %}
             </div>
           </div>
         </div>

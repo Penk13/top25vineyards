@@ -14,9 +14,12 @@
 
 <!-- News Detail -->
 {% block content %}
-<h6><span class="badge bg-dark">{{ news.category.name }}</span></h6>
-<h1 class="fw-bold">{{ news.title }}</h1>
-{{ news.body|safe }} {% endblock content %}
+<div class="row d-flex p-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h6><span class="badge bg-dark">{{ news.category.name }}</span></h6>
+  <h1 class="fw-bold">{{ news.title }}</h1>
+  {{ news.body|safe }}
+</div>
+{% endblock content %}
 
 <!-- Breadcrumb -->
 {% block breadcrumb %}

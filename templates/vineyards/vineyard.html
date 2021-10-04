@@ -33,100 +33,102 @@
 
 <!-- Vineyard Detail -->
 {% block content %}
-<h1 class="fw-bold">{{ vineyard.name }}</h1>
-<h5><i class="bi bi-geo-alt-fill"></i> {{ vineyard.wine_rg }}</h5>
-{% if vineyard.cover_slider and yard_cover_images %}
-<div class="slick-carousel-yard-cover my-3">
-  {% for image in yard_cover_images %}
-  <img src="{{ image.image.url }}" />
-  {% endfor %}
-</div>
-{% else %}
-<img src="{{ vineyard.cover.url }}" alt="" class="img-fluid py-3" />
-{% endif %}
+<div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h1 class="fw-bold">{{ vineyard.name }}</h1>
+  <h5><i class="bi bi-geo-alt-fill"></i> {{ vineyard.wine_rg }}</h5>
+  {% if vineyard.cover_slider and yard_cover_images %}
+  <div class="slick-carousel-yard-cover my-3">
+    {% for image in yard_cover_images %}
+    <img src="{{ image.image.url }}" />
+    {% endfor %}
+  </div>
+  {% else %}
+  <img src="{{ vineyard.cover.url }}" alt="" class="img-fluid py-3" />
+  {% endif %}
 
-<div class="row d-flex align-items-center mb-3">
-  {% if vineyard.custom_overlay %}
-  <div
-    class="col-4"
-    style="
+  <div class="row d-flex align-items-center mb-3">
+    {% if vineyard.custom_overlay %}
+    <div
+      class="col-4"
+      style="
       background: url('{{ vineyard.custom_overlay.url }}') no-repeat center;
       background-size: 125px;
       height: 120px;
     "
-  ></div>
-  {% elif vineyard.hide_rating == False %}
-  <div
-    class="col-4"
-    style="
-      background: url('{%static 'img/overlay-icon-bg.png' %}') no-repeat center;
-      background-size: 125px;
-      height: 120px;
-    "
-  >
-    <p class="text-light fs-5 fw-bold text-center mt-4">
-      TOP <br /><span style="font-size: 28px">{{ vineyard.rating }}</span>
-    </p>
+    ></div>
+    {% elif vineyard.hide_rating == False %}
+    <div
+      class="col-4"
+      style="
+        background: url('{%static 'img/overlay-icon-bg.png' %}') no-repeat center;
+        background-size: 125px;
+        height: 120px;
+      "
+    >
+      <p class="text-light fs-5 fw-bold text-center mt-4">
+        TOP <br /><span style="font-size: 28px">{{ vineyard.rating }}</span>
+      </p>
+    </div>
+    {% endif %}
+    <div class="col-8">
+      <p class="my-auto">
+        <strong> Wine Region </strong> : {{ vineyard.wine_rg }}
+        <br />
+        <strong> Size </strong> : {{ vineyard.size }}
+        <br />
+        <strong> Grapes </strong> : {{ vineyard.grapes }}
+        <br />
+        <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
+        <br />
+        <strong> Visits </strong> : {{ vineyard.visits }}
+        <br />
+      </p>
+    </div>
   </div>
-  {% endif %}
-  <div class="col-8">
-    <p class="my-auto">
-      <strong> Wine Region </strong> : {{ vineyard.wine_rg }}
-      <br />
-      <strong> Size </strong> : {{ vineyard.size }}
-      <br />
-      <strong> Grapes </strong> : {{ vineyard.grapes }}
-      <br />
-      <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
-      <br />
-      <strong> Visits </strong> : {{ vineyard.visits }}
-      <br />
-    </p>
-  </div>
+  {{ vineyard.text|safe }} {{ vineyard.google_map|safe }}
 </div>
-{{ vineyard.text|safe }} {{ vineyard.google_map|safe }}
-<!--  -->
 {% endblock content %}
 
-<!-- Breadcrumb -->
-{% block breadcrumb %}
-<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
-  <ol class="breadcrumb" style="font-size: 13px">
-    <li class="breadcrumb-item">
-      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
-        ><i class="bi bi-house-fill"></i> Home</a
-      >
-    </li>
-    <li class="breadcrumb-item" aria-current="page">
-      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
-        >Regions</a
-      >
-    </li>
-    {% if vineyard.region.region_parent %}
-    <li class="breadcrumb-item" aria-current="page">
-      <a
-        href="{% url 'vineyards:region' vineyard.region.region_parent.slug %}"
-        class="text-dark"
-        style="text-decoration: none"
-        >{{ vineyard.region.region_parent.name }}</a
-      >
-    </li>
-    {% endif %}
-    <li class="breadcrumb-item" aria-current="page">
-      <a
-        href="{% url 'vineyards:region' vineyard.region.slug %}"
-        class="text-dark"
-        style="text-decoration: none"
-        >{{ vineyard.region.name }}</a
-      >
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">{{ vineyard.name }}</li>
-  </ol>
-</nav>
-{% endblock breadcrumb %}
+  <!-- Breadcrumb -->
+  {% block breadcrumb %}
+  <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+    <ol class="breadcrumb" style="font-size: 13px">
+      <li class="breadcrumb-item">
+        <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+          ><i class="bi bi-house-fill"></i> Home</a
+        >
+      </li>
+      <li class="breadcrumb-item" aria-current="page">
+        <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+          >Regions</a
+        >
+      </li>
+      {% if vineyard.region.region_parent %}
+      <li class="breadcrumb-item" aria-current="page">
+        <a
+          href="{% url 'vineyards:region' vineyard.region.region_parent.slug %}"
+          class="text-dark"
+          style="text-decoration: none"
+          >{{ vineyard.region.region_parent.name }}</a
+        >
+      </li>
+      {% endif %}
+      <li class="breadcrumb-item" aria-current="page">
+        <a
+          href="{% url 'vineyards:region' vineyard.region.slug %}"
+          class="text-dark"
+          style="text-decoration: none"
+          >{{ vineyard.region.name }}</a
+        >
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">{{ vineyard.name }}</li>
+    </ol>
+  </nav>
+  {% endblock breadcrumb %}
 
-<!-- Sidebar -->
-{% block sidebar %} {{ vineyard.sidebar|safe }} {% endblock sidebar %}
+  <!-- Sidebar -->
+  {% block sidebar %} {{ vineyard.sidebar|safe }} {% endblock sidebar %}
 
-<!-- Ad Manager -->
-{% block admanager %} {{ vineyard.ad_manager|safe }} {% endblock admanager %}
+  <!-- Ad Manager -->
+  {% block admanager %} {{ vineyard.ad_manager|safe }} {% endblock admanager %}
+</div>

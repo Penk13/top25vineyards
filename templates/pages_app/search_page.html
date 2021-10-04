@@ -14,84 +14,88 @@
 
 <!-- Mainpage -->
 {% block content %} {% if searched %}
-<h1 class="fw-bold">Search Results For: {{ searched }}</h1>
-<hr />
-{% for result in results %}
-<!-- Vineyards -->
-{% with result|class_name as model %} {% if model == 'Vineyard' %}
-<div class="col-12 col-md-6 py-3 text-start">
-  <div style="position: absolute; z-index: 1">
-    <p
-      style="z-index: 1; position: absolute; padding-top: 10px"
-      class="text-light fs-5 fw-bold m-4 text-center"
-    >
-      TOP <span style="font-size: 28px">{{ result.rating }}</span>
-    </p>
-    <img src="{% static 'img/overlay-icon-bg.png' %} " style="max-width: 125px" class="m-2" />
+<div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h1 class="fw-bold">Search Results For: {{ searched }}</h1>
+  <hr />
+  {% for result in results %}
+  <!-- Vineyards -->
+  {% with result|class_name as model %} {% if model == 'Vineyard' %}
+  <div class="col-12 col-md-6 py-3 text-start">
+    <div style="position: absolute; z-index: 1">
+      <p
+        style="z-index: 1; position: absolute; padding-top: 10px"
+        class="text-light fs-5 fw-bold m-4 text-center"
+      >
+        TOP <span style="font-size: 28px">{{ result.rating }}</span>
+      </p>
+      <img src="{% static 'img/overlay-icon-bg.png' %} " style="max-width: 125px" class="m-2" />
+    </div>
+    <a href="{{ result.get_absolute_url }}">
+      <img src="{{ result.cover.url }}" class="img-fluid"
+    /></a>
   </div>
-  <a href="{{ result.get_absolute_url }}">
-    <img src="{{ result.cover.url }}" class="img-fluid"
-  /></a>
+  <div class="col-12 col-md-6 py-3" style="font-size: 14px">
+    <h5 class="fw-bold">
+      <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
+        >{{ result.name }}</a
+      >
+    </h5>
+    <p>
+      <strong> Wine Region </strong> :
+      <a href="{{ result.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
+        >{{ result.wine_rg }}</a
+      ><br />
+      <strong> Wines </strong> :
+      <a href="{{ result.wines_url }}" style="text-decoration: none; color: #688c3b"
+        >{{ result.wines }}</a
+      ><br />
+      <strong> Owner </strong> :
+      <a href="{{ result.owner_url }}" style="text-decoration: none; color: #688c3b"
+        >{{ result.owner }}</a
+      ><br />
+      {{ result.text|safe|truncatewords:25 }}
+    </p>
+  </div>
+  <!-- News -->
+  {% elif model == 'Post' %}
+  <div class="col-12 col-md-6 py-3 text-start">
+    <a href="{{ result.get_absolute_url }}">
+      <img src="{{ result.cover.url }}" class="img-fluid"
+    /></a>
+  </div>
+  <div class="col-12 col-md-6 py-3" style="font-size: 14px">
+    <h5 class="fw-bold">
+      <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
+        >{{ result.title }}</a
+      >
+    </h5>
+  </div>
+  {% endif %} {% endwith %} {% endfor %}
+  <!-- Nav Pagination -->
+  <nav class="nav-pagination">
+    <ul class="pagination justify-content-center">
+      {% if vineyards.has_previous %}
+      <li class="page-item">
+        <!-- <a class="page-link" href="?page=1">&laquo First</a> -->
+        <a class="page-link" href="?page={{vineyards.previous_page_number}}">&laquo</a>
+      </li>
+      {% endif %}
+      <li class="page-item disabled">
+        <a class="page-link" href="#"
+          >Page {{ vineyards.number }} of {{ vineyards.paginator.num_pages }}
+        </a>
+      </li>
+      {% if vineyards.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{vineyards.next_page_number}}">&raquo</a>
+        <!-- <a class="page-link" href="?page={{vineyards.paginator.num_pages}}">Last &raquo</a> -->
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
 </div>
-<div class="col-12 col-md-6 py-3" style="font-size: 14px">
-  <h5 class="fw-bold">
-    <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
-      >{{ result.name }}</a
-    >
-  </h5>
-  <p>
-    <strong> Wine Region </strong> :
-    <a href="{{ result.wine_rg_url }}" style="text-decoration: none; color: #688c3b"
-      >{{ result.wine_rg }}</a
-    ><br />
-    <strong> Wines </strong> :
-    <a href="{{ result.wines_url }}" style="text-decoration: none; color: #688c3b"
-      >{{ result.wines }}</a
-    ><br />
-    <strong> Owner </strong> :
-    <a href="{{ result.owner_url }}" style="text-decoration: none; color: #688c3b"
-      >{{ result.owner }}</a
-    ><br />
-    {{ result.text|safe|truncatewords:25 }}
-  </p>
-</div>
-<!-- News -->
-{% elif model == 'Post' %}
-<div class="col-12 col-md-6 py-3 text-start">
-  <a href="{{ result.get_absolute_url }}">
-    <img src="{{ result.cover.url }}" class="img-fluid"
-  /></a>
-</div>
-<div class="col-12 col-md-6 py-3" style="font-size: 14px">
-  <h5 class="fw-bold">
-    <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
-      >{{ result.title }}</a
-    >
-  </h5>
-</div>
-{% endif %} {% endwith %} {% endfor %}
-<!-- Nav Pagination -->
-<nav class="nav-pagination">
-  <ul class="pagination justify-content-center">
-    {% if vineyards.has_previous %}
-    <li class="page-item">
-      <!-- <a class="page-link" href="?page=1">&laquo First</a> -->
-      <a class="page-link" href="?page={{vineyards.previous_page_number}}">&laquo</a>
-    </li>
-    {% endif %}
-    <li class="page-item disabled">
-      <a class="page-link" href="#"
-        >Page {{ vineyards.number }} of {{ vineyards.paginator.num_pages }}
-      </a>
-    </li>
-    {% if vineyards.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{vineyards.next_page_number}}">&raquo</a>
-      <!-- <a class="page-link" href="?page={{vineyards.paginator.num_pages}}">Last &raquo</a> -->
-    </li>
-    {% endif %}
-  </ul>
-</nav>
 {% else %}
-<h1>Please enter the word</h1>
+<div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h1>Please enter the word</h1>
+</div>
 {% endif %} {% endblock content %}
