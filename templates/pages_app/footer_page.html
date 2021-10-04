@@ -41,7 +41,15 @@
 {% endblock %}
 
 <!-- Sidebar -->
-{% block sidebar %} {{ content_page.sidebar|safe }} {% endblock sidebar %}
+{% block sidebar %} {% if content_page.sidebar %}
+<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ content_page.sidebar|safe }}</div>
+</div>
+{% endif %} {% endblock sidebar %}
 
 <!-- Ad Manager -->
-{% block admanager %} {{ content_page.ad_manager|safe }} {% endblock admanager %}
+{% block admanager %} {% if content_page.ad_manager %}
+<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ content_page.ad_manager|safe }}</div>
+</div>
+{% endif %} {% endblock admanager %}

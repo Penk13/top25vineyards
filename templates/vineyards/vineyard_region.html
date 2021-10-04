@@ -108,9 +108,16 @@
 </div>
 {% endblock content %}
 
-  <!-- Sidebar -->
-  {% block sidebar %} {{ region.sidebar|safe }} {% endblock sidebar %}
-
-  <!-- Ad Manager -->
-  {% block admanager %} {{ region.ad_manager|safe }} {% endblock admanager %}
+<!-- Sidebar -->
+{% block sidebar %} {% if region.sidebar %}
+<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ region.sidebar|safe }}</div>
 </div>
+{% endif %} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {% if region.ad_manager %}
+<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ region.ad_manager|safe }}</div>
+</div>
+{% endif %} {% endblock admanager %}

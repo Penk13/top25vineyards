@@ -96,14 +96,21 @@
     </ul>
   </nav>
 </div>
-<div class=" row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  {{ content_page.additional_content|safe }} 
+<div class="row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {{ content_page.additional_content|safe }}
 </div>
 {% endif %} {% endblock content %}
 
-  <!-- Sidebar -->
-  {% block sidebar %} {{ content_page.sidebar|safe }} {% endblock sidebar %}
-
-  <!-- Ad Manager -->
-  {% block admanager %} {{ content_page.ad_manager|safe }} {% endblock admanager %}
+<!-- Sidebar -->
+{% block sidebar %} {% if content_page.sidebar %}
+<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ content_page.sidebar|safe }}</div>
 </div>
+{% endif %} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {% if content_page.ad_manager %}
+<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ content_page.ad_manager|safe }}</div>
+</div>
+{% endif %} {% endblock admanager %}
