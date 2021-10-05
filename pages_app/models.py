@@ -9,6 +9,7 @@ TYPE = (
     ("PAGE", "Page"),
     ("FOOTER", "Footer"),
     ("HOME_PAGE", "Home Page"),
+    ("SEARCH_PAGE", "Search Page")
 )
 
 

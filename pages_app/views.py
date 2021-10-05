@@ -55,6 +55,7 @@ def footerpage(request, slug):
 
 
 def searchpage(request):
+    content_page = ContentPage.objects.filter(types="SEARCH_PAGE")
     if request.method == "POST":
         searched = request.POST['searched']
         vineyard = Vineyard.objects.filter(
@@ -73,5 +74,6 @@ def searchpage(request):
         p = Paginator(result_list, 10)
         page = request.GET.get('page')
         results = p.get_page(page)
-    context = {"searched": searched, "results": results}
+    context = {"content_page": content_page,
+               "searched": searched, "results": results}
     return render(request, "pages_app/search_page.html", context)
