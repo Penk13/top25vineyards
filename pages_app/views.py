@@ -55,7 +55,7 @@ def footerpage(request, slug):
 
 
 def searchpage(request):
-    content_page = ContentPage.objects.filter(types="SEARCH_PAGE")
+    content_page = get_object_or_404(ContentPage, types="SEARCH_PAGE")
     if request.method == "POST":
         searched = request.POST['searched']
         vineyard = Vineyard.objects.filter(

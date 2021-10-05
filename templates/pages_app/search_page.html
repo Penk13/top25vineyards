@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% load class_name %}
 
 <!-- Meta Keywords -->
-{% block keywords %} <meta name="keywords" content="top 25 vineyards" />
+{% block keywords %} <meta name="keywords" content="{{ content_page.meta_keywords }}" />
 {% endblock keywords %}
 
 <!-- Title -->
@@ -97,6 +97,10 @@
 {% else %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h1>Please enter the word</h1>
+</div>
+{% endif %} {% if content_page.additional_content %}
+<div class="row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {{ content_page.additional_content|safe }}
 </div>
 {% endif %} {% endblock content %}
 
