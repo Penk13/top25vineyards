@@ -77,3 +77,19 @@ def searchpage(request):
     context = {"content_page": content_page,
                "searched": searched, "results": results}
     return render(request, "pages_app/search_page.html", context)
+
+
+def page(request, slug):
+    content_page = get_object_or_404(ContentPage, slug=slug)
+    image_carousel = ImageUpload.objects.filter(page=content_page)
+    if content_page.category:
+        p = Paginator(Vineyard.objects.filter(
+            regions=content_page.category).order_by("-rating"), 10)
+    else:
+        p = Paginator(Vineyard.objects.all().order_by("-rating"), 10)
+    page = request.GET.get('page')
+    vineyards = p.get_page(page)
+    context = {"content_page": content_page,
+               "vineyards": vineyards,
+               "image_carousel": image_carousel}
+    return render(request, "pages_app/page.html", context)

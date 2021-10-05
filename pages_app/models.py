@@ -32,8 +32,10 @@ class ContentPage(models.Model):
     def get_absolute_url(self):
         if self.types == "HOME_PAGE":
             return reverse('pages_app:mainpage')
-        else:
+        elif self.types == "FOOTER":
             return reverse('pages_app:footerpage', kwargs={'slug': self.slug})
+        elif self.types == "PAGE":
+            return reverse('pages_app:page', kwargs={'slug': self.slug})
 
 
 def create_slug(instance, new_slug=None):
