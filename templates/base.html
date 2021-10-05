@@ -41,7 +41,9 @@
         {% endif %} {% endblock navlogo %}
         <div class="navbar d-flex">
           <div class="d-flex my-auto d-none d-md-none d-lg-flex fw-bold" style="font-size: 12px">
-            {% for navbar in navbars %} {% if navbar.region.exists %}
+            {% for navbar in navbars %}
+            <!--  -->
+            {% if navbar.region.exists or navbar.page.exists %}
             <div class="dropdown">
               <a
                 class="nav-item text-light me-4 dropdown-toggle"
@@ -78,30 +80,10 @@
                       <a href="{{ child.get_absolute_url }}" class="text-light">{{ child.name }}</a>
                     </li>
                   </ul>
+                  {% endif %} {% endfor %}
                 </li>
                 {% endif %} {% endfor %}
-                <!--  -->
-                {% endif %} {% endfor %}
-              </ul>
-            </div>
-            {% elif navbar.page.exists %}
-            <div class="dropdown">
-              <a
-                class="nav-item text-light me-4 dropdown-toggle"
-                href="#"
-                role="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style="text-decoration: none"
-              >
-                {{ navbar.title }}
-              </a>
-              <ul
-                class="dropdown-menu bg-dark"
-                aria-labelledby="dropdownMenuLink"
-                style="font-size: 12px"
-              >
+                <!-- Page -->
                 {% for page in navbar.page.all %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li class="nav-drop">
@@ -122,7 +104,9 @@
               style="text-decoration: none"
               >{{ navbar.title }}</a
             >
-            {% endif %} {% endfor %}
+            {% endif %}
+            <!--  -->
+            {% endfor %}
           </div>
           <button
             class="navbar-toggler navbar-dark d-block px-0"
@@ -156,7 +140,9 @@
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                {% for navbar in navbars %} {% if navbar.region.exists %}
+                {% for navbar in navbars %}
+                <!--  -->
+                {% if navbar.region.exists or navbar.page.exists %}
                 <li class="nav-item dropdown">
                   <a
                     class="nav-link dropdown-toggle text-light"
@@ -183,25 +169,10 @@
                           >
                         </li>
                       </ul>
+                      {% endif %} {% endfor %}
                     </li>
                     {% endif %} {% endfor %}
-                    <!--  -->
-                    {% endif %} {% endfor %}
-                  </ul>
-                </li>
-                {% elif navbar.page.exists %}
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle text-light"
-                    href="#"
-                    id="offcanvasNavbarDropdown"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {{ navbar.title }}
-                  </a>
-                  <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
+                    <!-- Page -->
                     {% for page in navbar.page.all %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
@@ -216,7 +187,9 @@
                 <li class="nav-item">
                   <a class="nav-link text-light" href="{{ navbar.link }}">{{ navbar.title }}</a>
                 </li>
-                {% endif %} {% endfor %}
+                {% endif %}
+                <!--  -->
+                {% endfor %}
               </ul>
               <form class="d-flex" method="POST" action="{% url 'pages_app:searchpage' %}">
                 {% csrf_token %}
