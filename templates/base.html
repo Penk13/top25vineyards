@@ -84,7 +84,7 @@
                 </li>
                 {% endif %} {% endfor %}
                 <!-- Page -->
-                {% for page in navbar.page.all %}
+                {% for page in navbar.page.all|dictsort:"title" %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
                 <li class="nav-drop">
                   <a
@@ -155,13 +155,17 @@
                     {{ navbar.title }}
                   </a>
                   <ul class="dropdown-menu bg-dark" aria-labelledby="offcanvasNavbarDropdown">
-                    {% for region in navbar.region.all %} {% if region.region_parent is None %}
+                    {% for region in navbar.region.all|dictsort:"name" %}
+                    <!--  -->
+                    {% if region.region_parent is None %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
                       <a class="dropdown-item text-light" href="{{ region.get_absolute_url }}"
                         >{{ region.name }}</a
                       >
-                      {% for child in navbar.region.all %} {% if child.region_parent == region %}
+                      {% for child in navbar.region.all|dictsort:"name" %}
+                      <!--  -->
+                      {% if child.region_parent == region %}
                       <ul class="text-light">
                         <li>
                           <a href="{{ child.get_absolute_url }}" class="text-light"
@@ -173,7 +177,7 @@
                     </li>
                     {% endif %} {% endfor %}
                     <!-- Page -->
-                    {% for page in navbar.page.all %}
+                    {% for page in navbar.page.all|dictsort:"title" %}
                     <li><hr class="dropdown-divider text-light my-1" /></li>
                     <li class="nav-drop">
                       <a class="dropdown-item text-light" href="{{ page.get_absolute_url }}"
