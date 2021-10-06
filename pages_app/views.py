@@ -58,22 +58,24 @@ def searchpage(request):
     content_page = get_object_or_404(ContentPage, types="SEARCH_PAGE")
     if request.method == "POST":
         searched = request.POST['searched']
-        vineyard = Vineyard.objects.filter(
-            Q(name__icontains=searched) |
-            Q(text__icontains=searched) |
-            Q(wine_rg__icontains=searched) |
-            Q(wines__icontains=searched) |
-            Q(grapes__icontains=searched) |
-            Q(owner__icontains=searched)
-        ).order_by("-rating")
-        news = Post.objects.filter(
-            Q(title__icontains=searched) |
-            Q(body__icontains=searched)
-        )
-        result_list = list(chain(vineyard, news))
-        p = Paginator(result_list, 10)
-        page = request.GET.get('page')
-        results = p.get_page(page)
+    else:
+        searched = request.GET.get('searched')
+    vineyard = Vineyard.objects.filter(
+        Q(name__icontains=searched) |
+        Q(text__icontains=searched) |
+        Q(wine_rg__icontains=searched) |
+        Q(wines__icontains=searched) |
+        Q(grapes__icontains=searched) |
+        Q(owner__icontains=searched)
+    ).order_by("-rating")
+    news = Post.objects.filter(
+        Q(title__icontains=searched) |
+        Q(body__icontains=searched)
+    )
+    result_list = list(chain(vineyard, news))
+    p = Paginator(result_list, 10)
+    page = request.GET.get('page')
+    results = p.get_page(page)
     context = {"content_page": content_page,
                "searched": searched, "results": results}
     return render(request, "pages_app/search_page.html", context)
