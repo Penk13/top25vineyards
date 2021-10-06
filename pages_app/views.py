@@ -93,3 +93,14 @@ def page(request, slug):
                "vineyards": vineyards,
                "image_carousel": image_carousel}
     return render(request, "pages_app/page.html", context)
+
+
+def travel_news_page(request):
+    content_page = get_object_or_404(ContentPage, types="GLOBAL_TRAVEL_NEWS")
+    p = Paginator(Post.objects.all(), 10)
+    page = request.GET.get('page')
+    travel_news = p.get_page(page)
+    context = {"content_page": content_page,
+               "travel_news": travel_news,
+               }
+    return render(request, "pages_app/newspage.html", context)

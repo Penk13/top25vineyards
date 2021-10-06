@@ -9,7 +9,8 @@ TYPE = (
     ("PAGE", "Page"),
     ("FOOTER", "Footer"),
     ("HOME_PAGE", "Home Page"),
-    ("SEARCH_PAGE", "Search Page")
+    ("SEARCH_PAGE", "Search Page"),
+    ("GLOBAL_TRAVEL_NEWS", "Global Travel News"),
 )
 
 
@@ -32,6 +33,8 @@ class ContentPage(models.Model):
     def get_absolute_url(self):
         if self.types == "HOME_PAGE":
             return reverse('pages_app:mainpage')
+        elif self.types == "GLOBAL_TRAVEL_NEWS":
+            return reverse('pages_app:page:newspage')
         elif self.types == "FOOTER":
             return reverse('pages_app:footerpage', kwargs={'slug': self.slug})
         elif self.types == "PAGE":
