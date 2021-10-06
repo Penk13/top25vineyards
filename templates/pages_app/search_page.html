@@ -79,6 +79,7 @@
         >{{ result.title }}</a
       >
     </h5>
+    {{ result.body_on_list|safe|truncatewords:25 }}
   </div>
   {% endif %} {% endwith %} {% endfor %}
   <!-- Nav Pagination -->

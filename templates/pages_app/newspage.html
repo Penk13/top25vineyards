@@ -25,6 +25,8 @@
 <!-- News List -->
 {% block content %} {% if content_page.show_listing == True %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h1 class="fw-bold">Global Travel News</h1>
+  <hr />
   {% for news in travel_news %}
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ news.get_absolute_url }}"><img src="{{ news.cover.url }}" class="img-fluid" /></a>
@@ -35,6 +37,7 @@
         >{{ news.title }}</a
       >
     </h5>
+    {{ news.body_on_list|safe|truncatewords:25 }}
   </div>
   {% endfor %}
   <!-- Nav Pagination -->

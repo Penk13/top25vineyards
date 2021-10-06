@@ -22,6 +22,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=255)
     body = RichTextField()
+    body_on_list = RichTextField(blank=True)
     tags = models.ManyToManyField(Tag)
     cover = models.ImageField(upload_to="news/", max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
