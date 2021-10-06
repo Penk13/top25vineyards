@@ -12,7 +12,17 @@
 <section class="search-page mt-5"></section>
 {% endblock topcarousel %}
 
-<!-- Mainpage -->
+<!-- Top Text -->
+{% block toptext %}
+<section style="background-color: white; z-index: 1; position: relative" class="top-text">
+  <div class="container text-center my-3 py-3">
+    <h1 class="fw-bold">{{ content_page.title }}</h1>
+    <p>{{ content_page.content|safe }}</p>
+  </div>
+</section>
+{% endblock toptext %}
+
+<!-- Search Result -->
 {% block content %} {% if searched %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h1 class="fw-bold">Search Results For: {{ searched }}</h1>
