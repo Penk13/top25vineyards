@@ -99,7 +99,7 @@ def page(request, slug):
 
 def travel_news_page(request):
     content_page = get_object_or_404(ContentPage, types="GLOBAL_TRAVEL_NEWS")
-    p = Paginator(Post.objects.all(), 10)
+    p = Paginator(Post.objects.all().order_by("-id"), 10)
     page = request.GET.get('page')
     travel_news = p.get_page(page)
     context = {"content_page": content_page,
