@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import ContentPage, ImageUpload
-from vineyards.models import Vineyard
+from vineyards.models import Vineyard, Region
 from news.models import Post
 
 from mailing.models import ContactEntry, Subscriber
@@ -72,11 +72,16 @@ def searchpage(request):
         Q(title__icontains=searched) |
         Q(body__icontains=searched)
     )
+    regions = Region.objects.filter(
+        Q(name__icontains=searched) |
+        Q(title__icontains=searched) |
+        Q(description__icontains=searched)
+    )
     pages = ContentPage.objects.filter(
         Q(content__icontains=searched) |
         Q(additional_content__icontains=searched)
     )
-    result_list = list(chain(vineyard, news, pages))
+    result_list = list(chain(vineyard, news, regions, pages))
     p = Paginator(result_list, 10)
     page = request.GET.get('page')
     results = p.get_page(page)

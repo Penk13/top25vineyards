@@ -11,6 +11,8 @@ class Region(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = RichTextField()
+    thumbnail = models.ImageField(
+        upload_to="thumbnail-region", blank=True, max_length=255)
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)

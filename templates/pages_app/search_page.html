@@ -81,7 +81,25 @@
     </h5>
     {{ result.body_on_list|safe|truncatewords:25 }}
   </div>
-  <!-- Content Page -->
+  <!-- Regions -->
+  {% elif model == 'Region' %}
+  <div class="col-12 col-md-6 py-3 text-start">
+    <a href="{{ result.get_absolute_url }}">
+      {% if result.thumbnail %}
+      <img src="{{ result.thumbnail.url }}" class="img-fluid" />
+      {% else %}
+      <img src="{% static 'img/thumbnail-page.jpg' %}" class="img-fluid" />
+      {% endif %}
+    </a>
+  </div>
+  <div class="col-12 col-md-6 py-3" style="font-size: 14px">
+    <h5 class="fw-bold">
+      <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
+        >{{ result.title }}</a
+      >
+    </h5>
+  </div>
+  <!-- Content Pages -->
   {% elif model == 'ContentPage' %} {% if result.types != "SEARCH_PAGE" %}
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ result.get_absolute_url }}">
