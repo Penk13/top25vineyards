@@ -98,6 +98,7 @@
         >{{ result.title }}</a
       >
     </h5>
+    {{ result.description_on_list|safe|truncatewords:25 }}
   </div>
   <!-- Content Pages -->
   {% elif model == 'ContentPage' %} {% if result.types != "SEARCH_PAGE" %}
@@ -116,7 +117,7 @@
         >{{ result.title }}</a
       >
     </h5>
-    <!-- <p>{{ result.content|truncatewords:25 }}</p> -->
+    {{ result.content_on_list|safe|truncatewords:25 }}
   </div>
   {% endif %} {% endif %} {% endwith %} {% endfor %}
   <!-- Nav Pagination -->

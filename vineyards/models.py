@@ -11,6 +11,7 @@ class Region(models.Model):
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
     description = RichTextField()
+    description_on_list = RichTextField(blank=True)
     thumbnail = models.ImageField(
         upload_to="thumbnail-region", blank=True, max_length=255)
     sidebar = RichTextField(blank=True)

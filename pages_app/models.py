@@ -20,6 +20,7 @@ class ContentPage(models.Model):
         upload_to='thumbnail-page/', blank=True, max_length=255)
     title = models.CharField(max_length=255)
     content = RichTextField(blank=True)
+    content_on_list = RichTextField(blank=True)
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
