@@ -82,7 +82,7 @@
     {{ result.body_on_list|safe|truncatewords:25 }}
   </div>
   <!-- Content Page -->
-  {% elif model == 'ContentPage' %}
+  {% elif model == 'ContentPage' %} {% if result.types != "SEARCH_PAGE" %}
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ result.get_absolute_url }}">
       {% if thumbnail %}
@@ -100,7 +100,7 @@
     </h5>
     <!-- <p>{{ result.content|truncatewords:25 }}</p> -->
   </div>
-  {% endif %} {% endwith %} {% endfor %}
+  {% endif %} {% endif %} {% endwith %} {% endfor %}
   <!-- Nav Pagination -->
   <nav class="nav-pagination">
     <ul class="pagination justify-content-center">

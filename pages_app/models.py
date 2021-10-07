@@ -36,7 +36,7 @@ class ContentPage(models.Model):
         if self.types == "HOME_PAGE":
             return reverse('pages_app:mainpage')
         elif self.types == "GLOBAL_TRAVEL_NEWS":
-            return reverse('pages_app:page:newspage')
+            return reverse('pages_app:newspage')
         elif self.types == "FOOTER":
             return reverse('pages_app:footerpage', kwargs={'slug': self.slug})
         elif self.types == "PAGE":
