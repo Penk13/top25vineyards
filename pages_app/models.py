@@ -16,6 +16,8 @@ TYPE = (
 
 class ContentPage(models.Model):
     types = models.CharField(max_length=20, choices=TYPE)
+    thumbnail = models.ImageField(
+        upload_to='thumbnail-page/', blank=True, max_length=255)
     title = models.CharField(max_length=255)
     content = RichTextField(blank=True)
     sidebar = RichTextField(blank=True)

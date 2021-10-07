@@ -72,7 +72,11 @@ def searchpage(request):
         Q(title__icontains=searched) |
         Q(body__icontains=searched)
     )
-    result_list = list(chain(vineyard, news))
+    pages = ContentPage.objects.filter(
+        Q(content__icontains=searched) |
+        Q(additional_content__icontains=searched)
+    )
+    result_list = list(chain(vineyard, news, pages))
     p = Paginator(result_list, 10)
     page = request.GET.get('page')
     results = p.get_page(page)
