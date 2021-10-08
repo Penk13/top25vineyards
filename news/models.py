@@ -56,7 +56,7 @@ class Post(models.Model):
         return "Post : " + self.title
 
     def get_absolute_url(self):
-        return reverse('news:detail', kwargs={'category': self.category.name, 'slug': self.slug})
+        return reverse('news:detail', kwargs={'category': self.category.slug, 'news': self.slug})
 
 
 def create_slug(instance, new_slug=None):

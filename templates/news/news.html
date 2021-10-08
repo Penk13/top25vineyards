@@ -17,7 +17,10 @@
 <div class="row d-flex p-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h6>
     <span class="badge bg-dark"
-      ><a href="{% url 'pages_app:newspage' %}" class="text-white" style="text-decoration: none"
+      ><a
+        href="{{ news.category.get_absolute_url }}"
+        class="text-white"
+        style="text-decoration: none"
         >{{ news.category.name }}</a
       ></span
     >
@@ -37,7 +40,7 @@
       >
     </li>
     <li class="breadcrumb-item active" aria-current="page">
-      <a href="{% url 'pages_app:newspage' %}" class="text-dark" style="text-decoration: none"
+      <a href="{{ news.category.get_absolute_url }}" class="text-dark" style="text-decoration: none"
         >{{ news.category.name }}</a
       >
     </li>

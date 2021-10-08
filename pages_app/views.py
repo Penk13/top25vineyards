@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
-from news.models import Post
+from news.models import Post, Category
 
 from mailing.models import ContactEntry, Subscriber
 from mailing.forms import ContactEntryForm, SubscriberForm
@@ -106,9 +106,10 @@ def page(request, slug):
     return render(request, "pages_app/page.html", context)
 
 
-def travel_news_page(request):
-    content_page = get_object_or_404(ContentPage, types="GLOBAL_TRAVEL_NEWS")
-    p = Paginator(Post.objects.all().order_by("-id"), 10)
+def newspage(request, slug):
+    content_page = get_object_or_404(ContentPage, slug=slug)
+    category = Category.objects.get(slug=content_page.slug)
+    p = Paginator(Post.objects.filter(category=category).order_by("-id"), 10)
     page = request.GET.get('page')
     travel_news = p.get_page(page)
     context = {"content_page": content_page,
