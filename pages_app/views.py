@@ -111,8 +111,7 @@ def newspage(request, slug):
     category = Category.objects.get(slug=content_page.slug)
     p = Paginator(Post.objects.filter(category=category).order_by("-id"), 10)
     page = request.GET.get('page')
-    travel_news = p.get_page(page)
+    news_list = p.get_page(page)
     context = {"content_page": content_page,
-               "travel_news": travel_news,
-               }
+               "news_list": news_list}
     return render(request, "pages_app/newspage.html", context)
