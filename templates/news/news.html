@@ -18,7 +18,7 @@
   <h6>
     <span class="badge bg-dark"
       ><a
-        href="{{ news.category.get_absolute_url }}"
+        href="{% url 'pages_app:newspage' news.category.slug %}"
         class="text-white"
         style="text-decoration: none"
         >{{ news.category.name }}</a
@@ -40,7 +40,10 @@
       >
     </li>
     <li class="breadcrumb-item active" aria-current="page">
-      <a href="{{ news.category.get_absolute_url }}" class="text-dark" style="text-decoration: none"
+      <a
+        href="{% url 'pages_app:newspage' news.category.slug %}"
+        class="text-dark"
+        style="text-decoration: none"
         >{{ news.category.name }}</a
       >
     </li>
