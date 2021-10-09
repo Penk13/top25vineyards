@@ -1,10 +1,11 @@
 from .models import ContentPage, Navbar
-from news.models import Post
+from news.models import Post, Category
 
 
 def base_variable(request):
     navbars = Navbar.objects.all().order_by("order")
-    travel_news = Post.objects.all()
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category)
     footer_count = ContentPage.objects.filter(types="FOOTER").count()
     footer_index = int(footer_count/2)
     footers1 = ContentPage.objects.filter(types="FOOTER")[:footer_index]
