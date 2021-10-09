@@ -108,10 +108,12 @@ def page(request, slug):
 
 def newspage(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug)
+    image_carousel = ImageUpload.objects.filter(page=content_page)
     category = Category.objects.get(slug=content_page.slug)
     p = Paginator(Post.objects.filter(category=category).order_by("-id"), 10)
     page = request.GET.get('page')
     news_list = p.get_page(page)
     context = {"content_page": content_page,
+               "image_carousel": image_carousel,
                "news_list": news_list}
     return render(request, "pages_app/newspage.html", context)
