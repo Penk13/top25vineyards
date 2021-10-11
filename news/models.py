@@ -77,3 +77,13 @@ def pre_save_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_receiver, sender=Post)
+
+
+class Autoblogging(models.Model):
+    title = models.CharField(max_length=255)
+    url = models.URLField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
