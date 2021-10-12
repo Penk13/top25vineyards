@@ -19,12 +19,11 @@
   <body>
     <section>
       <div class="container my-3">
-        <h1>Autoblogging</h1>
-        {% for source in sources %}
+        <h1 class="text-center my-3">Autoblogging</h1>
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">#ID</th>
               <th scope="col">Title</th>
               <th scope="col">URL</th>
               <th scope="col">Last Update</th>
@@ -33,17 +32,20 @@
             </tr>
           </thead>
           <tbody>
+            {% for source in sources %}
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{ source.id }}</th>
               <td>{{ source.title }}</td>
               <td>{{ source.url }}</td>
               <td>{{ source.last_updated }}</td>
               <td>{{ source.category }}</td>
-              <td><button type="button" class="btn btn-success">Pull</button></td>
+              <td>
+                <a class="btn btn-success" href="{% url 'news:pull' source.category.id %}">Pull</a>
+              </td>
             </tr>
+            {% endfor %}
           </tbody>
         </table>
-        {% endfor %}
       </div>
     </section>
     <script
