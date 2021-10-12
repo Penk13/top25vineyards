@@ -83,6 +83,7 @@ class Autoblogging(models.Model):
     title = models.CharField(max_length=255)
     url = models.URLField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    items = models.IntegerField(default=15)
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):

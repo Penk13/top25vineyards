@@ -40,7 +40,7 @@
               <td>{{ source.last_updated }}</td>
               <td>{{ source.category }}</td>
               <td>
-                <a class="btn btn-success" href="{% url 'news:pull' source.category.id %}">Pull</a>
+                <a class="btn btn-success" href="{% url 'news:pull' source.id %}">Pull</a>
               </td>
             </tr>
             {% endfor %}
