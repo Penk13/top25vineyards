@@ -24,7 +24,7 @@ def pull_feeds(request, pk):
     items = soup.find_all('item')[:length]
     contents = soup.find_all('content:encoded')[:length]
     covers = soup.find_all('media:content')[:length]
-    for i in range(length):
+    for i in range(length-1, -1, -1):
         title = items[i].title.text
         body = contents[i].text
         # body_on_list = items[i].description.text
@@ -37,10 +37,11 @@ def pull_feeds(request, pk):
         # print(cover)
         # print(category)
         # print("====================================================================")
-        Post.objects.create(title=title,
-                            body=str(body),
-                            # body_on_list=str(body_on_list),
-                            cover=str(cover),
-                            category=category)
-    # Autoblogging.objects.get()
+        if not Post.objects.filter(title=title).exists():
+            Post.objects.create(title=title,
+                                body=str(body),
+                                # body_on_list=str(body_on_list),
+                                cover=str(cover),
+                                category=category)
+            # Autoblogging.objects.get()
     return redirect("news:autoblogging")
