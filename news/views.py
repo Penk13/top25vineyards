@@ -34,6 +34,9 @@ def pull_feeds(request, pk):
         for i in range(length-1, -1, -1):
             title = items[i].title.text
             body = contents[i].text
+            # Grab first pharagraph for body on list
+            body_on_list = body[body.find(
+                '/ TRAVELINDEX /')+15:body.find('/ TRAVELINDEX /')+215]
             try:
                 cover = covers[i]['url']
             except:
@@ -42,6 +45,7 @@ def pull_feeds(request, pk):
             if not Post.objects.filter(title=title).exists():
                 Post.objects.create(title=title,
                                     body=str(body),
+                                    body_on_list=body_on_list,
                                     cover=str(cover),
                                     category=category)
         return redirect("news:autoblogging")
