@@ -1,8 +1,8 @@
 import requests
+import os
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
 from django.core import files
-from io import BytesIO
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Autoblogging, Category
 
@@ -39,19 +39,21 @@ def pull_feeds(request, pk):
             body_on_list = body[body.find(
                 '/ TRAVELINDEX /')+15:body.find('/ TRAVELINDEX /')+215]
 
-            link = body[body.find('src=')+5:body.find('alt')-2]
-            resp = requests.get(link)
-            fp = BytesIO()
-            fp.write(resp.content)
-            file_name = link.split("/")[-1]
-
             category = Category.objects.get(pk=source.category.id)
             if not Post.objects.filter(title=title).exists():
                 post = Post(title=title,
                             body=str(body),
                             body_on_list=body_on_list,
                             category=category)
-                post.cover.save(file_name, files.File(fp))
+
+                link = body[body.find('src=')+5:body.find('alt')-2]
+                img_data = requests.get(link).content
+                with open('temp_image.jpg', 'wb') as handler:
+                    handler.write(img_data)
+                with open('temp_image.jpg', 'rb') as handler:
+                    file_name = link.split("/")[-1]
+                    post.cover.save(file_name, files.File(handler))
+            os.remove("temp_image.jpg")
         return redirect("news:autoblogging")
     else:
         return HttpResponse("Sorry you are not allowed to access this page")
