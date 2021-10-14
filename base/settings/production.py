@@ -4,7 +4,7 @@ from .base import *
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-default-secret-key')
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['topvineyards.herokuapp.com']
 
 
