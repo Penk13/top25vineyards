@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
+from django.core import files
+from io import BytesIO
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Autoblogging, Category
 
@@ -29,7 +31,6 @@ def pull_feeds(request, pk):
         length = source.items
         items = soup.find_all('item')[:length]
         contents = soup.find_all('content:encoded')[:length]
-        covers = soup.find_all('media:content')[:length]
 
         for i in range(length-1, -1, -1):
             title = items[i].title.text
@@ -37,17 +38,20 @@ def pull_feeds(request, pk):
             # Grab first pharagraph for body on list
             body_on_list = body[body.find(
                 '/ TRAVELINDEX /')+15:body.find('/ TRAVELINDEX /')+215]
-            try:
-                cover = covers[i]['url']
-            except:
-                cover = ""
+
+            link = body[body.find('src=')+5:body.find('alt')-2]
+            resp = requests.get(link)
+            fp = BytesIO()
+            fp.write(resp.content)
+            file_name = link.split("/")[-1]
+
             category = Category.objects.get(pk=source.category.id)
             if not Post.objects.filter(title=title).exists():
-                Post.objects.create(title=title,
-                                    body=str(body),
-                                    body_on_list=body_on_list,
-                                    cover=str(cover),
-                                    category=category)
+                post = Post(title=title,
+                            body=str(body),
+                            body_on_list=body_on_list,
+                            category=category)
+                post.cover.save(file_name, files.File(fp))
         return redirect("news:autoblogging")
     else:
         return HttpResponse("Sorry you are not allowed to access this page")

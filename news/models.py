@@ -45,7 +45,8 @@ class Post(models.Model):
     body = RichTextField()
     body_on_list = RichTextField(blank=True)
     tags = models.ManyToManyField(Tag, blank=True)
-    cover = models.URLField()
+    cover = models.ImageField(
+        upload_to="news", blank=True, max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)

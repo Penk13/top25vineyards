@@ -33,7 +33,7 @@
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% for news in news_list %}
   <div class="col-12 col-md-6 py-3 text-start">
-    <a href="{{ news.get_absolute_url }}"><img src="{{ news.cover }}" class="img-fluid" /></a>
+    <a href="{{ news.get_absolute_url }}"><img src="{{ news.cover.url }}" class="img-fluid" /></a>
   </div>
   <div class="col-12 col-md-6 py-3" style="font-size: 14px">
     <h5 class="fw-bold">
