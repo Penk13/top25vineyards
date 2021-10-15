@@ -41,7 +41,7 @@
         >{{ news.title }}</a
       >
     </h5>
-    {{ news.body_on_list|safe|truncatewords:25 }}
+    {{ news.body|safe|truncatewords:25 }}
   </div>
   {% endfor %}
   <!-- Nav Pagination -->

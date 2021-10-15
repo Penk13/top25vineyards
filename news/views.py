@@ -33,20 +33,17 @@ def pull_feeds(request, pk):
         contents = soup.find_all('content:encoded')[:length]
 
         for i in range(length-1, -1, -1):
+            content = contents[i].text
             title = items[i].title.text
-            body = contents[i].text
-            # Grab first pharagraph for body on list
-            body_on_list = body[body.find(
-                '/ TRAVELINDEX /')+15:body.find('/ TRAVELINDEX /')+215]
+            body = content[content.find('<p>'):]
 
             category = Category.objects.get(pk=source.category.id)
             if not Post.objects.filter(title=title).exists():
                 post = Post(title=title,
-                            body=str(body),
-                            body_on_list=body_on_list,
+                            body=body,
                             category=category)
 
-                link = body[body.find('src=')+5:body.find('alt')-2]
+                link = content[content.find('src=')+5:content.find('alt')-2]
                 img_data = requests.get(link).content
                 with open('temp_image.jpg', 'wb') as handler:
                     handler.write(img_data)

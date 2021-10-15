@@ -79,7 +79,7 @@
         >{{ result.title }}</a
       >
     </h5>
-    {{ result.body_on_list|safe|truncatewords:25 }}
+    {{ result.body|safe|truncatewords:25 }}
   </div>
   <!-- Regions -->
   {% elif model == 'Region' %}
