@@ -28,6 +28,7 @@
               <th scope="col">URL</th>
               <th scope="col">Last Update</th>
               <th scope="col">Category</th>
+              <th scope="col">Items</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
@@ -39,6 +40,7 @@
               <td>{{ source.url }}</td>
               <td>{{ source.last_updated }}</td>
               <td>{{ source.category }}</td>
+              <td class="text-center">{{ source.items }}</td>
               <td>
                 <a class="btn btn-success" href="{% url 'news:pull' source.id %}">Pull</a>
               </td>
