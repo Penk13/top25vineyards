@@ -33,24 +33,34 @@ def pull_feeds(request, pk):
         contents = soup.find_all('content:encoded')[:length]
 
         for i in range(length-1, -1, -1):
-            content = contents[i].text
-            title = items[i].title.text
-            body = content[content.find('<p>'):]
+            try:
+                content = contents[i].text
+                title = items[i].title.text
+                body = content[content.find('<p>'):]
+                category = Category.objects.get(pk=source.category.id)
+            except:
+                pass
 
-            category = Category.objects.get(pk=source.category.id)
             if not Post.objects.filter(title=title).exists():
-                post = Post(title=title,
-                            body=body,
-                            category=category)
+                try:
+                    post = Post(title=title,
+                                body=body,
+                                category=category)
+                except:
+                    pass
 
-                link = content[content.find('src=')+5:content.find('alt')-2]
-                img_data = requests.get(link).content
-                with open('temp_image.jpg', 'wb') as handler:
-                    handler.write(img_data)
-                with open('temp_image.jpg', 'rb') as handler:
-                    file_name = link.split("/")[-1]
-                    post.cover.save(file_name, files.File(handler))
-            os.remove("temp_image.jpg")
+                try:
+                    link = content[content.find(
+                        'src=')+5:content.find('alt')-2]
+                    img_data = requests.get(link).content
+                    with open('temp_image.jpg', 'wb') as handler:
+                        handler.write(img_data)
+                    with open('temp_image.jpg', 'rb') as handler:
+                        file_name = link.split("/")[-1]
+                        post.cover.save(file_name, files.File(handler))
+                    os.remove("temp_image.jpg")
+                except:
+                    pass
         return redirect("news:autoblogging")
     else:
         return HttpResponse("Sorry you are not allowed to access this page")
