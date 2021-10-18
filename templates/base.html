@@ -225,9 +225,7 @@
       <div class="container">
         <div class="row d-flex">
           <!-- Main Section -->
-          <div class="col-12 col-lg-8 ps-0">
-            <div class="row d-flex">{% block content %} {% endblock content %}</div>
-          </div>
+          <div class="col-12 col-lg-8">{% block content %} {% endblock content %}</div>
           <!-- Sidebar -->
           <div class="sidebar col-12 col-lg-4 ps-lg-5 ps-md-0 ps-sm-0">
             {% block breadcrumb %} {% endblock breadcrumb %}
@@ -244,52 +242,50 @@
     <section>
       <div class="container">
         <div class="row d-flex py-5">
-          <div class="col col-md-12 col-lg-8 ps-0">
-            <div class="row d-flex">
-              <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-                <h5 class="fw-bold ps-0">Global Travel News</h5>
-                <hr />
-                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="10000">
-                      <div class="row d-flex">
-                        {% for news in travel_news %}
-                        <div class="col-6 col-md-4 py-2 text-center">
-                          <a href="{{ news.get_absolute_url }}" style="text-decoration: none">
-                            <img
-                              src="{{ news.cover.url }}"
-                              style="max-height: 150px"
-                              class="img-fluid"
-                            />
-                            <h6 class="fw-bold text-start text-dark my-2">{{ news.title }}</h6>
-                          </a>
-                        </div>
-                        {% if forloop.counter|divisibleby:6 %}
+          <div class="col col-md-12 col-lg-8">
+            <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+              <h5 class="fw-bold ps-0">Global Travel News</h5>
+              <hr />
+              <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active" data-bs-interval="10000">
+                    <div class="row d-flex">
+                      {% for news in travel_news %}
+                      <div class="col-6 col-md-4 py-2 text-center">
+                        <a href="{{ news.get_absolute_url }}" style="text-decoration: none">
+                          <img
+                            src="{{ news.cover.url }}"
+                            style="max-height: 150px"
+                            class="img-fluid"
+                          />
+                          <h6 class="fw-bold text-start text-dark my-2">{{ news.title }}</h6>
+                        </a>
                       </div>
-                    </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                      <div class="row d-flex py-3">{% endif %} {% endfor %}</div>
+                      {% if forloop.counter|divisibleby:6 %}
                     </div>
                   </div>
-                  <button
-                    class="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide="prev"
-                  >
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button
-                    class="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselExampleInterval"
-                    data-bs-slide="next"
-                  >
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
+                  <div class="carousel-item" data-bs-interval="2000">
+                    <div class="row d-flex py-3">{% endif %} {% endfor %}</div>
+                  </div>
                 </div>
+                <button
+                  class="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide="prev"
+                >
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button
+                  class="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleInterval"
+                  data-bs-slide="next"
+                >
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
               </div>
             </div>
           </div>
