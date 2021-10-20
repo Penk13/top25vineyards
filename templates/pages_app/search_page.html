@@ -32,6 +32,9 @@
   {% with result|class_name as model %} {% if model == 'Vineyard' %}
   <div class="col-12 col-md-6 py-3 text-start">
     <div style="position: absolute; z-index: 1">
+      {% if result.custom_overlay %}
+      <img src="{{ result.custom_overlay.url }} " style="max-width: 125px" class="m-2" />
+      {% elif result.hide_rating == False %}
       <p
         style="z-index: 1; position: absolute; padding-top: 10px"
         class="text-light fs-5 fw-bold m-4 text-center"
@@ -39,6 +42,7 @@
         TOP <span style="font-size: 28px">{{ result.rating }}</span>
       </p>
       <img src="{% static 'img/overlay-icon-bg.png' %} " style="max-width: 125px" class="m-2" />
+      {% endif %}
     </div>
     <a href="{{ result.get_absolute_url }}">
       <img src="{{ result.cover.url }}" class="img-fluid"
