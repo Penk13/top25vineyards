@@ -42,11 +42,14 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
 
+    'accounts.apps.AccountsConfig',
     'pages_app.apps.PagesAppConfig',
     'vineyards.apps.VineyardsConfig',
     'news.apps.NewsConfig',
     'mailing.apps.MailingConfig',
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
