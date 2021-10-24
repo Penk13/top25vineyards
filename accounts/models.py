@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.utils import timezone
 
+GENDER = (
+    ("MALE", "Male"),
+    ("FEMALE", "Female"),
+)
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, is_active=True, is_staff=False, is_superuser=False):  # , **extra_fields
@@ -47,7 +52,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     # REQUIRED_FIELD is a list of the field names that will be prompted
     # for when creating a user via the createsuperuser management command
-    REQUIRED_FIELDS = ['username']  # first_name, last_name
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.email
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(
+        upload_to='profile_pic/', default='profile_pic/user.png')
+    country = models.CharField(max_length=255, blank=True)
+    gender = models.CharField(max_length=20, choices=GENDER, blank=True)
+
+    def __str__(self):
+        return self.user.email
