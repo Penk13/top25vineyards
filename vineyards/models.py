@@ -3,6 +3,10 @@ from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.urls import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class Region(models.Model):
@@ -124,3 +128,27 @@ class TopSliderImage(models.Model):
 class CoverSliderImage(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="yard-cover-image/", max_length=255)
+
+
+class ReviewAndRating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
+    recommended = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+    review = models.TextField(blank=False)
+    value = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+    service = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+    cleanliness = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+    location = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+    sustainability = models.IntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+
+    def total_rating(self):
+        return (self.recommended + self.value + self.service + self.cleanliness + self.location + self.sustainability)/6
+
+    def __str__(self):
+        return "Total rating : " + str(self.total_rating())

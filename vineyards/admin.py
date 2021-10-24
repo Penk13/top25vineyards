@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RegionImage, Region, Vineyard, TopSliderImage, CoverSliderImage
+from .models import RegionImage, Region, Vineyard, TopSliderImage, CoverSliderImage, ReviewAndRating
 
 
 class RegionImageInline(admin.TabularInline):
@@ -26,3 +26,4 @@ class VineyardAdmin(admin.ModelAdmin):
 
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Vineyard, VineyardAdmin)
+admin.site.register(ReviewAndRating)
