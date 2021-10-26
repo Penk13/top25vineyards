@@ -37,7 +37,7 @@
     </div>
     {% endif %}
 
-    <div>
+    <!-- <div>
       <strong>Menu:</strong>
       <ul>
         {% if user.is_authenticated %}
@@ -48,8 +48,8 @@
         <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
         {% endif %}
       </ul>
-    </div>
-    <div class="container col-lg-5 col-sm-12 p-4 border border-secondary-rounded shadow">
+    </div> -->
+    <div class="container col-md-5 col-sm-12 p-4 my-5 border border-secondary-rounded shadow">
       {% block content %} {% endblock %} {% endblock %} {% block extra_body %} {% endblock %}
     </div>
   </body>

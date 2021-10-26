@@ -25,15 +25,3 @@
 .requiredField {
   display: none;
 }
-
-/* Hide list tag */
-.socialaccount_providers {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.socialaccount_provider {
-  text-decoration: none;
-  color: white;
-}
