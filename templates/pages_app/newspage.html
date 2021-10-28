@@ -41,7 +41,7 @@
         >{{ news.title }}</a
       >
     </h5>
-    {{ news.body|safe|truncatewords:25 }}
+    {{ news.body|slice:"3:200" }} ...
   </div>
   {% endfor %}
   <!-- Nav Pagination -->
