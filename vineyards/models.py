@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
@@ -130,12 +131,17 @@ class CoverSliderImage(models.Model):
     image = models.ImageField(upload_to="yard-cover-image/", max_length=255)
 
 
+def review_validator(value):
+    if len(value) <= 50:
+        raise ValidationError("Enter a minimum of 50 characters")
+
+
 class ReviewAndRating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
     recommended = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
-    review = models.TextField(blank=False)
+    review = models.TextField(blank=False, validators=[review_validator])
     value = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
     service = models.IntegerField(

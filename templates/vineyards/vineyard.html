@@ -92,9 +92,6 @@
 <div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h5 class="fw-bold ps-0">Review and Rating</h5>
   <hr />
-  {% if exists %}
-  <p>You have filled out this form. Thank you!</p>
-  {% else %}
   <h5 class="my-3">Your rating and review are important to help others. Thank you!</h5>
   <form method="POST">
     {% csrf_token %}
@@ -133,9 +130,51 @@
       {{ form.review }}
       <p class="text-danger">{{ form.review.errors.as_text }}</p>
     </div>
+    {% if request.user.is_authenticated %}
     <input type="submit" value="Send" class="btn btn-primary w-100" />
+    {% else %}
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary w-100"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Send
+    </button>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog w-100">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              You need to login to your account first
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <a href="{% url 'account_login' %}">Go to Login Page</a><br />
+            Don't have an account yet?
+            <a href="{% url 'account_signup' %}">Create account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
   </form>
-  {% endif %}
 </div>
 {% endblock content %}
 
