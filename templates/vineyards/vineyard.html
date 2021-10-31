@@ -95,39 +95,101 @@
   <h5 class="my-3">Your rating and review are important to help others. Thank you!</h5>
   <form method="POST">
     {% csrf_token %}
-    <div class="my-3">
-      <label>Recommended :</label><br />
-      {{ form.recommended }}
+    <div class="form-group row my-3">
+      <label for="recommendedRange" class="col-3 form-label">Recommended :</label>
+      <div class="col-9">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="recommended"
+          value="{{form.recommended.value}}"
+          id="recommendedRange"
+        />
+      </div>
       <p class="text-danger">{{ form.recommended.errors.as_text }}</p>
     </div>
-    <div class="my-3">
-      <label>Value :</label><br />
-      {{ form.value }}
+    <div class="form-group row my-3">
+      <label for="valueRange" class="col-3 form-label">Value :</label>
+      <div class="col-9">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="value"
+          value="{{form.value.value}}"
+          id="valueRange"
+        />
+      </div>
       <p class="text-danger">{{ form.value.errors.as_text }}</p>
     </div>
-    <div class="my-3">
-      <label>Service :</label><br />
-      {{ form.service }}
+    <div class="form-group row my-3">
+      <label for="serviceRange" class="col-3 form-label">Service :</label>
+      <div class="col-9">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="service"
+          value="{{form.service.value}}"
+          id="serviceRange"
+        />
+      </div>
       <p class="text-danger">{{ form.service.errors.as_text }}</p>
     </div>
-    <div class="my-3">
-      <label>Cleanliness :</label><br />
-      {{ form.cleanliness }}
+    <div class="form-group row my-3">
+      <label for="cleanlinessRange" class="col-3 form-label">Cleanliness :</label>
+      <div class="col-9">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="cleanliness"
+          value="{{form.cleanliness.value}}"
+          id="cleanlinessRange"
+        />
+      </div>
       <p class="text-danger">{{ form.cleanliness.errors.as_text }}</p>
     </div>
-    <div class="my-3">
-      <label>Location :</label><br />
-      {{ form.location }}
+    <div class="form-group row my-3">
+      <label for="locationRange" class="col-3 form-label">Location :</label>
+      <div class="col-9">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="location"
+          value="{{form.location.value}}"
+          id="locationRange"
+        />
+      </div>
       <p class="text-danger">{{ form.location.errors.as_text }}</p>
     </div>
-    <div class="my-3">
-      <label>Sustainability :</label><br />
-      {{ form.sustainability }}
+    <div class="form-group row my-3">
+      <label for="sustainabilityRange" class="col-3 form-label">Sustainability :</label>
+      <div class="col-9">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="sustainability"
+          value="{{form.sustainability.value}}"
+          id="sustainabilityRange"
+        />
+      </div>
       <p class="text-danger">{{ form.sustainability.errors.as_text }}</p>
     </div>
     <div class="my-3">
       <label>Your Review :</label><br />
-      {{ form.review }}
+      <textarea class="form-control" name="review" cols="40" rows="5" id="id_review">
+{{form.review.value}}</textarea
+      >
       <p class="text-danger">{{ form.review.errors.as_text }}</p>
     </div>
     {% if request.user.is_authenticated %}
