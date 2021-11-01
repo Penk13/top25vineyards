@@ -92,34 +92,36 @@
 <div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h5 class="fw-bold ps-0">Review and Rating</h5>
   <hr />
-  {% if review_and_rating %}
-  <div>
-    {% for r in review_and_rating %}
-    <div class="row my-4">
-      <div class="col-2 text-center">
-        <img src="{{ r.user.profile.profile_pic.url }}" class="w-100" />
-        <strong>{{ r.user.username }}</strong>
-      </div>
-      <div class="col-10" style="word-wrap: break-word">
-        <h6>{{ r.date_created }}</h6>
-        {{ r.review }}
-      </div>
+  {% if review_and_rating %} {% for r in review_and_rating %}
+  <div class="row my-4">
+    <div class="col-3 text-center">
+      <img src="{{ r.user.profile.profile_pic.url }}" class="w-100" />
+      <strong>{{ r.user.username }}</strong>
     </div>
-    {% endfor %}
+    <div class="col-9" style="word-wrap: break-word">
+      <h5 class="d-flex">
+        <strong>{{ r.title }}</strong><span class="ms-auto">{{ r.total_rating }}</span>
+      </h5>
+      <h6>{{ r.date_created }}</h6>
+      <details>
+        <summary>Read more...</summary>
+        <p>{{ r.review }}</p>
+      </details>
+    </div>
   </div>
-  {% endif %}
+  {% endfor %} {% endif %}
 </div>
 
 <!-- Review and Rating Form -->
 <div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h5 class="fw-bold ps-0">Give your Rating And Review Here</h5>
+  <h5 class="fw-bold ps-0">Give Your Rating And Review Here</h5>
   <hr />
   <h5 class="my-3">Your rating and review are important to help others. Thank you!</h5>
   <form method="POST">
     {% csrf_token %}
     <div class="form-group row my-3">
-      <label for="recommendedRange" class="col-3 form-label">Recommended :</label>
-      <div class="col-9">
+      <label for="recommendedRange" class="col-4 form-label">Recommended:</label>
+      <div class="col-8">
         <input
           type="range"
           class="form-range"
@@ -133,8 +135,8 @@
       <p class="text-danger">{{ form.recommended.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
-      <label for="valueRange" class="col-3 form-label">Value :</label>
-      <div class="col-9">
+      <label for="valueRange" class="col-4 form-label">Value:</label>
+      <div class="col-8">
         <input
           type="range"
           class="form-range"
@@ -148,8 +150,8 @@
       <p class="text-danger">{{ form.value.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
-      <label for="serviceRange" class="col-3 form-label">Service :</label>
-      <div class="col-9">
+      <label for="serviceRange" class="col-4 form-label">Service:</label>
+      <div class="col-8">
         <input
           type="range"
           class="form-range"
@@ -163,8 +165,8 @@
       <p class="text-danger">{{ form.service.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
-      <label for="cleanlinessRange" class="col-3 form-label">Cleanliness :</label>
-      <div class="col-9">
+      <label for="cleanlinessRange" class="col-4 form-label">Cleanliness:</label>
+      <div class="col-8">
         <input
           type="range"
           class="form-range"
@@ -178,8 +180,8 @@
       <p class="text-danger">{{ form.cleanliness.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
-      <label for="locationRange" class="col-3 form-label">Location :</label>
-      <div class="col-9">
+      <label for="locationRange" class="col-4 form-label">Location:</label>
+      <div class="col-8">
         <input
           type="range"
           class="form-range"
@@ -193,8 +195,8 @@
       <p class="text-danger">{{ form.location.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
-      <label for="sustainabilityRange" class="col-3 form-label">Sustainability :</label>
-      <div class="col-9">
+      <label for="sustainabilityRange" class="col-4 form-label">Sustainability:</label>
+      <div class="col-8">
         <input
           type="range"
           class="form-range"
@@ -208,12 +210,12 @@
       <p class="text-danger">{{ form.sustainability.errors.as_text }}</p>
     </div>
     <div class="my-3">
-      <label>Title of Your Review :</label><br />
+      <label>Title of Your Review:</label><br />
       <input class="form-control" name="title" id="id_title" value="{{form.title.value}}" />
       <p class="text-danger">{{ form.title.errors.as_text }}</p>
     </div>
     <div class="my-3">
-      <label>Your Review :</label><br />
+      <label>Your Review:</label><br />
       <textarea class="form-control" name="review" cols="40" rows="5" id="id_review">
 {{form.review.value}}</textarea
       >
@@ -312,8 +314,9 @@
   <div class="text-start">
     <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
     <strong>{{ review.user.username }}</strong>
+    <h5>{{ review.title }}</h5>
     <details style="word-wrap: break-word">
-      <summary>Summary goes here</summary>
+      <summary>Read more...</summary>
       <p>{{ review.review }}</p>
     </details>
     <br />

@@ -156,7 +156,7 @@ class ReviewAndRating(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     def total_rating(self):
-        return (self.recommended + self.value + self.service + self.cleanliness + self.location + self.sustainability)/6
+        return round((self.recommended + self.value + self.service + self.cleanliness + self.location + self.sustainability)/6, 2)
 
     def __str__(self):
         return "Total rating : " + str(self.total_rating())
