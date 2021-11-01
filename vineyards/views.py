@@ -8,7 +8,8 @@ def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
-    review_and_rating = ReviewAndRating.objects.filter(
+    review_and_rating = ReviewAndRating.objects.filter(vineyard=vineyard)
+    recent_reviews = ReviewAndRating.objects.filter(
         vineyard=vineyard).order_by('-id')[:3]
     try:
         obj = ReviewAndRating.objects.get(user=request.user, vineyard=vineyard)
@@ -29,6 +30,7 @@ def vineyard_detail(request, region, slug, parent=None):
                "yard_images": yard_images,
                "yard_cover_images": yard_cover_images,
                "review_and_rating": review_and_rating,
+               "recent_reviews": recent_reviews,
                "form": form,
                }
     return render(request, "vineyards/vineyard.html", context)

@@ -88,9 +88,31 @@
   {{ vineyard.text|safe }} {{ vineyard.google_map|safe }}
 </div>
 
-<!-- Review and Rating Form -->
+<!-- Review and Rating -->
 <div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h5 class="fw-bold ps-0">Review and Rating</h5>
+  <hr />
+  {% if review_and_rating %}
+  <div>
+    {% for r in review_and_rating %}
+    <div class="row my-4">
+      <div class="col-2 text-center">
+        <img src="{{ r.user.profile.profile_pic.url }}" class="w-100" />
+        <strong>{{ r.user.username }}</strong>
+      </div>
+      <div class="col-10" style="word-wrap: break-word">
+        <h6>{{ r.date_created }}</h6>
+        {{ r.review }}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+<!-- Review and Rating Form -->
+<div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h5 class="fw-bold ps-0">Give your Rating And Review Here</h5>
   <hr />
   <h5 class="my-3">Your rating and review are important to help others. Thank you!</h5>
   <form method="POST">
@@ -278,10 +300,10 @@
 {% endblock breadcrumb %}
 
 <!-- Recent Reviews -->
-{% block recent_reviews %}{% if review_and_rating %}
+{% block recent_reviews %}{% if recent_reviews %}
 <div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h6 class="fw-bold mb-4">Recent reviews of {{ vineyard.name }}</h6>
-  {% for review in review_and_rating %}
+  {% for review in recent_reviews %}
   <div class="text-start">
     <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
     <strong>{{ review.user.username }}</strong>
