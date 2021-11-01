@@ -208,6 +208,11 @@
       <p class="text-danger">{{ form.sustainability.errors.as_text }}</p>
     </div>
     <div class="my-3">
+      <label>Title of Your Review :</label><br />
+      <input class="form-control" name="title" id="id_title" value="{{form.title.value}}" />
+      <p class="text-danger">{{ form.title.errors.as_text }}</p>
+    </div>
+    <div class="my-3">
       <label>Your Review :</label><br />
       <textarea class="form-control" name="review" cols="40" rows="5" id="id_review">
 {{form.review.value}}</textarea

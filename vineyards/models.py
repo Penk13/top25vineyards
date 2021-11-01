@@ -141,6 +141,7 @@ class ReviewAndRating(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
     recommended = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+    title = models.CharField(max_length=255)
     review = models.TextField(blank=False, validators=[review_validator])
     value = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
