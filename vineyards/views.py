@@ -8,7 +8,8 @@ def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
-    review_and_rating = ReviewAndRating.objects.filter(vineyard=vineyard)
+    review_and_rating = ReviewAndRating.objects.filter(
+        vineyard=vineyard).order_by('-id')[:3]
     try:
         obj = ReviewAndRating.objects.get(user=request.user, vineyard=vineyard)
         form = ReviewRatingForm(request.POST or None, instance=obj)

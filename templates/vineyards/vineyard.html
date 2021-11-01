@@ -277,9 +277,27 @@
 </nav>
 {% endblock breadcrumb %}
 
+<!-- Recent Reviews -->
+{% block recent_reviews %}{% if review_and_rating %}
+<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h6 class="fw-bold mb-4">Recent reviews of {{ vineyard.name }}</h6>
+  {% for review in review_and_rating %}
+  <div class="text-start">
+    <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
+    <strong>{{ review.user.username }}</strong>
+    <details style="word-wrap: break-word">
+      <summary>Summary goes here</summary>
+      <p>{{ review.review }}</p>
+    </details>
+    <br />
+  </div>
+  {% endfor %}
+</div>
+{% endif %}{% endblock recent_reviews %}
+
 <!-- Sidebar -->
 {% block sidebar %} {% if vineyard.sidebar %}
-<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ vineyard.sidebar|safe }}</div>
 </div>
 {% endif %} {% endblock sidebar %}

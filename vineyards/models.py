@@ -152,6 +152,7 @@ class ReviewAndRating(models.Model):
         validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
     sustainability = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(20)], default=10)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def total_rating(self):
         return (self.recommended + self.value + self.service + self.cleanliness + self.location + self.sustainability)/6
