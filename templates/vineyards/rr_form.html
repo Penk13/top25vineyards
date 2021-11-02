@@ -1,0 +1,273 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
+
+<!-- Meta Keywords -->
+{% block keywords %} <meta name="keywords" content="{{ vineyard.meta_keywords }}" />
+{% endblock keywords %}
+
+<!-- Title -->
+{% block title %} {{ vineyard.name }} {% endblock title %}
+
+<!-- Nadbar Logo -->
+{% block navlogo %} {% if vineyard.region.logo_on_navbar %}
+<a class="navbar-brand px-0 mx-0" href="{% url 'vineyards:region' vineyard.region.slug %}">
+  <img src="{{ vineyard.region.logo_on_navbar.url }}" />
+</a>
+{% else %}
+<a class="navbar-brand" href="{{ vineyard.get_absolute_url }}">
+  <img src="{% static 'img/navbrandtop25.png'%}" />
+</a>
+{% endif %} {% endblock navlogo %}
+
+<!-- Slick Slider Carousel -->
+{% block topcarousel %}
+<section class="vineyard-detail mb-5">
+  {% if vineyard.top_slider %}
+  <div class="slick-carousel">
+    {% for image in yard_images %}
+    <img src="{{ image.image.url }}" />
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% endblock topcarousel %}
+
+<!-- Vineyard Detail -->
+{% block content %}
+<div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h1 class="fw-bold">{{ vineyard.name }}</h1>
+  <h5><i class="bi bi-geo-alt-fill"></i> {{ vineyard.wine_rg }}</h5>
+  {% if vineyard.cover_slider and yard_cover_images %}
+  <div class="slick-carousel-yard-cover my-3">
+    {% for image in yard_cover_images %}
+    <img src="{{ image.image.url }}" />
+    {% endfor %}
+  </div>
+  {% else %}
+  <img src="{{ vineyard.cover.url }}" alt="" class="img-fluid py-3" />
+  {% endif %}
+
+  <!-- Review and Rating Form -->
+  <h5 class="my-3">
+    <strong>Your rating and review are important to help others. Thank you!</strong>
+  </h5>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group row my-3">
+      <label for="recommendedRange" class="col-4 form-label">Recommended:</label>
+      <div class="col-8">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="recommended"
+          value="{{form.recommended.value}}"
+          id="recommendedRange"
+        />
+      </div>
+      <p class="text-danger">{{ form.recommended.errors.as_text }}</p>
+    </div>
+    <div class="form-group row my-3">
+      <label for="valueRange" class="col-4 form-label">Value:</label>
+      <div class="col-8">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="value"
+          value="{{form.value.value}}"
+          id="valueRange"
+        />
+      </div>
+      <p class="text-danger">{{ form.value.errors.as_text }}</p>
+    </div>
+    <div class="form-group row my-3">
+      <label for="serviceRange" class="col-4 form-label">Service:</label>
+      <div class="col-8">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="service"
+          value="{{form.service.value}}"
+          id="serviceRange"
+        />
+      </div>
+      <p class="text-danger">{{ form.service.errors.as_text }}</p>
+    </div>
+    <div class="form-group row my-3">
+      <label for="cleanlinessRange" class="col-4 form-label">Cleanliness:</label>
+      <div class="col-8">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="cleanliness"
+          value="{{form.cleanliness.value}}"
+          id="cleanlinessRange"
+        />
+      </div>
+      <p class="text-danger">{{ form.cleanliness.errors.as_text }}</p>
+    </div>
+    <div class="form-group row my-3">
+      <label for="locationRange" class="col-4 form-label">Location:</label>
+      <div class="col-8">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="location"
+          value="{{form.location.value}}"
+          id="locationRange"
+        />
+      </div>
+      <p class="text-danger">{{ form.location.errors.as_text }}</p>
+    </div>
+    <div class="form-group row my-3">
+      <label for="sustainabilityRange" class="col-4 form-label">Sustainability:</label>
+      <div class="col-8">
+        <input
+          type="range"
+          class="form-range"
+          min="1"
+          max="20"
+          name="sustainability"
+          value="{{form.sustainability.value}}"
+          id="sustainabilityRange"
+        />
+      </div>
+      <p class="text-danger">{{ form.sustainability.errors.as_text }}</p>
+    </div>
+    <div class="my-3">
+      <label>Title of Your Review:</label><br />
+      <input class="form-control" name="title" id="id_title" value="{{form.title.value}}" />
+      <p class="text-danger">{{ form.title.errors.as_text }}</p>
+    </div>
+    <div class="my-3">
+      <label>Your Review:</label><br />
+      <textarea class="form-control" name="review" cols="40" rows="5" id="id_review">
+{{form.review.value}}</textarea
+      >
+      <p class="text-danger">{{ form.review.errors.as_text }}</p>
+    </div>
+    {% if request.user.is_authenticated %}
+    <input type="submit" value="SUBMIT" class="btn btn-dark w-100" />
+    {% else %}
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary w-100"
+      data-bs-toggle="modal"
+      data-bs-target="#staticBackdrop"
+    >
+      Send
+    </button>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog w-100">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">
+              You need to login to your account first
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <a href="{% url 'account_login' %}">Go to Login Page</a><br />
+            Don't have an account yet?
+            <a href="{% url 'account_signup' %}">Create account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </form>
+</div>
+{% endblock content %}
+
+<!-- Breadcrumb -->
+{% block breadcrumb %}
+<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size: 13px">
+    <li class="breadcrumb-item">
+      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+        ><i class="bi bi-house-fill"></i> Home</a
+      >
+    </li>
+    <li class="breadcrumb-item" aria-current="page">
+      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+        >Regions</a
+      >
+    </li>
+    {% if vineyard.region.region_parent %}
+    <li class="breadcrumb-item" aria-current="page">
+      <a
+        href="{% url 'vineyards:region' vineyard.region.region_parent.slug %}"
+        class="text-dark"
+        style="text-decoration: none"
+        >{{ vineyard.region.region_parent.name }}</a
+      >
+    </li>
+    {% endif %}
+    <li class="breadcrumb-item" aria-current="page">
+      <a
+        href="{% url 'vineyards:region' vineyard.region.slug %}"
+        class="text-dark"
+        style="text-decoration: none"
+        >{{ vineyard.region.name }}</a
+      >
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ vineyard.name }}</li>
+  </ol>
+</nav>
+{% endblock breadcrumb %}
+
+<!-- Recent Reviews -->
+{% block recent_reviews %}{% if recent_reviews %}
+<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h6 class="fw-bold mb-4">Recent reviews of {{ vineyard.name }}</h6>
+  {% for review in recent_reviews %}
+  <div class="text-start">
+    <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
+    <strong>{{ review.user.username }}</strong>
+    <h5>{{ review.title }}</h5>
+    <details style="word-wrap: break-word">
+      <summary>Read more...</summary>
+      <p>{{ review.review }}</p>
+    </details>
+    <br />
+  </div>
+  {% endfor %}
+</div>
+{% endif %}{% endblock recent_reviews %}
+
+<!-- Sidebar -->
+{% block sidebar %} {% if vineyard.sidebar %}
+<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ vineyard.sidebar|safe }}</div>
+</div>
+{% endif %} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {% if vineyard.ad_manager %}
+<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ vineyard.ad_manager|safe }}</div>
+</div>
+{% endif %} {% endblock admanager %}
