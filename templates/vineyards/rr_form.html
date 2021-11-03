@@ -50,11 +50,12 @@
   <h5 class="my-3">
     <strong>Your rating and review are important to help others. Thank you!</strong>
   </h5>
-  <form method="POST">
+  <form method="POST" id="rr_form">
     {% csrf_token %}
     <div class="form-group row my-3">
-      <label for="recommendedRange" class="col-4 form-label">Recommended:</label>
-      <div class="col-8">
+      <label for="recommendedRange" class="col-4 form-label">Would you recommend to a friend?</label
+      >1
+      <div class="col-7">
         <input
           type="range"
           class="form-range"
@@ -65,11 +66,13 @@
           id="recommendedRange"
         />
       </div>
+      20
       <p class="text-danger">{{ form.recommended.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
       <label for="valueRange" class="col-4 form-label">Value:</label>
-      <div class="col-8">
+      1
+      <div class="col-7">
         <input
           type="range"
           class="form-range"
@@ -80,11 +83,13 @@
           id="valueRange"
         />
       </div>
+      20
       <p class="text-danger">{{ form.value.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
       <label for="serviceRange" class="col-4 form-label">Service:</label>
-      <div class="col-8">
+      1
+      <div class="col-7">
         <input
           type="range"
           class="form-range"
@@ -95,11 +100,13 @@
           id="serviceRange"
         />
       </div>
+      20
       <p class="text-danger">{{ form.service.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
       <label for="cleanlinessRange" class="col-4 form-label">Cleanliness:</label>
-      <div class="col-8">
+      1
+      <div class="col-7">
         <input
           type="range"
           class="form-range"
@@ -110,11 +117,13 @@
           id="cleanlinessRange"
         />
       </div>
+      20
       <p class="text-danger">{{ form.cleanliness.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
       <label for="locationRange" class="col-4 form-label">Location:</label>
-      <div class="col-8">
+      1
+      <div class="col-7">
         <input
           type="range"
           class="form-range"
@@ -125,11 +134,13 @@
           id="locationRange"
         />
       </div>
+      20
       <p class="text-danger">{{ form.location.errors.as_text }}</p>
     </div>
     <div class="form-group row my-3">
       <label for="sustainabilityRange" class="col-4 form-label">Sustainability:</label>
-      <div class="col-8">
+      1
+      <div class="col-7">
         <input
           type="range"
           class="form-range"
@@ -140,31 +151,43 @@
           id="sustainabilityRange"
         />
       </div>
+      20
       <p class="text-danger">{{ form.sustainability.errors.as_text }}</p>
     </div>
     <div class="my-3">
       <label>Title of Your Review:</label><br />
-      <input class="form-control" name="title" id="id_title" value="{{form.title.value}}" />
+      <input class="form-control" name="title" id="titleValue" value="{{form.title.value}}" />
       <p class="text-danger">{{ form.title.errors.as_text }}</p>
     </div>
     <div class="my-3">
       <label>Your Review:</label><br />
-      <textarea class="form-control" name="review" cols="40" rows="5" id="id_review">
+      <textarea class="form-control" name="review" cols="40" rows="5" id="reviewValue">
 {{form.review.value}}</textarea
       >
       <p class="text-danger">{{ form.review.errors.as_text }}</p>
     </div>
+    <div class="form-check my-3">
+      <input class="form-check-input" type="checkbox" id="beforeSubmit" required />
+      <label class="form-check-label" for="beforeSubmit">
+        I certify that this review and rating are based on my assessment and is my genuine opinion
+        of this company or business. I have no personal or business relationship with this
+        establishment, and have not been offered any incentive or payment originating from this
+        establishment to write this review.
+      </label>
+    </div>
+  </form>
+  <div class="text-center row justify-content-evenly">
     {% if request.user.is_authenticated %}
-    <input type="submit" value="SUBMIT" class="btn btn-dark w-100" />
+    <input type="submit" value="SUBMIT" class="btn btn-dark col-5" form="rr_form" />
     {% else %}
     <!-- Button trigger modal -->
     <button
       type="button"
-      class="btn btn-primary w-100"
+      class="btn btn-dark col-5"
       data-bs-toggle="modal"
       data-bs-target="#staticBackdrop"
     >
-      Send
+      SUBMIT
     </button>
     <!-- Modal -->
     <div
@@ -176,7 +199,7 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog w-100">
+      <div class="modal-dialog w-50">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="staticBackdropLabel">
@@ -198,7 +221,79 @@
       </div>
     </div>
     {% endif %}
-  </form>
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-dark col-5"
+      data-bs-toggle="modal"
+      data-bs-target="#preview"
+      onclick="preview()"
+    >
+      Preview your rating and review
+    </button>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="preview"
+      tabindex="-1"
+      aria-labelledby="previewLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="previewLabel">Preview</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body row">
+            <div class="col-3">
+              <img src="{{ request.user.profile.profile_pic.url }}" alt="" class="w-100" />
+              <p>{{ request.user.username }}</p>
+            </div>
+            <div class="col-9 text-start" style="word-wrap: break-word">
+              <h5 class="d-flex">
+                <strong><span id="titlePreview"></span></strong>
+                <span class="ms-auto" id="totalRating"></span>
+              </h5>
+              <p id="reviewPreview">{{ form.review.value }}</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <input
+              type="submit"
+              value="SUBMIT"
+              class="btn btn-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="p-3 mt-5">
+    Please note by submitting your review and rating you agree to the following:
+    <br /><br />
+    By submitting a review and rating you grant this website and its affiliates the right to use,
+    control, share, reproduce, translate, distribute, manage, publicly display and remove your
+    review and rating You are fully responsible for the content of your review and of your rating.
+    Once you submit your review and rating, you transfer ownership and control to us and it is
+    publicly accessible. We may also share your review with our partners, members or listed
+    businesses in order that they can address any issues raised in your review or through your
+    rating but we will never share your personal details. We are not responsible for the business or
+    entity reviewed deducing your identity from the content of your review and rating and contacting
+    you direct. You accept our review and rating terms of use and privacy policy as they apply to
+    your review and rating. We reserve the right to reject reviews and ratings that do not meet our
+    guidelines, in particular we can't publish your review and rating if it includes, but not
+    limited to: specific rates or prices, personal insults or profanity, any personal details or any
+    personally identifiable information, commercial website addresses or phone numbers.
+  </p>
 </div>
 {% endblock content %}
 
