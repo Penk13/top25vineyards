@@ -357,6 +357,7 @@
       </div>
     </footer>
 
+    <!-- Bootstrap -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
@@ -365,105 +366,6 @@
     <!-- Slick Slider -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.slick/1.4.1/slick.min.js"></script>
-    <!-- Default Carousel -->
-    <script>
-      $().ready(function () {
-        $(".slick-carousel").slick({
-          centerPadding: "370px",
-          infinite: true,
-          slidesToShow: 1,
-          prevArrow: false,
-          nextArrow: false,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 5000,
-          centerMode: true,
-          responsive: [
-            {
-              breakpoint: 1400,
-              settings: {
-                centerPadding: "330px",
-                slidesToShow: 1,
-              },
-            },
-            {
-              breakpoint: 978,
-              settings: {
-                centerPadding: "100px",
-                slidesToShow: 2,
-              },
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                centerPadding: "0px",
-                slidesToShow: 1,
-              },
-            },
-          ],
-        });
-      });
-    </script>
-    <!-- Homepage Carousel -->
-    <script>
-      $().ready(function () {
-        $(".slick-carousel-homepage").slick({
-          centerPadding: "0px",
-          infinite: true,
-          slidesToShow: 1,
-          prevArrow: false,
-          nextArrow: false,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 5000,
-          fade: true,
-        });
-      });
-    </script>
-    <!-- Yard Cover Carousel -->
-    <script>
-      $().ready(function () {
-        $(".slick-carousel-yard-cover").slick({
-          centerPadding: "0px",
-          infinite: true,
-          slidesToShow: 1,
-          prevArrow: false,
-          nextArrow: false,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 5000,
-          fade: true,
-        });
-      });
-    </script>
-    <!-- Show Total Rating on Preview (rr_form.html)  -->
-    <script>
-      function preview() {
-        var totalRating = document.getElementById("totalRating").innerText;
-        document.getElementById("totalRatingPreview").innerHTML = totalRating;
-        var titleValue = document.getElementById("titleValue").value;
-        document.getElementById("titlePreview").innerHTML = titleValue;
-        var reviewValue = document.getElementById("reviewValue").value;
-        document.getElementById("reviewPreview").innerHTML = reviewValue;
-        console.log(totalRating, titleValue);
-      }
-      function liveCalculation() {
-        var recommendedValue = Number(document.getElementById("recommendedRange").value);
-        var valueValue = Number(document.getElementById("valueRange").value);
-        var serviceValue = Number(document.getElementById("serviceRange").value);
-        var cleanlinessValue = Number(document.getElementById("cleanlinessRange").value);
-        var locationValue = Number(document.getElementById("locationRange").value);
-        var sustainabilityValue = Number(document.getElementById("sustainabilityRange").value);
-        var totalRating =
-          (recommendedValue +
-            valueValue +
-            serviceValue +
-            cleanlinessValue +
-            locationValue +
-            sustainabilityValue) /
-          6;
-        document.getElementById("totalRating").innerHTML = totalRating.toFixed(2);
-      }
-    </script>
+    <script type="text/javascript" src="{% static 'js/myScript.js' %}"></script>
   </body>
 </html>
