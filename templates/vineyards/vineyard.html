@@ -114,7 +114,9 @@
       </details>
     </div>
   </div>
-  {% endfor %} {% endif %}
+  {% endfor %} {% else %}
+  <h6><strong>Be the first to rate and write a review for {{ vineyard.name }} ... here</strong></h6>
+  {% endif %}
 </div>
 {% endblock content %}
 
