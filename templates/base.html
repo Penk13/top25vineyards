@@ -439,6 +439,15 @@
     <!-- Show Total Rating on Preview (rr_form.html)  -->
     <script>
       function preview() {
+        var totalRating = document.getElementById("totalRating").innerText;
+        document.getElementById("totalRatingPreview").innerHTML = totalRating;
+        var titleValue = document.getElementById("titleValue").value;
+        document.getElementById("titlePreview").innerHTML = titleValue;
+        var reviewValue = document.getElementById("reviewValue").value;
+        document.getElementById("reviewPreview").innerHTML = reviewValue;
+        console.log(totalRating, titleValue);
+      }
+      function liveCalculation() {
         var recommendedValue = Number(document.getElementById("recommendedRange").value);
         var valueValue = Number(document.getElementById("valueRange").value);
         var serviceValue = Number(document.getElementById("serviceRange").value);
@@ -454,18 +463,6 @@
             sustainabilityValue) /
           6;
         document.getElementById("totalRating").innerHTML = totalRating.toFixed(2);
-        console.log(
-          recommendedValue +
-            valueValue +
-            serviceValue +
-            cleanlinessValue +
-            locationValue +
-            sustainabilityValue
-        );
-        var titleValue = document.getElementById("titleValue").value;
-        document.getElementById("titlePreview").innerHTML = titleValue;
-        var reviewValue = document.getElementById("reviewValue").value;
-        document.getElementById("reviewPreview").innerHTML = reviewValue;
       }
     </script>
   </body>

@@ -64,6 +64,7 @@
           name="recommended"
           value="{{form.recommended.value}}"
           id="recommendedRange"
+          onchange="liveCalculation()"
         />
       </div>
       20
@@ -81,6 +82,7 @@
           name="value"
           value="{{form.value.value}}"
           id="valueRange"
+          onchange="liveCalculation()"
         />
       </div>
       20
@@ -98,6 +100,7 @@
           name="service"
           value="{{form.service.value}}"
           id="serviceRange"
+          onchange="liveCalculation()"
         />
       </div>
       20
@@ -115,6 +118,7 @@
           name="cleanliness"
           value="{{form.cleanliness.value}}"
           id="cleanlinessRange"
+          onchange="liveCalculation()"
         />
       </div>
       20
@@ -132,6 +136,7 @@
           name="location"
           value="{{form.location.value}}"
           id="locationRange"
+          onchange="liveCalculation()"
         />
       </div>
       20
@@ -149,10 +154,16 @@
           name="sustainability"
           value="{{form.sustainability.value}}"
           id="sustainabilityRange"
+          onchange="liveCalculation()"
         />
       </div>
       20
       <p class="text-danger">{{ form.sustainability.errors.as_text }}</p>
+    </div>
+    <div class="mt-3 mb-5" style="font-size: 20px">
+      <p>
+        <strong> Total Rating </strong><span class="badge bg-primary ms-2" id="totalRating">-</span>
+      </p>
     </div>
     <div class="my-3">
       <label>Title of Your Review:</label><br />
@@ -179,49 +190,7 @@
   <div class="text-center row justify-content-evenly">
     {% if request.user.is_authenticated %}
     <input type="submit" value="SUBMIT" class="btn btn-dark col-5" form="rr_form" />
-    {% else %}
-    <!-- Button trigger modal -->
-    <button
-      type="button"
-      class="btn btn-dark col-5"
-      data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop"
-    >
-      SUBMIT
-    </button>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="staticBackdrop"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog w-50">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">
-              You need to login to your account first
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <a href="{% url 'account_login' %}">Go to Login Page</a><br />
-            Don't have an account yet?
-            <a href="{% url 'account_signup' %}">Create account</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endif %}
-    <!-- Button trigger modal -->
+    <!-- Button trigger Modal Preview -->
     <button
       type="button"
       class="btn btn-dark col-5"
@@ -231,7 +200,7 @@
     >
       Preview your rating and review
     </button>
-    <!-- Modal -->
+    <!-- Modal Preview -->
     <div
       class="modal fade"
       id="preview"
@@ -258,24 +227,69 @@
             <div class="col-9 text-start" style="word-wrap: break-word">
               <h5 class="d-flex">
                 <strong><span id="titlePreview"></span></strong>
-                <span class="ms-auto" id="totalRating"></span>
+                <span class="ms-auto" id="totalRatingPreview"></span>
               </h5>
               <p id="reviewPreview">{{ form.review.value }}</p>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <input
-              type="submit"
-              value="SUBMIT"
-              class="btn btn-dark"
-              data-bs-toggle="modal"
-              data-bs-target="#staticBackdrop"
-            />
+            <input type="submit" value="SUBMIT" class="btn btn-dark" form="rr_form" />
           </div>
         </div>
       </div>
     </div>
+    {% else %}
+    <!-- Button trigger Modal Login First -->
+    <button
+      type="button"
+      class="btn btn-dark col-5"
+      data-bs-toggle="modal"
+      data-bs-target="#loginFirst"
+    >
+      SUBMIT
+    </button>
+    <!-- Button trigger Modal Login First -->
+    <button
+      type="button"
+      class="btn btn-dark col-5"
+      data-bs-toggle="modal"
+      data-bs-target="#loginFirst"
+    >
+      Preview your rating and review
+    </button>
+    <!-- Modal Login First -->
+    <div
+      class="modal fade"
+      id="loginFirst"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="loginFirstLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog w-50">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginFirstLabel">
+              You need to login to your account first
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <a href="{% url 'account_login' %}">Go to Login Page</a><br />
+            Don't have an account yet?
+            <a href="{% url 'account_signup' %}">Create account</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
   </div>
   <p class="p-3 mt-5">
     Please note by submitting your review and rating you agree to the following:
