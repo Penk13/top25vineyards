@@ -7,7 +7,7 @@
 <!-- Title -->
 {% block title %} {{ vineyard.name }} {% endblock title %}
 
-<!-- Nadbar Logo -->
+<!-- Navbar Logo -->
 {% block navlogo %} {% if vineyard.region.logo_on_navbar %}
 <a class="navbar-brand px-0 mx-0" href="{% url 'vineyards:region' vineyard.region.slug %}">
   <img src="{{ vineyard.region.logo_on_navbar.url }}" />

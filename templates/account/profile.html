@@ -1,0 +1,41 @@
+{% extends 'base.html' %} {% load static %}
+
+<!-- Title -->
+{% block title %} {{ user.username }} {% endblock title %}
+
+<!-- Top Carousel -->
+{% block topcarousel %}
+<section class="search-page mt-5"></section>
+{% endblock topcarousel %}
+
+<!-- Profile -->
+{% block content %}
+<div class="row p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="col-4">
+    <img src="{{ user.profile.profile_pic.url }}" class="w-100" />
+    <h1 class="text-center"><strong>{{ user.username }}</strong></h1>
+  </div>
+  <div class="col-8">
+    <form method="POST">
+      {% csrf_token %} {{ form.as_p }}
+      <input class="btn btn-primary" type="submit" value="Save Profile" />
+    </form>
+  </div>
+</div>
+
+<!-- Review and Rating -->
+{% endblock content %}
+
+<!-- Sidebar -->
+{% block sidebar %} {% if content_page.sidebar %}
+<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ content_page.sidebar|safe }}</div>
+</div>
+{% endif %} {% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} {% if content_page.ad_manager %}
+<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ content_page.ad_manager|safe }}</div>
+</div>
+{% endif %} {% endblock admanager %}
