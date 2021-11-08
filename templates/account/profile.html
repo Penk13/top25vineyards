@@ -7,6 +7,7 @@
 {% block topcarousel %}
 <section class="search-page mt-5"></section>
 {% endblock topcarousel %}
+<script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>
 
 <!-- Profile -->
 {% block content %}
@@ -20,7 +21,21 @@
       {% csrf_token %}
       <h6><strong>Email:</strong></h6>
       <p>{{ user.email }}</p>
-      {{ form|crispy }}
+      <div id="div_id_profile_pic" class="mb-3">
+        <div class="mb-2">
+          <input
+            type="file"
+            name="profile_pic"
+            class="form-control"
+            accept="image/*"
+            id="id_profile_pic"
+          />
+        </div>
+      </div>
+      <h6><strong>Country:</strong></h6>
+      {{ form.country|as_crispy_field }}
+      <h6><strong>Gender:</strong></h6>
+      {{ form.gender|as_crispy_field }}
       <h6><strong>Joined:</strong></h6>
       <p>{{ user.date_joined }}</p>
       <input class="btn btn-primary" type="submit" value="Save Profile" />
