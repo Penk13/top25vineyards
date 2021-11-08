@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
 
 <!-- Title -->
 {% block title %} {{ user.username }} {% endblock title %}
@@ -11,13 +11,18 @@
 <!-- Profile -->
 {% block content %}
 <div class="row p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <div class="col-4">
+  <div class="col-md-4 col-sm-12">
     <img src="{{ user.profile.profile_pic.url }}" class="w-100" />
     <h1 class="text-center"><strong>{{ user.username }}</strong></h1>
   </div>
-  <div class="col-8">
-    <form method="POST">
-      {% csrf_token %} {{ form.as_p }}
+  <div class="col-md-8 col-sm-12">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <h6><strong>Email:</strong></h6>
+      <p>{{ user.email }}</p>
+      {{ form|crispy }}
+      <h6><strong>Joined:</strong></h6>
+      <p>{{ user.date_joined }}</p>
       <input class="btn btn-primary" type="submit" value="Save Profile" />
     </form>
   </div>
