@@ -3,6 +3,7 @@ from .models import Profile
 from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from pages_app.models import ContentPage
+from vineyards.models import ReviewAndRating
 
 
 @login_required
@@ -10,6 +11,7 @@ def profile(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     form = ProfileForm(instance=profile)
+    review_and_rating = ReviewAndRating.objects.filter(user=user)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -21,5 +23,6 @@ def profile(request):
         'profile': profile,
         'content_page': content_page,
         'form': form,
+        'review_and_rating': review_and_rating,
     }
     return render(request, "account/profile.html", context)

@@ -29,6 +29,32 @@
 </div>
 
 <!-- Review and Rating -->
+<div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="row p-3 align-items-center mt-0 pt-0 pe-0">
+    <h5 class="col-9 fw-bold ps-0 m-0">My Ratings & Reviews</h5>
+  </div>
+  <hr />
+  {% if review_and_rating %} {% for r in review_and_rating %}
+  <div class="row my-4">
+    <div class="col-3 text-center">
+      <img src="{{ r.user.profile.profile_pic.url }}" class="w-100" />
+      <strong>{{ r.user.username }}</strong>
+    </div>
+    <div class="col-9" style="word-wrap: break-word">
+      <h5 class="d-flex">
+        <strong>{{ r.title }}</strong><span class="ms-auto">{{ r.total_rating }}</span>
+      </h5>
+      <h6>{{ r.date_created }}</h6>
+      <details>
+        <summary>Read more...</summary>
+        <p>{{ r.review }}</p>
+      </details>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <h6><strong>Let's write some reviews!</strong></h6>
+  {% endif %}
+</div>
 {% endblock content %}
 
 <!-- Sidebar -->
