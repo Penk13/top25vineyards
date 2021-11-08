@@ -17,7 +17,7 @@
     <h1 class="text-center"><strong>{{ user.username }}</strong></h1>
   </div>
   <div class="col-md-8 col-sm-12">
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data" id="profile_form">
       {% csrf_token %}
       <h6><strong>Email:</strong></h6>
       <p>{{ user.email }}</p>
@@ -38,8 +38,11 @@
       {{ form.gender|as_crispy_field }}
       <h6><strong>Joined:</strong></h6>
       <p>{{ user.date_joined }}</p>
-      <input class="btn btn-primary" type="submit" value="Save Profile" />
     </form>
+    <div class="d-flex">
+      <input class="btn btn-primary" type="submit" value="Save Profile" form="profile_form" />
+      <a class="btn btn-danger ms-auto" href="{% url 'account_logout' %}" role="button">Sign Out</a>
+    </div>
   </div>
 </div>
 
