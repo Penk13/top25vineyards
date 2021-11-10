@@ -11,7 +11,7 @@ def profile(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     form = ProfileForm(instance=profile)
-    review_and_rating = ReviewAndRating.objects.filter(user=user)
+    review_and_rating = ReviewAndRating.objects.filter(user=user, approved=True)
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():

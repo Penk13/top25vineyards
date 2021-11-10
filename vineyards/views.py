@@ -8,9 +8,9 @@ def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
-    review_and_rating = ReviewAndRating.objects.filter(vineyard=vineyard)
+    review_and_rating = ReviewAndRating.objects.filter(vineyard=vineyard, approved=True)
     recent_reviews = ReviewAndRating.objects.filter(
-        vineyard=vineyard).order_by('-id')[:3]
+        vineyard=vineyard, approved=True).order_by('-id')[:3]
     context = {"vineyard": vineyard,
                "yard_images": yard_images,
                "yard_cover_images": yard_cover_images,
@@ -37,7 +37,7 @@ def rr_form(request, region, slug, parent=None):
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     recent_reviews = ReviewAndRating.objects.filter(
-        vineyard=vineyard).order_by('-id')[:3]
+        vineyard=vineyard, approved=True).order_by('-id')[:3]
     try:
         obj = ReviewAndRating.objects.get(user=request.user, vineyard=vineyard)
         form = ReviewRatingForm(request.POST or None, instance=obj)
@@ -46,6 +46,7 @@ def rr_form(request, region, slug, parent=None):
         form = ReviewRatingForm(request.POST or None)
     if form.is_valid():
         if obj:
+            obj.approved = False
             form.save()
         else:
             instance = form.save(commit=False)
