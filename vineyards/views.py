@@ -8,7 +8,8 @@ def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
-    review_and_rating = ReviewAndRating.objects.filter(vineyard=vineyard, approved=True)
+    review_and_rating = ReviewAndRating.objects.filter(
+        vineyard=vineyard, approved=True)
     recent_reviews = ReviewAndRating.objects.filter(
         vineyard=vineyard, approved=True).order_by('-id')[:3]
     context = {"vineyard": vineyard,
@@ -38,21 +39,33 @@ def rr_form(request, region, slug, parent=None):
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     recent_reviews = ReviewAndRating.objects.filter(
         vineyard=vineyard, approved=True).order_by('-id')[:3]
+    # Check if it is update form or not
     try:
         obj = ReviewAndRating.objects.get(user=request.user, vineyard=vineyard)
         form = ReviewRatingForm(request.POST or None, instance=obj)
     except:
         obj = None
         form = ReviewRatingForm(request.POST or None)
+    # If user login from submit rr_form
+    if 'rr_form' in request.session:
+        form = ReviewRatingForm(initial=request.session['rr_form'])
+        request.session.pop('rr_form')
     if form.is_valid():
-        if obj:
-            obj.approved = False
-            form.save()
+        if request.user.is_authenticated:
+            # If it's update form
+            if obj:
+                obj.approved = False
+                form.save()
+            # If not update form
+            else:
+                instance = form.save(commit=False)
+                instance.user = request.user
+                instance.vineyard = vineyard
+                instance.save()
         else:
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.vineyard = vineyard
-            instance.save()
+            request.session['rr_form'] = form.cleaned_data
+            request.session['vineyard'] = vineyard.id
+            return redirect('accounts:account_login')
         return redirect(vineyard.get_absolute_url())
     context = {"vineyard": vineyard,
                "yard_images": yard_images,

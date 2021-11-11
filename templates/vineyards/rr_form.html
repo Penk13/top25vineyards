@@ -188,7 +188,6 @@
     </div>
   </form>
   <div class="text-center row justify-content-evenly">
-    {% if request.user.is_authenticated %}
     <input type="submit" value="SUBMIT" class="btn btn-dark col-5" form="rr_form" />
     <!-- Button trigger Modal Preview -->
     <button
@@ -239,57 +238,6 @@
         </div>
       </div>
     </div>
-    {% else %}
-    <!-- Button trigger Modal Login First -->
-    <button
-      type="button"
-      class="btn btn-dark col-5"
-      data-bs-toggle="modal"
-      data-bs-target="#loginFirst"
-    >
-      SUBMIT
-    </button>
-    <!-- Button trigger Modal Login First -->
-    <button
-      type="button"
-      class="btn btn-dark col-5"
-      data-bs-toggle="modal"
-      data-bs-target="#loginFirst"
-    >
-      Preview your rating and review
-    </button>
-    <!-- Modal Login First -->
-    <div
-      class="modal fade"
-      id="loginFirst"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="loginFirstLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog w-50">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginFirstLabel">
-              You need to login to your account first
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <a href="{% url 'account_login' %}">Go to Login Page</a><br />
-            Don't have an account yet?
-            <a href="{% url 'account_signup' %}">Create account</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endif %}
   </div>
   <p class="p-3 mt-5">
     Please note by submitting your review and rating you agree to the following:
