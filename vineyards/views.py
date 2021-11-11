@@ -65,7 +65,7 @@ def rr_form(request, region, slug, parent=None):
         else:
             request.session['rr_form'] = form.cleaned_data
             request.session['vineyard'] = vineyard.id
-            return redirect('accounts:account_login')
+            return redirect('account_login')
         return redirect(vineyard.get_absolute_url())
     context = {"vineyard": vineyard,
                "yard_images": yard_images,
