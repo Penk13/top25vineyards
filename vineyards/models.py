@@ -160,4 +160,4 @@ class ReviewAndRating(models.Model):
         return round((self.recommended + self.value + self.service + self.cleanliness + self.location + self.sustainability)/6, 2)
 
     def __str__(self):
-        return "Total rating : " + str(self.total_rating())
+        return "Total rating : " + str(self.total_rating()) + " - " + self.title + " - " + str(self.date_created.strftime("%d %b %Y"))
