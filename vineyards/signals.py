@@ -9,7 +9,7 @@ import datetime
 
 
 @receiver(post_save, sender=ReviewAndRating)
-def submission_email(sender, instance, **kwargs):
+def from_admin_email(sender, instance, **kwargs):
     if instance.approved is True:
         domain = Site.objects.get_current().domain
         path = instance.vineyard.get_absolute_url()
