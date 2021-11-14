@@ -18,7 +18,7 @@ def from_admin_email(sender, instance, **kwargs):
             'approval-email.html',
             {
                 'username': instance.user.username,
-                'vineyard_url': domain + path,
+                'vineyard_url': 'https://' + domain + path,
                 'email': settings.DEFAULT_FROM_EMAIL
             })
     else:
@@ -43,6 +43,7 @@ def from_user_email(sender, instance, **kwargs):
     if instance.approved is False:
         # Email sent to admin
         send_mail("Review from User",
+                  instance.vineyard.name + '\n\n' +
                   instance.title + '\n\n' +
                   instance.review,
                   instance.user.email,
