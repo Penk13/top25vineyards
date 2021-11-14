@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from pages_app.models import ContentPage
 from vineyards.models import ReviewAndRating, Vineyard
 from vineyards.forms import ReviewRatingForm
+from datetime import date, timedelta
 
 
 @login_required
@@ -12,17 +13,22 @@ def profile(request):
     if 'vineyard' in request.session:
         vineyard = Vineyard.objects.get(
             id=request.session['vineyard'])
-        # If it's update form
+        # Check if there is a previous review
+        form = ReviewRatingForm(request.session["rr_form"])
         try:
-            obj = ReviewAndRating.objects.get(
-                user=request.user, vineyard=vineyard)
-            form = ReviewRatingForm(request.session['rr_form'], instance=obj)
-            obj.approved = False
-            form.save()
-        # If not update form
+            obj = ReviewAndRating.objects.filter(
+                user=request.user, vineyard=vineyard).latest('date_created')
+            wait = obj.date_created.date() + timedelta(days=10)
+            if date.today() < wait:
+                allowed = False
+            else:
+                allowed = True
         except:
-            obj = None
-            form = ReviewRatingForm(request.session['rr_form'])
+            allowed = True
+
+        if not allowed:
+            request.session['rr_form_msg'] = "Sorry you can't post right now. You have to wait 10 days since the last post."
+        else:
             instance = form.save(commit=False)
             instance.user = request.user
             instance.vineyard = vineyard
