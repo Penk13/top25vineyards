@@ -46,10 +46,6 @@ def rr_form(request, region, slug, parent=None):
     except:
         obj = None
         form = ReviewRatingForm(request.POST or None)
-    # If user login from submit rr_form
-    if 'rr_form' in request.session:
-        form = ReviewRatingForm(initial=request.session['rr_form'])
-        request.session.pop('rr_form')
     if form.is_valid():
         if request.user.is_authenticated:
             # If it's update form

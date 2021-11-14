@@ -4,6 +4,7 @@ from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from pages_app.models import ContentPage
 from vineyards.models import ReviewAndRating, Vineyard
+from vineyards.forms import ReviewRatingForm
 
 
 @login_required
@@ -11,8 +12,24 @@ def profile(request):
     if 'vineyard' in request.session:
         vineyard = Vineyard.objects.get(
             id=request.session['vineyard'])
+        # If it's update form
+        try:
+            obj = ReviewAndRating.objects.get(
+                user=request.user, vineyard=vineyard)
+            form = ReviewRatingForm(request.session['rr_form'], instance=obj)
+            obj.approved = False
+            form.save()
+        # If not update form
+        except:
+            obj = None
+            form = ReviewRatingForm(request.session['rr_form'])
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.vineyard = vineyard
+            instance.save()
         request.session.pop('vineyard')
-        return redirect(vineyard.get_absolute_url()+'form')
+        request.session.pop('rr_form')
+        return redirect(vineyard.get_absolute_url())
     user = request.user
     profile = Profile.objects.get(user=user)
     form = ProfileForm(instance=profile)
