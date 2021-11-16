@@ -46,5 +46,5 @@ def from_user_email(sender, instance, **kwargs):
                   instance.vineyard.name + '\n\n' +
                   instance.title + '\n\n' +
                   instance.review,
-                  instance.user.email,
+                  '',
                   [settings.DEFAULT_FROM_EMAIL])
