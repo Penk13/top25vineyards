@@ -95,3 +95,33 @@ function liveCalculation() {
     6;
   document.getElementById("totalRating").innerHTML = totalRating.toFixed(2);
 }
+
+// Read more & Read less (on vineyard detail reviews)
+function moreLess(element) {
+  var half = "half-" + element.id;
+  var full = "full-" + element.id;
+  var halfDisplay = document.getElementById(half).style.display;
+  console.log(halfDisplay);
+  if (halfDisplay == "none") {
+    document.getElementById(half).style.display = "block";
+    document.getElementById(full).style.display = "none";
+  } else if (halfDisplay == "block") {
+    document.getElementById(half).style.display = "none";
+    document.getElementById(full).style.display = "block";
+  }
+}
+
+// Read more & Read less (on recent reviews)
+function sidebarMoreLess(element) {
+  var half = "half-" + element.id + "-sidebar";
+  var full = "full-" + element.id + "-sidebar";
+  var halfDisplay = document.getElementById(half).style.display;
+  console.log(halfDisplay);
+  if (halfDisplay == "none") {
+    document.getElementById(half).style.display = "block";
+    document.getElementById(full).style.display = "none";
+  } else if (halfDisplay == "block") {
+    document.getElementById(half).style.display = "none";
+    document.getElementById(full).style.display = "block";
+  }
+}

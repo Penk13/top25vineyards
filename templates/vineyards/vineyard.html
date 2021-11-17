@@ -100,20 +100,40 @@
   </div>
   <hr />
   {% if review_and_rating %} {% for r in review_and_rating %}
-  <div class="row my-4">
+  <div class="row">
     <div class="col-3 text-center">
-      <img src="{{ r.user.profile.profile_pic.url }}" class="w-100" />
-      <strong>{{ r.user.username }}</strong>
+      <img src="{{ r.user.profile.profile_pic.url }}" class="w-75" />
+      <strong style="font-size: 2vmin">{{ r.user.username }}</strong>
     </div>
     <div class="col-9" style="word-wrap: break-word">
       <h5 class="d-flex">
         <strong>{{ r.title }}</strong><span class="ms-auto">{{ r.total_rating }}</span>
       </h5>
       <h6>{{ r.date_created }}</h6>
-      <details>
-        <summary>Read more...</summary>
-        <p>{{ r.review }}</p>
-      </details>
+      {% if r.review|wordcount > 20 %}
+      <div class="half-content" id="half-{{ r.pk }}" style="display: block">
+        {{ r.review|safe|linebreaks|truncatewords:20 }} <br />
+        <a
+          id="{{ r.pk }}"
+          class="fw-bold"
+          onclick="moreLess(this)"
+          style="text-decoration: none; cursor: pointer"
+          >Read more</a
+        >
+      </div>
+      <div class="full-content" id="full-{{ r.pk }}" style="display: none">
+        {{ r.review|safe|linebreaks }}
+        <a
+          id="{{ r.pk }}"
+          class="fw-bold"
+          onclick="moreLess(this)"
+          style="text-decoration: none; cursor: pointer"
+          >Read less</a
+        >
+      </div>
+      {% else %}
+      <p>{{ r.review|safe|linebreaks }}</p>
+      {% endif %}
     </div>
   </div>
   {% endfor %} {% else %}
@@ -168,10 +188,30 @@
     <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
     <strong>{{ review.user.username }}</strong>
     <h5>{{ review.title }}</h5>
-    <details style="word-wrap: break-word">
-      <summary>Read more...</summary>
-      <p>{{ review.review }}</p>
-    </details>
+    {% if review.review|wordcount > 20 %}
+    <div class="half-content-sidebar" id="half-{{ review.pk }}-sidebar" style="display: block">
+      {{ review.review|safe|linebreaks|truncatewords:20 }} <br />
+      <a
+        id="{{ review.pk }}"
+        class="fw-bold"
+        onclick="sidebarMoreLess(this)"
+        style="text-decoration: none; cursor: pointer"
+        >Read more</a
+      >
+    </div>
+    <div class="full-content-sidebar" id="full-{{ review.pk }}-sidebar" style="display: none">
+      {{ review.review|safe|linebreaks }}
+      <a
+        id="{{ review.pk }}"
+        class="fw-bold"
+        onclick="sidebarMoreLess(this)"
+        style="text-decoration: none; cursor: pointer"
+        >Read less</a
+      >
+    </div>
+    {% else %}
+    <p>{{ r.review|safe|linebreaks }}</p>
+    {% endif %}
     <br />
   </div>
   {% endfor %}

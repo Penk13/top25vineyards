@@ -305,10 +305,30 @@
     <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
     <strong>{{ review.user.username }}</strong>
     <h5>{{ review.title }}</h5>
-    <details style="word-wrap: break-word">
-      <summary>Read more...</summary>
-      <p>{{ review.review }}</p>
-    </details>
+    {% if review.review|wordcount > 20 %}
+    <div class="half-content-sidebar" id="half-{{ review.pk }}-sidebar" style="display: block">
+      {{ review.review|safe|linebreaks|truncatewords:20 }} <br />
+      <a
+        id="{{ review.pk }}"
+        class="fw-bold"
+        onclick="sidebarMoreLess(this)"
+        style="text-decoration: none; cursor: pointer"
+        >Read more</a
+      >
+    </div>
+    <div class="full-content-sidebar" id="full-{{ review.pk }}-sidebar" style="display: none">
+      {{ review.review|safe|linebreaks }}
+      <a
+        id="{{ review.pk }}"
+        class="fw-bold"
+        onclick="sidebarMoreLess(this)"
+        style="text-decoration: none; cursor: pointer"
+        >Read less</a
+      >
+    </div>
+    {% else %}
+    <p>{{ r.review|safe|linebreaks }}</p>
+    {% endif %}
     <br />
   </div>
   {% endfor %}
