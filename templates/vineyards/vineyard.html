@@ -101,24 +101,30 @@
   <hr />
   {% if review_and_rating %} {% for r in review_and_rating %}
   <div class="row">
-    <div class="col-3 text-center">
-      <img src="{{ r.user.profile.profile_pic.url }}" class="w-75" />
-      <strong style="font-size: 2vmin">{{ r.user.username }}</strong>
+    <div class="col-3 col-sm-2">
+      <div class="row text-center">
+        <img
+          class="col-12 px-0 mx-auto"
+          src="{{ r.user.profile.profile_pic.url }}"
+          style="height: 72px; width: 72px; border-radius: 50%"
+        />
+        <p class="col-12" style="font-size: 2vmin"><strong>{{ r.user.username }}</strong></p>
+      </div>
     </div>
-    <div class="col-9" style="word-wrap: break-word">
+    <div class="col-9 col-sm-10" style="word-wrap: break-word">
       <h5 class="d-flex">
         <strong>{{ r.title }}</strong><span class="ms-auto">{{ r.total_rating }}</span>
       </h5>
       <h6>{{ r.date_created }}</h6>
-      {% if r.review|wordcount > 20 %}
+      {% if r.review|wordcount > 30 %}
       <div class="half-content" id="half-{{ r.pk }}" style="display: block">
-        {{ r.review|safe|linebreaks|truncatewords:20 }} <br />
+        {{ r.review|safe|linebreaks|truncatewords:30 }} <br />
         <a
           id="{{ r.pk }}"
           class="fw-bold"
           onclick="moreLess(this)"
           style="text-decoration: none; cursor: pointer"
-          >Read more</a
+          ><i class="bi bi-caret-right-fill"></i>more...</a
         >
       </div>
       <div class="full-content" id="full-{{ r.pk }}" style="display: none">
@@ -128,7 +134,7 @@
           class="fw-bold"
           onclick="moreLess(this)"
           style="text-decoration: none; cursor: pointer"
-          >Read less</a
+          ><i class="bi bi-caret-left-fill"></i>less</a
         >
       </div>
       {% else %}
@@ -196,7 +202,7 @@
         class="fw-bold"
         onclick="sidebarMoreLess(this)"
         style="text-decoration: none; cursor: pointer"
-        >Read more</a
+        ><i class="bi bi-caret-right-fill"></i>more...</a
       >
     </div>
     <div class="full-content-sidebar" id="full-{{ review.pk }}-sidebar" style="display: none">
@@ -206,7 +212,7 @@
         class="fw-bold"
         onclick="sidebarMoreLess(this)"
         style="text-decoration: none; cursor: pointer"
-        >Read less</a
+        ><i class="bi bi-caret-left-fill"></i>less</a
       >
     </div>
     {% else %}
