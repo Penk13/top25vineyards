@@ -111,9 +111,9 @@
         <p class="col-12" style="font-size: 2vmin"><strong>{{ r.user.username }}</strong></p>
       </div>
     </div>
-    <div class="col-9 col-sm-10" style="word-wrap: break-word">
+    <div class="col-7 col-sm-8" style="word-wrap: break-word; font-size: 14px">
       <h5 class="d-flex">
-        <strong>{{ r.title }}</strong><span class="ms-auto">{{ r.total_rating }}</span>
+        <strong>{{ r.title }}</strong>
       </h5>
       <h6>{{ r.date_created }}</h6>
       {% if r.review|wordcount > 30 %}
@@ -140,6 +140,24 @@
       {% else %}
       <p>{{ r.review|safe|linebreaks }}</p>
       {% endif %}
+    </div>
+    <div class="col-2 fw-bold">
+      <img src="{% static 'img/quote_box.png' %}" style="width: 100px; position: absolute" />
+      <div id="total-rating-icon" style="position: absolute">
+        <p
+          style="
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            line-height: 20px;
+            margin-top: 14px;
+            margin-left: 22px;
+          "
+        >
+          {{ r.total_rating }} <br />
+          <span style="font-size: 12px">user rating</span>
+        </p>
+      </div>
     </div>
   </div>
   {% endfor %} {% else %}
