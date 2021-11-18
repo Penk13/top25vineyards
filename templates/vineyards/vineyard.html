@@ -208,10 +208,12 @@
 <div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h6 class="fw-bold mb-4">Recent reviews of {{ vineyard.name }}</h6>
   {% for review in recent_reviews %}
-  <div class="text-start">
-    <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
-    <strong>{{ review.user.username }}</strong>
-    <h5>{{ review.title }}</h5>
+  <div class="text-start" style="font-size: 14px">
+    <div class="my-3">
+      <img src="{{ review.user.profile.profile_pic.url }}" style="width: 30px" />
+      <strong>{{ review.user.username }}</strong>
+    </div>
+    <h5><strong>{{ review.title }}</strong></h5>
     {% if review.review|wordcount > 20 %}
     <div class="half-content-sidebar" id="half-{{ review.pk }}-sidebar" style="display: block">
       {{ review.review|safe|linebreaks|truncatewords:20 }} <br />
