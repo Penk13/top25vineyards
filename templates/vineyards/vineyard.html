@@ -108,30 +108,27 @@
           src="{{ r.user.profile.profile_pic.url }}"
           style="height: 72px; width: 72px; border-radius: 50%"
         />
-        <p class="col-12" style="font-size: 2vmin"><strong>{{ r.user.username }}</strong></p>
+        <p class="col-12" style="font-size: 2vmin">{{ r.user.username }}</p>
       </div>
     </div>
     <div class="col-7 col-sm-8" style="word-wrap: break-word; font-size: 14px">
-      <h5 class="d-flex">
-        <strong>{{ r.title }}</strong>
-      </h5>
-      <h6>{{ r.date_created }}</h6>
+      <h5 class="d-flex">{{ r.title }}</h5>
       {% if r.review|wordcount > 30 %}
       <div class="half-content" id="half-{{ r.pk }}" style="display: block">
-        {{ r.review|safe|linebreaks|truncatewords:30 }} <br />
+        {{ r.review|safe|truncatewords:30|slice:"-2" }}
         <a
           id="{{ r.pk }}"
-          class="fw-bold"
+          class="fw-bold text-dark"
           onclick="moreLess(this)"
           style="text-decoration: none; cursor: pointer"
           ><i class="bi bi-caret-right-fill"></i>more...</a
         >
       </div>
       <div class="full-content" id="full-{{ r.pk }}" style="display: none">
-        {{ r.review|safe|linebreaks }}
+        {{ r.review|safe }}
         <a
           id="{{ r.pk }}"
-          class="fw-bold"
+          class="fw-bold text-dark"
           onclick="moreLess(this)"
           style="text-decoration: none; cursor: pointer"
           ><i class="bi bi-caret-left-fill"></i>less</a
@@ -149,8 +146,8 @@
             color: white;
             font-size: 24px;
             text-align: center;
-            line-height: 20px;
-            margin-top: 14px;
+            line-height: 16px;
+            margin-top: 16px;
             margin-left: 22px;
           "
         >
@@ -159,6 +156,7 @@
         </p>
       </div>
     </div>
+    <hr style="margin-top: 15px" />
   </div>
   {% endfor %} {% else %}
   <h6><strong>Be the first to rate and write a review for {{ vineyard.name }} ... here</strong></h6>
