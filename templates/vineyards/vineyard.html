@@ -58,20 +58,6 @@
       height: 120px;
     "
     ></div>
-    {% elif vineyard.hide_rating == False %}
-    <div
-      class="col-4"
-      style="
-        background: url('{%static 'img/overlay-icon-bg.png' %}') no-repeat center;
-        background-size: 125px;
-        height: 120px;
-      "
-    >
-      <p class="text-light fs-5 fw-bold text-center mt-4">
-        TOP <br /><span style="font-size: 28px">{{ vineyard.rating }}</span>
-      </p>
-    </div>
-    {% endif %}
     <div class="col-8">
       <p class="my-auto">
         <strong> Wine Region </strong> : {{ vineyard.wine_rg }}
@@ -86,6 +72,49 @@
         <br />
       </p>
     </div>
+    {% elif vineyard.hide_rating == False %}
+    <div
+      class="col-4"
+      style="
+        background: url('{%static 'img/overlay-icon-bg.png' %}') no-repeat center;
+        background-size: 125px;
+        height: 120px;
+      "
+    >
+      <p class="text-light fs-5 fw-bold text-center mt-4">
+        TOP <br /><span style="font-size: 28px">{{ vineyard.rating }}</span>
+      </p>
+    </div>
+    <div class="col-8">
+      <p class="my-auto">
+        <strong> Wine Region </strong> : {{ vineyard.wine_rg }}
+        <br />
+        <strong> Size </strong> : {{ vineyard.size }}
+        <br />
+        <strong> Grapes </strong> : {{ vineyard.grapes }}
+        <br />
+        <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
+        <br />
+        <strong> Visits </strong> : {{ vineyard.visits }}
+        <br />
+      </p>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <p class="my-auto">
+        <strong> Wine Region </strong> : {{ vineyard.wine_rg }}
+        <br />
+        <strong> Size </strong> : {{ vineyard.size }}
+        <br />
+        <strong> Grapes </strong> : {{ vineyard.grapes }}
+        <br />
+        <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
+        <br />
+        <strong> Visits </strong> : {{ vineyard.visits }}
+        <br />
+      </p>
+    </div>
+    {% endif %}
   </div>
   {{ vineyard.text|safe }} {{ vineyard.google_map|safe }}
 </div>
@@ -203,10 +232,12 @@
 
 <!-- Recent Reviews -->
 {% block recent_reviews %}{% if recent_reviews %}
-<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h6 class="fw-bold mb-3">
-    <img src="{% static 'img/reviews_sidebar_icon.png'%}" style="width: 30px" />
-    Recent reviews of {{ vineyard.name }}
+<div class="row p-3 mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h6 class="row fw-bold mb-3">
+    <div class="col-3">
+      <img src="{% static 'img/reviews_sidebar_icon.png'%}" style="height: 36px" />
+    </div>
+    <div class="col-9 px-0">Recent reviews of {{ vineyard.name }}</div>
   </h6>
   <hr />
   {% for review in recent_reviews %}
