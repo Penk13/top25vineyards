@@ -138,21 +138,21 @@
       <p>{{ r.review|safe|linebreaks }}</p>
       {% endif %}
     </div>
-    <div class="col-2 fw-bold">
-      <img src="{% static 'img/quote_box.png' %}" style="width: 100px; position: absolute" />
+    <div class="col-2 fw-bold ps-0">
+      <img src="{% static 'img/quote_box.png' %}" style="width: 80px; position: absolute" />
       <div id="total-rating-icon" style="position: absolute">
         <p
           style="
             color: white;
-            font-size: 24px;
+            font-size: 20px;
             text-align: center;
             line-height: 16px;
-            margin-top: 18px;
-            margin-left: 22px;
+            margin-top: 12px;
+            margin-left: 16px;
           "
         >
           {{ r.total_rating }} <br />
-          <span style="font-size: 12px">user rating</span>
+          <span style="font-size: 10px">user rating</span>
         </p>
       </div>
     </div>
