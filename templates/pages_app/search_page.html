@@ -67,7 +67,7 @@
       <a href="{{ result.owner_url }}" style="text-decoration: none; color: #688c3b"
         >{{ result.owner }}</a
       ><br />
-      {{ result.text|safe|truncatewords:25 }}
+      <p>{{ result.text|striptags|truncatewords:25 }}</p>
     </p>
   </div>
   <!-- News -->
@@ -83,7 +83,7 @@
         >{{ result.title }}</a
       >
     </h5>
-    {{ result.body|safe|truncatewords:25 }}
+    <p>{{ result.body|striptags|truncatewords:25 }}</p>
   </div>
   <!-- Regions -->
   {% elif model == 'Region' %}
@@ -102,7 +102,7 @@
         >{{ result.title }}</a
       >
     </h5>
-    {{ result.description_on_list|safe|truncatewords:25 }}
+    <p>{{ result.description_on_list|striptags|truncatewords:25 }}</p>
   </div>
   <!-- Content Pages -->
   {% elif model == 'ContentPage' %} {% if result.types != "SEARCH_PAGE" %}
@@ -121,7 +121,7 @@
         >{{ result.title }}</a
       >
     </h5>
-    {{ result.content_on_list|safe|truncatewords:25 }}
+    <p>{{ result.content_on_list|striptags|truncatewords:25 }}</p>
   </div>
   {% endif %} {% endif %} {% endwith %} {% endfor %}
   <!-- Nav Pagination -->
