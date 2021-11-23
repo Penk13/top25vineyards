@@ -164,12 +164,19 @@
         <p class="text-danger">{{ form.sustainability.errors.as_text }}</p>
       </div>
       <div class="col-4 col-md-3 p-0 my-auto">
-        <div class="text-center fw-bold border border-secondary rounded-3">
-          <p class="mt-3" style="font-size: 20px">Your Rating</p>
-          <p id="totalRating" style="font-size: 4vw; color: orangered">-</p>
-          <p class="m-0" style="background-color: #0d6efd; color: white">VINEYARD</p>
+        <div
+          class="text-center fw-bold border border-secondary rounded-3 mx-auto"
+          style="max-width: fit-content"
+        >
+          <p class="m-3 mb-0" style="font-size: 18px">Your Rating</p>
+          <p class="m-2 my-0" id="totalRating" style="color: orangered; font-size: 7vmin">10.00</p>
+          <p class="m-0 py-1" style="background-color: #20669b; color: white; font-size: 18px">
+            VINEYARD
+          </p>
         </div>
-        <p>Your rating on a scale of 1 to 20.</p>
+        <p class="my-2" style="font-size: 12px">
+          Your personal overall rating on a scale from 1 to 20 where 20 is the best rating
+        </p>
       </div>
     </div>
     <div class="my-3">

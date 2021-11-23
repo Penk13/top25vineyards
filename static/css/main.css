@@ -25,3 +25,14 @@
 .requiredField {
   display: none;
 }
+
+/* Change bootstrap range color */
+input[type="range"]::-webkit-slider-thumb {
+  background: #20669b;
+}
+input[type="range"]::-moz-range-thumb {
+  background: #20669b;
+}
+input[type="range"]::-ms-thumb {
+  background: #20669b;
+}
