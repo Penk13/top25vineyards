@@ -167,16 +167,19 @@
         <div
           class="text-center fw-bold border border-secondary rounded-3 mx-auto"
           style="max-width: fit-content"
+          id="your-rating"
         >
           <p class="m-3 mb-0" style="font-size: 18px">Your Rating</p>
-          <p class="m-2 my-0" id="totalRating" style="color: orangered; font-size: 7vmin">10.00</p>
+          <p class="m-2 mt-0" id="totalRating" style="color: orangered; font-size: 7vmin">10.00</p>
           <p class="m-0 py-1" style="background-color: #20669b; color: white; font-size: 18px">
             VINEYARD
           </p>
         </div>
-        <p class="my-2" style="font-size: 12px">
-          Your personal overall rating on a scale from 1 to 20 where 20 is the best rating
-        </p>
+        <div class="mx-auto" id="text-below-your-rating">
+          <p class="my-2" style="font-size: 12px">
+            Your personal overall rating on a scale from 1 to 20 where 20 is the best rating
+          </p>
+        </div>
       </div>
     </div>
     <div class="my-3">
@@ -312,10 +315,12 @@
 
 <!-- Recent Reviews -->
 {% block recent_reviews %}{% if recent_reviews %}
-<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h6 class="fw-bold mb-3">
-    <img src="{% static 'img/reviews_sidebar_icon.png'%}" style="width: 30px" />
-    Recent reviews of {{ vineyard.name }}
+<div class="row p-3 mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <h6 class="row fw-bold mb-3">
+    <div class="col-3">
+      <img src="{% static 'img/reviews_sidebar_icon.png'%}" style="height: 36px" />
+    </div>
+    <div class="col-9 px-0">Recent reviews of {{ vineyard.name }}</div>
   </h6>
   <hr />
   {% for review in recent_reviews %}

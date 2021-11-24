@@ -125,3 +125,15 @@ function sidebarMoreLess(element) {
     document.getElementById(full).style.display = "block";
   }
 }
+
+// Change width of text below your rating (rr_form.html)
+$(document).ready(function () {
+  $("#text-below-your-rating").css({
+    width: $("#your-rating").width() + "px",
+  });
+  $(window).resize(function () {
+    $("#text-below-your-rating").css({
+      width: $("#your-rating").width() + "px",
+    });
+  });
+});
