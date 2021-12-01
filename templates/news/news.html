@@ -26,7 +26,9 @@
     >
   </h6>
   <h1 class="fw-bold">{{ news.title }}</h1>
-  <img src="{{ news.cover.url }}" class="my-3" />
+  <div class="text-center my-3" style="background-color: #292b2c">
+    <img src="{{ news.cover.url }}" class="m-0" style="max-width: 500px" />
+  </div>
   {{ news.body|safe }}
 </div>
 {% endblock content %}
