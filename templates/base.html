@@ -65,22 +65,28 @@
                 <!-- Parent Region -->
                 {% if region.region_parent is None %}
                 <li><hr class="dropdown-divider text-light my-1" /></li>
-                <li class="nav-drop">
+                <li class="dropend m-0 p-0">
                   <a
-                    class="dropdown-item text-light fw-bold"
+                    class="dropdown-item text-light fw-bold py-0"
                     href="{{ region.get_absolute_url }}"
-                    style="text-transform: uppercase"
+                    style="text-transform: uppercase; display: inline"
                     >{{ region.name }}</a
                   >
-                  {% for child in navbar.region.all|dictsort:"name" %}
-                  <!-- Child Region -->
-                  {% if child.region_parent == region %}
-                  <ul class="text-light">
-                    <li>
-                      <a href="{{ child.get_absolute_url }}" class="text-light">{{ child.name }}</a>
+                  <ul class="dropdown-menu text-light child-regions p-0 m-0">
+                    {% for child in navbar.region.all|dictsort:"name" %}
+                    <!-- Child Region -->
+                    {% if child.region_parent == region %}
+                    <li class="child-region py-0 px-2">
+                      <a
+                        href="{{ child.get_absolute_url }}"
+                        class="text-light text-decoration-none"
+                        style="text-transform: uppercase; font-size: 12px"
+                        >{{ child.name }}</a
+                      >
                     </li>
+                    <li><hr class="dropdown-divider text-light my-1" /></li>
+                    {% endif %} {% endfor %}
                   </ul>
-                  {% endif %} {% endfor %}
                 </li>
                 {% endif %} {% endfor %}
                 <!-- Page -->
