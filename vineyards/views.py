@@ -28,8 +28,8 @@ def vineyard_detail(request, region, slug, parent=None):
     return render(request, "vineyards/vineyard.html", context)
 
 
-def vineyard_region(request, slug):
-    region = get_object_or_404(Region, slug=slug)
+def vineyard_region(request, region, parent=None):
+    region = get_object_or_404(Region, slug=region)
     region_images = RegionImage.objects.filter(region=region)
     p = Paginator(Vineyard.objects.filter(
         regions=region).order_by("-rating"), 10)

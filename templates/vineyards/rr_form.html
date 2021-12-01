@@ -9,7 +9,7 @@
 
 <!-- Nadbar Logo -->
 {% block navlogo %} {% if vineyard.region.logo_on_navbar %}
-<a class="navbar-brand px-0 mx-0" href="{% url 'vineyards:region' vineyard.region.slug %}">
+<a class="navbar-brand px-0 mx-0" href="{{vineyard.region.get_absolute_url}}">
   <img src="{{ vineyard.region.logo_on_navbar.url }}" />
 </a>
 {% else %}
@@ -293,7 +293,7 @@
     {% if vineyard.region.region_parent %}
     <li class="breadcrumb-item" aria-current="page">
       <a
-        href="{% url 'vineyards:region' vineyard.region.region_parent.slug %}"
+        href="{{vineyard.region.region_parent.get_absolute_url}}"
         class="text-dark"
         style="text-decoration: none"
         >{{ vineyard.region.region_parent.name }}</a
@@ -301,10 +301,7 @@
     </li>
     {% endif %}
     <li class="breadcrumb-item" aria-current="page">
-      <a
-        href="{% url 'vineyards:region' vineyard.region.slug %}"
-        class="text-dark"
-        style="text-decoration: none"
+      <a href="{{vineyard.get_absolute_url}}" class="text-dark" style="text-decoration: none"
         >{{ vineyard.region.name }}</a
       >
     </li>

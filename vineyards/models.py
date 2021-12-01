@@ -34,7 +34,10 @@ class Region(models.Model):
             return "Region : " + self.name
 
     def get_absolute_url(self):
-        return reverse('vineyards:region', kwargs={'slug': self.slug})
+        if self.region_parent is not None:
+            return reverse('vineyards:region', kwargs={'parent': self.region_parent.slug, 'region': self.slug})
+        else:
+            return reverse('vineyards:region-without-parent', kwargs={'region': self.slug})
 
 
 def create_slug_region(instance, new_slug=None):
