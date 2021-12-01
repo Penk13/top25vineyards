@@ -63,6 +63,10 @@ AUTH_USER_MODEL = 'accounts.User'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_USERNAME_MIN_LENGTH = 6
+ACCOUNT_USERNAME_BLACKLIST = [
+    'home', 'index', 'admin', 'info', 'top25', 'backup']
+SOCIALACCOUNT_AUTO_SIGNUP = False
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
