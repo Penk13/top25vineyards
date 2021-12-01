@@ -13,7 +13,7 @@
   <img src="{{ vineyard.region.logo_on_navbar.url }}" />
 </a>
 {% else %}
-<a class="navbar-brand" href="{{ vineyard.get_absolute_url }}">
+<a class="navbar-brand" href="{{ vineyard.region.get_absolute_url }}">
   <img src="{% static 'img/navbrandtop25.png'%}" />
 </a>
 {% endif %} {% endblock navlogo %}
@@ -37,7 +37,9 @@
 {% endif %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h1 class="fw-bold">{{ vineyard.name }}</h1>
-  <h5><i class="bi bi-geo-alt-fill"></i> {{ vineyard.wine_rg }}</h5>
+  <a class="text-decoration-none text-dark" href="#google-maps"
+    ><h5><i class="bi bi-geo-alt-fill"></i> {{ vineyard.wine_rg }}</h5></a
+  >
   {% if vineyard.cover_slider and yard_cover_images %}
   <div class="slick-carousel-yard-cover my-3">
     {% for image in yard_cover_images %}
@@ -116,7 +118,8 @@
     </div>
     {% endif %}
   </div>
-  {{ vineyard.text|safe }} {{ vineyard.google_map|safe }}
+  {{ vineyard.text|safe }}
+  <div id="google-maps">{{ vineyard.google_map|safe }}</div>
 </div>
 
 <!-- Review and Rating -->
