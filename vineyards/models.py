@@ -55,6 +55,10 @@ def create_slug_region(instance, new_slug=None):
 def pre_save_receiver_region(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug_region(instance)
+    if not instance.meta_keywords:
+        meta_key = instance.name.lower()
+        meta_key += ", " + instance.title.lower()
+        instance.meta_keywords = meta_key
 
 
 pre_save.connect(pre_save_receiver_region, sender=Region)
@@ -119,6 +123,15 @@ def create_slug_vineyard(instance, new_slug=None):
 def pre_save_receiver_vineyard(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug_vineyard(instance)
+    if not instance.meta_keywords:
+        meta_key = instance.name.lower()
+        if instance.wine_rg:
+            meta_key += ", " + instance.wine_rg.lower()
+        if instance.wines:
+            meta_key += ", " + instance.wines.lower()
+        if instance.grapes:
+            meta_key += ", " + instance.grapes.lower()
+        instance.meta_keywords = meta_key
 
 
 pre_save.connect(pre_save_receiver_vineyard, sender=Vineyard)

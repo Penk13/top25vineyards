@@ -59,6 +59,9 @@ def create_slug(instance, new_slug=None):
 def pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
+    if not instance.meta_keywords:
+        meta_key = instance.title.lower()
+        instance.meta_keywords = meta_key
 
 
 pre_save.connect(pre_save_receiver, sender=ContentPage)
