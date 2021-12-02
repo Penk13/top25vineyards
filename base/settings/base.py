@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+from django.contrib import admin
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -202,3 +203,40 @@ CKEDITOR_CONFIGS = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+ADMIN_ORDERING = [
+    ('vineyards', [
+        'Region',
+        'ReviewAndRating',
+        'Vineyard'
+    ]),
+    ('pages_app', [
+        'ContentPage',
+        'Navbar',
+    ]),
+    ('mailing', [
+        'ContactEntry',
+        'Subscriber',
+    ]),
+    ('news', [
+        'Autoblogging',
+        'Category',
+        'Post',
+        'Tag',
+    ]),
+]
+
+# Creating a sort function
+
+
+def get_app_list(self, request):
+    app_dict = self._build_app_dict(request)
+    for app_name, object_list in ADMIN_ORDERING:
+        app = app_dict[app_name]
+        app['models'].sort(key=lambda x: object_list.index(x['object_name']))
+        yield app
+
+
+# Covering django.contrib.admin.AdminSite.get_app_list
+
+admin.AdminSite.get_app_list = get_app_list
