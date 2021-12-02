@@ -4,6 +4,7 @@ from .models import Category, Tag, Post, Autoblogging
 
 class PostAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
+    search_fields = ['title', 'body']
 
 
 class CategoryAdmin(admin.ModelAdmin):
