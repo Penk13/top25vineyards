@@ -27,12 +27,13 @@ def profile(request):
             allowed = True
 
         if not allowed:
-            request.session['rr_form_msg'] = "Sorry you can't post right now. You have to wait 10 days since the last post."
+            request.session['rr_form_error_msg'] = "Sorry you can't post right now. You have to wait 10 days since the last post."
         else:
             instance = form.save(commit=False)
             instance.user = request.user
             instance.vineyard = vineyard
             instance.save()
+            request.session['rr_form_success_msg'] = "Your Rating and Review has been submitted. Thank you."
         request.session.pop('vineyard')
         request.session.pop('rr_form')
         return redirect(vineyard.get_absolute_url())

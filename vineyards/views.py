@@ -13,17 +13,21 @@ def vineyard_detail(request, region, slug, parent=None):
         vineyard=vineyard, approved=True)
     recent_reviews = ReviewAndRating.objects.filter(
         vineyard=vineyard, approved=True).order_by('-id')[:3]
-    if "rr_form_msg" in request.session:
-        msg = request.session["rr_form_msg"]
-        request.session.pop("rr_form_msg")
-    else:
-        msg = None
+    error_msg = None
+    success_msg = None
+    if "rr_form_error_msg" in request.session:
+        error_msg = request.session["rr_form_error_msg"]
+        request.session.pop("rr_form_error_msg")
+    elif "rr_form_success_msg" in request.session:
+        success_msg = request.session["rr_form_success_msg"]
+        request.session.pop("rr_form_success_msg")
     context = {"vineyard": vineyard,
                "yard_images": yard_images,
                "yard_cover_images": yard_cover_images,
                "review_and_rating": review_and_rating,
                "recent_reviews": recent_reviews,
-               "msg": msg,
+               "error_msg": error_msg,
+               "success_msg": success_msg
                }
     return render(request, "vineyards/vineyard.html", context)
 
@@ -62,13 +66,14 @@ def rr_form(request, region, slug, parent=None):
 
     if form.is_valid():
         if not allowed:
-            request.session['rr_form_msg'] = "Sorry you can't post right now. You have to wait 10 days since the last post."
+            request.session['rr_form_error_msg'] = "Sorry you can't post right now. You have to wait 10 days since the last post."
         else:
             if request.user.is_authenticated:
                 instance = form.save(commit=False)
                 instance.user = request.user
                 instance.vineyard = vineyard
                 instance.save()
+                request.session['rr_form_success_msg'] = "Your Rating and Review has been submitted. Thank you."
             else:
                 request.session['rr_form'] = form.cleaned_data
                 request.session['vineyard'] = vineyard.id

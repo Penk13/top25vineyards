@@ -32,8 +32,10 @@
 {% endblock topcarousel %}
 
 <!-- Vineyard Detail -->
-{% block content %} {% if msg %}
-<div class="alert alert-danger">{{ msg }}</div>
+{% block content %} {% if error_msg %}
+<div class="alert alert-danger">{{ error_msg }}</div>
+{% elif success_msg %}
+<div class="alert alert-success">{{ success_msg }}</div>
 {% endif %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h1 class="fw-bold">{{ vineyard.name }}</h1>
