@@ -26,10 +26,10 @@
     >
   </h6>
   <h1 class="fw-bold">{{ news.title }}</h1>
-  <div class="text-center my-3" style="background-color: #292b2c">
-    <img src="{{ news.cover.url }}" class="m-0" style="max-width: 500px" />
+  <div class="my-3">
+    <img src="{{ news.cover.url }}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
+    {{ news.body|safe }}
   </div>
-  {{ news.body|safe }}
 </div>
 {% endblock content %}
 
