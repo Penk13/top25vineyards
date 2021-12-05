@@ -38,6 +38,7 @@ def pull_feeds(request, pk):
                 title = items[i].title.text
                 body = content[content.find('<p>'):]
                 category = Category.objects.get(pk=source.category.id)
+                meta_keywords = title.lower()
             except:
                 pass
 
@@ -45,7 +46,8 @@ def pull_feeds(request, pk):
                 try:
                     post = Post(title=title,
                                 body=body,
-                                category=category)
+                                category=category,
+                                meta_keywords=meta_keywords)
                 except:
                     pass
 
