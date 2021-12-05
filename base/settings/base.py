@@ -224,6 +224,24 @@ ADMIN_ORDERING = [
         'Post',
         'Tag',
     ]),
+    ('account', [
+        'EmailAddress',
+    ]),
+    ('accounts', [
+        'Profile',
+        'User',
+    ]),
+    ('auth', [
+        'Group',
+    ]),
+    ('sites', [
+        'Site',
+    ]),
+    ('socialaccount', [
+        'SocialAccount',
+        'SocialToken',
+        'SocialApp',
+    ]),
 ]
 
 # Creating a sort function
