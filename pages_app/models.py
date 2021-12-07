@@ -3,6 +3,7 @@ from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.urls import reverse
+from django.utils.html import strip_tags
 from vineyards.models import Region
 
 TYPE = (
@@ -23,6 +24,7 @@ class ContentPage(models.Model):
     content_on_list = RichTextField(blank=True)
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
+    meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     additional_content = RichTextField(blank=True)
     category = models.ForeignKey(
@@ -62,6 +64,9 @@ def pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.meta_keywords:
         meta_key = instance.title.lower()
         instance.meta_keywords = meta_key
+    if not instance.meta_description and instance.content:
+        meta_desc = instance.content[0:instance.content.find(".")]
+        instance.meta_description = strip_tags(meta_desc)
 
 
 pre_save.connect(pre_save_receiver, sender=ContentPage)
