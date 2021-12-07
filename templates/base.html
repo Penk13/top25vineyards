@@ -72,7 +72,7 @@
                     style="text-transform: uppercase; display: inline"
                     >{{ region.name }}</a
                   >
-                  <ul class="dropdown-menu text-light child-regions p-0 m-0">
+                  <ul class="dropdown-menu text-light child-regions p-0 m-0" style="border: none">
                     {% for child in navbar.region.all|dictsort:"name" %}
                     <!-- Child Region -->
                     {% if child.region_parent == region %}
