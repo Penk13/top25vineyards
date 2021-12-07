@@ -267,9 +267,9 @@
             <!-- Recent Reviews -->
             {% block recent_reviews %} {% endblock recent_reviews %}
             <!-- Sidebar -->
-            {% block sidebar %} {% endblock sidebar %}
+            {% block sidebar %} {{ default_sidebar }} {% endblock sidebar %}
             <!-- Ad Manager -->
-            {% block admanager %} {% endblock admanager %}
+            {% block admanager %} {{ default_ad_manager }} {% endblock admanager %}
           </div>
         </div>
       </div>

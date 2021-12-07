@@ -112,15 +112,23 @@
 {% endblock content %}
 
 <!-- Sidebar -->
-{% block sidebar %} {% if region.sidebar %}
+{% block sidebar %}
 <div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {% if region.sidebar %}
   <div class="text-start">{{ region.sidebar|safe }}</div>
+  {% else %}
+  <div class="text-start">{{ default_sidebar|safe }}</div>
+  {% endif %}
 </div>
-{% endif %} {% endblock sidebar %}
+{% endblock sidebar %}
 
 <!-- Ad Manager -->
-{% block admanager %} {% if region.ad_manager %}
+{% block admanager %}
 <div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {% if region.ad_manager %}
   <div class="text-start">{{ region.ad_manager|safe }}</div>
+  {% else %}
+  <div class="text-start">{{ default_ad_manager|safe }}</div>
+  {% endif %}
 </div>
-{% endif %} {% endblock admanager %}
+{% endblock admanager %}

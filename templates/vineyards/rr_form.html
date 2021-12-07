@@ -359,15 +359,23 @@
 {% endif %}{% endblock recent_reviews %}
 
 <!-- Sidebar -->
-{% block sidebar %} {% if vineyard.sidebar %}
+{% block sidebar %}
 <div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {% if vineyard.sidebar %}
   <div class="text-start">{{ vineyard.sidebar|safe }}</div>
+  {% else %}
+  <div class="text-start">{{ default_sidebar|safe }}</div>
+  {% endif %}
 </div>
-{% endif %} {% endblock sidebar %}
+{% endblock sidebar %}
 
 <!-- Ad Manager -->
-{% block admanager %} {% if vineyard.ad_manager %}
+{% block admanager %}
 <div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {% if vineyard.ad_manager %}
   <div class="text-start">{{ vineyard.ad_manager|safe }}</div>
+  {% else %}
+  <div class="text-start">{{ default_ad_manager|safe }}</div>
+  {% endif %}
 </div>
-{% endif %} {% endblock admanager %}
+{% endblock admanager %}
