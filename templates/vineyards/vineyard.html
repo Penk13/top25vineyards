@@ -1,6 +1,9 @@
 {% extends 'base.html' %} {% load static %}
 
 <!-- Meta Keywords -->
+{% block description %} <meta name="description" content="{{ vineyard.meta_description }}" />
+{% endblock description %}
+<!--  -->
 {% block keywords %} <meta name="keywords" content="{{ vineyard.meta_keywords }}" />
 {% endblock keywords %}
 

@@ -5,6 +5,8 @@ from django.utils.text import slugify
 from django.urls import reverse
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.contrib.auth import get_user_model
+from django.utils.html import strip_tags
+import html
 from django.core.exceptions import ValidationError
 
 User = get_user_model()
@@ -21,6 +23,7 @@ class Region(models.Model):
         upload_to="thumbnail-region", blank=True, max_length=255)
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
+    meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     logo_on_navbar = models.ImageField(
         upload_to="logo-on-navbar/", blank=True, max_length=255)
@@ -59,6 +62,9 @@ def pre_save_receiver_region(sender, instance, *args, **kwargs):
         meta_key = instance.name.lower()
         meta_key += ", " + instance.title.lower()
         instance.meta_keywords = meta_key
+    if not instance.meta_description and instance.description:
+        meta_desc = instance.description[0:instance.description.find(".")]
+        instance.meta_description = html.unescape(strip_tags(meta_desc))
 
 
 pre_save.connect(pre_save_receiver_region, sender=Region)
@@ -92,6 +98,7 @@ class Vineyard(models.Model):
     cover = models.ImageField(upload_to="vineyard/", max_length=255)
     sidebar = RichTextField(blank=True)
     ad_manager = models.TextField(blank=True)
+    meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     top_slider = models.BooleanField(default=False)
     cover_slider = models.BooleanField(default=False)
@@ -132,6 +139,9 @@ def pre_save_receiver_vineyard(sender, instance, *args, **kwargs):
         if instance.grapes:
             meta_key += ", " + instance.grapes.lower()
         instance.meta_keywords = meta_key
+    if not instance.meta_description and instance.text:
+        meta_desc = instance.text[0:instance.text.find(".")]
+        instance.meta_description = html.unescape(strip_tags(meta_desc))
 
 
 pre_save.connect(pre_save_receiver_vineyard, sender=Vineyard)

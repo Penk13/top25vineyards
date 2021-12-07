@@ -1,6 +1,9 @@
 {% extends 'base.html' %} {% load static %}
 
 <!-- Meta Keywords -->
+{% block description %} <meta name="description" content="{{ region.meta_description }}" />
+{% endblock description %}
+<!--  -->
 {% block keywords %} <meta name="keywords" content="{{ region.meta_keywords }}" />
 {% endblock keywords %}
 
