@@ -87,3 +87,11 @@ class Navbar(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Sidebar(models.Model):
+    sidebar = RichTextField(blank=True)
+    ad_manager = models.TextField(blank=True)
+
+    def __str__(self):
+        return "Default Sidebar"
