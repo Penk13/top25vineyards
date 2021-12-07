@@ -1,5 +1,7 @@
 import requests
 import os
+import html
+from django.utils.html import strip_tags
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
 from django.core import files
@@ -39,6 +41,8 @@ def pull_feeds(request, pk):
                 body = content[content.find('<p>'):]
                 category = Category.objects.get(pk=source.category.id)
                 meta_keywords = title.lower()
+                meta_description = html.unescape(
+                    strip_tags(body[0:body.find(".")]))
             except:
                 pass
 
@@ -47,7 +51,8 @@ def pull_feeds(request, pk):
                     post = Post(title=title,
                                 body=body,
                                 category=category,
-                                meta_keywords=meta_keywords)
+                                meta_keywords=meta_keywords,
+                                meta_description=meta_description)
                 except:
                     pass
 
