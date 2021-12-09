@@ -29,3 +29,7 @@ class SubscriberForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={'placeholder': 'Email', 'type': 'email'})
     )
+    country = forms.CharField(
+        label="",
+        widget=forms.TextInput(attrs={'placeholder': 'Country'})
+    )

@@ -14,6 +14,7 @@ class ContactEntry(models.Model):
 class Subscriber(models.Model):
     email = models.EmailField()
     name = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
 
     def __str__(self):
         return self.email
