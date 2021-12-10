@@ -267,9 +267,13 @@
             <!-- Recent Reviews -->
             {% block recent_reviews %} {% endblock recent_reviews %}
             <!-- Sidebar -->
-            {% block sidebar %} {{ default_sidebar }} {% endblock sidebar %}
+            <div class="mt-lg-0 mt-4">
+              {% block sidebar %} {{ default_sidebar }} {% endblock sidebar %}
+            </div>
             <!-- Ad Manager -->
-            {% block admanager %} {{ default_ad_manager }} {% endblock admanager %}
+            <div class="mt-lg-0 mt-4">
+              {% block admanager %} {{ default_ad_manager }} {% endblock admanager %}
+            </div>
           </div>
         </div>
       </div>

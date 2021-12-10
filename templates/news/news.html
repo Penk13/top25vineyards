@@ -59,23 +59,23 @@
 {% endblock breadcrumb %}
 
 <!-- Sidebar -->
-{% block sidebar %}
-<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  {% if news.sidebar %}
+{% block sidebar %} {% if news.sidebar %}
+<div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ news.sidebar|safe }}</div>
-  {% else %}
-  <div class="text-start">{{ default_sidebar|safe }}</div>
-  {% endif %}
 </div>
-{% endblock sidebar %}
+{% elif news.sidebar == "" and default_sidebar != "" %}
+<div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ default_sidebar|safe }}</div>
+</div>
+{% endif %} {% endblock sidebar %}
 
 <!-- Ad Manager -->
-{% block admanager %}
-<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  {% if news.ad_manager %}
+{% block admanager %} {% if news.ad_manager %}
+<div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ news.ad_manager|safe }}</div>
-  {% else %}
-  <div class="text-start">{{ default_ad_manager|safe }}</div>
-  {% endif %}
 </div>
-{% endblock admanager %}
+{% elif news.ad_manager == "" and default_ad_manager != "" %}
+<div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ default_ad_manager|safe }}</div>
+</div>
+{% endif %} {% endblock admanager %}
