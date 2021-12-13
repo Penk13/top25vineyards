@@ -37,6 +37,27 @@
     <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
   </form>
   {% endif %}
+
+  <!-- Vineyard Form -->
+  {% if content_page.slug == 'submit-vineyard' %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} 
+    <h3>Vineyard Form</h3>
+    {% for field in vineyard_form %}
+      <div class="col-12 my-2">{{ field.label }}</div>
+      {{ field }}
+      {{ field.errors }}
+    {% endfor %}
+    <hr>
+    <h3>Vineyard User Form</h3>
+    {% for field in vineyard_user_form %}
+      <div class="col-12 my-2">{{ field.label }}</div>
+      {{ field }}
+      {{ field.errors }}
+    {% endfor %}
+    <input type="submit" value="Submit" class="btn btn-dark my-3" style="width: 100%" />
+  </form>
+  {% endif %}
 </div>
 {% if content_page.additional_content %}
 <div class="row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">

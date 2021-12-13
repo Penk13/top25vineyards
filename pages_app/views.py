@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import ContentPage, ImageUpload
-from vineyards.models import Vineyard, Region
+from vineyards.models import Vineyard, VineyardUser, Region
+from vineyards.forms import VineyardUserForm, VineyardForm
 from news.models import Post, Category
 
 from mailing.models import ContactEntry, Subscriber
@@ -31,6 +32,8 @@ def footerpage(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug)
     contact_entry_form = ContactEntryForm()
     subscriber_form = SubscriberForm()
+    vineyard_form = VineyardForm()
+    vineyard_user_form = VineyardUserForm()
 
     if slug == "contact-us":
         contact_entry_form = ContactEntryForm()
@@ -48,9 +51,28 @@ def footerpage(request, slug):
                 Subscriber.objects.create(**subscriber_form.cleaned_data)
             return redirect("pages_app:mainpage")
 
+    elif slug == "submit-vineyard":
+        vineyard_form = VineyardForm()
+        vineyard_user_form = VineyardUserForm()
+        if request.method == "POST":
+            vineyard_form = VineyardForm(request.POST,request.FILES)
+            vineyard_user_form = VineyardUserForm(request.POST)
+            if vineyard_form.is_valid() and vineyard_user_form.is_valid():
+                if request.user.is_authenticated:
+                    instance1 = vineyard_form.save(commit=False)
+                    instance1.save()
+                    instance2 = vineyard_user_form.save(commit=False)
+                    instance2.vineyard = instance1
+                    instance2.name = request.user.username
+                    instance2.email1 = request.user.email
+                    instance2.save()
+                    return redirect("pages_app:mainpage")
+
     context = {"content_page": content_page,
                "contact_entry_form": contact_entry_form,
-               "subscriber_form": subscriber_form}
+               "subscriber_form": subscriber_form,
+               "vineyard_form": vineyard_form,
+               "vineyard_user_form":vineyard_user_form}
     return render(request, "pages_app/footer_page.html", context)
 
 

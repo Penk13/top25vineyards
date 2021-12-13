@@ -208,7 +208,8 @@ ADMIN_ORDERING = [
     ('vineyards', [
         'Region',
         'ReviewAndRating',
-        'Vineyard'
+        'Vineyard',
+        'VineyardUser',
     ]),
     ('pages_app', [
         'ContentPage',

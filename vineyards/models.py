@@ -103,6 +103,7 @@ class Vineyard(models.Model):
     top_slider = models.BooleanField(default=False)
     cover_slider = models.BooleanField(default=False)
     hide_rating = models.BooleanField(default=False)
+    display = models.BooleanField(default=False)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -145,6 +146,18 @@ def pre_save_receiver_vineyard(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(pre_save_receiver_vineyard, sender=Vineyard)
+
+
+class VineyardUser(models.Model):
+    vineyard = models.OneToOneField(Vineyard, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email1 = models.EmailField()
+    email2 = models.EmailField()
+    address = models.CharField(max_length=255)
+    number = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.vineyard.name + " - " + self.name
 
 
 class TopSliderImage(models.Model):
