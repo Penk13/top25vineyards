@@ -23,4 +23,4 @@ class VineyardForm(forms.ModelForm):
 class VineyardUserForm(forms.ModelForm):
     class Meta:
         model = VineyardUser
-        fields = ["email2", "address", "number"]
+        fields = ["email2", "address", "website", "number"]

@@ -154,6 +154,7 @@ class VineyardUser(models.Model):
     email1 = models.EmailField()
     email2 = models.EmailField()
     address = models.CharField(max_length=255)
+    website = models.CharField(max_length=255)
     number = models.CharField(max_length=20)
 
     def __str__(self):

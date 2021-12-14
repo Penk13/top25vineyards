@@ -124,6 +124,20 @@
     {% endif %}
   </div>
   {{ vineyard.text|safe }}
+  {% if vineyard_user %}
+  <div class="row">
+    <div class="col-6">
+      <h5 class="fw-bold">Address:</h5>
+      <p>{{ vineyard_user.address }}</p>
+    </div>
+    <div class="col-6">
+      <h5 class="fw-bold">Contact Information:</h5>
+      <p><span class="fw-bold">Phone: </span>{{ vineyard_user.number }}</p>
+      <p><span class="fw-bold">Email: </span>{{ vineyard_user.email2 }}</p>
+      <p><span class="fw-bold">Web: </span>{{ vineyard_user.website }}</p>
+    </div>
+  </div>
+  {% endif %}
   <div id="google-maps">{{ vineyard.google_map|safe }}</div>
 </div>
 

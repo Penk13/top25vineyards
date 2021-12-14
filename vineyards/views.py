@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from .models import Vineyard, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating
+from .models import Vineyard, VineyardUser, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating
 from .forms import ReviewRatingForm
 from datetime import date, timedelta
 
 
 def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug, display=True)
+    try:
+        vineyard_user = VineyardUser.objects.get(vineyard=vineyard)
+    except:
+        vineyard_user = None
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     review_and_rating = ReviewAndRating.objects.filter(
@@ -22,6 +26,7 @@ def vineyard_detail(request, region, slug, parent=None):
         success_msg = request.session["rr_form_success_msg"]
         request.session.pop("rr_form_success_msg")
     context = {"vineyard": vineyard,
+               "vineyard_user": vineyard_user,
                "yard_images": yard_images,
                "yard_cover_images": yard_cover_images,
                "review_and_rating": review_and_rating,
