@@ -17,9 +17,9 @@ def mainpage(request):
     image_carousel = ImageUpload.objects.filter(page=content_page)
     if content_page.category:
         p = Paginator(Vineyard.objects.filter(
-            regions=content_page.category).order_by("-rating"), 10)
+            regions=content_page.category, display=True).order_by("-rating"), 10)
     else:
-        p = Paginator(Vineyard.objects.all().order_by("-rating"), 10)
+        p = Paginator(Vineyard.objects.filter(display=True).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"content_page": content_page,
@@ -119,9 +119,9 @@ def page(request, slug):
     image_carousel = ImageUpload.objects.filter(page=content_page)
     if content_page.category:
         p = Paginator(Vineyard.objects.filter(
-            regions=content_page.category).order_by("-rating"), 10)
+            regions=content_page.category, display=True).order_by("-rating"), 10)
     else:
-        p = Paginator(Vineyard.objects.all().order_by("-rating"), 10)
+        p = Paginator(Vineyard.objects.filter(display=True).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"content_page": content_page,

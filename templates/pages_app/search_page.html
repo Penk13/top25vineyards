@@ -33,6 +33,7 @@
   {% for result in results %}
   <!-- Vineyards -->
   {% with result|class_name as model %} {% if model == 'Vineyard' %}
+  {% if result.display == True %}
   <div class="col-12 col-md-6 py-3 text-start">
     <div style="position: absolute; z-index: 1">
       {% if result.custom_overlay %}
@@ -73,6 +74,7 @@
       <p>{{ result.text|striptags|safe|truncatewords:25 }}</p>
     </p>
   </div>
+  {% endif %}
   <!-- News -->
   {% elif model == 'Post' %}
   <div class="col-12 col-md-6 py-3 text-start">

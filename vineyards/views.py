@@ -6,7 +6,7 @@ from datetime import date, timedelta
 
 
 def vineyard_detail(request, region, slug, parent=None):
-    vineyard = get_object_or_404(Vineyard, slug=slug)
+    vineyard = get_object_or_404(Vineyard, slug=slug, display=True)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     review_and_rating = ReviewAndRating.objects.filter(
@@ -36,7 +36,7 @@ def vineyard_region(request, region, parent=None):
     region = get_object_or_404(Region, slug=region)
     region_images = RegionImage.objects.filter(region=region)
     p = Paginator(Vineyard.objects.filter(
-        regions=region).order_by("-rating"), 10)
+        regions=region, display=True).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"vineyards": vineyards, "region": region,
