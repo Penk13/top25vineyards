@@ -54,11 +54,11 @@ def footerpage(request, slug):
     elif slug == "submit-vineyard":
         vineyard_form = VineyardForm()
         vineyard_user_form = VineyardUserForm()
-        if request.method == "POST":
-            vineyard_form = VineyardForm(request.POST,request.FILES)
-            vineyard_user_form = VineyardUserForm(request.POST)
-            if vineyard_form.is_valid() and vineyard_user_form.is_valid():
-                if request.user.is_authenticated:
+        if request.user.is_authenticated:
+            if request.method == "POST":
+                vineyard_form = VineyardForm(request.POST,request.FILES)
+                vineyard_user_form = VineyardUserForm(request.POST)
+                if vineyard_form.is_valid() and vineyard_user_form.is_valid():
                     instance1 = vineyard_form.save(commit=False)
                     instance1.save()
                     instance2 = vineyard_user_form.save(commit=False)
@@ -67,6 +67,8 @@ def footerpage(request, slug):
                     instance2.email1 = request.user.email
                     instance2.save()
                     return redirect("pages_app:mainpage")
+        else:
+            return redirect("socialaccount_signup")
 
     context = {"content_page": content_page,
                "contact_entry_form": contact_entry_form,
