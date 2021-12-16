@@ -42,7 +42,7 @@ def profile(request):
     # From v_form
     if 'v_form' in request.session:
         request.session.pop('v_form')
-        return redirect("pages_app:footerpage", slug="submit-vineyard")
+        return redirect("pages_app:footerpage", slug="submit-a-vineyard")
 
     user = request.user
     profile = Profile.objects.get(user=user)
