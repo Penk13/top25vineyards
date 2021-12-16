@@ -91,7 +91,7 @@ class Vineyard(models.Model):
     grapes = models.CharField(max_length=255)
     owner_url = models.URLField(blank=True)
     owner = models.CharField(max_length=255)
-    visits = models.CharField(max_length=255)
+    visits = models.TextField()
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     regions = models.ManyToManyField(
         Region, blank=True, related_name="regions")
@@ -153,7 +153,7 @@ class VineyardUser(models.Model):
     name = models.CharField(max_length=255)
     email1 = models.EmailField()
     email2 = models.EmailField()
-    address = models.CharField(max_length=255)
+    address = models.TextField()
     website = models.CharField(max_length=255)
     number = models.CharField(max_length=20)
 
