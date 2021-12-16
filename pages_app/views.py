@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import ContentPage, ImageUpload
-from vineyards.models import Vineyard, VineyardUser, Region
+from vineyards.models import Vineyard, Region
 from vineyards.forms import VineyardUserForm, VineyardForm
 from news.models import Post, Category
 
@@ -68,13 +68,14 @@ def footerpage(request, slug):
                     instance2.save()
                     return redirect("pages_app:mainpage")
         else:
-            return redirect("socialaccount_signup")
+            request.session["v_form"] = True
+            return redirect("account_login")
 
     context = {"content_page": content_page,
                "contact_entry_form": contact_entry_form,
                "subscriber_form": subscriber_form,
                "vineyard_form": vineyard_form,
-               "vineyard_user_form":vineyard_user_form}
+               "vineyard_user_form": vineyard_user_form}
     return render(request, "pages_app/footer_page.html", context)
 
 

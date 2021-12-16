@@ -10,6 +10,7 @@ from datetime import date, timedelta
 
 @login_required
 def profile(request):
+    # From rr_form
     if 'vineyard' in request.session:
         vineyard = Vineyard.objects.get(
             id=request.session['vineyard'])
@@ -37,6 +38,12 @@ def profile(request):
         request.session.pop('vineyard')
         request.session.pop('rr_form')
         return redirect(vineyard.get_absolute_url())
+
+    # From v_form
+    if 'v_form' in request.session:
+        request.session.pop('v_form')
+        return redirect("pages_app:footerpage", slug="submit-vineyard")
+
     user = request.user
     profile = Profile.objects.get(user=user)
     form = ProfileForm(instance=profile)
