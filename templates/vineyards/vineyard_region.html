@@ -113,11 +113,11 @@
 
 <!-- Sidebar -->
 {% block sidebar %} {% if region.sidebar %}
-<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+<div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ region.sidebar|safe }}</div>
 </div>
 {% elif region.sidebar == "" and default_sidebar != "" %}
-<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+<div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ default_sidebar|safe }}</div>
 </div>
 {% endif %} {% endblock sidebar %}

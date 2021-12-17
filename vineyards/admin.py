@@ -23,7 +23,7 @@ class VineyardAdmin(admin.ModelAdmin):
     inlines = [TopSliderImageInline, CoverSliderImageInline]
     readonly_fields = ('slug',)
     search_fields = ['name', 'text']
-    list_filter = ['region']
+    list_filter = ['region', 'display']
 
 
 class ReviewAndRatingAdmin(admin.ModelAdmin):
