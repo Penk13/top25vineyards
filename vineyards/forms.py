@@ -15,7 +15,7 @@ class VineyardForm(forms.ModelForm):
     class Meta:
         model = Vineyard
         fields = [
-            "name", "text", "rating", "google_map", "wine_rg", "wines", "size", "grapes",
+            "name", "text", "wine_rg", "wines", "size", "grapes",
             "owner", "visits", "region", "regions", "cover"
         ]
 

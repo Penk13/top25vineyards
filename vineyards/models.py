@@ -79,10 +79,10 @@ class RegionImage(models.Model):
 class Vineyard(models.Model):
     name = models.CharField(max_length=255)
     text = RichTextField()
-    rating = models.FloatField()
+    rating = models.FloatField(default=0)
     custom_overlay = models.ImageField(
         upload_to="custom-rating/", blank=True, max_length=255)
-    google_map = models.TextField()
+    google_map = models.TextField(default="")
     wine_rg_url = models.URLField(blank=True)
     wine_rg = models.CharField(max_length=255)
     wines_url = models.URLField(blank=True)
