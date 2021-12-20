@@ -60,6 +60,15 @@ Add here a description and all information about vineyard:
 
 
 class VineyardUserForm(forms.ModelForm):
+    def __init__(self, *args, **kw):
+        super(VineyardUserForm, self).__init__(*args, **kw)
+        placeholder_address = "Address"
+
+        self.fields['address'].widget.attrs['placeholder'] = placeholder_address
+        self.fields['address'].widget.attrs['cols'] = 54
+        self.fields['address'].widget.attrs['rows'] = 5
+        self.fields['address'].widget.attrs['class'] = "bg-light"
+
     class Meta:
         model = VineyardUser
         fields = ["email2", "address", "website", "number"]
@@ -71,7 +80,6 @@ class VineyardUserForm(forms.ModelForm):
         }
         widgets = {
             "email2": forms.EmailInput(attrs={"placeholder": "Email", "class": "w-75 bg-light"}),
-            "address": forms.TextInput(attrs={"placeholder": "Address", "class": "w-75 bg-light"}),
             "website": forms.TextInput(attrs={"placeholder": "Website", "class": "w-75 bg-light"}),
             "number": forms.TextInput(attrs={"placeholder": "Phone Number", "class": "w-75 bg-light"}),
         }
