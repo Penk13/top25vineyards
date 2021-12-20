@@ -26,6 +26,10 @@ class VineyardAdmin(admin.ModelAdmin):
     list_filter = ['region', 'display']
 
 
+class VineyardUserAdmin(admin.ModelAdmin):
+    search_fields = ('vineyard__name', 'name',)
+
+
 class ReviewAndRatingAdmin(admin.ModelAdmin):
     search_fields = ['title', 'review']
     list_filter = ['approved']
@@ -33,5 +37,5 @@ class ReviewAndRatingAdmin(admin.ModelAdmin):
 
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Vineyard, VineyardAdmin)
-admin.site.register(VineyardUser)
+admin.site.register(VineyardUser, VineyardUserAdmin)
 admin.site.register(ReviewAndRating, ReviewAndRatingAdmin)
