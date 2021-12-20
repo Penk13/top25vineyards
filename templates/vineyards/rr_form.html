@@ -186,14 +186,12 @@
     </div>
     <div class="my-3">
       <label>Title of Your Review:</label><br />
-      <input class="form-control" name="title" id="titleValue" value="{{form.title.value}}" />
+      <input class="form-control" name="title" id="titleValue" placeholder="Title your review here" />
       <p class="text-danger">{{ form.title.errors.as_text }}</p>
     </div>
     <div class="my-3">
       <label>Your Review:</label><br />
-      <textarea class="form-control" name="review" cols="40" rows="5" id="reviewValue">
-{{form.review.value}}</textarea
-      >
+      <textarea class="form-control" name="review" cols="40" rows="5" id="reviewValue" placeholder="Write your review here"></textarea>
       <p class="text-danger">{{ form.review.errors.as_text }}</p>
     </div>
     <div class="form-check my-3">
