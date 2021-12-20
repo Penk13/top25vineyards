@@ -75,8 +75,7 @@
         <br />
         <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
         <br />
-        <strong> Visits </strong> : 
-        {{ vineyard.visits|linebreaks }}
+        <strong> Visits </strong> : {{ vineyard.visits|striptags }}
       </p>
     </div>
     {% elif vineyard.hide_rating == False %}
@@ -102,8 +101,7 @@
         <br />
         <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
         <br />
-        <strong> Visits </strong> : 
-        {{ vineyard.visits|linebreaks }}
+        <strong> Visits </strong> : {{ vineyard.visits|striptags }}
       </p>
     </div>
     {% else %}
@@ -117,8 +115,7 @@
         <br />
         <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
         <br />
-        <strong> Visits </strong> : 
-        {{ vineyard.visits|linebreaks }}
+        <strong> Visits </strong> : {{ vineyard.visits|striptags }}
       </p>
     </div>
     {% endif %}
@@ -130,7 +127,7 @@
       <h5 class="fw-bold">Address:</h5>
       <p>{{ vineyard_user.address|linebreaks }}</p>
     </div>
-    <div class="col-6">
+    <div class="col-6" style="line-height: 12px">
       <h5 class="fw-bold">Contact Information:</h5>
       <p><span class="fw-bold">Phone: </span>{{ vineyard_user.number }}</p>
       <p><span class="fw-bold">Email: </span>{{ vineyard_user.email2 }}</p>
