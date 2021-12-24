@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
+
+<!-- Title -->
+{% block title %} Edit Vineyard {% endblock title %}
+
+<!-- Top Carousel -->
+{% block topcarousel %}
+<section class="footer-page mt-5"></section>
+{% endblock topcarousel %}
+
+<!-- Footer Page -->
+{% block content %}
+<div class="row d-flex p-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <!-- Vineyard Form -->
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %} 
+    <h3>Vineyard Form</h3>
+    {% for field in vineyard_form %}
+      <div class="col-12 my-2">{{ field.label }}</div>
+      {{ field }}
+      {{ field.errors }}
+    {% endfor %}
+    <hr>
+    <h3>Vineyard User Form</h3>
+    {% for field in vineyard_user_form %}
+      <div class="col-12 my-2">{{ field.label }}</div>
+      {{ field }}
+      {{ field.errors }}
+    {% endfor %}
+    <input type="submit" value="Submit" class="btn btn-dark my-3" style="width: 100%" />
+  </form>
+</div>
+{% endblock content %}
+
+<!-- Sidebar -->
+{% block sidebar %}
+<div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ default_sidebar|safe }}</div>
+</div>
+{% endblock sidebar %}
+
+<!-- Ad Manager -->
+{% block admanager %} 
+<div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ default_ad_manager|safe }}</div>
+</div>
+{% endblock admanager %}

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from .models import Vineyard, VineyardUser, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating
-from .forms import ReviewRatingForm
+from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm
 from datetime import date, timedelta
 
 
@@ -91,3 +91,21 @@ def rr_form(request, region, slug, parent=None):
                "form": form,
                }
     return render(request, "vineyards/rr_form.html", context)
+
+
+def edit_vineyard(request, vineyard):
+    vineyard = Vineyard.objects.get(name=vineyard)
+    vineyard_form = VineyardForm(instance=vineyard)
+    vineyard_user = VineyardUser.objects.get(name=request.user.username)
+    vineyard_user_form = VineyardUserForm(instance=vineyard_user)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            vineyard_form = VineyardForm(request.POST, request.FILES, instance=vineyard)
+            vineyard_user_form = VineyardUserForm(request.POST, instance=vineyard_user)
+            if vineyard_form.is_valid() and vineyard_user_form.is_valid():
+                vineyard_form.save()
+                vineyard_user_form.save()
+                return redirect("pages_app:mainpage")
+    context = {"vineyard_form": vineyard_form,
+                "vineyard_user_form": vineyard_user_form}
+    return render(request, "vineyards/edit_vineyard.html", context)

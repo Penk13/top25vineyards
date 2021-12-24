@@ -3,7 +3,7 @@ from .models import Profile
 from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from pages_app.models import ContentPage
-from vineyards.models import ReviewAndRating, Vineyard
+from vineyards.models import ReviewAndRating, Vineyard, VineyardUser
 from vineyards.forms import ReviewRatingForm
 from datetime import date, timedelta
 
@@ -46,6 +46,7 @@ def profile(request):
 
     user = request.user
     profile = Profile.objects.get(user=user)
+    vineyards = VineyardUser.objects.filter(name=user.username)
     form = ProfileForm(instance=profile)
     review_and_rating = ReviewAndRating.objects.filter(
         user=user, approved=True)
@@ -61,5 +62,6 @@ def profile(request):
         'content_page': content_page,
         'form': form,
         'review_and_rating': review_and_rating,
+        'vineyards': vineyards,
     }
     return render(request, "account/profile.html", context)
