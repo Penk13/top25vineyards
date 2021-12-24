@@ -229,7 +229,7 @@
     {% if vineyard.region.region_parent %}
     <li class="breadcrumb-item" aria-current="page">
       <a
-        href="{{vineyard.region_parent.get_absolute_url}}"
+        href="{{vineyard.region.region_parent.get_absolute_url}}"
         class="text-dark"
         style="text-decoration: none"
         >{{ vineyard.region.region_parent.name }}</a
