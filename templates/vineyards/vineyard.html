@@ -122,16 +122,16 @@
   </div>
   {{ vineyard.text|safe }}
   {% if vineyard_user %}
-  <div class="row mt-4">
-    <div class="col-6">
+  <div class="row my-3">
+    <div class="col-md-6 col-sm-12">
       <h5 class="fw-bold">Address:</h5>
-      <p>{{ vineyard_user.address|linebreaks }}</p>
+      {{ vineyard_user.address|linebreaks }}
     </div>
-    <div class="col-6" style="line-height: 12px">
+    <div class="col-md-6 col-sm-12">
       <h5 class="fw-bold">Contact Information:</h5>
-      <p><span class="fw-bold">Phone: </span>{{ vineyard_user.number }}</p>
-      <p><span class="fw-bold">Email: </span>{{ vineyard_user.email2 }}</p>
-      <p><span class="fw-bold">Web: </span>{{ vineyard_user.website }}</p>
+      <span class="fw-bold">Phone: </span>{{ vineyard_user.number }} <br>
+      <span class="fw-bold">Email: </span> <a href="mailto:{{ vineyard_user.email2 }}">{{ vineyard_user.email2 }}</a> <br>
+      <span class="fw-bold">Web: </span> <a href="{{ vineyard_user.website }}">{{ vineyard_user.website }}</a> <br>
     </div>
   </div>
   {% endif %}
