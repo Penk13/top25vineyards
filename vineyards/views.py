@@ -3,6 +3,8 @@ from django.core.paginator import Paginator
 from .models import Vineyard, VineyardUser, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating
 from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm
 from datetime import date, timedelta
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def vineyard_detail(request, region, slug, parent=None):
@@ -104,8 +106,19 @@ def edit_vineyard(request, vineyard):
                 vineyard_form = VineyardForm(request.POST, request.FILES, instance=vineyard)
                 vineyard_user_form = VineyardUserForm(request.POST, instance=vineyard_user)
                 if vineyard_form.is_valid() and vineyard_user_form.is_valid():
-                    vineyard_form.save()
+                    instance = vineyard_form.save(commit=False)
+                    instance.display = False
+                    instance.send_mail = False
+                    instance.save()
                     vineyard_user_form.save()
+                    # From Admin to User
+                    subject = "Update Vineyard"
+                    body = "Your vineyard updates have been recorded but have to be approved by Admin."
+                    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [vineyard_user.email1])
+                    # From User to Admin
+                    subject = "Update Vineyard"
+                    body = "Update Vineyard from User"
+                    send_mail(subject, body, "", [settings.DEFAULT_FROM_EMAIL])
                     return redirect("pages_app:mainpage")
     else:
         return redirect("pages_app:mainpage")

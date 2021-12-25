@@ -104,6 +104,7 @@ class Vineyard(models.Model):
     cover_slider = models.BooleanField(default=False)
     hide_rating = models.BooleanField(default=False)
     display = models.BooleanField(default=False)
+    send_email = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
