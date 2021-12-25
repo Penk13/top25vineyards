@@ -75,7 +75,7 @@
   {% endif %}
 </div>
 
-<!-- Review and Rating -->
+<!-- Vineyards -->
 <div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="row p-3 align-items-center mt-0 pt-0 pe-0">
     <h5 class="col-9 fw-bold ps-0 m-0">Vineyards</h5>
@@ -85,7 +85,7 @@
   <div class="row">
     <div class="col-12">
       <strong>{{ vineyard.vineyard.name }}</strong>
-      <a href="{% url 'vineyards:edit-vineyard' vineyard.vineyard.name %}" class="btn btn-primary mx-2">Edit</a>
+      <a href="{% url 'vineyards:edit-vineyard' vineyard.vineyard.slug %}" class="btn btn-primary mx-2">Edit</a>
     </div>
   </div>
   {% endfor %}
