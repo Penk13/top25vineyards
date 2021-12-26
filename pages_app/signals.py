@@ -36,7 +36,7 @@ def from_user_email(sender, instance, **kwargs):
 def vineyard_go_live(sender, instance, **kwargs):
     try:
         vuser = VineyardUser.objects.get(vineyard=instance.id)
-        if instance.display is True and instance.vineyard.send_email is True:
+        if instance.display is True and instance.send_email is True:
             domain = Site.objects.get_current().domain  # https://www.top25vineyards.com/
             path = instance.get_absolute_url()  # link to the vineyard (for example : vineyards/france/bordeaux/vineyard/chateau-monlot/)
 
