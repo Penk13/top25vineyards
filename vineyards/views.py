@@ -110,6 +110,7 @@ def edit_vineyard(request, vineyard):
                     instance.display = False
                     instance.send_mail = False
                     instance.save()
+                    vineyard_form.save_m2m()
                     vineyard_user_form.save()
                     # From Admin to User
                     subject = "Update Vineyard"

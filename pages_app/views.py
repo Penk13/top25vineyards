@@ -61,6 +61,7 @@ def footerpage(request, slug):
                 if vineyard_form.is_valid() and vineyard_user_form.is_valid():
                     instance1 = vineyard_form.save(commit=False)
                     instance1.save()
+                    vineyard_form.save_m2m()
                     instance2 = vineyard_user_form.save(commit=False)
                     instance2.vineyard = instance1
                     instance2.name = request.user.username
