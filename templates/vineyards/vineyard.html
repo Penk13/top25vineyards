@@ -73,9 +73,7 @@
         <br />
         <strong> Grapes </strong> : {{ vineyard.grapes }}
         <br />
-        <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
-        <br />
-        <strong> Visits </strong> : {{ vineyard.visits|striptags }}
+        <span class="fw-bold">Web: </span> <a href="//{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
       </p>
     </div>
     {% elif vineyard.hide_rating == False %}
@@ -99,9 +97,7 @@
         <br />
         <strong> Grapes </strong> : {{ vineyard.grapes }}
         <br />
-        <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
-        <br />
-        <strong> Visits </strong> : {{ vineyard.visits|striptags }}
+        <span class="fw-bold">Web: </span> <a href="//{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
       </p>
     </div>
     {% else %}
@@ -113,9 +109,7 @@
         <br />
         <strong> Grapes </strong> : {{ vineyard.grapes }}
         <br />
-        <strong> Owner / Winemaker </strong> : {{ vineyard.owner }}
-        <br />
-        <strong> Visits </strong> : {{ vineyard.visits|striptags }}
+        <span class="fw-bold">Web: </span> <a href="//{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
       </p>
     </div>
     {% endif %}
@@ -130,8 +124,8 @@
     <div class="col-md-6 col-sm-12">
       <h5 class="fw-bold">Contact Information:</h5>
       <span class="fw-bold">Phone: </span>{{ vineyard_user.number }} <br>
-      <span class="fw-bold">Email: </span> <a href="mailto:{{ vineyard_user.email2 }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d;">Send a message</a> <br>
-      <span class="fw-bold">Web: </span> <a href="//{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d;">{{ vineyard_user.web_text }}</a> <br>
+      <span class="fw-bold">Email: </span> <a href="mailto:{{ vineyard_user.email2 }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">Send a message</a> <br>
+      <span class="fw-bold">Web: </span> <a href="//{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
     </div>
   </div>
   {% endif %}
