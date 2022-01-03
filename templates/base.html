@@ -334,6 +334,21 @@
       </div>
     </section>
 
+    <!-- Billboards -->
+    <section style="background-color: lightgray;">
+      <div class="container">
+        {% for billboard in billboards %}
+        <div class="row">
+          <div class="col-3 m-3">
+            <img src="{{ billboard.image.url }}" class="" style="max-height: 150px;">
+            <span class="">{{ billboard.title }}</span>
+            <p class="">{{ billboard.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-dark text-light text-center">
       <div class="container py-4">

@@ -224,6 +224,7 @@ ADMIN_ORDERING = [
         'Autoblogging',
         'Category',
         'Post',
+        'Billboard',
         'Tag',
     ]),
     ('account', [
