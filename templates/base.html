@@ -335,17 +335,19 @@
     </section>
 
     <!-- Billboards -->
-    <section style="background-color: lightgray;">
+    <section style="background-color: whitesmoke;">
       <div class="container">
-        {% for billboard in billboards %}
         <div class="row">
-          <div class="col-3 m-3">
-            <img src="{{ billboard.image.url }}" class="" style="max-height: 150px;">
-            <span class="">{{ billboard.title }}</span>
-            <p class="">{{ billboard.description }}</p>
+        {% for billboard in billboards %}
+          <div class="col-2 m-3" style="position: relative;">
+            <a href="{{ billboard.url }}" style="text-decoration: none; color: black;">
+            <img src="{{ billboard.image.url }}" class="" style="max-width: 200px">
+            <span class="p-1" style="position: absolute; bottom: 62px; left: 12px; background-color: whitesmoke;">{{ billboard.title }}</span>
+            <p>{{ billboard.description }}</p>
+            </a>
           </div>
-        </div>
         {% endfor %}
+        </div>
       </div>
     </section>
 
