@@ -96,6 +96,7 @@ class Billboard(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to="billboard", max_length=255)
     url = models.URLField(max_length=255)
+    display = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

@@ -337,13 +337,13 @@
     <!-- Billboards -->
     <section style="background-color: whitesmoke;">
       <div class="container">
-        <div class="row">
+        <div class="row pt-4">
         {% for billboard in billboards %}
-          <div class="col-2 m-3" style="position: relative;">
-            <a href="{{ billboard.url }}" style="text-decoration: none; color: black;">
-            <img src="{{ billboard.image.url }}" class="" style="max-width: 200px">
-            <span class="p-1" style="position: absolute; bottom: 62px; left: 12px; background-color: whitesmoke;">{{ billboard.title }}</span>
-            <p>{{ billboard.description }}</p>
+          <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 my-3" style="position: relative;">
+            <a href="{{ billboard.url }}" target="_blank" style="text-decoration: none; color: black;">
+            <img src="{{ billboard.image.url }}" class="img-fluid">
+            <strong class="p-1" style="position: absolute; bottom: 40px; left: 12px; background-color: whitesmoke;">{{ billboard.title }}</strong>
+            <p>{{ billboard.description|truncatechars:35 }}</p>
             </a>
           </div>
         {% endfor %}
@@ -405,7 +405,7 @@
       <!-- Copyright -->
       <div class="p-3 text-muted" style="background-color: rgba(0, 0, 0, 0.5)">
         <div class="container text-start" style="font-size: 14px">
-          Copyright © 2021 - Top25Vineyards.com & Travelindex. All Rights Reserved |
+          Copyright © <script>document.write(new Date().getFullYear())</script> - Top25Vineyards.com & Travelindex. All Rights Reserved |
           <a class="text-white" href="https://www.travelindex.com/" style="text-decoration: none"
             >❤Travelindex Group</a
           >

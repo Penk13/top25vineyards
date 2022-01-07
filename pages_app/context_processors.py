@@ -8,7 +8,7 @@ def base_variable(request):
     default_ad_manager = Sidebar.objects.get(id=1).ad_manager
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
-    billboards = Billboard.objects.all()
+    billboards = Billboard.objects.filter(display=True)
     footer_count = ContentPage.objects.filter(types="FOOTER").count()
     footer_index = int(footer_count/2)
     footers1 = ContentPage.objects.filter(types="FOOTER")[:footer_index]
