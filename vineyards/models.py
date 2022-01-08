@@ -28,6 +28,8 @@ class Region(models.Model):
     logo_on_navbar = models.ImageField(
         upload_to="logo-on-navbar/", blank=True, max_length=255)
     display_on_navbar = models.BooleanField(default=True)
+    display_news = models.BooleanField(default=True)
+    display_billboard = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):
@@ -105,6 +107,8 @@ class Vineyard(models.Model):
     hide_rating = models.BooleanField(default=False)
     display = models.BooleanField(default=False)
     send_email = models.BooleanField(default=True)
+    display_news = models.BooleanField(default=True)
+    display_billboard = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

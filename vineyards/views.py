@@ -5,10 +5,14 @@ from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm
 from datetime import date, timedelta
 from django.core.mail import send_mail
 from django.conf import settings
+from news.models import Post, Category, Billboard
 
 
 def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug, display=True)
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     try:
         vineyard_user = VineyardUser.objects.get(vineyard=vineyard)
     except:
@@ -34,25 +38,37 @@ def vineyard_detail(request, region, slug, parent=None):
                "review_and_rating": review_and_rating,
                "recent_reviews": recent_reviews,
                "error_msg": error_msg,
-               "success_msg": success_msg
+               "success_msg": success_msg,
+               "travel_news": travel_news,
+               "billboards": billboards,
                }
     return render(request, "vineyards/vineyard.html", context)
 
 
 def vineyard_region(request, region, parent=None):
     region = get_object_or_404(Region, slug=region)
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     region_images = RegionImage.objects.filter(region=region)
     p = Paginator(Vineyard.objects.filter(
         regions=region, display=True).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
-    context = {"vineyards": vineyards, "region": region,
-               "region_images": region_images}
+    context = {"vineyards": vineyards, 
+               "region": region,
+               "region_images": region_images,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
     return render(request, "vineyards/vineyard_region.html", context)
 
 
 def rr_form(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug)
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     recent_reviews = ReviewAndRating.objects.filter(
@@ -91,13 +107,18 @@ def rr_form(request, region, slug, parent=None):
                "yard_cover_images": yard_cover_images,
                "recent_reviews": recent_reviews,
                "form": form,
+               "travel_news": travel_news,
+               "billboards": billboards,
                }
     return render(request, "vineyards/rr_form.html", context)
 
 
 def edit_vineyard(request, vineyard):
     vineyard = Vineyard.objects.get(slug=vineyard)
+    category = Category.objects.get(slug="global-travel-news")
     vineyard_user = VineyardUser.objects.get(vineyard=vineyard)
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     if vineyard_user.name == request.user.username:
         vineyard_form = VineyardForm(instance=vineyard)
         vineyard_user_form = VineyardUserForm(instance=vineyard_user)
@@ -124,5 +145,8 @@ def edit_vineyard(request, vineyard):
     else:
         return redirect("pages_app:mainpage")
     context = {"vineyard_form": vineyard_form,
-                "vineyard_user_form": vineyard_user_form}
+                "vineyard_user_form": vineyard_user_form,
+                "travel_news": travel_news,
+                "billboards": billboards,
+                }
     return render(request, "vineyards/edit_vineyard.html", context)

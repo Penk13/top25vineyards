@@ -315,3 +315,71 @@
   <div class="text-start">{{ default_ad_manager|safe }}</div>
 </div>
 {% endif %} {% endblock admanager %}
+
+<!-- Global Travel News -->
+{% block global_travel_news %} {% if vineyard.display_news %}
+<div class="row d-flex py-5">
+  <div class="col col-md-12 col-lg-8">
+    <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+      <h5 class="fw-bold ps-0">Global Travel News</h5>
+      <hr />
+      <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="10000">
+            <div class="row d-flex">
+              {% for news in travel_news %}
+              <div class="col-6 col-md-4 py-2 text-center">
+                <a href="{{ news.get_absolute_url }}" style="text-decoration: none">
+                  <img
+                    src="{{ news.cover.url }}"
+                    style="max-height: 150px"
+                    class="img-fluid"
+                  />
+                  <h6 class="fw-bold text-start text-dark my-2">{{ news.title }}</h6>
+                </a>
+              </div>
+              {% if forloop.counter|divisibleby:6 %}
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="2000">
+            <div class="row d-flex py-3">{% endif %} {% endfor %}</div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleInterval"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %} {% endblock global_travel_news %}
+
+<!-- Billboards -->
+{% block billboards %} {% if vineyard.display_billboard %}
+<div class="row pt-4">
+  {% for billboard in billboards %}
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 my-3" style="position: relative;">
+      <a href="{{ billboard.url }}" target="_blank" style="text-decoration: none; color: black;">
+      <img src="{{ billboard.image.url }}" class="img-fluid">
+      <strong class="p-1" style="position: absolute; bottom: 40px; left: 12px; background-color: whitesmoke;">{{ billboard.title }}</strong>
+      <p style="font-style: italic">{{ billboard.description|truncatechars:35 }}</p>
+      </a>
+    </div>
+  {% endfor %}
+  </div>
+{% endif %} {% endblock billboards %}

@@ -6,12 +6,18 @@ from bs4 import BeautifulSoup
 from django.http import HttpResponse
 from django.core import files
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Autoblogging, Category
+from .models import Post, Autoblogging, Category, Billboard
 
 
 def news_detail(request, category, news):
     news = get_object_or_404(Post, slug=news)
-    context = {"news": news}
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+    context = {"news": news,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
     return render(request, "news/news.html", context)
 
 

@@ -31,6 +31,8 @@ class ContentPage(models.Model):
     category = models.ForeignKey(
         Region, null=True, blank=True, on_delete=models.CASCADE)
     show_listing = models.BooleanField(default=False)
+    display_news = models.BooleanField(default=True)
+    display_billboard = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 
     def __str__(self):

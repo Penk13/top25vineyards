@@ -4,7 +4,7 @@ from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
 from vineyards.forms import VineyardUserForm, VineyardForm
-from news.models import Post, Category
+from news.models import Post, Category, Billboard
 
 from mailing.models import ContactEntry, Subscriber
 from mailing.forms import ContactEntryForm, SubscriberForm
@@ -14,6 +14,9 @@ from itertools import chain
 
 def mainpage(request):
     content_page = get_object_or_404(ContentPage, types="HOME_PAGE")
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
     if content_page.category:
         p = Paginator(Vineyard.objects.filter(
@@ -24,12 +27,19 @@ def mainpage(request):
     vineyards = p.get_page(page)
     context = {"content_page": content_page,
                "vineyards": vineyards,
-               "image_carousel": image_carousel}
+               "image_carousel": image_carousel,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
     return render(request, "pages_app/main_page.html", context)
 
 
 def footerpage(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug)
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+
     contact_entry_form = ContactEntryForm()
     subscriber_form = SubscriberForm()
     vineyard_form = VineyardForm()
@@ -76,12 +86,19 @@ def footerpage(request, slug):
                "contact_entry_form": contact_entry_form,
                "subscriber_form": subscriber_form,
                "vineyard_form": vineyard_form,
-               "vineyard_user_form": vineyard_user_form}
+               "vineyard_user_form": vineyard_user_form,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
     return render(request, "pages_app/footer_page.html", context)
 
 
 def searchpage(request):
     content_page = get_object_or_404(ContentPage, types="SEARCH_PAGE")
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+
     if request.method == "POST":
         searched = request.POST['searched']
     else:
@@ -112,12 +129,19 @@ def searchpage(request):
     page = request.GET.get('page')
     results = p.get_page(page)
     context = {"content_page": content_page,
-               "searched": searched, "results": results}
+               "searched": searched,
+               "results": results,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
     return render(request, "pages_app/search_page.html", context)
 
 
 def page(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug)
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
     if content_page.category:
         p = Paginator(Vineyard.objects.filter(
@@ -128,12 +152,18 @@ def page(request, slug):
     vineyards = p.get_page(page)
     context = {"content_page": content_page,
                "vineyards": vineyards,
-               "image_carousel": image_carousel}
+               "image_carousel": image_carousel,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
     return render(request, "pages_app/page.html", context)
 
 
 def newspage(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug)
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
     category = Category.objects.get(slug=content_page.slug)
     p = Paginator(Post.objects.filter(category=category).order_by("-id"), 10)
@@ -141,5 +171,8 @@ def newspage(request, slug):
     news_list = p.get_page(page)
     context = {"content_page": content_page,
                "image_carousel": image_carousel,
-               "news_list": news_list}
+               "news_list": news_list,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
     return render(request, "pages_app/newspage.html", context)

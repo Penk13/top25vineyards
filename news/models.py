@@ -51,6 +51,8 @@ class Post(models.Model):
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
+    display_news = models.BooleanField(default=True)
+    display_billboard = models.BooleanField(default=True)
     slug = models.SlugField(unique=True, max_length=200)
 
     def __str__(self):
