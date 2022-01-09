@@ -18,11 +18,8 @@ def mainpage(request):
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
-    if content_page.category:
-        p = Paginator(Vineyard.objects.filter(
-            regions=content_page.category, display=True).order_by("-rating"), 10)
-    else:
-        p = Paginator(Vineyard.objects.filter(display=True).order_by("-rating"), 10)
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"content_page": content_page,
@@ -39,6 +36,11 @@ def footerpage(request, slug):
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
+
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+    page = request.GET.get('page')
+    vineyards = p.get_page(page)
 
     contact_entry_form = ContactEntryForm()
     subscriber_form = SubscriberForm()
@@ -83,6 +85,7 @@ def footerpage(request, slug):
             return redirect("account_login")
 
     context = {"content_page": content_page,
+               "vineyards": vineyards,
                "contact_entry_form": contact_entry_form,
                "subscriber_form": subscriber_form,
                "vineyard_form": vineyard_form,
@@ -98,6 +101,11 @@ def searchpage(request):
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
+
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+    page = request.GET.get('page')
+    vineyards = p.get_page(page)
 
     if request.method == "POST":
         searched = request.POST['searched']
@@ -129,6 +137,7 @@ def searchpage(request):
     page = request.GET.get('page')
     results = p.get_page(page)
     context = {"content_page": content_page,
+               "vineyards": vineyards,
                "searched": searched,
                "results": results,
                "travel_news": travel_news,
@@ -143,11 +152,8 @@ def page(request, slug):
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
-    if content_page.category:
-        p = Paginator(Vineyard.objects.filter(
-            regions=content_page.category, display=True).order_by("-rating"), 10)
-    else:
-        p = Paginator(Vineyard.objects.filter(display=True).order_by("-rating"), 10)
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"content_page": content_page,
@@ -164,12 +170,19 @@ def newspage(request, slug):
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
+
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+    page = request.GET.get('page')
+    vineyards = p.get_page(page)
+
     image_carousel = ImageUpload.objects.filter(page=content_page)
     category = Category.objects.get(slug=content_page.slug)
     p = Paginator(Post.objects.filter(category=category).order_by("-id"), 10)
     page = request.GET.get('page')
     news_list = p.get_page(page)
     context = {"content_page": content_page,
+               "vineyards": vineyards,
                "image_carousel": image_carousel,
                "news_list": news_list,
                "travel_news": travel_news,

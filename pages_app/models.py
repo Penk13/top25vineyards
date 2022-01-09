@@ -28,8 +28,7 @@ class ContentPage(models.Model):
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     additional_content = RichTextField(blank=True)
-    category = models.ForeignKey(
-        Region, null=True, blank=True, on_delete=models.CASCADE)
+    category = models.ManyToManyField(Region, blank=True)
     show_listing = models.BooleanField(default=False)
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
