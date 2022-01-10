@@ -70,6 +70,13 @@
     </ul>
   </nav>
 </div>
+{% endif %} 
+
+{% if content_page.additional_content %}
+<div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {{ content_page.additional_content|safe }}
+</div>
+{% endif %}
 
 <!-- Vineyards -->
 {% if content_page.show_listing == True %}
@@ -140,12 +147,7 @@
   </nav>
 </div>
 {% endif %}
-
-{% endif %} {% if content_page.additional_content %}
-<div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  {{ content_page.additional_content|safe }}
-</div>
-{% endif %} {% endblock content %}
+{% endblock content %}
 
 <!-- Sidebar -->
 {% block sidebar %} {% if content_page.sidebar %}
@@ -171,7 +173,7 @@
 
 <!-- Global Travel News -->
 {% block global_travel_news %} {% if content_page.display_news %}
-<div class="row d-flex py-5">
+<div class="row d-flex">
   <div class="col col-md-12 col-lg-8">
     <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
       <h5 class="fw-bold ps-0">Global Travel News</h5>

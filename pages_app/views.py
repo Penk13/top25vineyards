@@ -19,7 +19,7 @@ def mainpage(request):
     billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
     p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"content_page": content_page,
@@ -38,7 +38,7 @@ def footerpage(request, slug):
     billboards = Billboard.objects.filter(display=True)
 
     p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
 
@@ -103,7 +103,7 @@ def searchpage(request):
     billboards = Billboard.objects.filter(display=True)
 
     p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
 
@@ -153,7 +153,7 @@ def page(request, slug):
     billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
     p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
     context = {"content_page": content_page,
@@ -172,7 +172,7 @@ def newspage(request, slug):
     billboards = Billboard.objects.filter(display=True)
 
     p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).order_by("-rating"), 10)
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
 
