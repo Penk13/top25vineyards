@@ -32,7 +32,14 @@
 {% endblock toptext %}
 
 <!-- Vineyard List -->
-{% block content %} {% if content_page.show_listing == True %}
+{% block content %}
+{% if content_page.additional_content %}
+<div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  {{ content_page.additional_content|safe }}
+</div>
+{% endif %}
+
+{% if content_page.show_listing == True %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% for vineyard in vineyards %}
   <div class="col-12 col-md-6 py-3 text-start">
@@ -99,11 +106,8 @@
     </ul>
   </nav>
 </div>
-{% endif %} {% if content_page.additional_content %}
-<div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  {{ content_page.additional_content|safe }}
-</div>
-{% endif %} {% endblock content %}
+{% endif %}
+{% endblock content %}
 
 <!-- Sidebar -->
 {% block sidebar %} {% if content_page.sidebar %}
