@@ -7,11 +7,7 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'body']
 
 
-class CategoryAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
-
-
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Category)
 admin.site.register(Tag)
 admin.site.register(Autoblogging)
 admin.site.register(Post, PostAdmin)
