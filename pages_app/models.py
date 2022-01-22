@@ -32,7 +32,7 @@ class ContentPage(models.Model):
     show_listing = models.BooleanField(default=False)
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
         return self.get_types_display() + " : " + self.title
@@ -48,21 +48,9 @@ class ContentPage(models.Model):
             return reverse('pages_app:page', kwargs={'slug': self.slug})
 
 
-def create_slug(instance, new_slug=None):
-    slug = slugify(instance.title)
-    if new_slug is not None:
-        slug = new_slug
-    qs = ContentPage.objects.filter(slug=slug).order_by("-id")
-    exists = qs.exists()
-    if exists:
-        new_slug = "%s-%s" % (slug, qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
-    return slug
-
-
 def pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
-        instance.slug = create_slug(instance)
+        instance.slug = slugify(instance.title)
     if not instance.meta_keywords:
         meta_key = instance.title.lower()
         instance.meta_keywords = meta_key

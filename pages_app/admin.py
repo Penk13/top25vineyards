@@ -8,7 +8,6 @@ class ImageUploadInline(admin.TabularInline):
 
 class ContentPageAdmin(admin.ModelAdmin):
     inlines = [ImageUploadInline]
-    readonly_fields = ('slug',)
     search_fields = ['title', 'content']
 
 

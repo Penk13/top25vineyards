@@ -32,7 +32,7 @@
 {% endblock toptext %}
 
 <!-- News List -->
-{% block content %} {% if content_page.show_listing == True %}
+{% block content %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% for news in news_list %}
   <div class="col-12 col-md-6 py-3 text-start">
@@ -70,7 +70,6 @@
     </ul>
   </nav>
 </div>
-{% endif %} 
 
 {% if content_page.additional_content %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
