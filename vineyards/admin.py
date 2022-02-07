@@ -1,3 +1,4 @@
+from re import search
 from django.contrib import admin
 from .models import RegionImage, Region, Vineyard, VineyardUser, TopSliderImage, CoverSliderImage, ReviewAndRating
 
@@ -7,6 +8,7 @@ class RegionImageInline(admin.TabularInline):
 
 
 class RegionAdmin(admin.ModelAdmin):
+    search_fields = ['name']
     inlines = [RegionImageInline]
     readonly_fields = ('slug',)
 
