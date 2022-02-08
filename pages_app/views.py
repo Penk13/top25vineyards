@@ -28,6 +28,12 @@ def mainpage(request):
                "travel_news": travel_news,
                "billboards": billboards,
                }
+    if("contact_form_msg" in request.session):
+        context["msg"] = request.session["contact_form_msg"]
+        request.session.pop("contact_form_msg")
+    if("subscribe_form_msg" in request.session):
+        context["msg"] = request.session["subscribe_form_msg"]
+        request.session.pop("subscribe_form_msg")
     return render(request, "pages_app/main_page.html", context)
 
 
@@ -53,6 +59,7 @@ def footerpage(request, slug):
             contact_entry_form = ContactEntryForm(request.POST)
             if contact_entry_form.is_valid():
                 ContactEntry.objects.create(**contact_entry_form.cleaned_data)
+                request.session["contact_form_msg"] = "Your message has been sent! Thank you!"
             return redirect("pages_app:mainpage")
 
     elif slug == "newsletter":
@@ -61,6 +68,7 @@ def footerpage(request, slug):
             subscriber_form = SubscriberForm(request.POST)
             if subscriber_form.is_valid():
                 Subscriber.objects.create(**subscriber_form.cleaned_data)
+                request.session["subscribe_form_msg"] = "Thanks for subscribing to our newsletter!"
             return redirect("pages_app:mainpage")
 
     elif slug == "submit-a-vineyard":

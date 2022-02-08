@@ -31,8 +31,15 @@
 </section>
 {% endblock toptext %}
 
+{% block content %}
+{% if msg %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{ msg }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
 <!-- Vineyard List -->
-{% block content %} {% if content_page.show_listing == True %}
+{% if content_page.show_listing == True %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% for vineyard in vineyards %}
   <div class="col-12 col-md-6 py-3 text-start">

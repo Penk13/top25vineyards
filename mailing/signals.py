@@ -6,18 +6,27 @@ from .models import ContactEntry, Subscriber
 
 
 @receiver(post_save, sender=ContactEntry)
-def contact_from_user(sender, instance, **kwargs):
+def from_user(sender, instance, **kwargs):
     # Email sent to admin
     send_mail(instance.subject,
-              instance.message + "\n\n" + "From: " + instance.name,
+              instance.message + "\n\n" + "From: " + instance.name + "\nEmail: " + instance.email,
               '',
               [settings.DEFAULT_FROM_EMAIL])
 
 
 @receiver(post_save, sender=Subscriber)
-def contact_from_user(sender, instance, **kwargs):
+def from_user(sender, instance, **kwargs):
     # Email sent to admin
     send_mail("Subscriber",
-              "From: " + instance.email,
+              "From: " + instance.name + "\nEmail: " + instance.email + "\nCountry: " + instance.country,
               '',
               [settings.DEFAULT_FROM_EMAIL])
+
+
+@receiver(post_save, sender=Subscriber)
+def from_admin(sender, instance, **kwargs):
+    # Email sent to user
+    send_mail("Confirmation Subscription",
+              "Thanks for subscribing to our newsletter!",
+              settings.DEFAULT_FROM_EMAIL,
+              [instance.email])
