@@ -1,0 +1,59 @@
+/* padding top 80px when width smaller than 978px */
+@media (max-width: 978px) {
+  .top-content {
+    padding-top: 80px;
+  }
+}
+
+/* If there is no carousel image on top, padding top 100px */
+@media (min-width: 978px) {
+  .footer-page,
+  .vineyard-detail,
+  .news-detail,
+  .search-page,
+  .vineyard-region {
+    padding-top: 80px;
+  }
+}
+
+/* Hover navbar */
+.dropend:hover,
+.dropend a:hover,
+.nav-drop a:hover,
+.child-region:hover {
+  background-color: black;
+}
+
+/* Display child region on hover */
+.child-regions {
+  display: none;
+}
+
+.dropend:hover > .child-regions {
+  display: block;
+  top: 0;
+  left: 100%;
+  padding: 10px;
+  background-color: #292b2c;
+}
+
+/* Hide label field */
+.requiredField {
+  display: none;
+}
+
+/* Change bootstrap range color */
+input[type="range"]::-webkit-slider-thumb {
+  background: #20669b;
+}
+input[type="range"]::-moz-range-thumb {
+  background: #20669b;
+}
+input[type="range"]::-ms-thumb {
+  background: #20669b;
+}
+
+.captcha {
+  padding-top: 20px;
+  padding-bottom: 14px
+ }

@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.urls import reverse
@@ -17,11 +17,11 @@ class Region(models.Model):
         "self", blank=True, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     title = models.CharField(max_length=255)
-    description = RichTextField()
-    description_on_list = RichTextField(blank=True)
+    description = RichTextUploadingField()
+    description_on_list = RichTextUploadingField(blank=True)
     thumbnail = models.ImageField(
         upload_to="thumbnail-region", blank=True, max_length=255)
-    sidebar = RichTextField(blank=True)
+    sidebar = RichTextUploadingField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
@@ -80,7 +80,7 @@ class RegionImage(models.Model):
 
 class Vineyard(models.Model):
     name = models.CharField(max_length=255)
-    text = RichTextField()
+    text = RichTextUploadingField()
     rating = models.FloatField(default=0)
     custom_overlay = models.ImageField(
         upload_to="custom-rating/", blank=True, max_length=255)
@@ -98,7 +98,7 @@ class Vineyard(models.Model):
     regions = models.ManyToManyField(
         Region, blank=True, related_name="regions")
     cover = models.ImageField(upload_to="vineyard/", max_length=255)
-    sidebar = RichTextField(blank=True)
+    sidebar = RichTextUploadingField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)

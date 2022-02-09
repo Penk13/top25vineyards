@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'ckeditor',
+    'ckeditor_uploader',
     "crispy_forms",
     "crispy_bootstrap5",
     'captcha',
@@ -200,6 +201,8 @@ CKEDITOR_CONFIGS = {
                     ["Maximize"]],
     },
 }
+
+CKEDITOR_UPLOAD_PATH = 'ckupload/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

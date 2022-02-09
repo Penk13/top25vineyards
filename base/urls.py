@@ -25,7 +25,9 @@ urlpatterns = [
     path('', include("pages_app.urls")),
     path('vineyards/', include("vineyards.urls")),
     path('news/', include("news.urls")),
+
     path('captcha/', include('captcha.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:
