@@ -1,4 +1,5 @@
 from django import forms
+from captcha.fields import CaptchaField
 
 
 class ContactEntryForm(forms.Form):
@@ -18,6 +19,7 @@ class ContactEntryForm(forms.Form):
         label="",
         widget=forms.Textarea(attrs={'placeholder': 'Message', 'rows': 5})
     )
+    captcha = CaptchaField()
 
 
 class SubscriberForm(forms.Form):
@@ -33,3 +35,4 @@ class SubscriberForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={'placeholder': 'Country'})
     )
+    captcha = CaptchaField()

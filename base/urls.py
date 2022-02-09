@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include("pages_app.urls")),
     path('vineyards/', include("vineyards.urls")),
     path('news/', include("news.urls")),
+    path('captcha/', include('captcha.urls')),
 ]
 
 if settings.DEBUG:

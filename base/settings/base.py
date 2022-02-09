@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'ckeditor',
     "crispy_forms",
     "crispy_bootstrap5",
+    'captcha',
 
     'accounts.apps.AccountsConfig',
     'pages_app.apps.PagesAppConfig',

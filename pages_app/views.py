@@ -58,18 +58,25 @@ def footerpage(request, slug):
         if request.method == "POST":
             contact_entry_form = ContactEntryForm(request.POST)
             if contact_entry_form.is_valid():
-                ContactEntry.objects.create(**contact_entry_form.cleaned_data)
+                ContactEntry.objects.create(
+                    name = contact_entry_form.cleaned_data["name"],
+                    email = contact_entry_form.cleaned_data["email"],
+                    subject = contact_entry_form.cleaned_data["subject"],
+                    message = contact_entry_form.cleaned_data["message"])
                 request.session["contact_form_msg"] = "Your message has been sent! Thank you!"
-            return redirect("pages_app:mainpage")
+                return redirect("pages_app:mainpage")
 
     elif slug == "newsletter":
         subscriber_form = SubscriberForm()
         if request.method == "POST":
             subscriber_form = SubscriberForm(request.POST)
             if subscriber_form.is_valid():
-                Subscriber.objects.create(**subscriber_form.cleaned_data)
+                Subscriber.objects.create(
+                    name = subscriber_form.cleaned_data["name"],
+                    email = subscriber_form.cleaned_data["email"],
+                    country = subscriber_form.cleaned_data["country"])
                 request.session["subscribe_form_msg"] = "Thanks for subscribing to our newsletter!"
-            return redirect("pages_app:mainpage")
+                return redirect("pages_app:mainpage")
 
     elif slug == "submit-a-vineyard":
         vineyard_form = VineyardForm()
