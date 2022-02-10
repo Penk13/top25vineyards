@@ -24,18 +24,22 @@
 
   <!-- Contact Us Form -->
   {% if content_page.slug == 'contact-us' %}
-  <form method="POST">
-    {% csrf_token %} {{ contact_entry_form|crispy }}
-    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-  </form>
+  <div class="w-75 mx-auto">
+    <form method="POST">
+      {% csrf_token %} {{ contact_entry_form|crispy }}
+      <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+    </form>
+  </div>
   {% endif %}
 
   <!-- Newsletter Form -->
   {% if content_page.slug == 'newsletter' %}
-  <form method="POST">
-    {% csrf_token %} {{ subscriber_form|crispy }}
-    <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
-  </form>
+  <div class="w-75 mx-auto">
+    <form method="POST">
+      {% csrf_token %} {{ subscriber_form|crispy }}
+      <input type="submit" value="Submit" class="btn btn-dark" style="width: 100%" />
+    </form>
+  </div>
   {% endif %}
 
   <!-- Vineyard Form -->

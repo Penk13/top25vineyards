@@ -54,6 +54,5 @@ input[type="range"]::-ms-thumb {
 }
 
 .captcha {
-  padding-top: 20px;
   padding-bottom: 14px
  }

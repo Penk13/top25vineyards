@@ -1,8 +1,10 @@
 from django import forms
 from .models import ReviewAndRating, Vineyard, VineyardUser
+from captcha.fields import CaptchaField
 
 
 class ReviewRatingForm(forms.ModelForm):
+    captcha = CaptchaField()
     class Meta:
         model = ReviewAndRating
         fields = [
@@ -69,6 +71,7 @@ class VineyardUserForm(forms.ModelForm):
         self.fields['address'].widget.attrs['rows'] = 5
         self.fields['address'].widget.attrs['class'] = "bg-light"
 
+    captcha = CaptchaField()
     class Meta:
         model = VineyardUser
         fields = ["email2", "address", "website", "number"]

@@ -265,3 +265,8 @@ def get_app_list(self, request):
 # Covering django.contrib.admin.AdminSite.get_app_list
 
 admin.AdminSite.get_app_list = get_app_list
+
+
+# Settings for django-simple-captcha
+CAPTCHA_IMAGE_SIZE = (110, 50)
+CAPTCHA_FONT_SIZE = 30
