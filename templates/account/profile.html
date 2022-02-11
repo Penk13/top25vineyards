@@ -84,8 +84,8 @@
   {% for vineyard in vineyards %}
   <div class="row">
     <div class="col-12">
-      <strong>{{ vineyard.vineyard.name }}</strong>
-      <a href="{% url 'vineyards:edit-vineyard' vineyard.vineyard.slug %}" class="btn btn-primary mx-2">Edit</a>
+      <strong>{{ vineyard.vineyard.name }}</strong> - 
+      <a href="{% url 'vineyards:edit-vineyard' vineyard.vineyard.slug %}">Edit</a>
     </div>
   </div>
   {% endfor %}

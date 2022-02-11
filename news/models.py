@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.urls import reverse
@@ -30,12 +30,12 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
-    body = RichTextField()
+    body = RichTextUploadingField()
     tags = models.ManyToManyField(Tag, blank=True)
     cover = models.ImageField(
         upload_to="news", blank=True, max_length=255)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    sidebar = RichTextField(blank=True)
+    sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)

@@ -21,7 +21,7 @@ class Region(models.Model):
     description_on_list = RichTextUploadingField(blank=True)
     thumbnail = models.ImageField(
         upload_to="thumbnail-region", blank=True, max_length=255)
-    sidebar = RichTextUploadingField(blank=True)
+    sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
@@ -98,7 +98,7 @@ class Vineyard(models.Model):
     regions = models.ManyToManyField(
         Region, blank=True, related_name="regions")
     cover = models.ImageField(upload_to="vineyard/", max_length=255)
-    sidebar = RichTextUploadingField(blank=True)
+    sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)

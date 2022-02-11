@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.urls import reverse
@@ -21,13 +21,13 @@ class ContentPage(models.Model):
     thumbnail = models.ImageField(
         upload_to='thumbnail-page/', blank=True, max_length=255)
     title = models.CharField(max_length=255)
-    content = RichTextField(blank=True)
-    content_on_list = RichTextField(blank=True)
-    sidebar = RichTextField(blank=True)
+    content = RichTextUploadingField(blank=True)
+    content_on_list = RichTextUploadingField(blank=True)
+    sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
-    additional_content = RichTextField(blank=True)
+    additional_content = RichTextUploadingField(blank=True)
     category = models.ManyToManyField(Region, blank=True)
     show_listing = models.BooleanField(default=False)
     display_news = models.BooleanField(default=True)
@@ -79,7 +79,7 @@ class Navbar(models.Model):
 
 
 class Sidebar(models.Model):
-    sidebar = RichTextField(blank=True)
+    sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
 
     def __str__(self):
