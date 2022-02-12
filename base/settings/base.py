@@ -199,6 +199,7 @@ CKEDITOR_CONFIGS = {
                     ["Image", "Table", "Link", "Unlink", "Anchor", "SectionLink",
                         "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
                     ["Maximize"]],
+        'allowedContent': True,
     },
 }
 
