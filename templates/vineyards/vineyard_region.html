@@ -90,21 +90,21 @@
   <nav class="nav-pagination">
     <ul class="pagination justify-content-center">
       {% if vineyards.has_previous %}
-      <li class="page-item">
-        <!-- <a class="page-link" href="?page=1">&laquo First</a> -->
-        <a class="page-link" href="?page={{vineyards.previous_page_number}}">&laquo</a>
-      </li>
+        <a class="btn btn-outline-secondary my-2" href="?page=1">First</a>
+        <a class="btn btn-outline-secondary my-2" href="?page={{ vineyards.previous_page_number }}">Previous</a>
       {% endif %}
-      <li class="page-item disabled">
-        <a class="page-link" href="#"
-          >Page {{ vineyards.number }} of {{ vineyards.paginator.num_pages }}
-        </a>
-      </li>
+
+      {% for num in vineyards.paginator.page_range %}
+        {% if vineyards.number == num %}
+          <a class="btn btn-secondary my-2" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > vineyards.number|add:'-3' and num < vineyards.number|add:'3' %}
+          <a class="btn btn-outline-secondary my-2" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
       {% if vineyards.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{vineyards.next_page_number}}">&raquo</a>
-        <!-- <a class="page-link" href="?page={{vineyards.paginator.num_pages}}">Last &raquo</a> -->
-      </li>
+        <a class="btn btn-outline-secondary my-2" href="?page={{ vineyards.next_page_number }}">Next</a>
+        <a class="btn btn-outline-secondary my-2" href="?page={{ vineyards.paginator.num_pages }}">Last</a>
       {% endif %}
     </ul>
   </nav>
