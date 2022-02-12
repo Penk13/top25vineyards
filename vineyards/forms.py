@@ -1,6 +1,7 @@
 from django import forms
 from .models import ReviewAndRating, Vineyard, VineyardUser
 from captcha.fields import CaptchaField
+from django.core.files.images import get_image_dimensions
 
 
 class ReviewRatingForm(forms.ModelForm):
@@ -59,6 +60,18 @@ Add here a description and all information about vineyard:
             "owner": forms.TextInput(attrs={"placeholder": "Name of Winemaker, Owner, Vigneron, or...", "class": "w-75 bg-light"}),
             "visits": forms.TextInput(attrs={"placeholder": "Visiting hours or visit options and conditions...", "class": "w-75 bg-light"}),
         }
+
+    def clean_cover(self):
+        cover = self.cleaned_data.get("cover")
+        if not cover:
+            raise forms.ValidationError("No image!")
+        else:
+            w, h = get_image_dimensions(cover)
+            if w < 900:
+                raise forms.ValidationError("The image is %i pixel wide. Minimum image width is 900px" % w)
+            # if h < 900:
+            #     raise forms.ValidationError("The image is %i pixel high. Minimum image height is 900px" % h)
+        return cover    
 
 
 class VineyardUserForm(forms.ModelForm):
