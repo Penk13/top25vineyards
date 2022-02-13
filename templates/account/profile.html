@@ -94,14 +94,22 @@
 
 <!-- Sidebar -->
 {% block sidebar %} {% if content_page.sidebar %}
-<div class="row p-3 text-center mt-lg-0 mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+<div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ content_page.sidebar|safe }}</div>
+</div>
+{% elif content_page.sidebar == "" and default_sidebar != "" %}
+<div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ default_sidebar|safe }}</div>
 </div>
 {% endif %} {% endblock sidebar %}
 
 <!-- Ad Manager -->
 {% block admanager %} {% if content_page.ad_manager %}
-<div class="row p-3 text-center mt-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+<div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ content_page.ad_manager|safe }}</div>
+</div>
+{% elif content_page.ad_manager == "" and default_ad_manager != "" %}
+<div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="text-start">{{ default_ad_manager|safe }}</div>
 </div>
 {% endif %} {% endblock admanager %}
