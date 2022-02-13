@@ -77,6 +77,7 @@ Add here a description and all information about vineyard:
 class VineyardUserForm(forms.ModelForm):
     def __init__(self, *args, **kw):
         super(VineyardUserForm, self).__init__(*args, **kw)
+        self.fields['website'].initial = "https://"
         placeholder_address = "Address"
 
         self.fields['address'].widget.attrs['placeholder'] = placeholder_address

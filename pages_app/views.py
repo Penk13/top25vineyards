@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.core.mail import send_mail
+from django.conf import settings
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
 from vineyards.forms import VineyardUserForm, VineyardForm
@@ -28,12 +30,16 @@ def mainpage(request):
                "travel_news": travel_news,
                "billboards": billboards,
                }
+    # Popup message if the form is submitted successfully
     if("contact_form_msg" in request.session):
         context["msg"] = request.session["contact_form_msg"]
         request.session.pop("contact_form_msg")
     if("subscribe_form_msg" in request.session):
         context["msg"] = request.session["subscribe_form_msg"]
         request.session.pop("subscribe_form_msg")
+    if("vineyard_form_msg" in request.session):
+        context["msg"] = request.session["vineyard_form_msg"]
+        request.session.pop("vineyard_form_msg")
     return render(request, "pages_app/main_page.html", context)
 
 
@@ -94,6 +100,11 @@ def footerpage(request, slug):
                     instance2.name = request.user.username
                     instance2.email1 = request.user.email
                     instance2.save()
+                    request.session["vineyard_form_msg"] = "Your vineyard has been successfully submitted!"
+                    # From Admin to User
+                    subject = "Create Vineyard"
+                    body = "Your vineyard has been created but must be approved by the Admin."
+                    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [instance2.email1])
                     return redirect("pages_app:mainpage")
         else:
             request.session["v_form"] = True
