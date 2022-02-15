@@ -53,6 +53,13 @@ input[type="range"]::-ms-thumb {
   background: #20669b;
 }
 
+/* Captcha */
 .captcha {
   padding-bottom: 14px
  }
+
+/* Remove border on hamburger menu */
+.navbar-toggler{
+  color: transparent !important;
+  border-color: transparent !important;
+}
