@@ -67,7 +67,7 @@
       <a href="{{ result.wines_url }}" style="text-decoration: none; color: #688c3b"
         >{{ result.wines }}</a
       ><br />
-      <strong> Owner </strong> :
+      <strong> Winemaker </strong> :
       <a href="{{ result.owner_url }}" style="text-decoration: none; color: #688c3b"
         >{{ result.owner }}</a
       ><br />
@@ -132,22 +132,24 @@
   <!-- Nav Pagination -->
   <nav class="nav-pagination">
     <ul class="pagination justify-content-center">
-      {% if results.has_previous %}
-        <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page=1">First</a>
-        <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.previous_page_number }}">Previous</a>
-      {% endif %}
-
-      {% for num in results.paginator.page_range %}
-        {% if results.number == num %}
-          <a class="btn btn-secondary my-2" href="?searched={{ searched }}&page={{ num }}">{{ num }}</a>
-        {% elif num > results.number|add:'-3' and num < results.number|add:'3' %}
-          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ num }}">{{ num }}</a>
+      {% if results.paginator.num_pages > 1 %}
+        {% if results.has_previous %}
+          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page=1">First</a>
+          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.previous_page_number }}">Previous</a>
         {% endif %}
-      {% endfor %}
 
-      {% if results.has_next %}
-        <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.next_page_number }}">Next</a>
-        <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.paginator.num_pages }}">Last</a>
+        {% for num in results.paginator.page_range %}
+          {% if results.number == num %}
+            <a class="btn btn-secondary my-2" href="?searched={{ searched }}&page={{ num }}">{{ num }}</a>
+          {% elif num > results.number|add:'-3' and num < results.number|add:'3' %}
+            <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ num }}">{{ num }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if results.has_next %}
+          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.next_page_number }}">Next</a>
+          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.paginator.num_pages }}">Last</a>
+        {% endif %}
       {% endif %}
     </ul>
   </nav>
@@ -201,7 +203,7 @@
       <a href="{{ vineyard.wines_url }}" style="text-decoration: none; color: #688c3b"
         >{{ vineyard.wines }}</a
       ><br />
-      <strong> Owner </strong> :
+      <strong> Winemaker </strong> :
       <a href="{{ vineyard.owner_url }}" style="text-decoration: none; color: #688c3b"
         >{{ vineyard.owner }}</a
       ><br />
