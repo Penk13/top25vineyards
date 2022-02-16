@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ContentPage, ImageUpload, Navbar, Sidebar
+from .models import ContentPage, ImageUpload, Navbar, Footer, Sidebar
 
 
 class ImageUploadInline(admin.TabularInline):
@@ -13,4 +13,5 @@ class ContentPageAdmin(admin.ModelAdmin):
 
 admin.site.register(ContentPage, ContentPageAdmin)
 admin.site.register(Navbar)
+admin.site.register(Footer)
 admin.site.register(Sidebar)

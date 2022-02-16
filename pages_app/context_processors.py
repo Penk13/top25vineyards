@@ -1,4 +1,4 @@
-from .models import ContentPage, Navbar, Sidebar
+from .models import Navbar, Footer, Sidebar
 from news.models import Post, Category, Billboard
 
 
@@ -9,10 +9,10 @@ def base_variable(request):
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
-    footer_count = ContentPage.objects.filter(types="FOOTER").count()
-    footer_index = int(footer_count/2)
-    footers1 = ContentPage.objects.filter(types="FOOTER")[:footer_index]
-    footers2 = ContentPage.objects.filter(types="FOOTER")[footer_index:]
+    footer = Footer.objects.all().order_by("order")
+    footer_index = int(footer.count()/2)
+    footers1 = footer[:footer_index]
+    footers2 = footer[footer_index:]
     return {"navbars": navbars,
             "default_sidebar": default_sidebar,
             "default_ad_manager": default_ad_manager,

@@ -219,6 +219,7 @@ ADMIN_ORDERING = [
     ('pages_app', [
         'ContentPage',
         'Navbar',
+        'Footer',
         'Sidebar',
     ]),
     ('mailing', [

@@ -78,6 +78,14 @@ class Navbar(models.Model):
         return self.title
 
 
+class Footer(models.Model):
+    title = models.CharField(max_length=255)
+    link = models.URLField(blank=True)
+    order = models.IntegerField(unique=True)
+
+    def __str__(self):
+        return self.title
+
 class Sidebar(models.Model):
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
