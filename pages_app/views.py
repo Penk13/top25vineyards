@@ -125,7 +125,7 @@ def footerpage(request, slug):
 def searchpage(request):
     content_page = get_object_or_404(ContentPage, types="SEARCH_PAGE")
     category = Category.objects.get(slug="global-travel-news")
-    travel_news = Post.objects.filter(category=category)
+    travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 
     p = Paginator(Vineyard.objects.filter(
