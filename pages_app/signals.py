@@ -16,7 +16,6 @@ def from_admin_email(sender, instance, **kwargs):
                 body,
                 settings.DEFAULT_FROM_EMAIL,
                 [instance.email1])
-        print("FROM ADMIN EMAIL")
 
 
 @receiver(post_save, sender=VineyardUser)
@@ -29,7 +28,6 @@ def from_user_email(sender, instance, **kwargs):
                 body,
                 '',
                 [settings.DEFAULT_FROM_EMAIL])
-        print("FROM USER EMAIL")
 
 
 @receiver(post_save, sender=Vineyard)
@@ -41,12 +39,11 @@ def vineyard_go_live(sender, instance, **kwargs):
             path = instance.get_absolute_url()  # link to the vineyard (for example : vineyards/france/bordeaux/vineyard/chateau-monlot/)
 
             subject = "Your vineyard is now live"
-            body = 'https://' + domain + path
+            body = domain + path
 
             send_mail(subject,
                     body,
                     settings.DEFAULT_FROM_EMAIL,
                     [vuser.email1])
-            print("VINEYARD GO LIVE")
     except:
         pass

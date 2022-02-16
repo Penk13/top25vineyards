@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.core.mail import send_mail
-from django.conf import settings
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
 from vineyards.forms import VineyardUserForm, VineyardForm
@@ -101,10 +99,6 @@ def footerpage(request, slug):
                     instance2.email1 = request.user.email
                     instance2.save()
                     request.session["vineyard_form_msg"] = "Your vineyard has been successfully submitted!"
-                    # From Admin to User
-                    subject = "Create Vineyard"
-                    body = "Your vineyard has been created but must be approved by the Admin."
-                    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [instance2.email1])
                     return redirect("pages_app:mainpage")
         else:
             request.session["v_form"] = True

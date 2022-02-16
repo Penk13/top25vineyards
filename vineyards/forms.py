@@ -88,15 +88,17 @@ class VineyardUserForm(forms.ModelForm):
     captcha = CaptchaField()
     class Meta:
         model = VineyardUser
-        fields = ["email2", "address", "website", "number"]
+        fields = ["email2", "address", "website", "web_text", "number"]
         labels = {
             "email2": "Email",
             "address": "Address",
             "website": "Website",
+            "web_text": "Website Name",
             "number": "Number",
         }
         widgets = {
             "email2": forms.EmailInput(attrs={"placeholder": "Email", "class": "w-75 bg-light"}),
+            "web_text": forms.TextInput(attrs={"placeholder": "Website Name", "class": "w-75 bg-light"}),
             "website": forms.TextInput(attrs={"placeholder": "Website", "class": "w-75 bg-light"}),
             "number": forms.TextInput(attrs={"placeholder": "Phone Number", "class": "w-75 bg-light"}),
         }
