@@ -81,6 +81,7 @@ class Navbar(models.Model):
 class Footer(models.Model):
     title = models.CharField(max_length=255)
     link = models.URLField(blank=True)
+    new_window = models.BooleanField(default=False)
     order = models.IntegerField(unique=True)
 
     def __str__(self):
