@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.utils.html import strip_tags
 import html
 from vineyards.models import Region
+from news.models import Category
 
 TYPE = (
     ("PAGE", "Page"),
@@ -29,6 +30,7 @@ class ContentPage(models.Model):
     meta_keywords = models.TextField(blank=True)
     additional_content = RichTextUploadingField(blank=True)
     category = models.ManyToManyField(Region, blank=True)
+    news = models.ManyToManyField(Category, blank=True)
     show_listing = models.BooleanField(default=False)
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)

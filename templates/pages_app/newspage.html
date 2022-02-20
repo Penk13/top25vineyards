@@ -185,15 +185,15 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
             <div class="row d-flex">
-              {% for news in travel_news %}
+              {% for post in news %}
               <div class="col-6 col-md-4 py-2 text-center">
-                <a href="{{ news.get_absolute_url }}" style="text-decoration: none">
+                <a href="{{ post.get_absolute_url }}" style="text-decoration: none">
                   <img
-                    src="{{ news.cover.url }}"
+                    src="{{ post.cover.url }}"
                     style="max-height: 150px"
                     class="img-fluid"
                   />
-                  <h6 class="fw-bold text-start text-dark my-2">{{ news.title }}</h6>
+                  <h6 class="fw-bold text-start text-dark my-2">{{ post.title }}</h6>
                 </a>
               </div>
               {% if forloop.counter|divisibleby:6 %}
