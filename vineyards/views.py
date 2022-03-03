@@ -144,7 +144,8 @@ def edit_vineyard(request, vineyard):
                     return redirect("pages_app:mainpage")
     else:
         return redirect("pages_app:mainpage")
-    context = {"vineyard_form": vineyard_form,
+    context = {"vineyard": vineyard,
+                "vineyard_form": vineyard_form,
                 "vineyard_user_form": vineyard_user_form,
                 "travel_news": travel_news,
                 "billboards": billboards,

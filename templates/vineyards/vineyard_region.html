@@ -7,6 +7,17 @@
 {% block keywords %} <meta name="keywords" content="{{ region.meta_keywords }}" />
 {% endblock keywords %}
 
+<!-- Open Graph Tags -->
+{% block opengraph %}
+{% if region.title %}
+<meta property="og:title" content="{{ region.title }}"> {% endif %}
+<meta property="og:url" content="https://top25vineyards.com/{{ request.get_full_path }}">
+{% if region.description %}
+<meta property="og:description" content="{{ region.description|striptags|truncatechars:160 }}"> {% endif %}
+{% if region.thumbnail %} 
+<meta property="og:image" content="https://top25vineyards.com/{{ region.thumbnail.url }}"> {% endif %}
+{% endblock opengraph %}
+
 <!-- Title -->
 {% block title %} {{ region.title }} {% endblock title %}
 
