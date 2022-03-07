@@ -45,7 +45,7 @@
 <!-- News List -->
 {% block content %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h5 class="fw-bold">Listing Title</h5>
+  <h5 class="fw-bold">Top Title Wine News Category Page</h5>
   <hr style="width: 97%; margin: 0 auto;">
   {% for news in news_list %}
   <div class="col-12 col-md-6 py-3 text-start">
@@ -93,9 +93,9 @@
 {% endif %}
 
 <!-- Vineyards -->
-{% if content_page.show_listing == True %}
+{% if content_page.show_listing == True and vineyards %}
 <div class="row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h5 class="fw-bold">Listing Title</h5>
+  <h5 class="fw-bold">Middle Section Title - Wine News</h5>
   <hr style="width: 97%; margin: 0 auto;">
   {% for vineyard in vineyards %}
   <div class="col-12 col-md-6 py-3 text-start">
@@ -194,7 +194,7 @@
 <div class="row d-flex">
   <div class="col col-md-12 col-lg-8">
     <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-      <h5 class="fw-bold">Global Travel News</h5>
+      <h5 class="fw-bold">Food & Dining News - at Wine News</h5>
       <hr style="width: 97%; margin: 0 auto; margin-bottom: 10px;">
       <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
