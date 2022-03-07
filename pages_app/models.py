@@ -89,9 +89,18 @@ class Footer(models.Model):
     def __str__(self):
         return self.title
 
+
 class Sidebar(models.Model):
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
 
     def __str__(self):
         return "Default Sidebar"
+
+
+class Script(models.Model):
+    name = models.CharField(max_length=255)
+    script = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.name

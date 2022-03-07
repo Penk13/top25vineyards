@@ -1,8 +1,9 @@
-from .models import Navbar, Footer, Sidebar
+from .models import Navbar, Footer, Sidebar, Script
 from news.models import Post, Category, Billboard
 
 
 def base_variable(request):
+    header_script = Script.objects.get(name="HEADER SCRIPT")
     navbars = Navbar.objects.all().order_by("order")
     default_sidebar = Sidebar.objects.get(id=1).sidebar
     default_ad_manager = Sidebar.objects.get(id=1).ad_manager
@@ -13,7 +14,8 @@ def base_variable(request):
     footer_index = int(footer.count()/2)
     footers1 = footer[:footer_index]
     footers2 = footer[footer_index:]
-    return {"navbars": navbars,
+    return {"header_script": header_script,
+            "navbars": navbars,
             "default_sidebar": default_sidebar,
             "default_ad_manager": default_ad_manager,
             "travel_news": travel_news,

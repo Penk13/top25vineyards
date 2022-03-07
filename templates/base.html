@@ -25,10 +25,10 @@
     <!-- Slick Slider -->
     <link href="https://kenwheeler.github.io/slick/slick/slick.css" rel="stylesheet" />
     <link href="https://kenwheeler.github.io/slick/slick/slick-theme.css" rel="stylesheet" />
-
+    
     <!-- Header Script -->
-    <script type='text/javascript' src='https://www.publicadvice.com/offers/www/delivery/spcjs.php?id=5'></script>
-
+    {{ header_script.script|safe }}
+    
     <title>
       {% block title %} {% endblock title %} | Top 25 Vineyards - World's Best Vineyards
     </title>

@@ -221,6 +221,7 @@ ADMIN_ORDERING = [
         'Navbar',
         'Footer',
         'Sidebar',
+        'Script',
     ]),
     ('mailing', [
         'ContactEntry',
