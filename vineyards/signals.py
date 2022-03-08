@@ -4,7 +4,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.contrib.sites.models import Site
-from .models import ReviewAndRating
+from .models import ReviewAndRating, Comment, Vineyard
 import datetime
 
 
@@ -46,5 +46,37 @@ def from_user_email(sender, instance, **kwargs):
                   instance.vineyard.name + '\n\n' +
                   instance.title + '\n\n' +
                   instance.review,
+                  '',
+                  [settings.DEFAULT_FROM_EMAIL])
+
+
+@receiver(post_save, sender=Comment)
+def to_user(sender, instance, **kwargs):
+    rr = instance.rr
+    if instance.approved is True:
+        domain = Site.objects.get_current().domain
+        path = rr.vineyard.get_absolute_url()
+        # Email sent to admin
+        send_mail("Your comment is now live",
+                  'https://' + domain + path + '\n\n',
+                   settings.DEFAULT_FROM_EMAIL,
+                   [instance.user.email])
+    else:
+        # Email sent to user
+        send_mail("Thank you for your comment",
+                   instance.title,
+                   settings.DEFAULT_FROM_EMAIL,
+                   [instance.user.email])
+
+
+@receiver(post_save, sender=Comment)
+def to_admin(sender, instance, **kwargs):
+    rr = instance.rr
+    if instance.approved is False:
+        # Email sent to admin
+        send_mail("Comment from User",
+                  rr.vineyard.name + '\n\n' +
+                  instance.title + '\n\n' +
+                  instance.body,
                   '',
                   [settings.DEFAULT_FROM_EMAIL])

@@ -196,8 +196,11 @@
       {% else %}
       <p>{{ r.review|safe|linebreaks }}</p>
       {% endif %}
+
       <!-- Comment Form -->
+      {% if request.user != r.user %}
       <a class="fw-bold fst-italic" data-bs-toggle="modal" data-bs-target="#commentModal-{{ r.id }}" style="cursor: pointer;">Comment</a>
+      {% endif %}
       <div class="modal fade" id="commentModal-{{ r.id }}" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
