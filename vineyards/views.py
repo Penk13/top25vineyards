@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from .models import Vineyard, VineyardUser, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating
-from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm
+from .models import Vineyard, VineyardUser, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
+from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm, CommentForm
 from datetime import date, timedelta
 from django.core.mail import send_mail
 from django.conf import settings
@@ -13,6 +13,19 @@ def vineyard_detail(request, region, slug, parent=None):
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
+    comments = Comment.objects.filter(approved=True)
+
+    # Comment Form
+    form = CommentForm(request.POST or None)
+    if form.is_valid():
+        rr = ReviewAndRating.objects.get(pk=request.POST['rr_id'])
+        if request.user.is_authenticated and request.user != rr.user:
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.rr = rr
+            instance.save()
+            return redirect(vineyard.get_absolute_url())
+
     try:
         vineyard_user = VineyardUser.objects.get(vineyard=vineyard)
     except:
@@ -36,9 +49,11 @@ def vineyard_detail(request, region, slug, parent=None):
                "yard_images": yard_images,
                "yard_cover_images": yard_cover_images,
                "review_and_rating": review_and_rating,
+               "comments": comments,
                "recent_reviews": recent_reviews,
                "error_msg": error_msg,
                "success_msg": success_msg,
+               "form": form,
                "travel_news": travel_news,
                "billboards": billboards,
                }

@@ -207,3 +207,15 @@ class ReviewAndRating(models.Model):
 
     def __str__(self):
         return "Total rating : " + str(self.total_rating()) + " - " + self.title + " - " + str(self.date_created.strftime("%d %b %Y"))
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rr = models.ForeignKey(ReviewAndRating, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    body = models.TextField(blank=False, validators=[review_validator])
+    date_created = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.user) + " - " + self.title

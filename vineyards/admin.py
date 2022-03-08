@@ -1,6 +1,6 @@
 from re import search
 from django.contrib import admin
-from .models import RegionImage, Region, Vineyard, VineyardUser, TopSliderImage, CoverSliderImage, ReviewAndRating
+from .models import RegionImage, Region, Vineyard, VineyardUser, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
 
 
 class RegionImageInline(admin.TabularInline):
@@ -37,7 +37,13 @@ class ReviewAndRatingAdmin(admin.ModelAdmin):
     list_filter = ['approved']
 
 
+class CommentAdmin(admin.ModelAdmin):
+    search_fields = ['title', 'body']
+    list_filter = ['approved']
+
+
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Vineyard, VineyardAdmin)
 admin.site.register(VineyardUser, VineyardUserAdmin)
 admin.site.register(ReviewAndRating, ReviewAndRatingAdmin)
+admin.site.register(Comment, CommentAdmin)

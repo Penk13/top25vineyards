@@ -213,6 +213,7 @@ ADMIN_ORDERING = [
     ('vineyards', [
         'Region',
         'ReviewAndRating',
+        'Comment',
         'Vineyard',
         'VineyardUser',
     ]),

@@ -1,5 +1,5 @@
 from django import forms
-from .models import ReviewAndRating, Vineyard, VineyardUser
+from .models import ReviewAndRating, Vineyard, VineyardUser, Comment
 from captcha.fields import CaptchaField
 from django.core.files.images import get_image_dimensions
 
@@ -102,3 +102,12 @@ class VineyardUserForm(forms.ModelForm):
             "website": forms.TextInput(attrs={"placeholder": "Website", "class": "w-75 bg-light"}),
             "number": forms.TextInput(attrs={"placeholder": "Phone Number", "class": "w-75 bg-light"}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    captcha = CaptchaField()
+    class Meta:
+        model = Comment
+        fields = [
+            'title', 'body'
+        ]
