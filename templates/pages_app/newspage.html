@@ -45,8 +45,10 @@
 <!-- News List -->
 {% block content %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h5 class="fw-bold">Top Title Wine News Category Page</h5>
+  {% if content_page.listing_title1 %}
+  <h5 class="fw-bold">{{ content_page.listing_title1 }}</h5>
   <hr style="width: 97%; margin: 0 auto;">
+  {% endif %}
   {% for news in news_list %}
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ news.get_absolute_url }}"><img src="{{ news.cover.url }}" class="img-fluid" /></a>
@@ -95,8 +97,10 @@
 <!-- Vineyards -->
 {% if content_page.show_listing == True and vineyards %}
 <div class="row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h5 class="fw-bold">Middle Section Title - Wine News</h5>
+  {% if content_page.listing_title2 %}
+  <h5 class="fw-bold">{{ content_page.listing_title2 }}</h5>
   <hr style="width: 97%; margin: 0 auto;">
+  {% endif %}
   {% for vineyard in vineyards %}
   <div class="col-12 col-md-6 py-3 text-start">
     <div style="position: absolute; z-index: 1">
@@ -194,8 +198,10 @@
 <div class="row d-flex">
   <div class="col col-md-12 col-lg-8">
     <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-      <h5 class="fw-bold">Food & Dining News - at Wine News</h5>
+      {% if content_page.listing_title3 %}
+      <h5 class="fw-bold">{{ content_page.listing_title3 }}</h5>
       <hr style="width: 97%; margin: 0 auto; margin-bottom: 10px;">
+      {% endif %}
       <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
