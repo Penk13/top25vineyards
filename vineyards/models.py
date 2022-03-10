@@ -27,6 +27,8 @@ class Region(models.Model):
     meta_keywords = models.TextField(blank=True)
     logo_on_navbar = models.ImageField(
         upload_to="logo-on-navbar/", blank=True, max_length=255)
+    listing_title1 = models.CharField(max_length=255, blank=True)
+    listing_title2 = models.CharField(max_length=255, blank=True)
     display_on_navbar = models.BooleanField(default=True)
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
