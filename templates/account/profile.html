@@ -84,11 +84,39 @@
   {% for vineyard in vineyards %}
   <div class="row">
     <div class="col-12">
-      <strong>{{ vineyard.vineyard.name }}</strong> - 
-      <a href="{% url 'vineyards:edit-vineyard' vineyard.vineyard.slug %}">Edit</a>
+      <strong>{{ vineyard.name }}</strong> - 
+      <a href="{% url 'vineyards:edit-vineyard' vineyard.slug %}">Edit</a>
     </div>
   </div>
   {% endfor %}
+</div>
+
+<!-- Reviews Received -->
+<div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="row p-3 align-items-center mt-0 pt-0 pe-0">
+    <h5 class="col-9 fw-bold ps-0 m-0">Reviews Received</h5>
+  </div>
+  <hr />
+  {% if rr_received %} {% for rr in rr_received %}
+  <div class="row my-4">
+    <div class="col-3 text-center">
+      <img src="{{ rr.user.profile.profile_pic.url }}" class="w-100" />
+      <strong>{{ rr.user.username }}</strong>
+    </div>
+    <div class="col-9" style="word-wrap: break-word">
+      <h5 class="d-flex">
+        <strong>{{ rr.title }}</strong><span class="ms-auto">{{ rr.total_rating }}</span>
+      </h5>
+      <h6>{{ rr.date_created }}</h6>
+      <details>
+        <summary>Read more...</summary>
+        <p>{{ rr.review }}</p>
+      </details>
+    </div>
+  </div>
+  {% endfor %} {% else %}
+  <h6><strong>No Reviews Received</strong></h6>
+  {% endif %}
 </div>
 {% endblock content %}
 

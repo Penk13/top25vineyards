@@ -46,7 +46,10 @@ def profile(request):
 
     user = request.user
     profile = Profile.objects.get(user=user)
-    vineyards = VineyardUser.objects.filter(name=user.username)
+    vineyard_user = VineyardUser.objects.filter(name=user.username).values_list('vineyard')
+    vineyards = Vineyard.objects.filter(id__in=vineyard_user)
+    rr_received = ReviewAndRating.objects.filter(vineyard__in=vineyards)
+
     form = ProfileForm(instance=profile)
     review_and_rating = ReviewAndRating.objects.filter(
         user=user, approved=True)
@@ -63,5 +66,6 @@ def profile(request):
         'form': form,
         'review_and_rating': review_and_rating,
         'vineyards': vineyards,
+        'rr_received': rr_received,
     }
     return render(request, "account/profile.html", context)
