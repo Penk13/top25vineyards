@@ -220,11 +220,19 @@
   </div>
   <!-- Comment on Each Review -->
   {% for comment in comments %} {% if comment.rr == r %}
-  <div>
+  <div class="col-3 col-sm-2"></div>
+  <div class="col-2 text-center">
+    <img
+      src="{{ comment.user.profile.profile_pic.url }}"
+      style="height: 72px; width: 72px; border-radius: 50%; object-fit: cover"
+     />
+     <p class="col-12" style="font-size: 2vmin">{{ comment.user.username }}</p>
+  </div>
+  <div class="col-7 col-sm-8">
     <h6>{{ comment.user }} - {{ comment.title }}</h6>
     <p>{{ comment.body }}</p>
-    <hr style="margin-top: 15px" />
   </div>
+  <hr style="margin-top: 15px" />
   {% endif %} {% endfor %}
 
   {% endfor %} {% else %}
