@@ -41,7 +41,7 @@
       <p>{{ user.date_joined }}</p>
     </form>
     <div class="d-flex">
-      <input class="btn btn-primary" type="submit" value="Save Profile" form="profile_form" />
+      <input class="btn btn-primary" type="submit" value="Save Profile" form="profile_form" name="profile_form" />
       <a class="btn btn-danger ms-auto" href="{% url 'account_logout' %}" role="button">Sign Out</a>
     </div>
   </div>
@@ -112,6 +112,28 @@
         <summary>Read more...</summary>
         <p>{{ rr.review }}</p>
       </details>
+      <!-- Comment Form -->
+      {% if not rr.comment %}
+      <a class="fw-bold fst-italic" data-bs-toggle="modal" data-bs-target="#commentModal-{{ rr.id }}" style="cursor: pointer;">Reply</a>
+      {% endif %}
+      <div class="modal fade" id="commentModal-{{ rr.id }}" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="hidden" value="{{ rr.id }}" name="rr_id">
+              {% for field in comment_form %}
+              {{ field.label }}
+              {{ field|as_crispy_field }}
+              {% endfor %}
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-primary" value="Comment" name="comment_form"></input>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   {% endfor %} {% else %}

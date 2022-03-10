@@ -213,7 +213,7 @@ class ReviewAndRating(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rr = models.ForeignKey(ReviewAndRating, on_delete=models.CASCADE)
+    rr = models.OneToOneField(ReviewAndRating, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     body = models.TextField(blank=False, validators=[review_validator])
     date_created = models.DateTimeField(auto_now_add=True)

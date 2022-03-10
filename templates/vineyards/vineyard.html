@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %}
+{% extends 'base.html' %} {% load static %}
 
 <!-- Meta Keywords -->
 {% block description %} <meta name="description" content="{{ vineyard.meta_description }}" />
@@ -197,28 +197,6 @@
       <p>{{ r.review|safe|linebreaks }}</p>
       {% endif %}
 
-      <!-- Comment Form -->
-      {% if request.user != r.user %}
-      <a class="fw-bold fst-italic" data-bs-toggle="modal" data-bs-target="#commentModal-{{ r.id }}" style="cursor: pointer;">Comment</a>
-      {% endif %}
-      <div class="modal fade" id="commentModal-{{ r.id }}" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <form method="POST" enctype="multipart/form-data">
-              {% csrf_token %}
-              <input type="hidden" value="{{ r.id }}" name="rr_id">
-              {% for field in form %}
-              {{ field.label }}
-              {{ field|as_crispy_field }}
-              {% endfor %}
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <input type="submit" class="btn btn-primary" value="Comment"></input>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="col-2 fw-bold ps-0">
       <img src="{% static 'img/quote_box.png' %}" style="width: 80px; position: absolute" />

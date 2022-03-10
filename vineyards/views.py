@@ -15,17 +15,6 @@ def vineyard_detail(request, region, slug, parent=None):
     billboards = Billboard.objects.filter(display=True)
     comments = Comment.objects.filter(approved=True)
 
-    # Comment Form
-    form = CommentForm(request.POST or None)
-    if form.is_valid():
-        rr = ReviewAndRating.objects.get(pk=request.POST['rr_id'])
-        if request.user.is_authenticated and request.user != rr.user:
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.rr = rr
-            instance.save()
-            return redirect(vineyard.get_absolute_url())
-
     try:
         vineyard_user = VineyardUser.objects.get(vineyard=vineyard)
     except:
@@ -53,7 +42,6 @@ def vineyard_detail(request, region, slug, parent=None):
                "recent_reviews": recent_reviews,
                "error_msg": error_msg,
                "success_msg": success_msg,
-               "form": form,
                "travel_news": travel_news,
                "billboards": billboards,
                }
