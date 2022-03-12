@@ -220,4 +220,4 @@ class Comment(models.Model):
     approved = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(self.user) + " - " + self.title
+        return str(self.user) + " - " + self.title + " - " + self.rr.vineyard.name
