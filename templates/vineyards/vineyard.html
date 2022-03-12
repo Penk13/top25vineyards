@@ -350,13 +350,15 @@
 <div class="row d-flex">
   <div class="col col-md-12 col-lg-8">
     <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-      <h5 class="fw-bold">Global Travel News</h5>
+      {% if vineyard.listing_title1 %}
+      <h5 class="fw-bold">{{ vineyard.listing_title1 }}</h5>
       <hr style="width: 97%; margin: 0 auto; margin-bottom: 10px;">
+      {% endif %}
       <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
             <div class="row d-flex">
-              {% for news in travel_news %}
+              {% for news in news %}
               <div class="col-6 col-md-4 py-2 text-center">
                 <a href="{{ news.get_absolute_url }}" style="text-decoration: none">
                   <img

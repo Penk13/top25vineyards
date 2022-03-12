@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from .models import Vineyard, VineyardUser, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
-from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm, CommentForm
+from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm
 from datetime import date, timedelta
 from django.core.mail import send_mail
 from django.conf import settings
@@ -10,8 +10,7 @@ from news.models import Post, Category, Billboard
 
 def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug, display=True)
-    category = Category.objects.get(slug="global-travel-news")
-    travel_news = Post.objects.filter(category=category).order_by("-id")
+    news = Post.objects.filter(category__in=vineyard.news.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     comments = Comment.objects.filter(approved=True)
 
@@ -42,7 +41,7 @@ def vineyard_detail(request, region, slug, parent=None):
                "recent_reviews": recent_reviews,
                "error_msg": error_msg,
                "success_msg": success_msg,
-               "travel_news": travel_news,
+               "news": news,
                "billboards": billboards,
                }
     return render(request, "vineyards/vineyard.html", context)
@@ -50,8 +49,7 @@ def vineyard_detail(request, region, slug, parent=None):
 
 def vineyard_region(request, region, parent=None):
     region = get_object_or_404(Region, slug=region)
-    category = Category.objects.get(slug="global-travel-news")
-    travel_news = Post.objects.filter(category=category).order_by("-id")
+    news = Post.objects.filter(category__in=region.news.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     region_images = RegionImage.objects.filter(region=region)
     p = Paginator(Vineyard.objects.filter(
@@ -61,7 +59,7 @@ def vineyard_region(request, region, parent=None):
     context = {"vineyards": vineyards, 
                "region": region,
                "region_images": region_images,
-               "travel_news": travel_news,
+               "news": news,
                "billboards": billboards,
                }
     return render(request, "vineyards/vineyard_region.html", context)

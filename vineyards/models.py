@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.utils.html import strip_tags
 import html
 from django.core.exceptions import ValidationError
+from news.models import Category
 
 User = get_user_model()
 
@@ -27,6 +28,7 @@ class Region(models.Model):
     meta_keywords = models.TextField(blank=True)
     logo_on_navbar = models.ImageField(
         upload_to="logo-on-navbar/", blank=True, max_length=255)
+    news = models.ManyToManyField(Category, blank=True)
     listing_title1 = models.CharField(max_length=255, blank=True)
     listing_title2 = models.CharField(max_length=255, blank=True)
     display_on_navbar = models.BooleanField(default=True)
@@ -104,6 +106,8 @@ class Vineyard(models.Model):
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
+    news = models.ManyToManyField(Category, blank=True)
+    listing_title1 = models.CharField(max_length=255, blank=True)
     top_slider = models.BooleanField(default=False)
     cover_slider = models.BooleanField(default=False)
     hide_rating = models.BooleanField(default=False)
