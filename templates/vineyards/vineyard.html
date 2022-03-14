@@ -150,8 +150,8 @@
 </div>
 
 <!-- Review and Rating -->
-<div class="row d-flex p-3 my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <div class="row p-3 align-items-center mt-0 pt-0 pe-0">
+<div class="row p-4 d-flex my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
+  <div class="row p-0 pb-3 align-items-center m-0">
     <h5 class="col-9 fw-bold ps-0 m-0">Ratings & Reviews</h5>
     <a class="col-3 btn btn-danger" href="{{ vineyard.get_absolute_url }}review/" role="button"
       ><i class="bi bi-pencil-square"></i> Write a Review</a
@@ -216,20 +216,22 @@
         </p>
       </div>
     </div>
-    <hr style="margin-top: 15px" />
   </div>
+  <hr style="margin-top: 15px; border-top: 1px dotted black;" />
   <!-- Comment on Each Review -->
   {% for comment in comments %} {% if comment.rr == r %}
-  <div class="col-3 col-sm-2"></div>
-  <div class="col-8 col-sm-9 d-flex px-0">
-    <img
-      class="mx-2"
-      src="{{ comment.user.profile.profile_pic.url }}"
-      style="height: 56px; width: 56px; object-fit: cover; float: left;"
-     />
-    <div style="float: right;">
-      <h6>{{ comment.title }}</h6>
-      <p>{{ comment.body }}</p>
+  <div class="row">
+    <div class="col-3 col-sm-2"></div>
+    <div class="col-8 col-sm-9 d-flex px-0">
+      <img
+        class="mx-2"
+        src="{{ comment.user.profile.profile_pic.url }}"
+        style="height: 56px; width: 56px; object-fit: cover; float: left;"
+      />
+      <div style="float: right;">
+        <h6>{{ comment.title }}</h6>
+        <p>{{ comment.body }}</p>
+      </div>
     </div>
   </div>  
   <hr style="margin-top: 15px" />
