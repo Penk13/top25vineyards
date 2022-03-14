@@ -99,7 +99,7 @@ def footerpage(request, slug):
                     request.session["vineyard_form_msg"] = "Your vineyard has been successfully submitted!"
                     return redirect("pages_app:mainpage")
         else:
-            request.session["v_form"] = True
+            request.session["submit_vineyard"] = True
             return redirect("account_login")
 
     context = {"content_page": content_page,

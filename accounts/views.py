@@ -4,18 +4,22 @@ from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from pages_app.models import ContentPage
 from vineyards.models import ReviewAndRating, Vineyard, VineyardUser
-from vineyards.forms import ReviewRatingForm, CommentForm
+from vineyards.forms import CommentForm
 from datetime import date, timedelta
 
 
 @login_required
 def profile(request):
+    # From submit_vineyard
+    if 'submit_vineyard' in request.session:
+        request.session.pop('submit_vineyard')
+        return redirect("pages_app:footerpage", slug="submit-a-vineyard")
+
     # From rr_form
     if 'vineyard' in request.session:
         vineyard = Vineyard.objects.get(
             id=request.session['vineyard'])
         # Check if there is a previous review
-        form = ReviewRatingForm(request.session["rr_form"])
         try:
             obj = ReviewAndRating.objects.filter(
                 user=request.user, vineyard=vineyard).latest('date_created')
@@ -30,19 +34,13 @@ def profile(request):
         if not allowed:
             request.session['rr_form_error_msg'] = "Sorry you can't post right now. You have to wait 10 days since the last post."
         else:
-            instance = form.save(commit=False)
-            instance.user = request.user
-            instance.vineyard = vineyard
-            instance.save()
+            request.session['rr_form'].pop('captcha')
+            request.session.modified = True
+            ReviewAndRating.objects.create(user=request.user, vineyard=vineyard, **request.session["rr_form"])
             request.session['rr_form_success_msg'] = "Your Rating and Review has been submitted. Thank you."
         request.session.pop('vineyard')
         request.session.pop('rr_form')
         return redirect(vineyard.get_absolute_url())
-
-    # From v_form
-    if 'v_form' in request.session:
-        request.session.pop('v_form')
-        return redirect("pages_app:footerpage", slug="submit-a-vineyard")
 
     user = request.user
     profile = Profile.objects.get(user=user)
