@@ -1,4 +1,3 @@
-from re import search
 from django.contrib import admin
 from .models import RegionImage, Region, Vineyard, VineyardUser, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
 
@@ -26,6 +25,7 @@ class VineyardAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
     search_fields = ['name', 'text']
     list_filter = ['region', 'display']
+    exclude = ['cover']
 
 
 class VineyardUserAdmin(admin.ModelAdmin):

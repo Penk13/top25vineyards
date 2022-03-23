@@ -117,8 +117,12 @@
       {% endif %}
     </div>
     <a href="{{ vineyard.get_absolute_url }}">
-      <img src="{{ vineyard.cover.url }}" class="img-fluid"
-    /></a>
+      {% if vineyard.cover2 %}
+      <img src="{{ vineyard.cover2.url }}" class="img-fluid"/>
+      {% else %}
+      <img src="{{ vineyard.cover.url }}" class="img-fluid"/>
+      {% endif %}
+    </a>
   </div>
   <div class="col-12 col-md-6 py-3" style="font-size: 14px">
     <h5 class="fw-bold">

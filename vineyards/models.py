@@ -9,6 +9,7 @@ from django.utils.html import strip_tags
 import html
 from django.core.exceptions import ValidationError
 from news.models import Category
+from filer.fields.image import FilerImageField
 
 User = get_user_model()
 
@@ -102,6 +103,7 @@ class Vineyard(models.Model):
     regions = models.ManyToManyField(
         Region, blank=True, related_name="regions")
     cover = models.ImageField(upload_to="vineyard/", max_length=255)
+    cover2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)

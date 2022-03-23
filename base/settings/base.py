@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     'captcha',
+    'easy_thumbnails',
+    'filer',
+    'mptt',
 
     'accounts.apps.AccountsConfig',
     'pages_app.apps.PagesAppConfig',
@@ -173,6 +176,28 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = "/top25vineyards/"
 
 MEDIA_ROOT = BASE_DIR / "static-live" / "media-root"
+
+# django-filer
+THUMBNAIL_PROCESSORS = (
+    'easy_thumbnails.processors.colorspace',
+    'easy_thumbnails.processors.autocrop',
+    #'easy_thumbnails.processors.scale_and_crop',
+    'filer.thumbnail_processors.scale_and_crop_with_subject_location',
+    'easy_thumbnails.processors.filters',
+)
+FILER_STORAGES = {
+    'public': {
+        'main': {
+            'UPLOAD_TO': 'my_filer.generate_filer_filename.custom_filename',
+            'UPLOAD_TO_PREFIX': 'img',
+        },
+        'thumbnails': {
+            'THUMBNAIL_OPTIONS': {
+                'base_dir': 'thumbnails',
+            },
+        },
+    },
+}
 
 
 # Default primary key field type

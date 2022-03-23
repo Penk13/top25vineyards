@@ -14,7 +14,9 @@
 <meta property="og:url" content="https://top25vineyards.com/{{ request.get_full_path }}">
 {% if vineyard.text %}
 <meta property="og:description" content="{{ vineyard.text|striptags|truncatechars:160 }}"> {% endif %}
-{% if vineyard.cover %} 
+{% if vineyard.cover2 %} 
+<meta property="og:image" content="https://top25vineyards.com/{{ vineyard.cover2.url }}">
+{% else %}
 <meta property="og:image" content="https://top25vineyards.com/{{ vineyard.cover.url }}"> {% endif %}
 {% endblock opengraph %}
 
