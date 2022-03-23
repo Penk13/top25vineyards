@@ -25,7 +25,6 @@ class VineyardAdmin(admin.ModelAdmin):
     readonly_fields = ('slug',)
     search_fields = ['name', 'text']
     list_filter = ['region', 'display']
-    exclude = ['cover']
 
 
 class VineyardUserAdmin(admin.ModelAdmin):

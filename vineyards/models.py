@@ -102,7 +102,7 @@ class Vineyard(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     regions = models.ManyToManyField(
         Region, blank=True, related_name="regions")
-    cover = models.ImageField(upload_to="vineyard/", max_length=255)
+    cover = models.ImageField(upload_to="vineyard/", max_length=255, blank=True)
     cover2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)

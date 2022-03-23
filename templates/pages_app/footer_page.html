@@ -59,7 +59,7 @@
     {% csrf_token %} 
     <h3>Vineyard Submission</h3>
     {% for field in vineyard_form %}
-      {% if field.label != "Regions" %}
+      {% if field.label != "Regions" and field.label != "Upload Main Photo (min. width 900px)" %}
         <div class="col-12 my-2">{{ field.label }}</div>
       {% endif %}
       {{ field|as_crispy_field }}
