@@ -14,7 +14,9 @@
 <meta property="og:url" content="https://top25vineyards.com/{{ request.get_full_path }}">
 {% if region.description %}
 <meta property="og:description" content="{{ region.description|striptags|truncatechars:160 }}"> {% endif %}
-{% if region.thumbnail %} 
+{% if region.thumbnail2 %} 
+<meta property="og:image" content="https://top25vineyards.com/{{ region.thumbnail2.url }}">
+{% else %} 
 <meta property="og:image" content="https://top25vineyards.com/{{ region.thumbnail.url }}"> {% endif %}
 {% endblock opengraph %}
 
@@ -22,7 +24,11 @@
 {% block title %} {{ region.title }} {% endblock title %}
 
 <!-- Nadbar Logo -->
-{% block navlogo %} {% if region.logo_on_navbar %}
+{% block navlogo %} {% if region.logo_on_navbar2 %}
+<a class="navbar-brand px-0 mx-0" href="{{ region.get_absolute_url }}">
+  <img src="{{ region.logo_on_navbar2.url }}" />
+</a>
+{% elif region.logo_on_navbar %}
 <a class="navbar-brand px-0 mx-0" href="{{ region.get_absolute_url }}">
   <img src="{{ region.logo_on_navbar.url }}" />
 </a>

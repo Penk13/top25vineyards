@@ -24,7 +24,11 @@
 {% block title %} {{ vineyard.name }} {% endblock title %}
 
 <!-- Navbar Logo -->
-{% block navlogo %} {% if vineyard.region.logo_on_navbar %}
+{% block navlogo %} {% if vineyard.region.logo_on_navbar2 %}
+<a class="navbar-brand px-0 mx-0" href="{{vineyard.region.get_absolute_url}}">
+  <img src="{{ vineyard.region.logo_on_navbar2.url }}" />
+</a>
+{% elif vineyard.region.logo_on_navbar %}
 <a class="navbar-brand px-0 mx-0" href="{{vineyard.region.get_absolute_url}}">
   <img src="{{ vineyard.region.logo_on_navbar.url }}" />
 </a>

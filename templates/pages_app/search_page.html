@@ -109,7 +109,9 @@
   {% elif model == 'Region' %}
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ result.get_absolute_url }}">
-      {% if result.thumbnail %}
+      {% if result.thumbnail2 %}
+      <img src="{{ result.thumbnail2.url }}" class="img-fluid" />
+      {% elif result.thumbnail %}
       <img src="{{ result.thumbnail.url }}" class="img-fluid" />
       {% else %}
       <img src="{% static 'img/thumbnail-page.jpg' %}" class="img-fluid" />
