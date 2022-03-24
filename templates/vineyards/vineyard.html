@@ -75,7 +75,16 @@
   {% endif %}
 
   <div class="row d-flex align-items-center mb-3">
-    {% if vineyard.custom_overlay %}
+    {% if vineyard.custom_overlay2 %}
+    <div
+      class="col-4"
+      style="
+      background: url('{{ vineyard.custom_overlay2.url }}') no-repeat center;
+      background-size: 125px;
+      height: 120px;
+    "
+    ></div>
+    {% elif vineyard.custom_overlay %}
     <div
       class="col-4"
       style="

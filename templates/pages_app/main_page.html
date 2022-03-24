@@ -59,7 +59,9 @@
   {% for vineyard in vineyards %}
   <div class="col-12 col-md-6 py-3 text-start">
     <div style="position: absolute; z-index: 1">
-      {% if vineyard.custom_overlay %}
+      {% if vineyard.custom_overlay2 %}
+      <img src="{{ vineyard.custom_overlay2.url }} " style="max-width: 125px" class="m-2" />
+      {% elif vineyard.custom_overlay %}
       <img src="{{ vineyard.custom_overlay.url }} " style="max-width: 125px" class="m-2" />
       {% elif vineyard.hide_rating == False %}
       <p

@@ -23,14 +23,16 @@ class Region(models.Model):
     description_on_list = RichTextUploadingField(blank=True)
     thumbnail = models.ImageField(
         upload_to="thumbnail-region", blank=True, max_length=255)
-    thumbnail2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE, related_name="thumbnail2")
+    thumbnail2 = FilerImageField(
+        null=True, blank=True, on_delete=models.CASCADE, related_name="thumbnail2")
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
     logo_on_navbar = models.ImageField(
         upload_to="logo-on-navbar/", blank=True, max_length=255)
-    logo_on_navbar2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE, related_name="logo_on_navbar2")
+    logo_on_navbar2 = FilerImageField(
+        null=True, blank=True, on_delete=models.CASCADE, related_name="logo_on_navbar2")
     news = models.ManyToManyField(Category, blank=True)
     listing_title1 = models.CharField(max_length=255, blank=True)
     listing_title2 = models.CharField(max_length=255, blank=True)
@@ -91,6 +93,8 @@ class Vineyard(models.Model):
     rating = models.FloatField(default=0)
     custom_overlay = models.ImageField(
         upload_to="custom-rating/", blank=True, max_length=255)
+    custom_overlay2 = FilerImageField(
+        null=True, blank=True, on_delete=models.CASCADE, related_name="custom_overlay2")
     google_map = models.TextField(default="")
     wine_rg_url = models.URLField(blank=True)
     wine_rg = models.CharField(max_length=255)
