@@ -185,11 +185,13 @@ class VineyardUser(models.Model):
 class TopSliderImage(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="yard-image/", max_length=255)
+    image2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
 class CoverSliderImage(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="yard-cover-image/", max_length=255)
+    image2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
 def review_validator(value):

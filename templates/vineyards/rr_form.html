@@ -44,7 +44,11 @@
   {% if vineyard.top_slider %}
   <div class="slick-carousel">
     {% for image in yard_images %}
-    <img src="{{ image.image.url }}" />
+      {% if image.image2 %}
+      <img src="{{ image.image2.url }}" />
+      {% elif image.image %}
+      <img src="{{ image.image.url }}" />
+      {% endif %}
     {% endfor %}
   </div>
   {% endif %}
@@ -59,7 +63,11 @@
   {% if vineyard.cover_slider and yard_cover_images %}
   <div class="slick-carousel-yard-cover my-3">
     {% for image in yard_cover_images %}
-    <img src="{{ image.image.url }}" />
+      {% if image.image2 %}
+      <img src="{{ image.image2.url }}" />
+      {% elif image.image %}
+      <img src="{{ image.image.url }}" />
+      {% endif %}
     {% endfor %}
   </div>
   {% elif vineyard.cover2 %}
