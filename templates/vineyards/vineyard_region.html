@@ -16,7 +16,7 @@
 <meta property="og:description" content="{{ region.description|striptags|truncatechars:160 }}"> {% endif %}
 {% if region.thumbnail2 %} 
 <meta property="og:image" content="https://top25vineyards.com/{{ region.thumbnail2.url }}">
-{% else %} 
+{% elif region.thumbnail %} 
 <meta property="og:image" content="https://top25vineyards.com/{{ region.thumbnail.url }}"> {% endif %}
 {% endblock opengraph %}
 
