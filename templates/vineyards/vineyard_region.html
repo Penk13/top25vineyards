@@ -43,7 +43,11 @@
 <section class="vineyard-region">
   <div class="slick-carousel">
     {% for image in region_images %}
-    <img src="{{ image.region_images.url }}" />
+      {% if image.region_images2 %}
+      <img src="{{ image.region_images2.url }}" />
+      {% elif image.region_images %}
+      <img src="{{ image.region_images.url }}" />
+      {% endif %}
     {% endfor %}
   </div>
 </section>

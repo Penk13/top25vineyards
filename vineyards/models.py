@@ -85,6 +85,7 @@ class RegionImage(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     region_images = models.ImageField(
         upload_to="region-image/", max_length=255)
+    region_images2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Vineyard(models.Model):
