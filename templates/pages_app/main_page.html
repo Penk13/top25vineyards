@@ -14,7 +14,9 @@
 <meta property="og:url" content="https://top25vineyards.com/{{ request.get_full_path }}">
 {% if content_page.content %}
 <meta property="og:description" content="{{ content_page.content|striptags|truncatechars:160 }}"> {% endif %}
-{% if content_page.thumbnail %} 
+{% if content_page.thumbnail2 %} 
+<meta property="og:image" content="https://top25vineyards.com/{{ content_page.thumbnail2.url }}"> 
+{% elif content_page.thumbnail %} 
 <meta property="og:image" content="https://top25vineyards.com/{{ content_page.thumbnail.url }}"> {% endif %}
 {% endblock opengraph %}
 
@@ -26,7 +28,11 @@
 <div class="slick-carousel-homepage" style="max-height: 480px">
   {% for image in image_carousel %}
   <div>
+    {% if image.image2 %}
+    <img class="w-100" src="{{ image.image2.url }}" alt="" />
+    {% elif image.image %}
     <img class="w-100" src="{{ image.image.url }}" alt="" />
+    {% endif %}
   </div>
   {% endfor %}
 </div>

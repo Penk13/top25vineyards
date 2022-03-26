@@ -7,6 +7,7 @@ from django.utils.html import strip_tags
 import html
 from vineyards.models import Region
 from news.models import Category
+from filer.fields.image import FilerImageField
 
 TYPE = (
     ("PAGE", "Page"),
@@ -21,6 +22,7 @@ class ContentPage(models.Model):
     types = models.CharField(max_length=20, choices=TYPE)
     thumbnail = models.ImageField(
         upload_to='thumbnail-page/', blank=True, max_length=255)
+    thumbnail2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     content = RichTextUploadingField(blank=True)
     content_on_list = RichTextUploadingField(blank=True)
@@ -70,6 +72,7 @@ pre_save.connect(pre_save_receiver, sender=ContentPage)
 class ImageUpload(models.Model):
     page = models.ForeignKey(ContentPage, on_delete=models.CASCADE)
     image = models.ImageField(upload_to="page/", max_length=255)
+    image2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
 class Navbar(models.Model):

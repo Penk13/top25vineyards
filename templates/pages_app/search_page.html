@@ -14,7 +14,9 @@
 <meta property="og:url" content="https://top25vineyards.com/{{ request.get_full_path }}">
 {% if content_page.content %}
 <meta property="og:description" content="{{ content_page.content|striptags|truncatechars:160 }}"> {% endif %}
-{% if content_page.thumbnail %} 
+{% if content_page.thumbnail2 %} 
+<meta property="og:image" content="https://top25vineyards.com/{{ content_page.thumbnail2.url }}"> 
+{% elif content_page.thumbnail %} 
 <meta property="og:image" content="https://top25vineyards.com/{{ content_page.thumbnail.url }}"> {% endif %}
 {% endblock opengraph %}
 
@@ -130,7 +132,9 @@
   {% elif model == 'ContentPage' %} {% if result.types != "SEARCH_PAGE" %}
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ result.get_absolute_url }}">
-      {% if result.thumbnail %}
+      {% if result.thumbnail2 %}
+      <img src="{{ result.thumbnail2.url }}" class="img-fluid" />
+      {% elif result.thumbnail %}
       <img src="{{ result.thumbnail.url }}" class="img-fluid" />
       {% else %}
       <img src="{% static 'img/thumbnail-page.jpg' %}" class="img-fluid" />
