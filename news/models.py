@@ -3,6 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.urls import reverse
+from filer.fields.image import FilerImageField
 
 
 class Category(models.Model):
@@ -84,7 +85,8 @@ class Autoblogging(models.Model):
 class Billboard(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    image = models.ImageField(upload_to="billboard", max_length=255)
+    image = models.ImageField(upload_to="billboard", blank=True, max_length=255)
+    image2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
     url = models.URLField(max_length=255)
     display = models.BooleanField(default=True)
 
