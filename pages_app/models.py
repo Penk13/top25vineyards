@@ -71,7 +71,7 @@ pre_save.connect(pre_save_receiver, sender=ContentPage)
 
 class ImageUpload(models.Model):
     page = models.ForeignKey(ContentPage, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="page/", max_length=255)
+    image = models.ImageField(upload_to="page/", blank=True, max_length=255)
     image2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
