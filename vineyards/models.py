@@ -84,7 +84,7 @@ pre_save.connect(pre_save_receiver_region, sender=Region)
 class RegionImage(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE)
     region_images = models.ImageField(
-        upload_to="region-image/", max_length=255)
+        upload_to="region-image/", blank=True, max_length=255)
     region_images2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
@@ -184,13 +184,13 @@ class VineyardUser(models.Model):
 
 class TopSliderImage(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="yard-image/", max_length=255)
+    image = models.ImageField(upload_to="yard-image/", blank=True, max_length=255)
     image2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
 class CoverSliderImage(models.Model):
     vineyard = models.ForeignKey(Vineyard, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="yard-cover-image/", max_length=255)
+    image = models.ImageField(upload_to="yard-cover-image/", blank=True, max_length=255)
     image2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
 
 
