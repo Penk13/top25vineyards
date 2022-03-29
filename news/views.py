@@ -44,7 +44,7 @@ def pull_feeds(request, pk):
             try:
                 content = contents[i].text
                 title = items[i].title.text
-                body = content[content.find('</a>')+1:]
+                body = content[content.find('</a>')+4:]
                 category = Category.objects.get(pk=source.category.id)
                 meta_keywords = title.lower()
                 meta_description = html.unescape(
