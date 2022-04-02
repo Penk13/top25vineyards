@@ -63,9 +63,9 @@
     </div>
     <a href="{{ result.get_absolute_url }}">
       {% if result.cover2 %}
-      <img src="{{ result.cover2.url }}" class="img-fluid"/>
+      <img src="{{ result.cover2.url }}" class="thumbnail-img"/>
       {% else %}
-      <img src="{{ result.cover.url }}" class="img-fluid"/>
+      <img src="{{ result.cover.url }}" class="thumbnail-img"/>
       {% endif %}
     </a>
   </div>
@@ -96,8 +96,8 @@
   {% elif model == 'Post' %}
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ result.get_absolute_url }}">
-      <img src="{{ result.cover.url }}" style="width: 100%"
-    /></a>
+      <img class="thumbnail-img" src="{{ result.cover.url }}"/>
+    </a>
   </div>
   <div class="col-12 col-md-6 py-3" style="font-size: 14px">
     <h5 class="fw-bold">
@@ -112,11 +112,11 @@
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ result.get_absolute_url }}">
       {% if result.thumbnail2 %}
-      <img src="{{ result.thumbnail2.url }}" class="img-fluid" />
+      <img src="{{ result.thumbnail2.url }}" class="thumbnail-img" />
       {% elif result.thumbnail %}
-      <img src="{{ result.thumbnail.url }}" class="img-fluid" />
+      <img src="{{ result.thumbnail.url }}" class="thumbnail-img" />
       {% else %}
-      <img src="{% static 'img/thumbnail-page.jpg' %}" class="img-fluid" />
+      <img src="{% static 'img/thumbnail-page.jpg' %}" class="thumbnail-img" />
       {% endif %}
     </a>
   </div>
@@ -133,11 +133,11 @@
   <div class="col-12 col-md-6 py-3 text-start">
     <a href="{{ result.get_absolute_url }}">
       {% if result.thumbnail2 %}
-      <img src="{{ result.thumbnail2.url }}" class="img-fluid" />
+      <img src="{{ result.thumbnail2.url }}" class="thumbnail-img" />
       {% elif result.thumbnail %}
-      <img src="{{ result.thumbnail.url }}" class="img-fluid" />
+      <img src="{{ result.thumbnail.url }}" class="thumbnail-img" />
       {% else %}
-      <img src="{% static 'img/thumbnail-page.jpg' %}" class="img-fluid" />
+      <img src="{% static 'img/thumbnail-page.jpg' %}" class="thumbnail-img" />
       {% endif %}
     </a>
   </div>
@@ -213,9 +213,9 @@
     </div>
     <a href="{{ vineyard.get_absolute_url }}">
       {% if vineyard.cover2 %}
-      <img src="{{ vineyard.cover2.url }}" class="img-fluid"/>
+      <img src="{{ vineyard.cover2.url }}" class="thumbnail-img"/>
       {% else %}
-      <img src="{{ vineyard.cover.url }}" class="img-fluid"/>
+      <img src="{{ vineyard.cover.url }}" class="thumbnail-img"/>
       {% endif %}
     </a>
   </div>

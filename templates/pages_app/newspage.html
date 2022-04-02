@@ -57,7 +57,7 @@
   {% endif %}
   {% for news in news_list %}
   <div class="col-12 col-md-6 py-3 text-start">
-    <a href="{{ news.get_absolute_url }}"><img src="{{ news.cover.url }}" style="width: 100%" /></a>
+    <a href="{{ news.get_absolute_url }}"><img class="img-thumbnail" src="{{ news.cover.url }}" /></a>
   </div>
   <div class="col-12 col-md-6 py-3" style="font-size: 14px">
     <h5 class="fw-bold">
@@ -126,9 +126,9 @@
     </div>
     <a href="{{ vineyard.get_absolute_url }}">
       {% if vineyard.cover2 %}
-      <img src="{{ vineyard.cover2.url }}" class="img-fluid"/>
+      <img src="{{ vineyard.cover2.url }}" class="thumbnail-img"/>
       {% else %}
-      <img src="{{ vineyard.cover.url }}" class="img-fluid"/>
+      <img src="{{ vineyard.cover.url }}" class="thumbnail-img"/>
       {% endif %}
     </a>
   </div>
