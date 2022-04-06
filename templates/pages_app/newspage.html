@@ -57,7 +57,7 @@
   {% endif %}
   {% for news in news_list %}
   <div class="col-12 col-md-6 py-3 text-start">
-    <a href="{{ news.get_absolute_url }}"><img class="img-thumbnail" src="{{ news.cover.url }}" /></a>
+    <a href="{{ news.get_absolute_url }}"><img class="thumbnail-img" src="{{ news.cover.url }}" /></a>
   </div>
   <div class="col-12 col-md-6 py-3" style="font-size: 14px">
     <h5 class="fw-bold">
