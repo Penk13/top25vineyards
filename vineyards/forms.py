@@ -29,7 +29,11 @@ Add here a description and all information about vineyard:
         self.fields['text'].widget.attrs['placeholder'] = placeholder_text
         self.fields['text'].widget.attrs['cols'] = 54
         self.fields['text'].widget.attrs['class'] = "bg-light"
+        self.fields['text'].widget.attrs['required'] = True
+
         self.fields['region'].widget.attrs['class'] = "w-75"
+        self.fields['region'].widget.attrs['required'] = True
+
         self.fields['regions'].widget.attrs['class'] = "w-75"
 
     class Meta:
@@ -52,13 +56,13 @@ Add here a description and all information about vineyard:
             "cover": "Upload Main Photo (min. width 900px)"
         }
         widgets = {
-            "name": forms.TextInput(attrs={"placeholder": "Name of your vineyard...", "class": "w-75 bg-light"}),
-            "wine_rg": forms.TextInput(attrs={"placeholder": "Where is your vineyard located: region and country...", "class": "w-75 bg-light"}),
-            "wines": forms.TextInput(attrs={"placeholder": "Your most famous and iconic wines...", "class": "w-75 bg-light"}),
-            "size": forms.TextInput(attrs={"placeholder": "Size of your vineyard, if multiple lots, give total area...", "class": "w-75 bg-light"}),
-            "grapes": forms.TextInput(attrs={"placeholder": "Grapes", "class": "w-75 bg-light"}),
-            "owner": forms.TextInput(attrs={"placeholder": "Name of Winemaker, Owner, Vigneron, or...", "class": "w-75 bg-light"}),
-            "visits": forms.TextInput(attrs={"placeholder": "Visiting hours or visit options and conditions...", "class": "w-75 bg-light"}),
+            "name": forms.TextInput(attrs={"placeholder": "Name of your vineyard...", "class": "w-75 bg-light", "required": True}),
+            "wine_rg": forms.TextInput(attrs={"placeholder": "Where is your vineyard located: region and country...", "class": "w-75 bg-light", "required": True}),
+            "wines": forms.TextInput(attrs={"placeholder": "Your most famous and iconic wines...", "class": "w-75 bg-light", "required": True}),
+            "size": forms.TextInput(attrs={"placeholder": "Size of your vineyard, if multiple lots, give total area...", "class": "w-75 bg-light", "required": True}),
+            "grapes": forms.TextInput(attrs={"placeholder": "Grapes", "class": "w-75 bg-light", "required": True}),
+            "owner": forms.TextInput(attrs={"placeholder": "Name of Winemaker, Owner, Vigneron, or...", "class": "w-75 bg-light", "required": True}),
+            "visits": forms.TextInput(attrs={"placeholder": "Visiting hours or visit options and conditions...", "class": "w-75 bg-light", "required": True}),
         }
 
     def clean_cover(self):
@@ -97,10 +101,10 @@ class VineyardUserForm(forms.ModelForm):
             "number": "Number",
         }
         widgets = {
-            "email2": forms.EmailInput(attrs={"placeholder": "Email", "class": "w-75 bg-light"}),
-            "web_text": forms.TextInput(attrs={"placeholder": "Website Name", "class": "w-75 bg-light"}),
-            "website": forms.TextInput(attrs={"placeholder": "Website", "class": "w-75 bg-light"}),
-            "number": forms.TextInput(attrs={"placeholder": "Phone Number", "class": "w-75 bg-light"}),
+            "email2": forms.EmailInput(attrs={"placeholder": "Email", "class": "w-75 bg-light", "required": True}),
+            "web_text": forms.TextInput(attrs={"placeholder": "Website Name", "class": "w-75 bg-light", "required": True}),
+            "website": forms.TextInput(attrs={"placeholder": "Website", "class": "w-75 bg-light", "required": True}),
+            "number": forms.TextInput(attrs={"placeholder": "Phone Number", "class": "w-75 bg-light", "required": True}),
         }
 
 

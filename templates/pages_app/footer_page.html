@@ -61,15 +61,11 @@
     {% csrf_token %} 
     <h3>Vineyard Submission</h3>
     {% for field in vineyard_form %}
-      {% if field.label != "Regions" and field.label != "Upload Main Photo (min. width 900px)" %}
-        <div class="col-12 my-2">{{ field.label }}</div>
-      {% endif %}
       {{ field|as_crispy_field }}
     {% endfor %}
     <hr>
     <h3>Vineyard Contact Information</h3>
     {% for field in vineyard_user_form %}
-      <div class="col-12 my-2">{{ field.label }}</div>
       {{ field|as_crispy_field }}
     {% endfor %}
     <input type="submit" value="Submit" class="btn btn-dark my-3" style="width: 100%" />

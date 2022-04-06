@@ -36,16 +36,12 @@
     {% csrf_token %} 
     <h3>Vineyard Form</h3>
     {% for field in vineyard_form %}
-      <div class="col-12 my-2">{{ field.label }}</div>
-      {{ field }}
-      {{ field.errors }}
+      {{ field|as_crispy_field }}
     {% endfor %}
     <hr>
     <h3>Vineyard User Form</h3>
     {% for field in vineyard_user_form %}
-      <div class="col-12 my-2">{{ field.label }}</div>
-      {{ field }}
-      {{ field.errors }}
+      {{ field|as_crispy_field }}
     {% endfor %}
     <input type="submit" value="Submit" class="btn btn-dark my-3" style="width: 100%" />
   </form>

@@ -89,24 +89,24 @@ class RegionImage(models.Model):
 
 
 class Vineyard(models.Model):
-    name = models.CharField(max_length=255)
-    text = RichTextUploadingField()
+    name = models.CharField(max_length=255, blank=True)
+    text = RichTextUploadingField(blank=True)
     rating = models.FloatField(default=0)
     custom_overlay = models.ImageField(
         upload_to="custom-rating/", blank=True, max_length=255)
     custom_overlay2 = FilerImageField(
         null=True, blank=True, on_delete=models.CASCADE, related_name="custom_overlay2")
-    google_map = models.TextField(default="")
+    google_map = models.TextField(blank=True)
     wine_rg_url = models.URLField(blank=True)
-    wine_rg = models.CharField(max_length=255)
+    wine_rg = models.CharField(max_length=255, blank=True)
     wines_url = models.URLField(blank=True)
-    wines = models.CharField(max_length=255)
-    size = models.CharField(max_length=255)
-    grapes = models.CharField(max_length=255)
+    wines = models.CharField(max_length=255, blank=True)
+    size = models.CharField(max_length=255, blank=True)
+    grapes = models.CharField(max_length=255, blank=True)
     owner_url = models.URLField(blank=True)
-    owner = models.CharField(max_length=255)
-    visits = models.TextField()
-    region = models.ForeignKey(Region, on_delete=models.CASCADE)
+    owner = models.CharField(max_length=255, blank=True)
+    visits = models.TextField(blank=True)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True)
     regions = models.ManyToManyField(
         Region, blank=True, related_name="regions")
     cover = models.ImageField(upload_to="vineyard/", max_length=255, blank=True)
@@ -124,7 +124,7 @@ class Vineyard(models.Model):
     send_email = models.BooleanField(default=True)
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
         return "Vineyard : " + self.name
@@ -170,13 +170,13 @@ pre_save.connect(pre_save_receiver_vineyard, sender=Vineyard)
 
 class VineyardUser(models.Model):
     vineyard = models.OneToOneField(Vineyard, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    email1 = models.EmailField()
-    email2 = models.EmailField()
-    address = models.TextField()
-    website = models.CharField(max_length=255)
-    web_text = models.CharField(max_length=255, default="")
-    number = models.CharField(max_length=20)
+    name = models.CharField(max_length=255, blank=True)
+    email1 = models.EmailField(blank=True)
+    email2 = models.EmailField(blank=True)
+    address = models.TextField(blank=True)
+    website = models.CharField(max_length=255, blank=True)
+    web_text = models.CharField(max_length=255, blank=True)
+    number = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return self.vineyard.name + " - " + self.name
