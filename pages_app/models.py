@@ -39,7 +39,7 @@ class ContentPage(models.Model):
     show_listing = models.BooleanField(default=False)
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True, max_length=255)
 
     def __str__(self):
         return self.get_types_display() + " : " + self.title
