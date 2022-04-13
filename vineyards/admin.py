@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RegionImage, Region, Vineyard, VineyardUser, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
+from .models import RegionImage, Region, Vineyard, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
 
 
 class RegionImageInline(admin.TabularInline):
@@ -22,13 +22,9 @@ class CoverSliderImageInline(admin.TabularInline):
 
 class VineyardAdmin(admin.ModelAdmin):
     inlines = [TopSliderImageInline, CoverSliderImageInline]
-    readonly_fields = ('slug',)
+    readonly_fields = ('id',)
     search_fields = ['name', 'text']
     list_filter = ['region', 'display']
-
-
-class VineyardUserAdmin(admin.ModelAdmin):
-    search_fields = ('vineyard__name', 'name',)
 
 
 class ReviewAndRatingAdmin(admin.ModelAdmin):
@@ -43,6 +39,5 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Vineyard, VineyardAdmin)
-admin.site.register(VineyardUser, VineyardUserAdmin)
 admin.site.register(ReviewAndRating, ReviewAndRatingAdmin)
 admin.site.register(Comment, CommentAdmin)

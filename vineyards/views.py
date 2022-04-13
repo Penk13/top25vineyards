@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from .models import Vineyard, VineyardUser, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
-from .forms import ReviewRatingForm, VineyardForm, VineyardUserForm
+from .models import Vineyard, Region, RegionImage, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
+from .forms import ReviewRatingForm, VineyardForm
 from datetime import date, timedelta
 from django.core.mail import send_mail
 from django.conf import settings
@@ -14,10 +14,6 @@ def vineyard_detail(request, region, slug, parent=None):
     billboards = Billboard.objects.filter(display=True)
     comments = Comment.objects.filter(approved=True)
 
-    try:
-        vineyard_user = VineyardUser.objects.get(vineyard=vineyard)
-    except:
-        vineyard_user = None
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     review_and_rating = ReviewAndRating.objects.filter(
@@ -33,7 +29,6 @@ def vineyard_detail(request, region, slug, parent=None):
         success_msg = request.session["rr_form_success_msg"]
         request.session.pop("rr_form_success_msg")
     context = {"vineyard": vineyard,
-               "vineyard_user": vineyard_user,
                "yard_images": yard_images,
                "yard_cover_images": yard_cover_images,
                "review_and_rating": review_and_rating,
@@ -117,27 +112,23 @@ def rr_form(request, region, slug, parent=None):
 def edit_vineyard(request, vineyard):
     vineyard = Vineyard.objects.get(slug=vineyard)
     category = Category.objects.get(slug="global-travel-news")
-    vineyard_user = VineyardUser.objects.get(vineyard=vineyard)
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
-    if vineyard_user.name == request.user.username:
+    if vineyard.user == request.user:
         vineyard_form = VineyardForm(instance=vineyard)
-        vineyard_user_form = VineyardUserForm(instance=vineyard_user)
         if request.user.is_authenticated:
             if request.method == "POST":
                 vineyard_form = VineyardForm(request.POST, request.FILES, instance=vineyard)
-                vineyard_user_form = VineyardUserForm(request.POST, instance=vineyard_user)
-                if vineyard_form.is_valid() and vineyard_user_form.is_valid():
+                if vineyard_form.is_valid():
                     instance = vineyard_form.save(commit=False)
                     instance.display = False
                     instance.send_mail = False
                     instance.save()
                     vineyard_form.save_m2m()
-                    vineyard_user_form.save()
                     # From Admin to User
                     subject = "Update Vineyard"
                     body = "Your vineyard updates have been recorded but have to be approved by Admin."
-                    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [vineyard_user.email1])
+                    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [vineyard.email1])
                     # From User to Admin
                     subject = "Update Vineyard"
                     body = "Update Vineyard from User"
@@ -147,7 +138,6 @@ def edit_vineyard(request, vineyard):
         return redirect("pages_app:mainpage")
     context = {"vineyard": vineyard,
                 "vineyard_form": vineyard_form,
-                "vineyard_user_form": vineyard_user_form,
                 "travel_news": travel_news,
                 "billboards": billboards,
                 }

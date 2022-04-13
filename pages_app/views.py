@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
-from vineyards.forms import VineyardUserForm, VineyardForm
+from vineyards.forms import VineyardForm
 from news.models import Post, Category, Billboard
 
 from mailing.models import ContactEntry, Subscriber
@@ -53,7 +53,6 @@ def footerpage(request, slug):
     contact_entry_form = ContactEntryForm()
     subscriber_form = SubscriberForm()
     vineyard_form = VineyardForm()
-    vineyard_user_form = VineyardUserForm()
 
     if slug == "contact-us":
         contact_entry_form = ContactEntryForm()
@@ -82,20 +81,15 @@ def footerpage(request, slug):
 
     elif slug == "submit-a-vineyard":
         vineyard_form = VineyardForm()
-        vineyard_user_form = VineyardUserForm()
         if request.user.is_authenticated:
             if request.method == "POST":
                 vineyard_form = VineyardForm(request.POST, request.FILES)
-                vineyard_user_form = VineyardUserForm(request.POST)
-                if vineyard_form.is_valid() and vineyard_user_form.is_valid():
-                    instance1 = vineyard_form.save(commit=False)
-                    instance1.save()
+                if vineyard_form.is_valid():
+                    instance = vineyard_form.save(commit=False)
+                    instance.user = request.user
+                    instance.email1 = request.user.email
+                    instance.save()
                     vineyard_form.save_m2m()
-                    instance2 = vineyard_user_form.save(commit=False)
-                    instance2.vineyard = instance1
-                    instance2.name = request.user.username
-                    instance2.email1 = request.user.email
-                    instance2.save()
                     request.session["vineyard_form_msg"] = "Your vineyard has been successfully submitted!"
                     return redirect("pages_app:mainpage")
         else:
@@ -107,7 +101,6 @@ def footerpage(request, slug):
                "contact_entry_form": contact_entry_form,
                "subscriber_form": subscriber_form,
                "vineyard_form": vineyard_form,
-               "vineyard_user_form": vineyard_user_form,
                "news": news,
                "billboards": billboards,
                }

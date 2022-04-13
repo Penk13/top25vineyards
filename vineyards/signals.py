@@ -8,8 +8,44 @@ from .models import ReviewAndRating, Comment, Vineyard
 import datetime
 
 
+@receiver(post_save, sender=Vineyard)
+def from_user_vineyard(sender, instance, **kwargs):
+    if instance.display is False and instance.send_email is True:
+        subject = "Vineyard from User"
+        body = instance.name + '\n\n' + instance.user.username + '\n\n' + instance.email1
+        # Email sent to admin
+        send_mail(subject,
+                body,
+                '',
+                [settings.DEFAULT_FROM_EMAIL])
+
+
+@receiver(post_save, sender=Vineyard)
+def from_admin_vineyard(sender, instance, **kwargs):
+    if instance.display is True and instance.send_email is True:
+        domain = Site.objects.get_current().domain  # https://www.top25vineyards.com/
+        path = instance.get_absolute_url()  # link to the vineyard (for example : vineyards/france/bordeaux/vineyard/chateau-monlot/)
+
+        subject = "Your vineyard is now live"
+        body = domain + path
+
+        send_mail(subject,
+                body,
+                settings.DEFAULT_FROM_EMAIL,
+                [instance.email1])
+
+    elif instance.display is False and instance.send_email is True:
+        subject = "Thank you for your submitting the vineyard"
+        body = "Admin will first review your vineyard before it is displayed"
+        # Email sent to user
+        send_mail(subject,
+                body,
+                settings.DEFAULT_FROM_EMAIL,
+                [instance.email1])
+
+
 @receiver(post_save, sender=ReviewAndRating)
-def from_admin_email(sender, instance, **kwargs):
+def from_admin_rr(sender, instance, **kwargs):
     if instance.approved is True:
         domain = Site.objects.get_current().domain
         path = instance.vineyard.get_absolute_url()
@@ -39,7 +75,7 @@ def from_admin_email(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=ReviewAndRating)
-def from_user_email(sender, instance, **kwargs):
+def from_user_rr(sender, instance, **kwargs):
     if instance.approved is False:
         # Email sent to admin
         send_mail("Review from User",
@@ -51,7 +87,7 @@ def from_user_email(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Comment)
-def to_user(sender, instance, **kwargs):
+def from_admin_comment(sender, instance, **kwargs):
     rr = instance.rr
     if instance.approved is True:
         domain = Site.objects.get_current().domain
@@ -70,7 +106,7 @@ def to_user(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Comment)
-def to_admin(sender, instance, **kwargs):
+def from_user_comment(sender, instance, **kwargs):
     rr = instance.rr
     if instance.approved is False:
         # Email sent to admin

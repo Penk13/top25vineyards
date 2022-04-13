@@ -111,7 +111,7 @@
         <br />
         <strong> Winemaker </strong> : {{ vineyard.owner }}
         <br />
-        <span class="fw-bold">Web: </span> <a href="{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
+        <span class="fw-bold">Web: </span> <a href="{{ vineyard.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard.web_text }}</a> <br>
       </p>
     </div>
     {% elif vineyard.hide_rating == False %}
@@ -137,7 +137,7 @@
         <br />
         <strong> Winemaker </strong> : {{ vineyard.owner }}
         <br />
-        <span class="fw-bold">Web: </span> <a href="{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
+        <span class="fw-bold">Web: </span> <a href="{{ vineyard.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard.web_text }}</a> <br>
       </p>
     </div>
     {% else %}
@@ -151,26 +151,24 @@
         <br />
         <strong> Winemaker </strong> : {{ vineyard.owner }}
         <br />
-        <span class="fw-bold">Web: </span> <a href="{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
+        <span class="fw-bold">Web: </span> <a href="{{ vineyard.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard.web_text }}</a> <br>
       </p>
     </div>
     {% endif %}
   </div>
   {{ vineyard.text|safe }}
-  {% if vineyard_user %}
   <div class="row my-3">
     <div class="col-md-6 col-sm-12">
       <h5 class="fw-bold">Address:</h5>
-      {{ vineyard_user.address|linebreaks }}
+      {{ vineyard.address|linebreaks }}
     </div>
     <div class="col-md-6 col-sm-12">
       <h5 class="fw-bold">Contact Information:</h5>
-      <span class="fw-bold">Phone: </span>{{ vineyard_user.number }} <br>
-      <span class="fw-bold">Email: </span> <a href="mailto:{{ vineyard_user.email2 }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">Send a message</a> <br>
-      <span class="fw-bold">Web: </span> <a href="{{ vineyard_user.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard_user.web_text }}</a> <br>
+      <span class="fw-bold">Phone: </span>{{ vineyard.number }} <br>
+      <span class="fw-bold">Email: </span> <a href="mailto:{{ vineyard.email2 }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">Send a message</a> <br>
+      <span class="fw-bold">Web: </span> <a href="{{ vineyard.website }}" target="_blank" style="text-decoration: none; border-bottom: 1px dashed #2d2d2d; color: #688c3b;">{{ vineyard.web_text }}</a> <br>
     </div>
   </div>
-  {% endif %}
   <div id="google-maps">{{ vineyard.google_map|safe }}</div>
 </div>
 
