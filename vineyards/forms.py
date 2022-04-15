@@ -26,12 +26,11 @@ Add here a description and all information about vineyard:
 - Wines
 - etc...
 """
-        placeholder_address = "Address"
+        
 
         self.fields['text'].widget.attrs['placeholder'] = placeholder_text
-        self.fields['text'].widget.attrs['cols'] = 54
-        self.fields['text'].widget.attrs['class'] = "bg-light"
-        self.fields['text'].widget.attrs['required'] = True
+        
+        self.fields['cover'].widget.attrs['class'] = "w-75"
 
         self.fields['region'].widget.attrs['class'] = "w-75"
         self.fields['region'].widget.attrs['required'] = True
@@ -39,12 +38,6 @@ Add here a description and all information about vineyard:
         self.fields['regions'].widget.attrs['class'] = "w-75"
 
         self.fields['website'].initial = "https://"
-
-        self.fields['address'].widget.attrs['placeholder'] = placeholder_address
-        self.fields['address'].widget.attrs['cols'] = 54
-        self.fields['address'].widget.attrs['rows'] = 5
-        self.fields['address'].widget.attrs['class'] = "bg-light"
-        self.fields['address'].widget.attrs['required'] = True
 
     captcha = CaptchaField()
     class Meta:
@@ -81,6 +74,7 @@ Add here a description and all information about vineyard:
             "owner": forms.TextInput(attrs={"placeholder": "Name of Winemaker, Owner, Vigneron, or...", "class": "w-75 bg-light", "required": True}),
             "visits": forms.TextInput(attrs={"placeholder": "Visiting hours or visit options and conditions...", "class": "w-75 bg-light", "required": True}),
             "email2": forms.EmailInput(attrs={"placeholder": "Email", "class": "w-75 bg-light", "required": True}),
+            "address": forms.Textarea(attrs={"placeholder": "Address", "class": "w-75 bg-light", "required": True}),
             "web_text": forms.TextInput(attrs={"placeholder": "Website Name", "class": "w-75 bg-light", "required": True}),
             "website": forms.TextInput(attrs={"placeholder": "Website", "class": "w-75 bg-light", "required": True}),
             "number": forms.TextInput(attrs={"placeholder": "Phone Number", "class": "w-75 bg-light", "required": True}),

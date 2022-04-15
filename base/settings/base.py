@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'filer',
     'mptt',
+    'import_export',
 
     'accounts.apps.AccountsConfig',
     'pages_app.apps.PagesAppConfig',
@@ -225,6 +226,8 @@ CKEDITOR_CONFIGS = {
                         "Subscript", "Superscript"], ['Undo', 'Redo'], ["Source"],
                     ["Maximize"]],
         'allowedContent': True,
+        'height': 'full',
+        'width': 'full',
     },
 }
 

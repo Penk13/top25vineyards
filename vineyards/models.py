@@ -125,6 +125,7 @@ class Vineyard(models.Model):
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    username = models.CharField(max_length=255, blank=True)
     email1 = models.EmailField(blank=True)
     email2 = models.EmailField(blank=True)
     address = models.TextField(blank=True)
@@ -135,6 +136,13 @@ class Vineyard(models.Model):
 
     def __str__(self):
         return "Vineyard : " + self.name
+
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = self.user.username
+        if not self.email1:
+            self.email1 = self.user.email
+        super(Vineyard, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         if self.region.region_parent is not None:

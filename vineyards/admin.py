@@ -1,5 +1,7 @@
 from django.contrib import admin
 from .models import RegionImage, Region, Vineyard, TopSliderImage, CoverSliderImage, ReviewAndRating, Comment
+from import_export.admin import ImportExportModelAdmin
+from .resources import VineyardResource
 
 
 class RegionImageInline(admin.TabularInline):
@@ -9,7 +11,7 @@ class RegionImageInline(admin.TabularInline):
 class RegionAdmin(admin.ModelAdmin):
     search_fields = ['name']
     inlines = [RegionImageInline]
-    readonly_fields = ('slug',)
+    readonly_fields = ('slug', 'id',)
 
 
 class TopSliderImageInline(admin.TabularInline):
@@ -20,11 +22,12 @@ class CoverSliderImageInline(admin.TabularInline):
     model = CoverSliderImage
 
 
-class VineyardAdmin(admin.ModelAdmin):
+class VineyardAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = [TopSliderImageInline, CoverSliderImageInline]
     readonly_fields = ('id',)
     search_fields = ['name', 'text']
     list_filter = ['region', 'display']
+    resource_class = VineyardResource
 
 
 class ReviewAndRatingAdmin(admin.ModelAdmin):

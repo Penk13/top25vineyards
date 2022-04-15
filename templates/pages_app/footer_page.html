@@ -60,9 +60,8 @@
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
     <h3>Vineyard Submission</h3>
-    {% for field in vineyard_form %}
-      {{ field|as_crispy_field }}
-    {% endfor %}
+    {{ vineyard_form.media }}
+    {{ vineyard_form|crispy }}
     <hr>
     <input type="submit" value="Submit" class="btn btn-dark my-3" style="width: 100%" />
   </form>
