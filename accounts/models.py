@@ -41,7 +41,7 @@ class UserManager(BaseUserManager):
 # Abstract Base User will give three fields by default (id, password, last_login)
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
-    username = models.CharField(max_length=255, unique=True, blank=False)
+    username = models.CharField(max_length=30, unique=True, blank=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)

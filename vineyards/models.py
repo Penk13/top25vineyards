@@ -109,7 +109,7 @@ class Vineyard(models.Model):
     region = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True)
     regions = models.ManyToManyField(
         Region, blank=True, related_name="regions")
-    cover = models.ImageField(upload_to="vineyard/", max_length=255, blank=True)
+    cover = models.ImageField(upload_to="img/%Y/%m/", max_length=255, blank=True)
     cover2 = FilerImageField(null=True, blank=True, on_delete=models.CASCADE)
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
@@ -125,7 +125,7 @@ class Vineyard(models.Model):
     display_news = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    username = models.CharField(max_length=255, blank=True)
+    username = models.CharField(max_length=30, blank=True)
     email1 = models.EmailField(blank=True)
     email2 = models.EmailField(blank=True)
     address = models.TextField(blank=True)
