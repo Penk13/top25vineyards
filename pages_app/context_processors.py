@@ -11,9 +11,13 @@ def base_variable(request):
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     footer = Footer.objects.all().order_by("order")
-    footer_index = int(footer.count()/2)
-    footers1 = footer[:footer_index]
-    footers2 = footer[footer_index:]
+    remainder = int(footer.count() % 3)
+    item_per_col = int(footer.count()/3)
+    idx1 = item_per_col + remainder
+    idx2 = idx1 + item_per_col
+    footers1 = footer[:idx1]
+    footers2 = footer[idx1:idx2]
+    footers3 = footer[idx2:]
     return {"header_script": header_script,
             "navbars": navbars,
             "default_sidebar": default_sidebar,
@@ -21,4 +25,5 @@ def base_variable(request):
             "travel_news": travel_news,
             "billboards": billboards,
             "footers1": footers1,
-            "footers2": footers2}
+            "footers2": footers2,
+            "footers3": footers3}
