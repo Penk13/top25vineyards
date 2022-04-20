@@ -55,8 +55,40 @@
 </section>
 {% endblock topcarousel %}
 
-<!-- Vineyard Detail -->
 {% block content %}
+<!-- Breadcrumb on Small Screen  -->
+<nav class="small-screen-breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+  <ol class="breadcrumb" style="font-size: 13px">
+    <li class="breadcrumb-item">
+      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+        ><i class="bi bi-house-fill"></i> Home</a
+      >
+    </li>
+    <li class="breadcrumb-item" aria-current="page">
+      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+        >World</a
+      >
+    </li>
+    {% if vineyard.region.region_parent %}
+    <li class="breadcrumb-item" aria-current="page">
+      <a
+        href="{{vineyard.region.region_parent.get_absolute_url}}"
+        class="text-dark"
+        style="text-decoration: none"
+        >{{ vineyard.region.region_parent.name }}</a
+      >
+    </li>
+    {% endif %}
+    <li class="breadcrumb-item" aria-current="page">
+      <a href="{{vineyard.get_absolute_url}}" class="text-dark" style="text-decoration: none"
+        >{{ vineyard.region.name }}</a
+      >
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ vineyard.name }}</li>
+  </ol>
+</nav>
+
+<!-- Vineyard Detail -->
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h1 class="fw-bold">{{ vineyard.name }}</h1>
   <h5><i class="bi bi-geo-alt-fill"></i> {{ vineyard.wine_rg }}</h5>
@@ -307,9 +339,9 @@
 </div>
 {% endblock content %}
 
-<!-- Breadcrumb -->
+<!-- Breadcrumb on Large Screen  -->
 {% block breadcrumb %}
-<nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+<nav class="large-screen-breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
   <ol class="breadcrumb" style="font-size: 13px">
     <li class="breadcrumb-item">
       <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
