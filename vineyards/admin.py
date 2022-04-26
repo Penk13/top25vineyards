@@ -26,7 +26,8 @@ class VineyardAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = [TopSliderImageInline, CoverSliderImageInline]
     readonly_fields = ('id',)
     search_fields = ['name', 'text']
-    list_filter = ['region', 'display']
+    list_filter = ['display','region']
+    list_display = ['name']
     resource_class = VineyardResource
 
 
