@@ -105,21 +105,3 @@ input[type="range"]::-ms-thumb {
     object-fit: cover;
   }
 }
-
-/* Set location of breadcrumbs based on screen size */
-@media (min-width: 992px) {
-  .small-screen-breadcrumb{
-    display: none;
-  }
-  .large-screen-breadcrumb{
-    display: block;
-  }
-}
-@media (max-width: 991px) {
-  .large-screen-breadcrumb{
-    display: none;
-  }
-  .small-screen-breadcrumb{
-    display: block;
-  }
-}

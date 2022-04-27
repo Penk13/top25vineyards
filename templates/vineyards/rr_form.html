@@ -40,7 +40,7 @@
 
 <!-- Slick Slider Carousel -->
 {% block topcarousel %}
-<section class="vineyard-detail mb-5">
+<section class="vineyard-detail mb-lg-5 mb-3">
   {% if vineyard.top_slider %}
   <div class="slick-carousel">
     {% for image in yard_images %}
@@ -57,7 +57,7 @@
 
 {% block content %}
 <!-- Breadcrumb on Small Screen  -->
-<nav class="small-screen-breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+<nav class="d-md-block d-lg-none" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
   <ol class="breadcrumb" style="font-size: 13px">
     <li class="breadcrumb-item">
       <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
@@ -341,7 +341,7 @@
 
 <!-- Breadcrumb on Large Screen  -->
 {% block breadcrumb %}
-<nav class="large-screen-breadcrumb" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+<nav class="d-md-none d-lg-block" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
   <ol class="breadcrumb" style="font-size: 13px">
     <li class="breadcrumb-item">
       <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
