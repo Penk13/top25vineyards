@@ -139,7 +139,8 @@
 {% endblock content %}
 
 <!-- Sidebar -->
-{% block sidebar %} {% if content_page.sidebar %}
+{% block sidebar %} {% if show_sidebar %}
+{% if content_page.sidebar %}
 <div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ content_page.sidebar|safe }}</div>
 </div>
@@ -147,10 +148,12 @@
 <div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ default_sidebar|safe }}</div>
 </div>
+{% endif %} 
 {% endif %} {% endblock sidebar %}
 
 <!-- Ad Manager -->
-{% block admanager %} {% if content_page.ad_manager %}
+{% block admanager %} {% if show_sidebar %}
+{% if content_page.ad_manager %}
 <div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ content_page.ad_manager|safe }}</div>
 </div>
@@ -158,6 +161,7 @@
 <div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ default_ad_manager|safe }}</div>
 </div>
+{% endif %} 
 {% endif %} {% endblock admanager %}
 
 <!-- Global Travel News -->

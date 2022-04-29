@@ -15,6 +15,7 @@ TYPE = (
     ("HOME_PAGE", "Home Page"),
     ("SEARCH_PAGE", "Search Page"),
     ("CATEGORY", "Category"),
+    ("WITHOUT_SIDEBAR", "Without Sidebar"),
 )
 
 
@@ -51,7 +52,7 @@ class ContentPage(models.Model):
             return reverse('pages_app:newspage', kwargs={'slug': self.slug})
         elif self.types == "FOOTER":
             return reverse('pages_app:footerpage', kwargs={'slug': self.slug})
-        elif self.types == "PAGE":
+        elif self.types == "PAGE" or self.types == "WITHOUT_SIDEBAR":
             return reverse('pages_app:page', kwargs={'slug': self.slug})
 
 
