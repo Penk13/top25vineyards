@@ -24,10 +24,11 @@ class CoverSliderImageInline(admin.TabularInline):
 
 class VineyardAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     inlines = [TopSliderImageInline, CoverSliderImageInline]
-    readonly_fields = ('id',)
+    readonly_fields = ('id', 'add_date', 'mod_date')
     search_fields = ['name', 'text']
     list_filter = ['display','region']
-    list_display = ['name']
+    list_display = ('id', 'name', 'add_date', 'mod_date', 'isvalidated',)
+    list_display_links = ('id', 'name')
     resource_class = VineyardResource
 
 

@@ -51,7 +51,7 @@ class Region(models.Model):
         if self.region_parent is not None:
             return reverse('vineyards:region', kwargs={'parent': self.region_parent.slug, 'region': self.slug})
         else:
-            return reverse('vineyards:region-without-parent', kwargs={'region': self.slug})
+            return reverse('vineyards:region-without-parent', kwargs={'region': self.slug})    
 
 
 def create_slug_region(instance, new_slug=None):
@@ -132,6 +132,9 @@ class Vineyard(models.Model):
     website = models.CharField(max_length=255, blank=True)
     web_text = models.CharField(max_length=255, blank=True)
     number = models.CharField(max_length=20, blank=True)
+    isvalidated = models.BooleanField(default=True)
+    add_date = models.DateTimeField(auto_now_add=True)
+    mod_date = models.DateTimeField(auto_now=True)
     slug = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
