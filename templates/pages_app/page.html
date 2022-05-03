@@ -41,9 +41,17 @@
 <!-- Top Text -->
 {% block toptext %}
 <section style="background-color: white; z-index: 1; position: relative" class="top-text">
-  <div class="container text-center my-3 py-3">
-    <h1 class="fw-bold">{{ content_page.title }}</h1>
-    <p>{{ content_page.content|safe }}</p>
+  <div class="container my-3 py-3">
+    <h1 class="text-center fw-bold">{{ content_page.title }}</h1>
+    {% if content_page.types == "WITHOUT_SIDEBAR" %}
+    <div class="text-start">
+      <p>{{ content_page.content|safe }}</p>
+    </div>
+    {% else %}
+    <div class="text-center">
+      <p>{{ content_page.content|safe }}</p>
+    </div>
+    {% endif %}
   </div>
 </section>
 {% endblock toptext %}
@@ -139,7 +147,7 @@
 {% endblock content %}
 
 <!-- Sidebar -->
-{% block sidebar %} {% if show_sidebar %}
+{% block sidebar %} {% if content_page.types != "WITHOUT_SIDEBAR" %}
 {% if content_page.sidebar %}
 <div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ content_page.sidebar|safe }}</div>

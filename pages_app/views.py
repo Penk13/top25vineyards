@@ -165,10 +165,7 @@ def searchpage(request):
 
 
 def page(request, slug):
-    content_page = get_object_or_404(ContentPage, slug=slug)
-    show_sidebar = True
-    if content_page.types == "WITHOUT_SIDEBAR":
-        show_sidebar = False
+    content_page = get_object_or_404(ContentPage, slug=slug)    
     news = Post.objects.filter(category__in=content_page.news.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
@@ -181,7 +178,6 @@ def page(request, slug):
                "image_carousel": image_carousel,
                "news": news,
                "billboards": billboards,
-               "show_sidebar": show_sidebar,
                }
     return render(request, "pages_app/page.html", context)
 
