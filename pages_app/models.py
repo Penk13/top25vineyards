@@ -16,6 +16,7 @@ TYPE = (
     ("SEARCH_PAGE", "Search Page"),
     ("CATEGORY", "Category"),
     ("WITHOUT_SIDEBAR", "Without Sidebar"),
+    ("ARTICLES", "Articles"),
 )
 
 
@@ -33,7 +34,7 @@ class ContentPage(models.Model):
     meta_keywords = models.TextField(blank=True)
     additional_content = RichTextUploadingField(blank=True)
     category = models.ManyToManyField(Region, blank=True)
-    news = models.ManyToManyField(Category, blank=True)
+    list = models.ManyToManyField(Category, blank=True)
     listing_title1 = models.CharField(max_length=255, blank=True)
     listing_title2 = models.CharField(max_length=255, blank=True)
     listing_title3 = models.CharField(max_length=255, blank=True)
@@ -54,6 +55,8 @@ class ContentPage(models.Model):
             return reverse('pages_app:footerpage', kwargs={'slug': self.slug})
         elif self.types == "PAGE" or self.types == "WITHOUT_SIDEBAR":
             return reverse('pages_app:page', kwargs={'slug': self.slug})
+        elif self.types == "ARTICLES":
+            return reverse('pages_app:articlespage', kwargs={'slug': self.slug})
 
 
 def pre_save_receiver(sender, instance, *args, **kwargs):
