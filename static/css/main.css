@@ -105,3 +105,14 @@ input[type="range"]::-ms-thumb {
     object-fit: cover;
   }
 }
+
+/* Pagination Button Color */
+.pagination-btn {
+  color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+.pagination-btn:hover {
+  color: #fff !important;
+  background-color: #5c636a !important;
+  border-color: #5c636a !important;
+}

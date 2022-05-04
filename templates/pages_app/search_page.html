@@ -41,7 +41,7 @@
 <!-- Search Result -->
 {% block content %} {% if searched %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <h1 class="fw-bold">Search Results For: {{ searched }}</h1>
+  <h5 class="fw-bold">Your search results for: {{ searched }}</h5>
   <hr />
   {% for result in results %}
   <!-- Vineyards -->
@@ -155,21 +155,21 @@
     <ul class="pagination justify-content-center">
       {% if results.paginator.num_pages > 1 %}
         {% if results.has_previous %}
-          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page=1">First</a>
-          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.previous_page_number }}">Previous</a>
+          <a class="btn pagination-btn my-2" href="?searched={{ searched }}&page=1">First</a>
+          <a class="btn pagination-btn my-2" href="?searched={{ searched }}&page={{ results.previous_page_number }}">Previous</a>
         {% endif %}
 
         {% for num in results.paginator.page_range %}
           {% if results.number == num %}
             <a class="btn btn-secondary my-2" href="?searched={{ searched }}&page={{ num }}">{{ num }}</a>
           {% elif num > results.number|add:'-3' and num < results.number|add:'3' %}
-            <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ num }}">{{ num }}</a>
+            <a class="btn pagination-btn my-2" href="?searched={{ searched }}&page={{ num }}">{{ num }}</a>
           {% endif %}
         {% endfor %}
 
         {% if results.has_next %}
-          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.next_page_number }}">Next</a>
-          <a class="btn btn-outline-secondary my-2" href="?searched={{ searched }}&page={{ results.paginator.num_pages }}">Last</a>
+          <a class="btn pagination-btn my-2" href="?searched={{ searched }}&page={{ results.next_page_number }}">Next</a>
+          <a class="btn pagination-btn my-2" href="?searched={{ searched }}&page={{ results.paginator.num_pages }}">Last</a>
         {% endif %}
       {% endif %}
     </ul>
@@ -247,21 +247,21 @@
     <ul class="pagination justify-content-center">
       {% if vineyards.paginator.num_pages > 1 %}
         {% if vineyards.has_previous %}
-          <a class="btn btn-outline-secondary my-2" href="?page=1">First</a>
-          <a class="btn btn-outline-secondary my-2" href="?page={{ vineyards.previous_page_number }}">Previous</a>
+          <a class="btn pagination-btn my-2" href="?page=1">First</a>
+          <a class="btn pagination-btn my-2" href="?page={{ vineyards.previous_page_number }}">Previous</a>
         {% endif %}
 
         {% for num in vineyards.paginator.page_range %}
           {% if vineyards.number == num %}
             <a class="btn btn-secondary my-2" href="?page={{ num }}">{{ num }}</a>
           {% elif num > vineyards.number|add:'-3' and num < vineyards.number|add:'3' %}
-            <a class="btn btn-outline-secondary my-2" href="?page={{ num }}">{{ num }}</a>
+            <a class="btn pagination-btn my-2" href="?page={{ num }}">{{ num }}</a>
           {% endif %}
         {% endfor %}
 
         {% if vineyards.has_next %}
-          <a class="btn btn-outline-secondary my-2" href="?page={{ vineyards.next_page_number }}">Next</a>
-          <a class="btn btn-outline-secondary my-2" href="?page={{ vineyards.paginator.num_pages }}">Last</a>
+          <a class="btn pagination-btn my-2" href="?page={{ vineyards.next_page_number }}">Next</a>
+          <a class="btn pagination-btn my-2" href="?page={{ vineyards.paginator.num_pages }}">Last</a>
         {% endif %}
       {% endif %}
     </ul>
