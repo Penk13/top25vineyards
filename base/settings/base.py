@@ -74,6 +74,8 @@ ACCOUNT_USERNAME_MIN_LENGTH = 6
 ACCOUNT_USERNAME_BLACKLIST = [
     'home', 'index', 'admin', 'info', 'top25', 'backup']
 SOCIALACCOUNT_AUTO_SIGNUP = False
+LOGIN_REDIRECT_URL = "/profile/"
+LOGIN_URL = "/login/"
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

@@ -110,7 +110,7 @@ def rr_form(request, region, slug, parent=None):
 
 
 def edit_vineyard(request, vineyard):
-    vineyard = Vineyard.objects.get(slug=vineyard)
+    vineyard = get_object_or_404(Vineyard, slug=vineyard)
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
@@ -133,9 +133,9 @@ def edit_vineyard(request, vineyard):
                     subject = "Update Vineyard"
                     body = "Update Vineyard from User"
                     send_mail(subject, body, "", [settings.DEFAULT_FROM_EMAIL])
-                    return redirect("pages_app:mainpage")
+                    return redirect("mainpage")
     else:
-        return redirect("pages_app:mainpage")
+        return redirect("mainpage")
     context = {"vineyard": vineyard,
                 "vineyard_form": vineyard_form,
                 "travel_news": travel_news,

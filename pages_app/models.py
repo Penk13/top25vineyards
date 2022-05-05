@@ -48,15 +48,15 @@ class ContentPage(models.Model):
 
     def get_absolute_url(self):
         if self.types == "HOME_PAGE":
-            return reverse('pages_app:mainpage')
+            return reverse('mainpage')
         elif self.types == "CATEGORY":
-            return reverse('pages_app:newspage', kwargs={'slug': self.slug})
+            return reverse('newspage', kwargs={'slug': self.slug})
         elif self.types == "FOOTER":
-            return reverse('pages_app:footerpage', kwargs={'slug': self.slug})
+            return reverse('footerpage', kwargs={'slug': self.slug})
         elif self.types == "PAGE" or self.types == "WITHOUT_SIDEBAR":
-            return reverse('pages_app:page', kwargs={'slug': self.slug})
+            return reverse('page', kwargs={'slug': self.slug})
         elif self.types == "ARTICLES":
-            return reverse('pages_app:articlespage', kwargs={'slug': self.slug})
+            return reverse('articlespage', kwargs={'slug': self.slug})
 
 
 def pre_save_receiver(sender, instance, *args, **kwargs):

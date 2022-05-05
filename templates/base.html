@@ -39,7 +39,7 @@
       <div class="container">
         <!-- Navbar Logo -->
         {% block navlogo %} {% if not navlogo %}
-        <a class="navbar-brand" href="{% url 'pages_app:mainpage' %}">
+        <a class="navbar-brand" href="{% url 'mainpage' %}">
           <img src="{% static 'img/navbrandtop25.png'%}" />
         </a>
         {% endif %} {% endblock navlogo %}
@@ -145,7 +145,7 @@
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
                 <a
-                  href="{% url 'pages_app:mainpage' %}"
+                  href="{% url 'mainpage' %}"
                   class="text-decoration-none fw-bold text-light"
                   >Top25Vineyards</a
                 >
@@ -214,7 +214,7 @@
                 <!--  -->
                 {% endfor %}
               </ul>
-              <form class="d-flex" method="POST" action="{% url 'pages_app:searchpage' %}">
+              <form class="d-flex" method="POST" action="{% url 'searchpage' %}">
                 {% csrf_token %}
                 <input
                   class="form-control me-2 d-inline"
@@ -236,7 +236,7 @@
                   >Sign out |
                 </a>
                 <a
-                  href="{% url 'accounts:profile' %}"
+                  href="{% url 'profile' %}"
                   class="text-decoration-none"
                   style="color: #cdcdcd"
                   >My Profile</a

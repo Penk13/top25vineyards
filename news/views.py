@@ -74,6 +74,6 @@ def pull_feeds(request, pk):
                     os.remove("temp_image.jpg")
                 except:
                     pass
-        return redirect("news:autoblogging")
+        return redirect("news-autoblogging")
     else:
         return HttpResponse("Sorry you are not allowed to access this page")

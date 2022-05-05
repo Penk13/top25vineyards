@@ -32,7 +32,7 @@
   <h6>
     <span class="badge bg-dark"
       ><a
-        href="{% url 'pages_app:newspage' news.category.slug %}"
+        href="{% url 'newspage' news.category.slug %}"
         class="text-white"
         style="text-decoration: none"
         >{{ news.category.name }}</a
@@ -52,13 +52,13 @@
 <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
   <ol class="breadcrumb" style="font-size: 13px">
     <li class="breadcrumb-item">
-      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+      <a href="{% url 'mainpage' %}" class="text-dark" style="text-decoration: none"
         ><i class="bi bi-house-fill"></i> Home</a
       >
     </li>
     <li class="breadcrumb-item active" aria-current="page">
       <a
-        href="{% url 'pages_app:newspage' news.category.slug %}"
+        href="{% url 'newspage' news.category.slug %}"
         class="text-dark"
         style="text-decoration: none"
         >{{ news.category.name }}</a

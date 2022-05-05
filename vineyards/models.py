@@ -49,9 +49,9 @@ class Region(models.Model):
 
     def get_absolute_url(self):
         if self.region_parent is not None:
-            return reverse('vineyards:region', kwargs={'parent': self.region_parent.slug, 'region': self.slug})
+            return reverse('region', kwargs={'parent': self.region_parent.slug, 'region': self.slug})
         else:
-            return reverse('vineyards:region-without-parent', kwargs={'region': self.slug})    
+            return reverse('region-without-parent', kwargs={'region': self.slug})    
 
 
 def create_slug_region(instance, new_slug=None):
@@ -149,9 +149,9 @@ class Vineyard(models.Model):
 
     def get_absolute_url(self):
         if self.region.region_parent is not None:
-            return reverse('vineyards:detail', kwargs={'parent': self.region.region_parent.slug, 'region': self.region.slug, 'slug': self.slug})
+            return reverse('vineyard-detail', kwargs={'parent': self.region.region_parent.slug, 'region': self.region.slug, 'slug': self.slug})
         else:
-            return reverse('vineyards:detail-without-parent', kwargs={'region': self.region.slug, 'slug': self.slug})
+            return reverse('vineyard-detail-without-parent', kwargs={'region': self.region.slug, 'slug': self.slug})
 
 
 def create_slug_vineyard(instance, new_slug=None):

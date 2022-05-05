@@ -41,7 +41,7 @@ def mainpage(request):
 
 
 def footerpage(request, slug):
-    content_page = get_object_or_404(ContentPage, slug=slug)
+    content_page = get_object_or_404(ContentPage, slug=slug, types="FOOTER")
     news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 
@@ -65,7 +65,7 @@ def footerpage(request, slug):
                     subject = contact_entry_form.cleaned_data["subject"],
                     message = contact_entry_form.cleaned_data["message"])
                 request.session["contact_form_msg"] = "Your message has been sent! Thank you!"
-                return redirect("pages_app:mainpage")
+                return redirect("mainpage")
 
     elif slug == "newsletter":
         subscriber_form = SubscriberForm()
@@ -77,7 +77,7 @@ def footerpage(request, slug):
                     email = subscriber_form.cleaned_data["email"],
                     country = subscriber_form.cleaned_data["country"])
                 request.session["subscribe_form_msg"] = "Thanks for subscribing to our newsletter!"
-                return redirect("pages_app:mainpage")
+                return redirect("mainpage")
 
     elif slug == "submit-a-vineyard":
         vineyard_form = VineyardForm()
@@ -91,7 +91,7 @@ def footerpage(request, slug):
                     instance.save()
                     vineyard_form.save_m2m()
                     request.session["vineyard_form_msg"] = "Your vineyard has been successfully submitted!"
-                    return redirect("pages_app:mainpage")
+                    return redirect("mainpage")
         else:
             request.session["submit_vineyard"] = True
             return redirect("account_login")
@@ -165,7 +165,7 @@ def searchpage(request):
 
 
 def page(request, slug):
-    content_page = get_object_or_404(ContentPage, slug=slug)    
+    content_page = get_object_or_404(ContentPage, slug=slug, types__in=["PAGE", "WITHOUT_SIDEBAR"])
     news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
@@ -183,7 +183,7 @@ def page(request, slug):
 
 
 def newspage(request, slug):
-    content_page = get_object_or_404(ContentPage, slug=slug)
+    content_page = get_object_or_404(ContentPage, slug=slug, types="CATEGORY")
     news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 
@@ -208,7 +208,7 @@ def newspage(request, slug):
 
 
 def articlespage(request, slug):
-    content_page = get_object_or_404(ContentPage, slug=slug)
+    content_page = get_object_or_404(ContentPage, slug=slug, types="ARTICLES")
     news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 

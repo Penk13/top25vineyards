@@ -13,7 +13,7 @@ def profile(request):
     # From submit_vineyard
     if 'submit_vineyard' in request.session:
         request.session.pop('submit_vineyard')
-        return redirect("pages_app:footerpage", slug="submit-a-vineyard")
+        return redirect("footerpage", slug="submit-a-vineyard")
 
     # From rr_form
     if 'vineyard' in request.session:
@@ -55,7 +55,7 @@ def profile(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect("accounts:profile")
+            return redirect("profile")
 
     # Comment Form
     comment_form = CommentForm(request.POST or None)
@@ -65,7 +65,7 @@ def profile(request):
         instance.user = request.user
         instance.rr = rr
         instance.save()
-        return redirect("accounts:profile")
+        return redirect("profile")
 
     content_page = get_object_or_404(ContentPage, types="SEARCH_PAGE")
     context = {

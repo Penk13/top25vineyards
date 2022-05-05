@@ -66,12 +66,12 @@
 <nav class="d-md-block d-lg-none" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
   <ol class="breadcrumb" style="font-size: 13px">
     <li class="breadcrumb-item">
-      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+      <a href="{% url 'mainpage' %}" class="text-dark" style="text-decoration: none"
       ><i class="bi bi-house-fill"></i> Home</a
       >
     </li>
     <li class="breadcrumb-item" aria-current="page">
-      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+      <a href="{% url 'mainpage' %}" class="text-dark" style="text-decoration: none"
       >World</a
       >
     </li>
@@ -210,7 +210,7 @@
 <div class="row p-4 d-flex my-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="row p-0 pb-3 align-items-center m-0">
     <h5 class="col-9 fw-bold ps-0 m-0">Ratings & Reviews</h5>
-    <a class="col-3 btn btn-danger" href="{{ vineyard.get_absolute_url }}review/" role="button"
+    <a class="col-3 btn btn-danger" href="/review{{ vineyard.get_absolute_url }}" role="button"
       ><i class="bi bi-pencil-square"></i> Write a Review</a
     >
   </div>
@@ -305,12 +305,12 @@
 <nav class="d-md-none d-lg-block" style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
   <ol class="breadcrumb" style="font-size: 13px">
     <li class="breadcrumb-item">
-      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+      <a href="{% url 'mainpage' %}" class="text-dark" style="text-decoration: none"
         ><i class="bi bi-house-fill"></i> Home</a
       >
     </li>
     <li class="breadcrumb-item" aria-current="page">
-      <a href="{% url 'pages_app:mainpage' %}" class="text-dark" style="text-decoration: none"
+      <a href="{% url 'mainpage' %}" class="text-dark" style="text-decoration: none"
         >World</a
       >
     </li>
