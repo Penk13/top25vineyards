@@ -50,22 +50,17 @@ urlpatterns = [
         catch = (Http404, ContinueResolving)
     ),
     path('explore/<slug:slug>/', page, name='page'),
-    path('article/<slug:slug>/', articlespage, name='articlespage'),
+    path('articles/<slug:slug>/', articlespage, name='articlespage'),
 
     # vineyards
     path('edit-a-vineyard/<str:vineyard>/', edit_vineyard, name="edit-vineyard"),
-    path('review/<str:parent>/<str:region>/vineyard/<slug:slug>/',
-         rr_form, name="vineyard-review"),
-    path('review/<str:region>/vineyard/<slug:slug>/',
-         rr_form, name="vineyard-without-parent-review"),
-    path('<str:parent>/<str:region>/vineyard/<slug:slug>/',
-         vineyard_detail, name="vineyard-detail"),
-    path('<str:region>/vineyard/<slug:slug>/',
-         vineyard_detail, name="vineyard-detail-without-parent"),
+    path('review/<str:parent>/<str:region>/vineyard/<slug:slug>/', rr_form, name="vineyard-review"),
+    path('review/<str:region>/vineyard/<slug:slug>/', rr_form, name="vineyard-without-parent-review"),
+    path('<str:parent>/<str:region>/vineyard/<slug:slug>/', vineyard_detail, name="vineyard-detail"),
+    path('<str:region>/vineyard/<slug:slug>/', vineyard_detail, name="vineyard-detail-without-parent"),
 
     multiurl(
-        path('<str:parent>/<str:region>/',
-            vineyard_region, name="region"),
+        path('<str:parent>/<str:region>/', vineyard_region, name="region"),
         path('<slug:category>/<slug:news>/', news_detail, name='news-detail'),
         catch = (Http404, ContinueResolving)
     )
