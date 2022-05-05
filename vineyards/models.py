@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
@@ -8,8 +9,10 @@ from django.contrib.auth import get_user_model
 from django.utils.html import strip_tags
 import html
 from django.core.exceptions import ValidationError
-from news.models import Category
+from news.models import Category, Post
 from filer.fields.image import FilerImageField
+
+import pages_app.models
 
 User = get_user_model()
 
@@ -58,10 +61,11 @@ def create_slug_region(instance, new_slug=None):
     slug = slugify(instance.name)
     if new_slug is not None:
         slug = new_slug
-    qs = Region.objects.filter(slug=slug).order_by("-id")
-    exists = qs.exists()
-    if exists:
-        new_slug = "%s-%s" % (slug, qs.first().id)
+    rg = Region.objects.filter(slug=slug).order_by("-id")
+    pg = pages_app.models.ContentPage.objects.filter(slug=slug).order_by("-id")
+    pt = Post.objects.filter(slug=slug).order_by("-id")
+    if rg.exists() or pg.exists() or pt.exists():
+        new_slug = "%s-%s" % (slug, str(random.randrange(1, 1000, 1)))
         return create_slug_region(instance, new_slug=new_slug)
     return slug
 

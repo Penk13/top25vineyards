@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
@@ -59,9 +60,21 @@ class ContentPage(models.Model):
             return reverse('articlespage', kwargs={'slug': self.slug})
 
 
+def create_slug_page(instance, new_slug=None):
+    slug = slugify(instance.title)
+    if new_slug is not None:
+        slug = new_slug
+    pg = ContentPage.objects.filter(slug=slug).order_by("-id")
+    rg = Region.objects.filter(slug=slug).order_by("-id")
+    if pg.exists() or rg.exists():
+        new_slug = "%s-%s" % (slug, str(random.randrange(1, 1000, 1)))
+        return create_slug_page(instance, new_slug=new_slug)
+    return slug
+
+
 def pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
-        instance.slug = slugify(instance.title)
+        instance.slug = create_slug_page(instance)
     if not instance.meta_keywords:
         meta_key = instance.title.lower()
         instance.meta_keywords = meta_key
