@@ -134,6 +134,7 @@ def searchpage(request):
     news = Post.objects.filter(
         Q(title__icontains=searched) |
         Q(body__icontains=searched) |
+        Q(tags__name__icontains=searched) |
         Q(meta_description__icontains=searched) |
         Q(meta_keywords__icontains=searched)
     ).order_by("-id")
