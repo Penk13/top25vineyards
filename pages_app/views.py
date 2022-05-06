@@ -4,7 +4,7 @@ from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
 from vineyards.forms import VineyardForm
-from news.models import Post, Category, Billboard
+from news.models import Post, Category, Billboard, Article
 
 from mailing.models import ContactEntry, Subscriber
 from mailing.forms import ContactEntryForm, SubscriberForm
@@ -219,8 +219,8 @@ def articlespage(request, slug):
     vineyards = p.get_page(page)
 
     image_carousel = ImageUpload.objects.filter(page=content_page)
-    category = Category.objects.get(slug=content_page.slug)
-    p = Paginator(Post.objects.filter(category=category).order_by("-id"), 10)
+    article = Article.objects.get(slug=content_page.slug)
+    p = Paginator(Post.objects.filter(article=article).order_by("-id"), 10)
     page = request.GET.get('page')
     article_list = p.get_page(page)
     context = {"content_page": content_page,

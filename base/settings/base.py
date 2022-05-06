@@ -260,6 +260,7 @@ ADMIN_ORDERING = [
     ]),
     ('news', [
         'Autoblogging',
+        'Article',
         'Category',
         'Post',
         'Billboard',

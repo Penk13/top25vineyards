@@ -17,12 +17,28 @@ class Category(models.Model):
         return "Category " + self.name
 
 
-def pre_save_receiver_region(sender, instance, *args, **kwargs):
+def pre_save_receiver_category(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.name)
 
 
-pre_save.connect(pre_save_receiver_region, sender=Category)
+pre_save.connect(pre_save_receiver_category, sender=Category)
+
+
+class Article(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, max_length=200, blank=True)
+
+    def __str__(self):
+        return "Article " + self.name
+
+
+def pre_save_receiver_article(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.name)
+
+
+pre_save.connect(pre_save_receiver_article, sender=Article)
 
 
 class Tag(models.Model):
@@ -38,7 +54,8 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     cover = models.ImageField(
         upload_to="news", blank=True, max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, null=True, blank=True)
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
@@ -51,7 +68,10 @@ class Post(models.Model):
         return "Post : " + self.title
 
     def get_absolute_url(self):
-        return reverse('news-detail', kwargs={'category': self.category.slug, 'news': self.slug})
+        if self.category is not None:
+            return reverse('news-detail', kwargs={'category': self.category.slug, 'news': self.slug})
+        elif self.article is not None:
+            return reverse('article-detail', kwargs={'category': self.article.slug, 'article': self.slug})
 
 
 def create_slug_post(instance, new_slug=None):

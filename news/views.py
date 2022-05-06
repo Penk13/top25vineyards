@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from django.http import HttpResponse
 from django.core import files
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post, Autoblogging, Category, Billboard
+from .models import Post, Autoblogging, Category, Billboard, Article
 
 
 def news_detail(request, category, news):
@@ -19,6 +19,18 @@ def news_detail(request, category, news):
                "billboards": billboards,
                }
     return render(request, "news/news.html", context)
+
+
+def article_detail(request, category, article):
+    article = get_object_or_404(Post, slug=article)
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+    context = {"article": article,
+               "travel_news": travel_news,
+               "billboards": billboards,
+               }
+    return render(request, "news/article.html", context)
 
 
 def autoblogging(request):
