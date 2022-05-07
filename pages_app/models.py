@@ -38,6 +38,7 @@ class ContentPage(models.Model):
     list_carousel = models.ManyToManyField(Category, blank=True, related_name="list_carousel+")
     listing_title1 = models.CharField(max_length=255, blank=True)
     listing_title2 = models.CharField(max_length=255, blank=True)
+    listing_title3 = models.CharField(max_length=255, blank=True)
     carousel_title = models.CharField(max_length=255, blank=True)
     show_listing = models.BooleanField(default=False)
     display_news = models.BooleanField(default=True)
