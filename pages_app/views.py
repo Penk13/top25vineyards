@@ -4,7 +4,7 @@ from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
 from vineyards.forms import VineyardForm
-from news.models import Post, Category, Billboard, Article
+from news.models import Post, Category, Billboard
 
 from mailing.models import ContactEntry, Subscriber
 from mailing.forms import ContactEntryForm, SubscriberForm
@@ -206,28 +206,3 @@ def newspage(request, slug):
                "billboards": billboards,
                }
     return render(request, "pages_app/newspage.html", context)
-
-
-def articlespage(request, slug):
-    content_page = get_object_or_404(ContentPage, slug=slug, types="ARTICLES")
-    news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
-
-    p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
-    page = request.GET.get('page')
-    vineyards = p.get_page(page)
-
-    image_carousel = ImageUpload.objects.filter(page=content_page)
-    article = Article.objects.get(slug=content_page.slug)
-    p = Paginator(Post.objects.filter(article=article).order_by("-id"), 10)
-    page = request.GET.get('page')
-    article_list = p.get_page(page)
-    context = {"content_page": content_page,
-               "vineyards": vineyards,
-               "image_carousel": image_carousel,
-               "article_list": article_list,
-               "news": news,
-               "billboards": billboards,
-               }
-    return render(request, "pages_app/articles_page.html", context)

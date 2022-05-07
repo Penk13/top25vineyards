@@ -21,8 +21,8 @@ from django.urls import path, include
 from multiurl import ContinueResolving, multiurl
 
 from accounts.views import profile
-from news.views import news_detail, autoblogging, pull_feeds, article_detail
-from pages_app.views import mainpage, footerpage, searchpage, page, newspage, articlespage
+from news.views import news_detail, autoblogging, pull_feeds
+from pages_app.views import mainpage, footerpage, searchpage, page, newspage
 from vineyards.views import vineyard_detail, vineyard_region, rr_form, edit_vineyard
 
 urlpatterns = [
@@ -50,8 +50,6 @@ urlpatterns = [
         catch = (Http404, ContinueResolving)
     ),
     path('explore/<slug:slug>/', page, name='page'),
-    path('articles/<slug:slug>/', articlespage, name='articlespage'),
-    path('articles/<slug:category>/<slug:article>/', article_detail, name='article-detail'),
 
     # vineyards
     path('edit-a-vineyard/<str:vineyard>/', edit_vineyard, name="edit-vineyard"),
