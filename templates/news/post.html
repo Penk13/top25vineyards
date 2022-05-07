@@ -1,48 +1,48 @@
 {% extends 'base.html' %} {% load static %}
 
 <!-- Meta Keywords -->
-{% block description %} <meta name="description" content="{{ news.meta_description }} " />
+{% block description %} <meta name="description" content="{{ post.meta_description }} " />
 {% endblock description %}
 <!--  -->
-{% block keywords %} <meta name="keywords" content="{{ news.meta_keywords }} " />
+{% block keywords %} <meta name="keywords" content="{{ post.meta_keywords }} " />
 {% endblock keywords %}
 
 <!-- Open Graph Tags -->
 {% block opengraph %}
-{% if news.title %}
-<meta property="og:title" content="{{ news.title }}"> {% endif %}
+{% if post.title %}
+<meta property="og:title" content="{{ post.title }}"> {% endif %}
 <meta property="og:url" content="https://top25vineyards.com/{{ request.get_full_path }}">
-{% if news.body %}
-<meta property="og:description" content="{{ news.body|striptags|truncatechars:160 }}"> {% endif %}
-{% if news.cover %} 
-<meta property="og:image" content="https://top25vineyards.com/{{ news.cover.url }}"> {% endif %}
+{% if post.body %}
+<meta property="og:description" content="{{ post.body|striptags|truncatechars:160 }}"> {% endif %}
+{% if post.cover %} 
+<meta property="og:image" content="https://top25vineyards.com/{{ post.cover.url }}"> {% endif %}
 {% endblock opengraph %}
 
 <!-- Title -->
-{% block title %} {{ news.title }} {% endblock title %}
+{% block title %} {{ post.title }} {% endblock title %}
 
 <!-- Top Carousel -->
 {% block topcarousel %}
-<section class="news-detail mt-5"></section>
+<section class="post-detail mt-5"></section>
 {% endblock topcarousel %}
 
-<!-- News Detail -->
+<!-- Post Detail -->
 {% block content %}
 <div class="row d-flex p-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h6>
     <span class="badge bg-dark"
       ><a
-        href="{% url 'newspage' news.category.slug %}"
+        href="{% url 'listpage' post.category.slug %}"
         class="text-white"
         style="text-decoration: none"
-        >{{ news.category.name }}</a
+        >{{ post.category.name }}</a
       ></span
     >
   </h6>
-  <h1 class="fw-bold">{{ news.title }}</h1>
+  <h1 class="fw-bold">{{ post.title }}</h1>
   <div class="my-3">
-    <img src="{{ news.cover.url }}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
-    {{ news.body|safe }}
+    <img src="{{ post.cover.url }}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
+    {{ post.body|safe }}
   </div>
 </div>
 {% endblock content %}
@@ -58,41 +58,41 @@
     </li>
     <li class="breadcrumb-item active" aria-current="page">
       <a
-        href="{% url 'newspage' news.category.slug %}"
+        href="{% url 'listpage' post.category.slug %}"
         class="text-dark"
         style="text-decoration: none"
-        >{{ news.category.name }}</a
+        >{{ post.category.name }}</a
       >
     </li>
-    <li class="breadcrumb-item active" aria-current="page">{{ news.title }}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{ post.title }}</li>
   </ol>
 </nav>
 {% endblock breadcrumb %}
 
 <!-- Sidebar -->
-{% block sidebar %} {% if news.sidebar %}
+{% block sidebar %} {% if post.sidebar %}
 <div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <div class="text-start">{{ news.sidebar|safe }}</div>
+  <div class="text-start">{{ post.sidebar|safe }}</div>
 </div>
-{% elif news.sidebar == "" and default_sidebar != "" %}
+{% elif post.sidebar == "" and default_sidebar != "" %}
 <div class="row p-3 text-center mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ default_sidebar|safe }}</div>
 </div>
 {% endif %} {% endblock sidebar %}
 
 <!-- Ad Manager -->
-{% block admanager %} {% if news.ad_manager %}
+{% block admanager %} {% if post.ad_manager %}
 <div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-  <div class="text-start">{{ news.ad_manager|safe }}</div>
+  <div class="text-start">{{ post.ad_manager|safe }}</div>
 </div>
-{% elif news.ad_manager == "" and default_ad_manager != "" %}
+{% elif post.ad_manager == "" and default_ad_manager != "" %}
 <div class="row p-3 text-center" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <div class="text-start">{{ default_ad_manager|safe }}</div>
 </div>
 {% endif %} {% endblock admanager %}
 
 <!-- Global Travel News -->
-{% block global_travel_news %} {% if news.display_news %}
+{% block global_travel_news %} {% if post.display_news %}
 <div class="row d-flex">
   <div class="col col-md-12 col-lg-8">
     <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
@@ -145,7 +145,7 @@
 {% endif %} {% endblock global_travel_news %}
 
 <!-- Billboards -->
-{% block billboards %} {% if news.display_billboard %}
+{% block billboards %} {% if post.display_billboard %}
 <div class="row pt-4">
   {% for billboard in billboards %}
     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 my-3" style="position: relative;">

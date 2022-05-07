@@ -21,8 +21,8 @@ from django.urls import path, include
 from multiurl import ContinueResolving, multiurl
 
 from accounts.views import profile
-from news.views import news_detail, autoblogging, pull_feeds
-from pages_app.views import mainpage, footerpage, searchpage, page, newspage
+from news.views import post_detail, autoblogging, pull_feeds
+from pages_app.views import mainpage, footerpage, searchpage, page, listpage
 from vineyards.views import vineyard_detail, vineyard_region, rr_form, edit_vineyard
 
 urlpatterns = [
@@ -46,7 +46,7 @@ urlpatterns = [
     multiurl(
         path('<slug:slug>/', footerpage, name='footerpage'),
         path('<str:region>/', vineyard_region, name="region-without-parent"),
-        path('<slug:slug>/', newspage, name='newspage'),
+        path('<slug:slug>/', listpage, name='listpage'),
         catch = (Http404, ContinueResolving)
     ),
     path('explore/<slug:slug>/', page, name='page'),
@@ -60,7 +60,7 @@ urlpatterns = [
 
     multiurl(
         path('<str:parent>/<str:region>/', vineyard_region, name="region"),
-        path('<slug:category>/<slug:news>/', news_detail, name='news-detail'),
+        path('<slug:category>/<slug:post>/', post_detail, name='post-detail'),
         catch = (Http404, ContinueResolving)
     )
 ]

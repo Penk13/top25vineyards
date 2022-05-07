@@ -9,16 +9,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Autoblogging, Category, Billboard
 
 
-def news_detail(request, category, news):
-    news = get_object_or_404(Post, slug=news)
+def post_detail(request, category, post):
+    post = get_object_or_404(Post, slug=post)
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
-    context = {"news": news,
+    context = {"post": post,
                "travel_news": travel_news,
                "billboards": billboards,
                }
-    return render(request, "news/news.html", context)
+    return render(request, "news/post.html", context)
 
 
 def autoblogging(request):

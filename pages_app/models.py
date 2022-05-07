@@ -15,9 +15,8 @@ TYPE = (
     ("FOOTER", "Footer"),
     ("HOME_PAGE", "Home Page"),
     ("SEARCH_PAGE", "Search Page"),
-    ("CATEGORY", "Category"),
+    ("LIST", "List"),
     ("WITHOUT_SIDEBAR", "Without Sidebar"),
-    ("ARTICLES", "Articles"),
 )
 
 
@@ -35,7 +34,8 @@ class ContentPage(models.Model):
     meta_keywords = models.TextField(blank=True)
     additional_content = RichTextUploadingField(blank=True)
     category = models.ManyToManyField(Region, blank=True)
-    list = models.ManyToManyField(Category, blank=True)
+    list_section = models.ManyToManyField(Category, blank=True, related_name="list_section+")
+    list_carousel = models.ManyToManyField(Category, blank=True, related_name="list_carousel+")
     listing_title1 = models.CharField(max_length=255, blank=True)
     listing_title2 = models.CharField(max_length=255, blank=True)
     listing_title3 = models.CharField(max_length=255, blank=True)
@@ -50,14 +50,12 @@ class ContentPage(models.Model):
     def get_absolute_url(self):
         if self.types == "HOME_PAGE":
             return reverse('mainpage')
-        elif self.types == "CATEGORY":
-            return reverse('newspage', kwargs={'slug': self.slug})
+        elif self.types == "LIST":
+            return reverse('listpage', kwargs={'slug': self.slug})
         elif self.types == "FOOTER":
             return reverse('footerpage', kwargs={'slug': self.slug})
         elif self.types == "PAGE" or self.types == "WITHOUT_SIDEBAR":
             return reverse('page', kwargs={'slug': self.slug})
-        elif self.types == "ARTICLES":
-            return reverse('articlespage', kwargs={'slug': self.slug})
 
 
 def create_slug_page(instance, new_slug=None):

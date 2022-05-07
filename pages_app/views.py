@@ -14,13 +14,16 @@ from itertools import chain
 
 def mainpage(request):
     content_page = get_object_or_404(ContentPage, types="HOME_PAGE")
-    news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
+    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
+
     image_carousel = ImageUpload.objects.filter(page=content_page)
-    p = Paginator(Vineyard.objects.filter(
+    p1 = Paginator(Vineyard.objects.filter(
         regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
     page = request.GET.get('page')
-    vineyards = p.get_page(page)
+    vineyards = p1.get_page(page)
+
+    # p2 = Paginator(Post.objects.filter())
     context = {"content_page": content_page,
                "vineyards": vineyards,
                "image_carousel": image_carousel,
@@ -42,7 +45,7 @@ def mainpage(request):
 
 def footerpage(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug, types="FOOTER")
-    news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
+    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 
     p = Paginator(Vineyard.objects.filter(
@@ -109,7 +112,7 @@ def footerpage(request, slug):
 
 def searchpage(request):
     content_page = get_object_or_404(ContentPage, types="SEARCH_PAGE")
-    news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
+    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 
     p = Paginator(Vineyard.objects.filter(
@@ -167,7 +170,7 @@ def searchpage(request):
 
 def page(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug, types__in=["PAGE", "WITHOUT_SIDEBAR"])
-    news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
+    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
     p = Paginator(Vineyard.objects.filter(
@@ -183,9 +186,9 @@ def page(request, slug):
     return render(request, "pages_app/page.html", context)
 
 
-def newspage(request, slug):
-    content_page = get_object_or_404(ContentPage, slug=slug, types="CATEGORY")
-    news = Post.objects.filter(category__in=content_page.list.all()).order_by("-id")
+def listpage(request, slug):
+    content_page = get_object_or_404(ContentPage, slug=slug, types="LIST")
+    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 
     p = Paginator(Vineyard.objects.filter(
@@ -205,4 +208,4 @@ def newspage(request, slug):
                "news": news,
                "billboards": billboards,
                }
-    return render(request, "pages_app/newspage.html", context)
+    return render(request, "pages_app/list_page.html", context)
