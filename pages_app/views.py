@@ -14,20 +14,28 @@ from itertools import chain
 
 def mainpage(request):
     content_page = get_object_or_404(ContentPage, types="HOME_PAGE")
-    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
+    image_carousel = ImageUpload.objects.filter(page=content_page)
+
+    # List Section 1: Vineyards
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
+    page = request.GET.get('page1')
+    vineyards = p.get_page(page)
+
+    # List Section 2: List Section
+    p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)
+    page = request.GET.get('page2')
+    list_section = p.get_page(page)
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
 
-    image_carousel = ImageUpload.objects.filter(page=content_page)
-    p1 = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
-    page = request.GET.get('page')
-    vineyards = p1.get_page(page)
-
-    # p2 = Paginator(Post.objects.filter())
     context = {"content_page": content_page,
-               "vineyards": vineyards,
                "image_carousel": image_carousel,
-               "news": news,
+               "vineyards": vineyards,
+               "list_section": list_section,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     # Popup message if the form is submitted successfully
@@ -45,17 +53,24 @@ def mainpage(request):
 
 def footerpage(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug, types="FOOTER")
-    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
-
-    p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
-    page = request.GET.get('page')
-    vineyards = p.get_page(page)
-
     contact_entry_form = ContactEntryForm()
     subscriber_form = SubscriberForm()
     vineyard_form = VineyardForm()
+
+    # List Section 1: Vineyards
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
+    page = request.GET.get('page1')
+    vineyards = p.get_page(page)
+
+    # List Section 2: List Section
+    p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)
+    page = request.GET.get('page2')
+    list_section = p.get_page(page)
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
 
     if slug == "contact-us":
         contact_entry_form = ContactEntryForm()
@@ -100,11 +115,12 @@ def footerpage(request, slug):
             return redirect("account_login")
 
     context = {"content_page": content_page,
-               "vineyards": vineyards,
                "contact_entry_form": contact_entry_form,
                "subscriber_form": subscriber_form,
                "vineyard_form": vineyard_form,
-               "news": news,
+               "vineyards": vineyards,
+               "list_section": list_section,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     return render(request, "pages_app/footer_page.html", context)
@@ -112,14 +128,8 @@ def footerpage(request, slug):
 
 def searchpage(request):
     content_page = get_object_or_404(ContentPage, types="SEARCH_PAGE")
-    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
 
-    p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
-    page = request.GET.get('page')
-    vineyards = p.get_page(page)
-
+    # List Section 1: Search Result
     if request.method == "POST":
         searched = request.POST['searched']
     else:
@@ -156,13 +166,30 @@ def searchpage(request):
     )
     result_list = list(chain(vineyard, news, regions, pages))
     p = Paginator(result_list, 10)
-    page = request.GET.get('page')
+    page = request.GET.get('page1')
     results = p.get_page(page)
+
+    # List Section 2: Vineyards
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
+    page = request.GET.get('page2')
+    vineyards = p.get_page(page)
+
+    # List Section 3: List Section
+    p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)
+    page = request.GET.get('page3')
+    list_section = p.get_page(page)
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+
     context = {"content_page": content_page,
-               "vineyards": vineyards,
                "searched": searched,
                "results": results,
-               "news": news,
+               "vineyards": vineyards,
+               "list_section": list_section,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     return render(request, "pages_app/search_page.html", context)
@@ -170,17 +197,28 @@ def searchpage(request):
 
 def page(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug, types__in=["PAGE", "WITHOUT_SIDEBAR"])
-    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
     image_carousel = ImageUpload.objects.filter(page=content_page)
+
+    # List Section 1: Vineyards
     p = Paginator(Vineyard.objects.filter(
         regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
-    page = request.GET.get('page')
+    page = request.GET.get('page1')
     vineyards = p.get_page(page)
+
+    # List Section 2: List Section
+    p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)
+    page = request.GET.get('page2')
+    list_section = p.get_page(page)
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+
     context = {"content_page": content_page,
-               "vineyards": vineyards,
                "image_carousel": image_carousel,
-               "news": news,
+               "vineyards": vineyards,
+               "list_section": list_section,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     return render(request, "pages_app/page.html", context)
@@ -188,24 +226,34 @@ def page(request, slug):
 
 def listpage(request, slug):
     content_page = get_object_or_404(ContentPage, slug=slug, types="LIST")
-    news = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
-
-    p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
-    page = request.GET.get('page')
-    vineyards = p.get_page(page)
-
     image_carousel = ImageUpload.objects.filter(page=content_page)
+
+    # List Section 1: Main List Section
     category = Category.objects.get(slug=content_page.slug)
     p = Paginator(Post.objects.filter(category=category).order_by("-id"), 10)
-    page = request.GET.get('page')
-    news_list = p.get_page(page)
+    page = request.GET.get('page1')
+    main_list = p.get_page(page)
+
+    # List Section 2: Vineyards
+    p = Paginator(Vineyard.objects.filter(
+        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
+    page = request.GET.get('page2')
+    vineyards = p.get_page(page)
+
+    # List Section 3: List Section
+    p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)
+    page = request.GET.get('page3')
+    list_section = p.get_page(page)
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=content_page.list_carousel.all()).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
     context = {"content_page": content_page,
-               "vineyards": vineyards,
                "image_carousel": image_carousel,
-               "news_list": news_list,
-               "news": news,
+               "main_list": main_list,
+               "vineyards": vineyards,
+               "list_section": list_section,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     return render(request, "pages_app/list_page.html", context)
