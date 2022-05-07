@@ -250,13 +250,13 @@
 </div>
 {% endif %} {% endblock admanager %}
 
-<!-- Global Travel News -->
+<!-- List Carousel -->
 {% block global_travel_news %} {% if content_page.display_news %}
 <div class="row d-flex">
   <div class="col col-md-12 col-lg-8">
     <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-      {% if content_page.listing_title3 %}
-      <h5 class="fw-bold">{{ content_page.listing_title3 }}</h5>
+      {% if content_page.carousel_title %}
+      <h5 class="fw-bold">{{ content_page.carousel_title }}</h5>
       <hr style="width: 97%; margin: 0 auto; margin-bottom: 10px;">
       {% endif %}
       <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
