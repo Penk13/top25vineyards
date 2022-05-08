@@ -38,8 +38,10 @@
 </section>
 {% endblock toptext %}
 
+<!-- Search Page -->
+{% block content %} 
 <!-- List Section 1: Search Result -->
-{% block content %} {% if searched %}
+{% if content_page.show_listing1 == True and searched %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   <h5 class="fw-bold">Your search results for: {{ searched }}</h5>
   <hr />
@@ -188,7 +190,7 @@
 {% endif %}
 
 <!-- List Section 2: Vineyards -->
-{% if content_page.show_listing == True %}
+{% if content_page.show_listing2 == True and vineyards %}
 <div class="row d-flex p-3 my-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% if content_page.listing_title2 %}
   <h5 class="fw-bold">{{ content_page.listing_title2 }}</h5>
@@ -270,6 +272,7 @@
 {% endif %}
 
 <!-- List Section 3: List Section -->
+{% if content_page.show_listing3 == True and list_section %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% if content_page.listing_title3 %}
   <h5 class="fw-bold">{{ content_page.listing_title3 }}</h5>
@@ -313,6 +316,7 @@
     </ul>
   </nav>
 </div>
+{% endif %}
 {% endblock content %}
 
 <!-- Sidebar -->

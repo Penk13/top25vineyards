@@ -56,7 +56,7 @@
 </section>
 {% endblock toptext %}
 
-<!-- List Section 1: Vineyards -->
+<!-- Page -->
 {% block content %}
 {% if content_page.additional_content %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
@@ -64,7 +64,8 @@
 </div>
 {% endif %}
 
-{% if content_page.show_listing == True %}
+<!-- List Section 1: Vineyards -->
+{% if content_page.show_listing1 == True and vineyards %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% if content_page.listing_title1 %}
   <h5 class="fw-bold">{{ content_page.listing_title1 }}</h5>
@@ -146,6 +147,7 @@
 {% endif %}
 
 <!-- List Section 2: List Section -->
+{% if content_page.show_listing1 == True and list_section %}
 <div class="row d-flex p-3 mb-4" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% if content_page.listing_title2 %}
   <h5 class="fw-bold">{{ content_page.listing_title2 }}</h5>
@@ -189,6 +191,7 @@
     </ul>
   </nav>
 </div>
+{% endif %}
 {% endblock content %}
 
 <!-- Sidebar -->
