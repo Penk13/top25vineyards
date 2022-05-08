@@ -10,16 +10,18 @@ from news.models import Post, Category, Billboard
 
 def vineyard_detail(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug, display=True)
-    news = Post.objects.filter(category__in=vineyard.news.all()).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
     comments = Comment.objects.filter(approved=True)
-
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     review_and_rating = ReviewAndRating.objects.filter(
         vineyard=vineyard, approved=True)
     recent_reviews = ReviewAndRating.objects.filter(
         vineyard=vineyard, approved=True).order_by('-id')[:3]
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=vineyard.list_carousel.all()).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+
     error_msg = None
     success_msg = None
     if "rr_form_error_msg" in request.session:
@@ -36,7 +38,7 @@ def vineyard_detail(request, region, slug, parent=None):
                "recent_reviews": recent_reviews,
                "error_msg": error_msg,
                "success_msg": success_msg,
-               "news": news,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     return render(request, "vineyards/vineyard.html", context)
@@ -44,17 +46,22 @@ def vineyard_detail(request, region, slug, parent=None):
 
 def vineyard_region(request, region, parent=None):
     region = get_object_or_404(Region, slug=region)
-    news = Post.objects.filter(category__in=region.news.all()).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
     region_images = RegionImage.objects.filter(region=region)
+
+    # List Section 1: Vineyard By Region
     p = Paginator(Vineyard.objects.filter(
         regions=region, display=True).order_by("-rating"), 10)
     page = request.GET.get('page')
     vineyards = p.get_page(page)
-    context = {"vineyards": vineyards, 
-               "region": region,
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=region.list_carousel.all()).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
+
+    context = {"region": region,
                "region_images": region_images,
-               "news": news,
+               "vineyards": vineyards,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     return render(request, "vineyards/vineyard_region.html", context)
@@ -62,14 +69,16 @@ def vineyard_region(request, region, parent=None):
 
 def rr_form(request, region, slug, parent=None):
     vineyard = get_object_or_404(Vineyard, slug=slug)
-    category = Category.objects.get(slug="global-travel-news")
-    travel_news = Post.objects.filter(category=category).order_by("-id")
-    billboards = Billboard.objects.filter(display=True)
     yard_images = TopSliderImage.objects.filter(vineyard=vineyard)
     yard_cover_images = CoverSliderImage.objects.filter(vineyard=vineyard)
     recent_reviews = ReviewAndRating.objects.filter(
         vineyard=vineyard, approved=True).order_by('-id')[:3]
     form = ReviewRatingForm(request.POST or None)
+
+    # List Carousel: Global Travel News
+    category = Category.objects.get(slug="global-travel-news")
+    travel_news = Post.objects.filter(category=category).order_by("-id")
+    billboards = Billboard.objects.filter(display=True)
 
     # Check if there is a previous review
     try:
@@ -111,9 +120,12 @@ def rr_form(request, region, slug, parent=None):
 
 def edit_vineyard(request, vineyard):
     vineyard = get_object_or_404(Vineyard, slug=vineyard)
+
+    # List Carousel: Global Travel News
     category = Category.objects.get(slug="global-travel-news")
     travel_news = Post.objects.filter(category=category).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
+
     if vineyard.user == request.user:
         vineyard_form = VineyardForm(instance=vineyard)
         if request.user.is_authenticated:

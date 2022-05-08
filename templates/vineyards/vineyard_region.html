@@ -63,7 +63,7 @@
 </section>
 {% endblock toptext %}
 
-<!-- Vineyard by Region -->
+<!-- List Section 1: Vineyard by Region -->
 {% block content %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
   {% if region.listing_title1 %}
@@ -166,28 +166,28 @@
 </div>
 {% endif %} {% endblock admanager %}
 
-<!-- Global Travel News -->
+<!-- List Carousel -->
 {% block global_travel_news %} {% if region.display_list %}
 <div class="row d-flex">
   <div class="col col-md-12 col-lg-8">
     <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">
-      {% if region.listing_title2 %}
-      <h5 class="fw-bold">{{ region.listing_title2 }}</h5>
+      {% if region.carousel_title %}
+      <h5 class="fw-bold">{{ region.carousel_title }}</h5>
       <hr style="width: 97%; margin: 0 auto; margin-bottom: 10px;">
       {% endif %}
       <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active" data-bs-interval="10000">
             <div class="row d-flex">
-              {% for news in news %}
+              {% for post in list_carousel %}
               <div class="col-6 col-md-4 py-2 text-center">
-                <a href="{{ news.get_absolute_url }}" style="text-decoration: none">
+                <a href="{{ post.get_absolute_url }}" style="text-decoration: none">
                   <img
-                    src="{{ news.cover.url }}"
+                    src="{{ post.cover.url }}"
                     style="max-height: 150px"
                     class="img-fluid"
                   />
-                  <h6 class="fw-bold text-start text-dark my-2">{{ news.title }}</h6>
+                  <h6 class="fw-bold text-start text-dark my-2">{{ post.title }}</h6>
                 </a>
               </div>
               {% if forloop.counter|divisibleby:6 %}
