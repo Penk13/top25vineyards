@@ -40,7 +40,7 @@ class Region(models.Model):
     listing_title1 = models.CharField(max_length=255, blank=True)
     listing_title2 = models.CharField(max_length=255, blank=True)
     display_on_navbar = models.BooleanField(default=True)
-    display_news = models.BooleanField(default=True)
+    display_list = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
     slug = models.SlugField(unique=True)
 
@@ -126,7 +126,7 @@ class Vineyard(models.Model):
     hide_rating = models.BooleanField(default=False)
     display = models.BooleanField(default=False)
     send_email = models.BooleanField(default=True)
-    display_news = models.BooleanField(default=True)
+    display_list = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     username = models.CharField(max_length=30, blank=True)

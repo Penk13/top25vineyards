@@ -41,7 +41,7 @@ class ContentPage(models.Model):
     listing_title3 = models.CharField(max_length=255, blank=True)
     carousel_title = models.CharField(max_length=255, blank=True)
     show_listing = models.BooleanField(default=False)
-    display_news = models.BooleanField(default=True)
+    display_list = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
     slug = models.SlugField(unique=True, blank=True, max_length=255)
 
