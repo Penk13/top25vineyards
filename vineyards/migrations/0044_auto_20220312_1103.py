@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0025_auto_20220211_1208'),
+        ('list', '0025_auto_20220211_1208'),
         ('vineyards', '0043_alter_comment_rr'),
     ]
 
@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='region',
             name='news',
-            field=models.ManyToManyField(blank=True, to='news.Category'),
+            field=models.ManyToManyField(blank=True, to='list.Category'),
         ),
         migrations.AddField(
             model_name='vineyard',
@@ -24,6 +24,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='vineyard',
             name='news',
-            field=models.ManyToManyField(blank=True, to='news.Category'),
+            field=models.ManyToManyField(blank=True, to='list.Category'),
         ),
     ]

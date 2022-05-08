@@ -21,7 +21,7 @@ from django.urls import path, include
 from multiurl import ContinueResolving, multiurl
 
 from accounts.views import profile
-from news.views import post_detail, autoblogging, pull_feeds
+from list.views import post_detail, autoblogging, pull_feeds
 from pages_app.views import mainpage, footerpage, searchpage, page, listpage
 from vineyards.views import vineyard_detail, vineyard_region, rr_form, edit_vineyard
 

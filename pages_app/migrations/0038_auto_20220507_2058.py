@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0028_auto_20220507_2028'),
+        ('list', '0028_auto_20220507_2028'),
         ('pages_app', '0037_auto_20220504_2123'),
     ]
 
@@ -18,11 +18,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contentpage',
             name='list_carousel',
-            field=models.ManyToManyField(blank=True, related_name='_pages_app_contentpage_list_carousel_+', to='news.Category'),
+            field=models.ManyToManyField(blank=True, related_name='_pages_app_contentpage_list_carousel_+', to='list.Category'),
         ),
         migrations.AddField(
             model_name='contentpage',
             name='list_section',
-            field=models.ManyToManyField(blank=True, related_name='_pages_app_contentpage_list_section_+', to='news.Category'),
+            field=models.ManyToManyField(blank=True, related_name='_pages_app_contentpage_list_section_+', to='list.Category'),
         ),
     ]

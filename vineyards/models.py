@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from django.utils.html import strip_tags
 import html
 from django.core.exceptions import ValidationError
-from news.models import Category, Post
+from list.models import Category, Post
 from filer.fields.image import FilerImageField
 
 import pages_app.models

@@ -5,7 +5,7 @@ from .forms import ReviewRatingForm, VineyardForm
 from datetime import date, timedelta
 from django.core.mail import send_mail
 from django.conf import settings
-from news.models import Post, Category, Billboard
+from list.models import Post, Category, Billboard
 
 
 def vineyard_detail(request, region, slug, parent=None):

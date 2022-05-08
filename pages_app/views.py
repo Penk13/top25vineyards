@@ -4,7 +4,7 @@ from django.db.models import Q
 from .models import ContentPage, ImageUpload
 from vineyards.models import Vineyard, Region
 from vineyards.forms import VineyardForm
-from news.models import Post, Category, Billboard
+from list.models import Post, Category, Billboard
 
 from mailing.models import ContactEntry, Subscriber
 from mailing.forms import ContactEntryForm, SubscriberForm

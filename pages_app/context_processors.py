@@ -1,5 +1,5 @@
 from .models import Navbar, Footer, Sidebar, Script
-from news.models import Post, Category, Billboard
+from list.models import Post, Category, Billboard
 
 
 def base_variable(request):

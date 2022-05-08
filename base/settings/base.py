@@ -55,11 +55,12 @@ INSTALLED_APPS = [
     'filer',
     'mptt',
     'import_export',
+    'django_rename_app',
 
     'accounts.apps.AccountsConfig',
     'pages_app.apps.PagesAppConfig',
     'vineyards.apps.VineyardsConfig',
-    'news.apps.NewsConfig',
+    'list.apps.ListConfig',
     'mailing.apps.MailingConfig',
 ]
 
@@ -258,7 +259,7 @@ ADMIN_ORDERING = [
         'ContactEntry',
         'Subscriber',
     ]),
-    ('news', [
+    ('list', [
         'Autoblogging',
         'Category',
         'Post',

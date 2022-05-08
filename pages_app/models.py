@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.utils.html import strip_tags
 import html
 from vineyards.models import Region
-from news.models import Category
+from list.models import Category
 from filer.fields.image import FilerImageField
 
 TYPE = (

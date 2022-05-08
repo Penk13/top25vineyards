@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('news', '0025_auto_20220211_1208'),
+        ('list', '0025_auto_20220211_1208'),
         ('pages_app', '0029_footer_new_window'),
     ]
 
@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contentpage',
             name='news',
-            field=models.ManyToManyField(blank=True, to='news.Category'),
+            field=models.ManyToManyField(blank=True, to='list.Category'),
         ),
     ]
