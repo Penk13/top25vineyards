@@ -4,6 +4,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.urls import reverse
+from django.utils.html import strip_tags
+import html
 from filer.fields.image import FilerImageField
 
 import vineyards.models
@@ -38,11 +40,13 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     cover = models.ImageField(
         upload_to="news", blank=True, max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, related_name="category+")
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
     meta_keywords = models.TextField(blank=True)
+    carousel_title = models.CharField(max_length=255, blank=True)
+    list_carousel = models.ManyToManyField(Category, blank=True, related_name="list_carousel+")
     display_list = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
     slug = models.SlugField(unique=True, max_length=200)
@@ -69,6 +73,12 @@ def create_slug_post(instance, new_slug=None):
 def pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug_post(instance)
+    if not instance.meta_keywords:
+        meta_key = instance.title.lower()
+        instance.meta_keywords = meta_key
+    if not instance.meta_description and instance.body:
+        meta_desc = instance.body[0:instance.body.find(".")]
+        instance.meta_description = html.unescape(strip_tags(meta_desc))
 
 
 pre_save.connect(pre_save_receiver, sender=Post)

@@ -3,7 +3,6 @@ from .models import Category, Tag, Post, Autoblogging, Billboard
 
 
 class PostAdmin(admin.ModelAdmin):
-    readonly_fields = ('slug',)
     search_fields = ['title', 'body']
     list_filter = ('category',)
 

@@ -11,11 +11,13 @@ from .models import Post, Autoblogging, Category, Billboard
 
 def post_detail(request, category, post):
     post = get_object_or_404(Post, slug=post)
-    category = Category.objects.get(slug="global-travel-news")
-    travel_news = Post.objects.filter(category=category).order_by("-id")
+
+    # List Carousel
+    list_carousel = Post.objects.filter(category__in=post.list_carousel.all()).order_by("-id")
     billboards = Billboard.objects.filter(display=True)
+
     context = {"post": post,
-               "travel_news": travel_news,
+               "list_carousel": list_carousel,
                "billboards": billboards,
                }
     return render(request, "news/post.html", context)
