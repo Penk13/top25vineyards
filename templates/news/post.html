@@ -43,8 +43,6 @@
   <div class="my-3">
     {% if post.cover %}
     <img src="{{ post.cover.url }}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
-    {% else %}
-    <img src="{% static 'img/thumbnail-page.jpg' %}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
     {% endif %}
     {{ post.body|safe }}
   </div>
