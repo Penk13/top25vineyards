@@ -41,7 +41,11 @@
   </h6>
   <h1 class="fw-bold">{{ post.title }}</h1>
   <div class="my-3">
+    {% if post.cover %}
     <img src="{{ post.cover.url }}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
+    {% else %}
+    <img src="{% static 'img/thumbnail-page.jpg' %}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
+    {% endif %}
     {{ post.body|safe }}
   </div>
 </div>
@@ -107,11 +111,11 @@
               {% for post in list_carousel %}
               <div class="col-6 col-md-4 py-2 text-center">
                 <a href="{{ post.get_absolute_url }}" style="text-decoration: none">
-                  <img
-                    src="{{ post.cover.url }}"
-                    style="max-height: 150px"
-                    class="img-fluid"
-                  />
+                  {% if post.cover %}
+                  <img src="{{ post.cover.url }}" style="max-height: 150px" class="img-fluid"/>
+                  {% else %}
+                  <img src="{% static 'img/thumbnail-page.jpg' %}" style="max-height: 150px" class="img-fluid" />
+                  {% endif %}
                   <h6 class="fw-bold text-start text-dark my-2">{{ post.title }}</h6>
                 </a>
               </div>

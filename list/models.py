@@ -34,13 +34,17 @@ class Tag(models.Model):
         return "Tag " + self.name
 
 
+def get_default_category():
+    return Category.objects.get(name="Global Travel News").id
+
+
 class Post(models.Model):
     title = models.CharField(max_length=255)
     body = RichTextUploadingField()
     tags = models.ManyToManyField(Tag, blank=True)
     cover = models.ImageField(
         upload_to="news", blank=True, max_length=255)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, related_name="category+")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category+", default=get_default_category)
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)
     meta_description = models.TextField(blank=True)
@@ -49,7 +53,7 @@ class Post(models.Model):
     list_carousel = models.ManyToManyField(Category, blank=True, related_name="list_carousel+")
     display_list = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
-    slug = models.SlugField(unique=True, max_length=200)
+    slug = models.SlugField(unique=True, max_length=200, blank=True)
 
     def __str__(self):
         return "Post : " + self.title

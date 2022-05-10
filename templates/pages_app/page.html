@@ -155,7 +155,13 @@
   {% endif %}
   {% for post in list_section %}
   <div class="col-12 col-md-6 py-3 text-start">
-    <a href="{{ post.get_absolute_url }}"><img class="thumbnail-img" src="{{ post.cover.url }}" /></a>
+    <a href="{{ post.get_absolute_url }}">
+      {% if post.cover %}
+      <img class="thumbnail-img" src="{{ post.cover.url }}" />
+      {% else %}
+      <img class="thumbnail-img" src="{% static 'img/thumbnail-page.jpg' %}" />
+      {% endif %}
+    </a>
   </div>
   <div class="col-12 col-md-6 py-3" style="font-size: 14px">
     <h5 class="fw-bold">
@@ -236,11 +242,11 @@
               {% for post in list_carousel %}
               <div class="col-6 col-md-4 py-2 text-center">
                 <a href="{{ post.get_absolute_url }}" style="text-decoration: none">
-                  <img
-                    src="{{ post.cover.url }}"
-                    style="max-height: 150px"
-                    class="img-fluid"
-                  />
+                  {% if post.cover %}
+                  <img src="{{ post.cover.url }}" style="max-height: 150px" class="img-fluid"/>
+                  {% else %}
+                  <img src="{% static 'img/thumbnail-page.jpg' %}" style="max-height: 150px" class="img-fluid" />
+                  {% endif %}
                   <h6 class="fw-bold text-start text-dark my-2">{{ post.title }}</h6>
                 </a>
               </div>

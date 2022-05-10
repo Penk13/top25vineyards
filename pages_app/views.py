@@ -144,7 +144,7 @@ def searchpage(request):
         Q(meta_description__icontains=searched) |
         Q(meta_keywords__icontains=searched)
     ).order_by("-rating")
-    news = Post.objects.filter(
+    post = Post.objects.filter(
         Q(title__icontains=searched) |
         Q(body__icontains=searched) |
         Q(tags__name__icontains=searched) |
@@ -164,7 +164,7 @@ def searchpage(request):
         Q(meta_description__icontains=searched) |
         Q(meta_keywords__icontains=searched)
     )
-    result_list = list(chain(vineyard, news, regions, pages))
+    result_list = list(chain(vineyard, post, regions, pages))
     p = Paginator(result_list, 10)
     page = request.GET.get('page1')
     results = p.get_page(page)
