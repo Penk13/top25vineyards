@@ -150,7 +150,7 @@ def searchpage(request):
         Q(tags__name__icontains=searched) |
         Q(meta_description__icontains=searched) |
         Q(meta_keywords__icontains=searched)
-    ).order_by("-id")
+    ).distinct().order_by("-id")
     regions = Region.objects.filter(
         Q(name__icontains=searched) |
         Q(title__icontains=searched) |
