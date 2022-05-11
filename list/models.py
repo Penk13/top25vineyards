@@ -44,6 +44,7 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
     cover = models.ImageField(
         upload_to="news", blank=True, max_length=255)
+    display_cover = models.BooleanField(default=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="category+", default=get_default_category)
     sidebar = models.TextField(blank=True)
     ad_manager = models.TextField(blank=True)

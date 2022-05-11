@@ -41,7 +41,7 @@
   </h6>
   <h1 class="fw-bold">{{ post.title }}</h1>
   <div class="my-3">
-    {% if post.cover %}
+    {% if post.display_cover %}
     <img src="{{ post.cover.url }}" class="w-100 me-3 my-2" style="max-width: 500px; float: left" />
     {% endif %}
     {{ post.body|safe }}
