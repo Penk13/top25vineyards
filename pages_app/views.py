@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -144,13 +145,6 @@ def searchpage(request):
         Q(meta_description__icontains=searched) |
         Q(meta_keywords__icontains=searched)
     ).order_by("-rating")
-    post = Post.objects.filter(
-        Q(title__icontains=searched) |
-        Q(body__icontains=searched) |
-        Q(tags__name__icontains=searched) |
-        Q(meta_description__icontains=searched) |
-        Q(meta_keywords__icontains=searched)
-    ).distinct().order_by("-id")
     regions = Region.objects.filter(
         Q(name__icontains=searched) |
         Q(title__icontains=searched) |
@@ -164,7 +158,18 @@ def searchpage(request):
         Q(meta_description__icontains=searched) |
         Q(meta_keywords__icontains=searched)
     )
-    result_list = list(chain(vineyard, post, regions, pages))
+    post = Post.objects.filter(
+        Q(title__icontains=searched) |
+        Q(body__icontains=searched) |
+        Q(tags__name__icontains=searched) |
+        Q(meta_description__icontains=searched) |
+        Q(meta_keywords__icontains=searched)
+    ).distinct().order_by("-id")
+    wine_post = post.filter(category__name__contains=["Best Wine Clubs", "Wine Tasting", "Wine News"])
+    all_post = post.exclude(category__name__contains=["Best Wine Clubs", "Wine Tasting", "Wine News", "Global Travel News"])
+    news_post = post.filter(category__name__contains="Global Travel News")
+
+    result_list = list(chain(vineyard, regions, pages, wine_post, all_post, news_post))
     p = Paginator(result_list, 10)
     page = request.GET.get('page1')
     results = p.get_page(page)

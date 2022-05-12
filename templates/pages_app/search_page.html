@@ -94,25 +94,6 @@
     </p>
   </div>
   {% endif %}
-  <!-- Post -->
-  {% elif model == 'Post' %}
-  <div class="col-12 col-md-6 py-3 text-start">
-    <a href="{{ result.get_absolute_url }}">
-      {% if result.cover %}
-      <img class="thumbnail-img" src="{{ result.cover.url }}"/>
-      {% else %}
-      <img class="thumbnail-img" src="{% static 'img/thumbnail-page.jpg' %}" />
-      {% endif %}
-    </a>
-  </div>
-  <div class="col-12 col-md-6 py-3" style="font-size: 14px">
-    <h5 class="fw-bold">
-      <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
-        >{{ result.title }}</a
-      >
-    </h5>
-    <p>{{ result.body|striptags|safe|truncatewords:25 }}</p>
-  </div>
   <!-- Regions -->
   {% elif model == 'Region' %}
   <div class="col-12 col-md-6 py-3 text-start">
@@ -155,7 +136,27 @@
     </h5>
     <p>{{ result.content_on_list|striptags|safe|truncatewords:25 }}</p>
   </div>
-  {% endif %} {% endif %} {% endwith %} {% endfor %}
+  {% endif %}
+  <!-- Post -->
+  {% elif model == 'Post' %}
+  <div class="col-12 col-md-6 py-3 text-start">
+    <a href="{{ result.get_absolute_url }}">
+      {% if result.cover %}
+      <img class="thumbnail-img" src="{{ result.cover.url }}"/>
+      {% else %}
+      <img class="thumbnail-img" src="{% static 'img/thumbnail-page.jpg' %}" />
+      {% endif %}
+    </a>
+  </div>
+  <div class="col-12 col-md-6 py-3" style="font-size: 14px">
+    <h5 class="fw-bold">
+      <a href="{{ result.get_absolute_url }}" class="text-decoration-none text-dark"
+        >{{ result.title }}</a
+      >
+    </h5>
+    <p>{{ result.body|striptags|safe|truncatewords:25 }}</p>
+  </div>
+  {% endif %} {% endwith %} {% endfor %}
   <!-- Nav Pagination -->
   <nav class="nav-pagination">
     <ul class="pagination justify-content-center">
