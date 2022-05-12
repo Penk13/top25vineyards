@@ -9,6 +9,14 @@ class ImageUploadInline(admin.TabularInline):
 class ContentPageAdmin(admin.ModelAdmin):
     inlines = [ImageUploadInline]
     search_fields = ['title', 'content']
+    fields = ('types', 'thumbnail', 'thumbnail2', 'title', 'content', 
+    'additional_content', 'content_on_list', 'sidebar', 'ad_manager', 
+    'meta_description', 'meta_keywords', 
+    ('category', 'listing_title1', 'show_listing1',), 
+    ('list_section', 'listing_title2', 'show_listing2',), 
+    'listing_title3', 'show_listing3', 
+    ('list_carousel', 'carousel_title', 'display_list',), 
+    'display_billboard', 'slug')
 
 
 admin.site.register(ContentPage, ContentPageAdmin)
