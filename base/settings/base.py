@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'vineyards.apps.VineyardsConfig',
     'list.apps.ListConfig',
     'mailing.apps.MailingConfig',
+    'filters.apps.FiltersConfig',
 ]
 
 SITE_ID = 1
@@ -265,6 +266,12 @@ ADMIN_ORDERING = [
         'Post',
         'Billboard',
         'Tag',
+    ]),
+    ('filters', [
+        'WorldArea',
+        'GeoRegion',
+        'Country',
+        'WineRegion',
     ]),
     ('account', [
         'EmailAddress',
