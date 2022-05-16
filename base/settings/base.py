@@ -272,6 +272,9 @@ ADMIN_ORDERING = [
         'GeoRegion',
         'Country',
         'WineRegion',
+        'Wine',
+        'Facility',
+        'Service',
     ]),
     ('account', [
         'EmailAddress',

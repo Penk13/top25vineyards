@@ -32,3 +32,27 @@ class WorldArea(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Wine(models.Model):
+    name = models.CharField(max_length=255)
+    vineyards = models.ManyToManyField(Vineyard, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Facility(models.Model):
+    name = models.CharField(max_length=255)
+    vineyards = models.ManyToManyField(Vineyard, blank=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=255)
+    vineyards = models.ManyToManyField(Vineyard, blank=True)
+
+    def __str__(self):
+        return self.name
