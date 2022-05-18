@@ -15,7 +15,13 @@ class Country(models.Model):
     wine_rg = models.ManyToManyField(WineRegion, blank=True)
 
     def __str__(self):
-        return self.name
+        wine_region_list = ""
+        for i in self.wine_rg.all():
+            wine_region_list += i.name + ", "
+        if wine_region_list == "":
+            return self.name
+        else:
+            return self.name + " - " + wine_region_list[0:-2]
 
 
 class GeoRegion(models.Model):
