@@ -1,0 +1,29 @@
+<!-- Override admin templates -->
+<!-- Reference: https://stackoverflow.com/questions/72304605/modify-filter-horizontal-search-field-django -->
+{% extends 'admin/change_form.html' %}    
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script>
+if (window.SelectBox) {
+  window.SelectBox.filter = function(id, text) {
+    const tokens = text.toLowerCase().split(/\s+/);
+    for (const node of SelectBox.cache[id]) {
+      node.displayed = 1;
+      // lowercase and strip accents off each node text in the filter list
+      const node_text = node.text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, "");
+
+      for (const token of tokens) {
+        if (!node_text.includes(token)) {
+          node.displayed = 0;
+          break;
+        }
+      }
+    }
+    SelectBox.redisplay(id);
+  }
+}
+</script>
+{% endblock %}

@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import WineRegion, Country, GeoRegion, WorldArea, Wine, Facility, Service
 from vineyards.models import Vineyard
 from django.db.models import Q
+from django.db.models.functions import Lower
 
 
 class WineRegionAdmin(admin.ModelAdmin):
@@ -15,6 +16,7 @@ class WineRegionAdmin(admin.ModelAdmin):
             pass
         return super(WineRegionAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
     filter_horizontal = ('vineyards',)
+    search_fields = ['name']
 
 
 class WineAdmin(admin.ModelAdmin):
