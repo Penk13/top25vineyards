@@ -6,7 +6,12 @@
 <script>
 if (window.SelectBox) {
   window.SelectBox.filter = function(id, text) {
-    const tokens = text.toLowerCase().split(/\s+/);
+    // lowercase and strip accents off search text
+    const tokens = text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, "")
+      .split(/\s+/);
     for (const node of SelectBox.cache[id]) {
       node.displayed = 1;
       // lowercase and strip accents off each node text in the filter list

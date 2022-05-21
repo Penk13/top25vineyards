@@ -11,7 +11,7 @@ class WineRegionAdmin(admin.ModelAdmin):
             wine_rg_id = request.resolver_match.kwargs["object_id"]
             wine_rg = WineRegion.objects.get(id=wine_rg_id)
             if db_field.name == "vineyards":
-                kwargs["queryset"] = Vineyard.objects.filter(Q(region__name__contains=wine_rg.name) | Q(regions__name__contains=wine_rg.name)).distinct()
+                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=wine_rg.name).distinct()
         except:
             pass
         return super(WineRegionAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
