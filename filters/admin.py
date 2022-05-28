@@ -1,17 +1,15 @@
 from django.contrib import admin
-from .models import WineRegion, Country, GeoRegion, WorldArea, Wine, Facility, Service
+from .models import WineRegion, Country, GeoRegion, WorldArea, Wine, Facility, Service, Rating
 from vineyards.models import Vineyard
-from django.db.models import Q
-from django.db.models.functions import Lower
 
 
 class WineRegionAdmin(admin.ModelAdmin):
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         try:
-            wine_rg_id = request.resolver_match.kwargs["object_id"]
-            wine_rg = WineRegion.objects.get(id=wine_rg_id)
+            obj_id = request.resolver_match.kwargs["object_id"]
+            obj = WineRegion.objects.get(id=obj_id)
             if db_field.name == "vineyards":
-                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=wine_rg.name).distinct()
+                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
         except:
             pass
         return super(WineRegionAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
@@ -20,14 +18,54 @@ class WineRegionAdmin(admin.ModelAdmin):
 
 
 class WineAdmin(admin.ModelAdmin):
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        try:
+            obj_id = request.resolver_match.kwargs["object_id"]
+            obj = Wine.objects.get(id=obj_id)
+            if db_field.name == "vineyards":
+                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+        except:
+            pass
+        return super(WineAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
     filter_horizontal = ('vineyards',)
 
 
 class FacilityAdmin(admin.ModelAdmin):
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        try:
+            obj_id = request.resolver_match.kwargs["object_id"]
+            obj = Facility.objects.get(id=obj_id)
+            if db_field.name == "vineyards":
+                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+        except:
+            pass
+        return super(FacilityAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
     filter_horizontal = ('vineyards',)
 
 
 class ServiceAdmin(admin.ModelAdmin):
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        try:
+            obj_id = request.resolver_match.kwargs["object_id"]
+            obj = Service.objects.get(id=obj_id)
+            if db_field.name == "vineyards":
+                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+        except:
+            pass
+        return super(ServiceAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
+    filter_horizontal = ('vineyards',)
+
+
+class RatingAdmin(admin.ModelAdmin):
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        try:
+            obj_id = request.resolver_match.kwargs["object_id"]
+            obj = Rating.objects.get(id=obj_id)
+            if db_field.name == "vineyards":
+                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+        except:
+            pass
+        return super(RatingAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
     filter_horizontal = ('vineyards',)
 
 
@@ -38,3 +76,4 @@ admin.site.register(WorldArea)
 admin.site.register(Wine, WineAdmin)
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Service, ServiceAdmin)
+admin.site.register(Rating, RatingAdmin)

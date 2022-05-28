@@ -160,3 +160,82 @@ $(function() {
       return false;
   });
 });
+
+// Filter Vineyards
+function showFilter(){
+  var filterBox = document.getElementById("filter-box");
+  if (filterBox.classList.contains("d-none")) {
+    filterBox.classList.remove("d-none")
+  }
+  else if (!filterBox.classList.contains("d-none")) {
+    filterBox.classList.add("d-none")
+  }
+}
+
+// Filter Checkbox
+$(document).ready(function(){
+  $(".ajaxLoader").hide();
+	$(".filter-checkbox").on("click", function(){
+		var _data={};
+    _data = {currentVineyards};
+		$(".filter-checkbox").each(function(index,ele){
+			var _filterVal=$(this).val();
+			var _filterKey=$(this).data('filter');
+			_data[_filterKey]=Array.from(document.querySelectorAll('input[data-filter='+_filterKey+']:checked')).map(function(el){
+			 	return el.value;
+			});
+		});
+    
+    console.log(_data);
+    
+    // Run Ajax
+		$.ajax({
+			url:'/filter-data',
+			data:_data,
+			dataType:'json',
+			beforeSend:function(){
+				$(".ajaxLoader").show();
+			},
+			success:function(res){
+				$("#filteredVineyards").html(res.data);
+				$(".ajaxLoader").hide();
+			}
+		});
+
+	});
+});
+
+// Vineyard Section Pagination
+$(document).ready(function(){
+	$("#loadMore").on('click',function(){
+		var _totalCurrentProducts=$(".vineyard-box").length;
+		var _limit=$(this).attr('data-limit');
+		var _total=$(this).attr('data-total');
+    console.log(_totalCurrentProducts, _limit, _total);
+
+    // Run Ajax
+		$.ajax({
+			url:'/load-more-data',
+			data:{
+				limit:_limit,
+				offset:_totalCurrentProducts
+			},
+			dataType:'json',
+			beforeSend:function(){
+				$("#loadMore").attr('disabled',true);
+				// $(".load-more-icon").addClass('fa-spin');
+			},
+			success:function(res){
+				$("#filteredVineyards").append(res.data);
+				$("#loadMore").attr('disabled',false);
+				// $(".load-more-icon").removeClass('fa-spin');
+
+				var _totalShowing=$(".vineyard-box").length;
+				if(_totalShowing==_total){
+					$("#loadMore").remove();
+				}
+			}
+		});
+
+  });
+});

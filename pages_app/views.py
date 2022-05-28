@@ -18,10 +18,9 @@ def mainpage(request):
     image_carousel = ImageUpload.objects.filter(page=content_page)
 
     # List Section 1: Vineyards
-    p = Paginator(Vineyard.objects.filter(
-        regions__in=content_page.category.all(), display=True).distinct().order_by("-rating"), 10)
-    page = request.GET.get('page1')
-    vineyards = p.get_page(page)
+    vineyards = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating")
+    total_vineyards = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().count()
+    vineyards_id = list(Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating").values_list('id', flat=True))
 
     # List Section 2: List Section
     p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)
@@ -35,6 +34,8 @@ def mainpage(request):
     context = {"content_page": content_page,
                "image_carousel": image_carousel,
                "vineyards": vineyards,
+               "total_vineyards": total_vineyards,
+               "vineyards_id": vineyards_id,
                "list_section": list_section,
                "list_carousel": list_carousel,
                "billboards": billboards,

@@ -275,6 +275,7 @@ ADMIN_ORDERING = [
         'Wine',
         'Facility',
         'Service',
+        'Rating',
     ]),
     ('account', [
         'EmailAddress',

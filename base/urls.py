@@ -24,6 +24,7 @@ from accounts.views import profile
 from list.views import post_detail, autoblogging, pull_feeds
 from pages_app.views import mainpage, footerpage, searchpage, page, listpage
 from vineyards.views import vineyard_detail, vineyard_region, rr_form, edit_vineyard
+from filters.views import filter_data, load_more_data
 
 urlpatterns = [
     # admin
@@ -31,6 +32,10 @@ urlpatterns = [
 
     path('captcha/', include('captcha.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+
+    # filters
+    path('filter-data/', filter_data, name='filter-data'),
+    path('load-more-data', load_more_data, name='load-more-data'),
 
     # accounts
     path('', include('allauth.urls')),

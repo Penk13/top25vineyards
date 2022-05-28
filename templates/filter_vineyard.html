@@ -1,0 +1,123 @@
+<div class="border border-secondary d-flex flex-wrap mx-auto my-3 p-0 d-none" style="width: 97%;" id="filter-box">
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter1" data-bs-toggle="dropdown" aria-expanded="false">
+			World Area
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter1" style="width: 300px">
+			<!-- World Area -->
+			{% for world_area in world_area_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_area" value="{{ world_area.id }}">
+						{{ world_area.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter2" data-bs-toggle="dropdown" aria-expanded="false">
+			Geo Region
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter2" style="width: 300px">
+			{% for geo_region in geo_region_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="geo_region" value="{{ geo_region.id }}">
+						{{ geo_region.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter3" data-bs-toggle="dropdown" aria-expanded="false">
+			Country
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter3" style="width: 300px">
+			{% for country in country_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" value="{{ country.id }}">
+						{{ country.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter4" data-bs-toggle="dropdown" aria-expanded="false">
+			Wine Region
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter4" style="width: 300px">
+			{% for wine_region in wine_region_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" value="{{ wine_region.id }}">
+						{{ wine_region.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter5" data-bs-toggle="dropdown" aria-expanded="false">
+			Wine
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter5" style="width: 300px">
+			{% for wine in wine_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine" value="{{ wine.id }}">
+						{{ wine.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter6" data-bs-toggle="dropdown" aria-expanded="false">
+			Facility
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter6" style="width: 300px">
+			{% for facility in facility_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="facility" value="{{ facility.id }}">
+						{{ facility.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter7" data-bs-toggle="dropdown" aria-expanded="false">
+			Service
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter7" style="width: 300px">
+			{% for service in service_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="service" value="{{ service.id }}">
+						{{ service.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="dropdown-toggle" type="button" id="dropdownFilter8" data-bs-toggle="dropdown" aria-expanded="false">
+			Rating
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter8" style="width: 300px">
+			{% for rating in rating_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="rating" value="{{ rating.id }}">
+						{{ rating.name }}
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>

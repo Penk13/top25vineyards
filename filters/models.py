@@ -4,7 +4,7 @@ from vineyards.models import Vineyard
 
 class WineRegion(models.Model):
     name = models.CharField(max_length=255)
-    vineyards = models.ManyToManyField(Vineyard, blank=True)
+    vineyards = models.ManyToManyField(Vineyard, blank=True, related_name="wineregion_filter")
 
     def __str__(self):
         return self.name
@@ -42,7 +42,7 @@ class WorldArea(models.Model):
 
 class Wine(models.Model):
     name = models.CharField(max_length=255)
-    vineyards = models.ManyToManyField(Vineyard, blank=True)
+    vineyards = models.ManyToManyField(Vineyard, blank=True, related_name="wine_filter")
 
     def __str__(self):
         return self.name
@@ -50,7 +50,7 @@ class Wine(models.Model):
 
 class Facility(models.Model):
     name = models.CharField(max_length=255)
-    vineyards = models.ManyToManyField(Vineyard, blank=True)
+    vineyards = models.ManyToManyField(Vineyard, blank=True, related_name="facility_filter")
 
     def __str__(self):
         return self.name
@@ -58,7 +58,15 @@ class Facility(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=255)
-    vineyards = models.ManyToManyField(Vineyard, blank=True)
+    vineyards = models.ManyToManyField(Vineyard, blank=True, related_name="service_filter")
+
+    def __str__(self):
+        return self.name
+
+
+class Rating(models.Model):
+    name = models.CharField(max_length=255)
+    vineyards = models.ManyToManyField(Vineyard, blank=True, related_name="rating_filter")
 
     def __str__(self):
         return self.name
