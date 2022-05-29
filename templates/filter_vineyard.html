@@ -1,123 +1,127 @@
-<div class="border border-secondary d-flex flex-wrap mx-auto my-3 p-0 d-none" style="width: 97%;" id="filter-box">
+<div class="d-flex flex-wrap my-1 mx-1 p-0" style="width: 97%;" id="filter-box">
+	<i class="my-auto bi bi-funnel mx-2" style="font-size: 30px; color: #6c757d"></i>
 	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter1" data-bs-toggle="dropdown" aria-expanded="false">
-			World Area
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter1" data-bs-toggle="dropdown" aria-expanded="false">
+			Rating
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownFilter1" style="width: 300px">
+			{% for rating in rating_filters %}
+			<li>
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="rating" value="{{ rating.id }}" id="ratingInput">
+					<label class="form-check-label" for="ratingInput">
+						{{ rating.name }}
+					</label>
+				</div>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="dropdown m-2">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter2" data-bs-toggle="dropdown" aria-expanded="false">
+			World
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownFilter2" style="width: 300px">
 			<!-- World Area -->
 			{% for world_area in world_area_filters %}
 			<li>
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_area" value="{{ world_area.id }}">
+					<input class="form-check-input filter-checkbox location-checkbox" type="checkbox" data-filter="world_area" value="{{ world_area.id }}" id="worldAreaInput">
+					<label class="form-check-label" for="worldAreaInput">
 						{{ world_area.name }}
+					</label>
 				</div>
 			</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter2" data-bs-toggle="dropdown" aria-expanded="false">
-			Geo Region
-		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter2" style="width: 300px">
-			{% for geo_region in geo_region_filters %}
-			<li>
-				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="geo_region" value="{{ geo_region.id }}">
-						{{ geo_region.name }}
-				</div>
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
-	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter3" data-bs-toggle="dropdown" aria-expanded="false">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter3" data-bs-toggle="dropdown" aria-expanded="false">
 			Country
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownFilter3" style="width: 300px">
-			{% for country in country_filters %}
+			{% for geo_region in geo_region_filters|dictsort:"name.lower" %}
+			<p class="mx-3 fw-bold p-0 my-1">{{ geo_region.name }}</p>
+			{% for country in geo_region.country.all|dictsort:"name.lower" %}
 			<li>
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" value="{{ country.id }}">
+					<input class="form-check-input filter-checkbox location-checkbox" type="checkbox" data-filter="country" value="{{ country.id }}" id="countryInput">
+					<label class="form-check-label" for="ratingInput">
 						{{ country.name }}
+					</label>
 				</div>
 			</li>
+			{% endfor %}
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter4" data-bs-toggle="dropdown" aria-expanded="false">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter4" data-bs-toggle="dropdown" aria-expanded="false">
 			Wine Region
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownFilter4" style="width: 300px">
 			{% for wine_region in wine_region_filters %}
 			<li>
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" value="{{ wine_region.id }}">
+					<input class="form-check-input filter-checkbox location-checkbox" type="checkbox" data-filter="wine_region" value="{{ wine_region.id }}" id="wineRegionInput">
+					<label class="form-check-label" for="wineRegionInput">
 						{{ wine_region.name }}
+					</label>
 				</div>
 			</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter5" data-bs-toggle="dropdown" aria-expanded="false">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter5" data-bs-toggle="dropdown" aria-expanded="false">
 			Wine
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownFilter5" style="width: 300px">
 			{% for wine in wine_filters %}
 			<li>
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine" value="{{ wine.id }}">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine" value="{{ wine.id }}" id="wineInput">
+					<label class="form-check-label" for="wineInput">
 						{{ wine.name }}
+					</label>
 				</div>
 			</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter6" data-bs-toggle="dropdown" aria-expanded="false">
-			Facility
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter6" data-bs-toggle="dropdown" aria-expanded="false">
+			Facilities
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownFilter6" style="width: 300px">
 			{% for facility in facility_filters %}
 			<li>
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="facility" value="{{ facility.id }}">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="facility" value="{{ facility.id }}" id="facilityInput">
+					<label class="form-check-label" for="facilityInput">
 						{{ facility.name }}
+					</label>
 				</div>
 			</li>
 			{% endfor %}
 		</ul>
 	</div>
 	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter7" data-bs-toggle="dropdown" aria-expanded="false">
-			Service
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter7" data-bs-toggle="dropdown" aria-expanded="false">
+			Services
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownFilter7" style="width: 300px">
 			{% for service in service_filters %}
 			<li>
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="service" value="{{ service.id }}">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="service" value="{{ service.id }}" id="serviceInput">
+					<label class="form-check-label" for="serviceInput">
 						{{ service.name }}
+					</label>
 				</div>
 			</li>
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2">
-		<button class="dropdown-toggle" type="button" id="dropdownFilter8" data-bs-toggle="dropdown" aria-expanded="false">
-			Rating
-		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter8" style="width: 300px">
-			{% for rating in rating_filters %}
-			<li>
-				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="rating" value="{{ rating.id }}">
-						{{ rating.name }}
-				</div>
-			</li>
-			{% endfor %}
-		</ul>
-	</div>
+	<i class="bi bi-arrow-repeat mx-2"style="font-size: 30px; color: #6c757d"></i>
 </div>

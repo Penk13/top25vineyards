@@ -161,20 +161,16 @@ $(function() {
   });
 });
 
-// Filter Vineyards
-function showFilter(){
-  var filterBox = document.getElementById("filter-box");
-  if (filterBox.classList.contains("d-none")) {
-    filterBox.classList.remove("d-none")
-  }
-  else if (!filterBox.classList.contains("d-none")) {
-    filterBox.classList.add("d-none")
-  }
-}
-
 // Filter Checkbox
 $(document).ready(function(){
   $(".ajaxLoader").hide();
+
+  // User can only select one location
+  $('.location-checkbox').change(function(){
+    // "this" is current checkbox
+    $('.location-checkbox').not(this).prop('disabled', this.checked);
+  });
+
 	$(".filter-checkbox").on("click", function(){
 		var _data={};
     _data = {currentVineyards};

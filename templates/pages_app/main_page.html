@@ -63,13 +63,9 @@
   {% if content_page.listing_title1 %}
   <div class="d-flex">
     <h5 class="fw-bold">{{ content_page.listing_title1 }}</h5>
-    <button class="btn btn-outline-secondary ms-auto mb-1" onclick="showFilter()">
-      <img src="{% static 'img/filter-icon.png' %}" alt="" style="width: 20px; height: 20px;">
-    </button>
   </div>
-  <hr style="width: 97%; margin: 0 auto;">
-  {% include 'filter_vineyard.html' %}
   {% endif %}
+  {% include 'filter_vineyard.html' %}
   <div class="" id="filteredVineyards">
     <p class="ajaxLoader">Loading...</p>
     <!-- Passing Django variable to JSON -->

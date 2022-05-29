@@ -15,39 +15,27 @@ def filter_data(request):
     service = request.GET.getlist('service[]')
     rating = request.GET.getlist('rating[]')
 
-    print(currentVineyards)
     vineyardList = Vineyard.objects.filter(id__in=currentVineyards).distinct()
-
-    wineregion_ids = []
-    wine_ids = []
-    facility_ids = []
-    service_ids = []
-    rating_ids = []
 
     if len(wine_region) > 0:
         qs = WineRegion.objects.filter(id__in=wine_region).distinct().values_list('id', flat=True)
         for id in qs:
-            wineregion_ids.append(id)
-    if len(country) > 0:
+            vineyardList = vineyardList.filter(wineregion_filter=id)
+    elif len(country) > 0:
         qs = Country.objects.filter(id__in=country).distinct().values_list('wine_rg', flat=True)
         for id in qs:
-            wineregion_ids.append(id)
-    if len(geo_region) > 0:
+            vineyardList = vineyardList.filter(wineregion_filter=id)
+    elif len(geo_region) > 0:
         qs1 = GeoRegion.objects.filter(id__in=geo_region).distinct().values_list('id', flat=True)
         qs2 = Country.objects.filter(id__in=qs1).distinct().values_list('wine_rg', flat=True)
         for id in qs2:
-            wineregion_ids.append(id)
-    if len(world_area) > 0:
+            vineyardList = vineyardList.filter(wineregion_filter=id)
+    elif len(world_area) > 0:
         qs1 = WorldArea.objects.filter(id__in=world_area).distinct().values_list('id', flat=True)
         qs2 = GeoRegion.objects.filter(id__in=qs1).distinct().values_list('id', flat=True)
         qs3 = Country.objects.filter(id__in=qs2).distinct().values_list('wine_rg', flat=True)
         for id in qs3:
-            wineregion_ids.append(id)
-
-    # Remove duplicate id
-    wineregion_ids = list(dict.fromkeys(wineregion_ids))
-    if len(wineregion_ids) > 0:
-        vineyardList = vineyardList.filter(wineregion_filter__in=wineregion_ids)
+            vineyardList = vineyardList.filter(wineregion_filter=id)
 
     if len(wine) > 0:
         qs = Wine.objects.filter(id__in=wine).distinct().values_list('id', flat=True)

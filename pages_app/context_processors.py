@@ -1,13 +1,12 @@
 from .models import Navbar, Footer, Sidebar, Script
 from list.models import Post, Category, Billboard
-from filters.models import WorldArea, GeoRegion, Country, WineRegion, Wine, Facility, Service, Rating
+from filters.models import WorldArea, GeoRegion, WineRegion, Wine, Facility, Service, Rating
 
 
 def base_variable(request):
     # Filter Vineyard
     world_area_filters = WorldArea.objects.all()
     geo_region_filters = GeoRegion.objects.all()
-    country_filters = Country.objects.all()
     wine_region_filters = WineRegion.objects.all()
     wine_filters = Wine.objects.all()
     facility_filters = Facility.objects.all()
@@ -32,7 +31,6 @@ def base_variable(request):
     footers3 = footer[idx2:]
     return {"world_area_filters": world_area_filters,
             "geo_region_filters": geo_region_filters,
-            "country_filters": country_filters,
             "wine_region_filters": wine_region_filters,
             "wine_filters": wine_filters,
             "facility_filters": facility_filters,
