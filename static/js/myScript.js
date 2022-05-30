@@ -171,7 +171,8 @@ $(document).ready(function(){
     $('.location-checkbox').not(this).prop('disabled', this.checked);
   });
 
-	$(".filter-checkbox").on("click", function(){
+	$(".filter-checkbox").on("change", function(){
+    console.log("TEST");
 		var _data={};
     _data = {currentVineyards};
 		$(".filter-checkbox").each(function(index,ele){
@@ -200,6 +201,11 @@ $(document).ready(function(){
 
 	});
 });
+
+// Reset Filter
+function resetAllFilters(){
+  $('.filter-checkbox').prop('checked', false).change();
+}
 
 // Vineyard Section Pagination
 $(document).ready(function(){
