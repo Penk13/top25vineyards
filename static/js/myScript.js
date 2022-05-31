@@ -164,15 +164,48 @@ $(function() {
 // Filter Checkbox
 $(document).ready(function(){
   $(".ajaxLoader").hide();
-
-  // User can only select one location
-  $('.location-checkbox').change(function(){
-    // "this" is current checkbox
-    $('.location-checkbox').not(this).prop('disabled', this.checked);
+  $('#dropdownCountry').hide();
+  $('#dropdownWineRegion').hide();
+  
+  // If user select or unselect world area or geo region
+  $('#worldAreaItem div, #geoRegionItem div').children('input[type="checkbox"]').change(function(){
+    if($('#worldAreaItem div, #geoRegionItem div').children('input[type="checkbox"]:checked').length > 0){
+      $('#worldAreaItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
+      $('#geoRegionItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
+      $('#dropdownCountry').show();
+    } else {
+      $('#worldAreaItem div').children('input[type="checkbox"]').prop('disabled', false);
+      $('#geoRegionItem div').children('input[type="checkbox"]').prop('disabled', false);
+      $('#dropdownCountry').hide();
+      $('#dropdownWineRegion').hide();
+      $('#countryItem div').children('input[type="checkbox"]').prop('checked', false);
+      $('#wineRegionItem div').children('input[type="checkbox"]').prop('checked', false);
+    };
   });
 
+  // If user select or unselect country
+  $('#countryItem div').children('input[type="checkbox"]').change(function(){
+    if($('#countryItem div').children('input[type="checkbox"]:checked').length > 0){
+      $('#countryItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
+      $('#dropdownWineRegion').show();
+    } else {
+      $('#countryItem div').children('input[type="checkbox"]').prop('disabled', false);
+      $('#dropdownWineRegion').hide();
+      $('#wineRegionItem div').children('input[type="checkbox"]').prop('checked', false);
+    };
+  });
+
+  // If user select or unselect wine region
+  $('#wineRegionItem div').children('input[type="checkbox"]').change(function(){
+    if($('#wineRegionItem div').children('input[type="checkbox"]:checked').length > 0){
+      $('#wineRegionItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
+    } else {
+      $('#wineRegionItem div').children('input[type="checkbox"]').prop('disabled', false);
+    };
+  });
+
+  // If user select anything
 	$(".filter-checkbox").on("change", function(){
-    console.log("TEST");
 		var _data={};
     _data = {currentVineyards};
 		$(".filter-checkbox").each(function(index,ele){

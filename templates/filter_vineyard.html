@@ -1,10 +1,12 @@
+{% load static %}
+
 <div class="d-flex flex-wrap my-1 mx-1 p-0" style="width: 97%;" id="filter-box">
 	<i class="my-auto bi bi-funnel mx-2" style="font-size: 30px; color: #6c757d" data-bs-toggle="tooltip" title="Filters"></i>
-	<div class="dropdown m-2">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter1" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownRating">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownRatingFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			Rating
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter1" style="width: 300px">
+		<ul class="dropdown-menu" aria-labelledby="dropdownRatingFilter" style="width: 300px">
 			{% for rating in rating_filters|dictsort:"name.lower" %}
 			<li>
 				<div class="form-check mx-3">
@@ -17,35 +19,45 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter2" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownWorldArea">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownWorldAreaFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			World
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter2" style="width: 300px">
+		<ul class="dropdown-menu" aria-labelledby="dropdownWorldAreaFilter" style="width: 300px">
 			{% for world_area in world_area_filters|dictsort:"name.lower" %}
-			<p class="mx-3 fw-bold p-0 my-1">{{ world_area.name }}</p>
-			{% for geo_region in world_area.geo_region.all|dictsort:"name.lower" %} {% if geo_region.name != world_area.name %}
-			<li>
-				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox location-checkbox" type="checkbox" data-filter="geo_region" value="{{ geo_region.id }}" id="geoRegionInput">
-					<label class="form-check-label" for="geoRegionInput">
-						{{ geo_region.name }}
-					</label>
-				</div>
-			</li>
-			{% endif %} {% endfor %}
+				{% if world_area.geo_region.count == 0 %}
+					<li id="worldAreaItem">
+						<div class="form-check mx-3">
+							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_area" value="{{ world_area.id }}" id="worldAreaInput">
+							<label class="form-check-label" for="worldAreaInput">
+								{{ world_area.name }}
+							</label>
+						</div>
+					</li>
+				{% else %}
+					{% for geo_region in world_area.geo_region.all|dictsort:"name.lower" %}
+					<li id="geoRegionItem">
+						<div class="form-check mx-3">
+							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="geo_region" value="{{ geo_region.id }}" id="geoRegionInput">
+							<label class="form-check-label" for="geoRegionInput">
+								{{ geo_region.name }}
+							</label>
+						</div>
+					</li>
+					{% endfor %}
+				{% endif %} 
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter3" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownCountry">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownCountryFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			Country
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter3" style="width: 300px">
+		<ul class="dropdown-menu" aria-labelledby="dropdownCountryFilter" style="width: 300px">
 			{% for country in country_filters|dictsort:"name.lower" %}
-			<li>
+			<li id="countryItem">
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox location-checkbox" type="checkbox" data-filter="country" value="{{ country.id }}" id="countryInput">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" value="{{ country.id }}" id="countryInput">
 					<label class="form-check-label" for="countryInput">
 						{{ country.name }}
 					</label>
@@ -54,15 +66,15 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter4" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownWineRegion">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownWineRegionFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			Wine Region
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter4" style="width: 300px">
+		<ul class="dropdown-menu" aria-labelledby="dropdownWineRegionFilter" style="width: 300px">
 			{% for wine_region in wine_region_filters|dictsort:"name.lower" %}
-			<li>
+			<li id="wineRegionItem">
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox location-checkbox" type="checkbox" data-filter="wine_region" value="{{ wine_region.id }}" id="wineRegionInput">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" value="{{ wine_region.id }}" id="wineRegionInput">
 					<label class="form-check-label" for="wineRegionInput">
 						{{ wine_region.name }}
 					</label>
@@ -71,11 +83,11 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter5" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownWine">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownWineFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			Wine
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter5" style="width: 300px">
+		<ul class="dropdown-menu" aria-labelledby="dropdownWineFilter" style="width: 300px">
 			{% for wine in wine_filters|dictsort:"name.lower" %}
 			<li>
 				<div class="form-check mx-3">
@@ -88,11 +100,11 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter6" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownFacility">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFacilityFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			Facilities
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter6" style="width: 300px">
+		<ul class="dropdown-menu" aria-labelledby="dropdownFacilityFilter" style="width: 300px">
 			{% for facility in facility_filters|dictsort:"name.lower" %}
 			<li>
 				<div class="form-check mx-3">
@@ -105,11 +117,11 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownFilter7" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownService">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownServiceFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			Services
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownFilter7" style="width: 300px">
+		<ul class="dropdown-menu" aria-labelledby="dropdownServiceFilter" style="width: 300px">
 			{% for service in service_filters|dictsort:"name.lower" %}
 			<li>
 				<div class="form-check mx-3">
@@ -122,5 +134,5 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<i class="bi bi-arrow-repeat mx-2" style="font-size: 30px; color: #6c757d; cursor: pointer;" onclick="resetAllFilters()"></i>
+	<i class="bi bi-arrow-repeat mx-2" style="font-size: 30px; color: #6c757d; cursor: pointer;" onclick="resetAllFilters()" data-bs-toggle="tooltip" title="Reset all filters"></i>
 </div>
