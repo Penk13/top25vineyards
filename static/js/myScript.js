@@ -167,15 +167,13 @@ $(document).ready(function(){
   $('#dropdownCountry').hide();
   $('#dropdownWineRegion').hide();
   
-  // If user select or unselect world area or geo region
-  $('#worldAreaItem div, #geoRegionItem div').children('input[type="checkbox"]').change(function(){
-    if($('#worldAreaItem div, #geoRegionItem div').children('input[type="checkbox"]:checked').length > 0){
-      $('#worldAreaItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
-      $('#geoRegionItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
+  // If user select or unselect world region
+  $('#worldRegionItem div').children('input[type="checkbox"]').change(function(){
+    if($('#worldRegionItem div').children('input[type="checkbox"]:checked').length > 0){
+      $('#worldRegionItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
       $('#dropdownCountry').show();
     } else {
-      $('#worldAreaItem div').children('input[type="checkbox"]').prop('disabled', false);
-      $('#geoRegionItem div').children('input[type="checkbox"]').prop('disabled', false);
+      $('#worldRegionItem div').children('input[type="checkbox"]').prop('disabled', false);
       $('#dropdownCountry').hide();
       $('#dropdownWineRegion').hide();
       $('#countryItem div').children('input[type="checkbox"]').prop('checked', false);

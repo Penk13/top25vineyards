@@ -268,8 +268,7 @@ ADMIN_ORDERING = [
         'Tag',
     ]),
     ('filters', [
-        'WorldArea',
-        'GeoRegion',
+        'WorldRegion',
         'Country',
         'WineRegion',
         'Wine',

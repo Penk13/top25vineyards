@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import WineRegion, Country, GeoRegion, WorldArea, Wine, Facility, Service, Rating
+from .models import WineRegion, Country, WorldRegion, Wine, Facility, Service, Rating
 from vineyards.models import Vineyard
 
 
@@ -71,8 +71,7 @@ class RatingAdmin(admin.ModelAdmin):
 
 admin.site.register(WineRegion, WineRegionAdmin)
 admin.site.register(Country)
-admin.site.register(GeoRegion)
-admin.site.register(WorldArea)
+admin.site.register(WorldRegion)
 admin.site.register(Wine, WineAdmin)
 admin.site.register(Facility, FacilityAdmin)
 admin.site.register(Service, ServiceAdmin)

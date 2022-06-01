@@ -1,15 +1,14 @@
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from vineyards.models import Vineyard
-from .models import WineRegion, Country, GeoRegion, WorldArea, Wine, Facility, Service, Rating
+from .models import WineRegion, Country, WorldRegion, Wine, Facility, Service, Rating
 
 
 def filter_data(request):
     defaultVineyards = request.GET.get('defaultVineyards')
     offset = int(request.GET['totalVineyards'])
     limit = int(request.GET['vineyardsPerPage'])
-    world_area = request.GET.getlist('world_area[]')
-    geo_region = request.GET.getlist('geo_region[]')
+    world_region = request.GET.getlist('world_region[]')
     country = request.GET.getlist('country[]')
     wine_region = request.GET.getlist('wine_region[]')
     wine = request.GET.getlist('wine[]')
@@ -26,15 +25,10 @@ def filter_data(request):
     elif len(country) > 0:
         qs = Country.objects.filter(id__in=country).values_list('wine_rg', flat=True)
         vineyardList = vineyardList.filter(wineregion_filter__in=qs)
-    elif len(geo_region) > 0:
-        qs1 = GeoRegion.objects.filter(id__in=geo_region).values_list('id', flat=True)
-        qs2 = Country.objects.filter(georegion__in=qs1).values_list('wine_rg', flat=True)
+    elif len(world_region) > 0:
+        qs1 = WorldRegion.objects.filter(id__in=world_region).values_list('id', flat=True)
+        qs2 = Country.objects.filter(worldregion__in=qs1).values_list('wine_rg', flat=True)
         vineyardList = vineyardList.filter(wineregion_filter__in=qs2)
-    elif len(world_area) > 0:
-        qs1 = WorldArea.objects.filter(id__in=world_area).values_list('id', flat=True)
-        qs2 = GeoRegion.objects.filter(worldarea__in=qs1).values_list('id', flat=True)
-        qs3 = Country.objects.filter(georegion__in=qs2).values_list('wine_rg', flat=True)
-        vineyardList = vineyardList.filter(wineregion_filter__in=qs3)
 
     if len(wine) > 0:
         qs = Wine.objects.filter(id__in=wine).values_list('id', flat=True)

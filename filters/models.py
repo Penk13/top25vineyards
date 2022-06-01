@@ -24,17 +24,9 @@ class Country(models.Model):
             return self.name + " - " + wine_region_list[0:-2]
 
 
-class GeoRegion(models.Model):
+class WorldRegion(models.Model):
     name = models.CharField(max_length=255)
     country = models.ManyToManyField(Country, blank=True)
-
-    def __str__(self):
-        return self.name
-
-
-class WorldArea(models.Model):
-    name = models.CharField(max_length=255)
-    geo_region = models.ManyToManyField(GeoRegion, blank=True)
 
     def __str__(self):
         return self.name

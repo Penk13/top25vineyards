@@ -19,33 +19,20 @@
 			{% endfor %}
 		</ul>
 	</div>
-	<div class="dropdown m-2" id="dropdownWorldArea">
-		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownWorldAreaFilter" data-bs-toggle="dropdown" aria-expanded="false">
+	<div class="dropdown m-2" id="dropdownWorldRegion">
+		<button class="btn btn-outline-secondary btn-sm" type="button" id="dropdownWorldRegionFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			World
 		</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownWorldAreaFilter" style="width: 300px">
-			{% for world_area in world_area_filters|dictsort:"name.lower" %}
-				{% if world_area.geo_region.count == 0 %}
-					<li id="worldAreaItem">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_area" value="{{ world_area.id }}" id="worldAreaInput">
-							<label class="form-check-label" for="worldAreaInput">
-								{{ world_area.name }}
-							</label>
-						</div>
-					</li>
-				{% else %}
-					{% for geo_region in world_area.geo_region.all|dictsort:"name.lower" %}
-					<li id="geoRegionItem">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="geo_region" value="{{ geo_region.id }}" id="geoRegionInput">
-							<label class="form-check-label" for="geoRegionInput">
-								{{ geo_region.name }}
-							</label>
-						</div>
-					</li>
-					{% endfor %}
-				{% endif %} 
+		<ul class="dropdown-menu" aria-labelledby="dropdownWorldRegionFilter" style="width: 300px">
+			{% for world_region in world_region_filters|dictsort:"name.lower" %}
+			<li id="worldRegionItem">
+				<div class="form-check mx-3">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_region" value="{{ world_region.id }}" id="worldRegionInput">
+					<label class="form-check-label" for="worldRegionInput">
+						{{ world_region.name }}
+					</label>
+				</div>
+			</li>
 			{% endfor %}
 		</ul>
 	</div>
