@@ -68,6 +68,8 @@
   {% include 'filter_vineyard.html' %}
   <script type="text/javascript">
     var defaultVineyards = "{{ vineyards_id }}";
+    var totalVineyards = "{{ total_vineyards }}";
+    var vineyardsPerPage = "{{ vineyards_per_page }}";
   </script>
   <div class="" id="filteredVineyards">
     <p class="ajaxLoader">Loading...</p>
@@ -150,7 +152,7 @@
       {% endif %}
     </ul>
   </nav> -->
-  <!-- <p><button id="loadMore" data-total="{{ total_vineyards }}" data-limit="1">Load more</button></p> -->
+  <!-- <p><button id="loadMore">Load more</button></p> -->
 </div>
 {% endif %} {% if content_page.additional_content %}
 <div class="row d-flex p-3" style="border: 1px solid rgba(0, 0, 0, 0.1)">

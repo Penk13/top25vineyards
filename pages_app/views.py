@@ -1,4 +1,3 @@
-from unicodedata import category
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
@@ -18,6 +17,7 @@ def mainpage(request):
     image_carousel = ImageUpload.objects.filter(page=content_page)
 
     # List Section 1: Vineyards
+    vineyards_per_page = 1
     vineyards = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating")
     total_vineyards = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().count()
     vineyards_id = list(Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating").values_list('id', flat=True))
@@ -33,6 +33,7 @@ def mainpage(request):
 
     context = {"content_page": content_page,
                "image_carousel": image_carousel,
+               "vineyards_per_page": vineyards_per_page,
                "vineyards": vineyards,
                "total_vineyards": total_vineyards,
                "vineyards_id": vineyards_id,

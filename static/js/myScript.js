@@ -207,7 +207,7 @@ $(document).ready(function(){
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
 		var _data={};
-    _data = {defaultVineyards};
+    _data = {defaultVineyards, totalVineyards, vineyardsPerPage};
 		$(".filter-checkbox").each(function(index,ele){
 			var _filterVal=$(this).val();
 			var _filterKey=$(this).data('filter');
@@ -243,18 +243,13 @@ function resetAllFilters(){
 // Vineyard Section Pagination
 $(document).ready(function(){
 	$("#loadMore").on('click',function(){
-		var _totalCurrentProducts=$(".vineyard-box").length;
-		var _limit=$(this).attr('data-limit');
-		var _total=$(this).attr('data-total');
-    console.log(_totalCurrentProducts, _limit, _total);
+		var _data={};
+    _data = {defaultVineyards, totalVineyards, vineyardsPerPage};
 
     // Run Ajax
 		$.ajax({
 			url:'/load-more-data',
-			data:{
-				limit:_limit,
-				offset:_totalCurrentProducts
-			},
+			data:_data,
 			dataType:'json',
 			beforeSend:function(){
 				$("#loadMore").attr('disabled',true);

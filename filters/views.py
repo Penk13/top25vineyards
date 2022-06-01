@@ -6,6 +6,8 @@ from .models import WineRegion, Country, GeoRegion, WorldArea, Wine, Facility, S
 
 def filter_data(request):
     defaultVineyards = request.GET.get('defaultVineyards')
+    offset = int(request.GET['totalVineyards'])
+    limit = int(request.GET['vineyardsPerPage'])
     world_area = request.GET.getlist('world_area[]')
     geo_region = request.GET.getlist('geo_region[]')
     country = request.GET.getlist('country[]')
@@ -55,8 +57,8 @@ def filter_data(request):
 
 
 def load_more_data(request):
-    offset = int(request.GET['offset'])
-    limit = int(request.GET['limit'])
+    offset = int(request.GET['totalVineyards'])
+    limit = int(request.GET['vineyardsPerPage'])
     vineyardList = Vineyard.objects.filter(display=True).distinct().order_by("-rating")[offset:offset+limit]
     vineyards = render_to_string("ajax/vineyard_list.html", {'vineyards': vineyardList})
     return JsonResponse({'data': vineyards})
