@@ -6,9 +6,10 @@ from .models import WineRegion, Country, WorldRegion, Wine, Facility, Service, R
 
 def filter_data(request):
     defaultVineyards = request.GET.get('defaultVineyards')
-    total_vineyards = int(request.GET['totalVineyards'])
-    vineyards_per_page = int(request.GET['vineyardsPerPage'])
-    vineyard_pages = int(request.GET['vineyardPages'])
+    per_page = request.GET.get('perPage')
+    num_pages = request.GET.get('numPages')
+    current_page = request.GET.get('currentPage')
+    page_range = request.GET.get('pageRange')
 
     world_region = request.GET.getlist('world_region[]')
     country = request.GET.getlist('country[]')
@@ -50,11 +51,12 @@ def filter_data(request):
     vineyards_id = list(vineyards_qs.values_list('id', flat=True))
 
     data = render_to_string("ajax/vineyard_list.html", {
-        "vineyards_per_page": vineyards_per_page,
         "vineyards": vineyards,
-        "total_vineyards": total_vineyards,
         "vineyards_id": vineyards_id,
-        "vineyard_pages": vineyard_pages,
+        "per_page": per_page,
+        "num_pages": num_pages,
+        "current_page": current_page,
+        "page_range": page_range,
     })
     return JsonResponse({'data': data})
 

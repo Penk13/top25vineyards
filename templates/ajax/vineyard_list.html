@@ -2,10 +2,11 @@
 
 <p class="ajaxLoader">Loading...</p>
 <script type="text/javascript"> 
-	var totalVineyards = "{{ total_vineyards }}";
-	var vineyardsPerPage = "{{ vineyards_per_page }}";
 	var currentVineyards = "{{ vineyards_id }}";
-	var vineyardPages = "{{ vineyard_pages }}";
+	var perPage = "{{ per_page }}";
+	var numPages = "{{ num_pages }}";
+	var currentPage = "{{ current_page }}";
+	var pageRange = "{{ page_range }}";
 </script>
 {% for vineyard in vineyards %}
 	<div class="d-md-flex vineyard-box">
