@@ -164,20 +164,15 @@ $(function() {
 // Filter Checkbox
 $(document).ready(function(){
   $(".ajaxLoader").hide();
-  $('#dropdownCountry').hide();
-  $('#dropdownWineRegion').hide();
   
   // If user select or unselect world region
   $('#worldRegionItem div').children('input[type="checkbox"]').change(function(){
     if($('#worldRegionItem div').children('input[type="checkbox"]:checked').length > 0){
       $('#worldRegionItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
-      $('#dropdownCountry').show();
     } else {
       $('#worldRegionItem div').children('input[type="checkbox"]').prop('disabled', false);
-      $('#dropdownCountry').hide();
-      $('#dropdownWineRegion').hide();
-      $('#countryItem div').children('input[type="checkbox"]').prop('checked', false);
-      $('#wineRegionItem div').children('input[type="checkbox"]').prop('checked', false);
+      // $('#countryItem div').children('input[type="checkbox"]').prop('checked', false);
+      // $('#wineRegionItem div').children('input[type="checkbox"]').prop('checked', false);
     };
   });
 
@@ -185,11 +180,9 @@ $(document).ready(function(){
   $('#countryItem div').children('input[type="checkbox"]').change(function(){
     if($('#countryItem div').children('input[type="checkbox"]:checked').length > 0){
       $('#countryItem div').children('input[type="checkbox"]').not(this).prop('disabled', true);
-      $('#dropdownWineRegion').show();
     } else {
       $('#countryItem div').children('input[type="checkbox"]').prop('disabled', false);
-      $('#dropdownWineRegion').hide();
-      $('#wineRegionItem div').children('input[type="checkbox"]').prop('checked', false);
+      // $('#wineRegionItem div').children('input[type="checkbox"]').prop('checked', false);
     };
   });
 
