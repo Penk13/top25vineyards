@@ -198,7 +198,7 @@ $(document).ready(function(){
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
 		var _data={};
-    _data = {defaultVineyards, totalVineyards, vineyardsPerPage};
+    _data = {defaultVineyards, totalVineyards, vineyardsPerPage, vineyardPages};
 		$(".filter-checkbox").each(function(index,ele){
 			var _filterVal=$(this).val();
 			var _filterKey=$(this).data('filter');
@@ -235,7 +235,7 @@ function resetAllFilters(){
 $(document).ready(function(){
 	$("#loadMore").on('click',function(){
 		var _data={};
-    _data = {defaultVineyards, totalVineyards, vineyardsPerPage};
+    _data = {currentVineyards, totalVineyards, vineyardsPerPage, vineyardPages};
 
     // Run Ajax
 		$.ajax({

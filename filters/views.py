@@ -6,8 +6,10 @@ from .models import WineRegion, Country, WorldRegion, Wine, Facility, Service, R
 
 def filter_data(request):
     defaultVineyards = request.GET.get('defaultVineyards')
-    offset = int(request.GET['totalVineyards'])
-    limit = int(request.GET['vineyardsPerPage'])
+    total_vineyards = int(request.GET['totalVineyards'])
+    vineyards_per_page = int(request.GET['vineyardsPerPage'])
+    vineyard_pages = int(request.GET['vineyardPages'])
+
     world_region = request.GET.getlist('world_region[]')
     country = request.GET.getlist('country[]')
     wine_region = request.GET.getlist('wine_region[]')
@@ -43,16 +45,36 @@ def filter_data(request):
         qs = Rating.objects.filter(id__in=rating).values_list('id', flat=True)
         vineyardList = vineyardList.filter(rating_filter__in=qs)
 
-    vineyardList = vineyardList.filter(display=True).distinct().order_by("-rating")
-    vineyards_id = list(vineyardList.values_list('id', flat=True))
+    vineyards_qs = vineyardList.filter(display=True).distinct().order_by("-rating")
+    vineyards = vineyards_qs
+    vineyards_id = list(vineyards_qs.values_list('id', flat=True))
 
-    vineyards = render_to_string("ajax/vineyard_list.html", {'vineyards': vineyardList, 'vineyards_id': vineyards_id})
-    return JsonResponse({'data': vineyards})
+    data = render_to_string("ajax/vineyard_list.html", {
+        "vineyards_per_page": vineyards_per_page,
+        "vineyards": vineyards,
+        "total_vineyards": total_vineyards,
+        "vineyards_id": vineyards_id,
+        "vineyard_pages": vineyard_pages,
+    })
+    return JsonResponse({'data': data})
 
 
 def load_more_data(request):
-    offset = int(request.GET['totalVineyards'])
-    limit = int(request.GET['vineyardsPerPage'])
-    vineyardList = Vineyard.objects.filter(display=True).distinct().order_by("-rating")[offset:offset+limit]
-    vineyards = render_to_string("ajax/vineyard_list.html", {'vineyards': vineyardList})
-    return JsonResponse({'data': vineyards})
+    currentVineyards = request.GET.get('currentVineyards')
+    total_vineyards = int(request.GET['totalVineyards'])
+    vineyards_per_page = int(request.GET['vineyardsPerPage'])
+    vineyard_pages = int(request.GET['vineyardPages'])
+
+    currentVineyards = currentVineyards.strip('][').split(', ')
+    vineyards_qs = Vineyard.objects.filter(display=True).distinct().order_by("-rating")
+    vineyards = vineyards_qs
+    vineyards_id = list(vineyards_qs.values_list('id', flat=True))
+
+    data = render_to_string("ajax/vineyard_list.html", {
+        "vineyards_per_page": vineyards_per_page,
+        "vineyards": vineyards,
+        "total_vineyards": total_vineyards,
+        "vineyards_id": vineyards_id,
+        "vineyard_pages": vineyard_pages,
+    })
+    return JsonResponse({'data': data})

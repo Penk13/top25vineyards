@@ -18,9 +18,11 @@ def mainpage(request):
 
     # List Section 1: Vineyards
     vineyards_per_page = 1
-    vineyards = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating")
-    total_vineyards = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().count()
-    vineyards_id = list(Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating").values_list('id', flat=True))
+    vineyard_pages = 1
+    vineyards_qs = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating")
+    vineyards = vineyards_qs
+    total_vineyards = vineyards_qs.count()
+    vineyards_id = list(vineyards_qs.values_list('id', flat=True))
 
     # List Section 2: List Section
     p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)
@@ -37,6 +39,7 @@ def mainpage(request):
                "vineyards": vineyards,
                "total_vineyards": total_vineyards,
                "vineyards_id": vineyards_id,
+               "vineyard_pages": vineyard_pages,
                "list_section": list_section,
                "list_carousel": list_carousel,
                "billboards": billboards,

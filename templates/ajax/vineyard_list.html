@@ -2,7 +2,10 @@
 
 <p class="ajaxLoader">Loading...</p>
 <script type="text/javascript"> 
+	var totalVineyards = "{{ total_vineyards }}";
+	var vineyardsPerPage = "{{ vineyards_per_page }}";
 	var currentVineyards = "{{ vineyards_id }}";
+	var vineyardPages = "{{ vineyard_pages }}";
 </script>
 {% for vineyard in vineyards %}
 	<div class="d-md-flex vineyard-box">
@@ -55,3 +58,27 @@
 		</div>
 	</div>
 {% endfor %}
+<!-- Nav Pagination -->
+<!-- <nav class="nav-pagination">
+	<ul class="pagination justify-content-center">
+		{% if vineyards.paginator.num_pages > 1 %}
+			{% if vineyards.has_previous %}
+				<a class="btn pagination-btn my-2" href="?page1=1">First</a>
+				<a class="btn pagination-btn my-2" href="?page1={{ vineyards.previous_page_number }}">Previous</a>
+			{% endif %}
+
+			{% for num in vineyards.paginator.page_range %}
+				{% if vineyards.number == num %}
+					<a class="btn btn-secondary my-2" href="?page1={{ num }}">{{ num }}</a>
+				{% elif num > vineyards.number|add:'-3' and num < vineyards.number|add:'3' %}
+					<a class="btn pagination-btn my-2" href="?page1={{ num }}">{{ num }}</a>
+				{% endif %}
+			{% endfor %}
+
+			{% if vineyards.has_next %}
+				<a class="btn pagination-btn my-2" href="?page1={{ vineyards.next_page_number }}">Next</a>
+				<a class="btn pagination-btn my-2" href="?page1={{ vineyards.paginator.num_pages }}">Last</a>
+			{% endif %}
+		{% endif %}
+	</ul>
+</nav> -->
