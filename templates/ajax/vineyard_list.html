@@ -1,5 +1,9 @@
 {% load static %}
 
+<p class="ajaxLoader">Loading...</p>
+<script type="text/javascript"> 
+	var currentVineyards = "{{ vineyards_id }}";
+</script>
 {% for vineyard in vineyards %}
 	<div class="d-md-flex vineyard-box">
 		<div class="col-12 col-md-6 py-3 text-start">

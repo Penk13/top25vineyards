@@ -207,7 +207,7 @@ $(document).ready(function(){
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
 		var _data={};
-    _data = {currentVineyards};
+    _data = {defaultVineyards};
 		$(".filter-checkbox").each(function(index,ele){
 			var _filterVal=$(this).val();
 			var _filterKey=$(this).data('filter');
