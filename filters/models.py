@@ -27,6 +27,7 @@ class Country(models.Model):
 class WorldRegion(models.Model):
     name = models.CharField(max_length=255)
     country = models.ManyToManyField(Country, blank=True)
+    order = models.IntegerField(unique=True)
 
     def __str__(self):
         return self.name
@@ -59,6 +60,7 @@ class Service(models.Model):
 class Rating(models.Model):
     name = models.CharField(max_length=255)
     vineyards = models.ManyToManyField(Vineyard, blank=True, related_name="rating_filter")
+    order = models.IntegerField(unique=True)
 
     def __str__(self):
         return self.name

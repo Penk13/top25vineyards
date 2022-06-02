@@ -5,13 +5,13 @@ from filters.models import WorldRegion, Country, WineRegion, Wine, Facility, Ser
 
 def base_variable(request):
     # Filter Vineyard
-    world_region_filters = WorldRegion.objects.all()
+    world_region_filters = WorldRegion.objects.all().order_by("order")
     country_filters = Country.objects.all()
     wine_region_filters = WineRegion.objects.all()
     wine_filters = Wine.objects.all()
     facility_filters = Facility.objects.all()
     service_filters = Service.objects.all()
-    rating_filters = Rating.objects.all()
+    rating_filters = Rating.objects.all().order_by("order")
 
     # Base
     header_script = Script.objects.get(name="HEADER SCRIPT")

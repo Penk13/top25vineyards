@@ -7,7 +7,7 @@
 			Rating
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownRatingFilter" style="width: 300px">
-			{% for rating in rating_filters|dictsort:"name.lower" %}
+			{% for rating in rating_filters %}
 			<li>
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="rating" value="{{ rating.id }}" id="ratingInput">
@@ -24,7 +24,7 @@
 			World
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownWorldRegionFilter" style="width: 300px">
-			{% for world_region in world_region_filters|dictsort:"name.lower" %}
+			{% for world_region in world_region_filters %}
 			<li id="worldRegionItem">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_region" value="{{ world_region.id }}" id="worldRegionInput">
