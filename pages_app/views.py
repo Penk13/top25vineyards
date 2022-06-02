@@ -22,7 +22,7 @@ def mainpage(request):
     vineyards_id = list(vineyards_qs.values_list('id', flat=True))
 
     # Pagination
-    per_page = 10
+    per_page = 1
     num_pages = int(total_vineyards/per_page) + (total_vineyards % per_page > 0)
     current_page = 1
     page_range = [i for i in range(1, num_pages + 1)]

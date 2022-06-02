@@ -74,7 +74,6 @@ function preview() {
   document.getElementById("titlePreview").innerHTML = titleValue;
   var reviewValue = document.getElementById("reviewValue").value;
   document.getElementById("reviewPreview").innerHTML = reviewValue;
-  console.log(totalRating, titleValue);
 }
 
 // Show Live Total Rating Calculation (rr_form.html)
@@ -101,7 +100,6 @@ function moreLess(element) {
   var half = "half-" + element.id;
   var full = "full-" + element.id;
   var halfDisplay = document.getElementById(half).style.display;
-  console.log(halfDisplay);
   if (halfDisplay == "none") {
     document.getElementById(half).style.display = "block";
     document.getElementById(full).style.display = "none";
@@ -116,7 +114,6 @@ function sidebarMoreLess(element) {
   var half = "half-" + element.id + "-sidebar";
   var full = "full-" + element.id + "-sidebar";
   var halfDisplay = document.getElementById(half).style.display;
-  console.log(halfDisplay);
   if (halfDisplay == "none") {
     document.getElementById(half).style.display = "block";
     document.getElementById(full).style.display = "none";
@@ -198,7 +195,8 @@ $(document).ready(function(){
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
 		var _data={};
-    _data = {defaultVineyards, perPage, numPages, pageRange};
+    _data = {currentVineyards, perPage};
+
 		$(".filter-checkbox").each(function(index,ele){
 			var _filterVal=$(this).val();
 			var _filterKey=$(this).data('filter');
@@ -206,8 +204,6 @@ $(document).ready(function(){
 			 	return el.value;
 			});
 		});
-    
-    console.log(_data);
     
     // Run Ajax
 		$.ajax({
@@ -234,9 +230,7 @@ function resetAllFilters(){
 // Vineyard Section Pagination
 function loadMore(currentPage){
   var _data={};
-  _data = {currentVineyards, perPage, numPages, currentPage, pageRange};
-
-  console.log(_data);
+  _data = {currentVineyards, perPage, currentPage};
 
   // Run Ajax
   $.ajax({

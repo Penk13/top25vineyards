@@ -13,9 +13,9 @@ def filter_data(request):
     service = request.GET.getlist('service[]')
     rating = request.GET.getlist('rating[]')
 
-    defaultVineyards = request.GET.get('defaultVineyards')
-    defaultVineyards = defaultVineyards.strip('][').split(', ')
-    vineyardList = Vineyard.objects.filter(id__in=defaultVineyards)
+    currentVineyards = request.GET.get('currentVineyards')
+    currentVineyards = currentVineyards.strip('][').split(', ')
+    vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
 
     if len(wine_region) > 0:
         qs = WineRegion.objects.filter(id__in=wine_region).values_list('id', flat=True)
@@ -66,15 +66,19 @@ def filter_data(request):
 
 def load_more_data(request):
     currentVineyards = request.GET.get('currentVineyards')
-    per_page = int(request.GET.get('perPage'))
-    num_pages = int(request.GET.get('numPages'))
-    current_page = int(request.GET.get('currentPage'))
-    page_range = [i for i in range(1, num_pages + 1)]
 
     currentVineyards = currentVineyards.strip('][').split(', ')
     vineyards_qs = Vineyard.objects.filter(id__in=currentVineyards, display=True).distinct().order_by("-rating")
-    vineyards = vineyards_qs[((current_page-1)*per_page):(current_page*per_page)]
+    total_vineyards = vineyards_qs.count()
     vineyards_id = list(vineyards_qs.values_list('id', flat=True))
+
+    # Pagination
+    per_page = int(request.GET.get('perPage'))
+    num_pages = int(total_vineyards/per_page) + (total_vineyards % per_page > 0)
+    current_page = int(request.GET.get('currentPage'))
+    page_range = [i for i in range(1, num_pages + 1)]
+
+    vineyards = vineyards_qs[((current_page-1)*per_page):(current_page*per_page)]
 
     data = render_to_string("ajax/vineyard_list.html", {
         "vineyards": vineyards,
