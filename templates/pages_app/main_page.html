@@ -130,29 +130,29 @@
     </div>
     {% endfor %}
     <!-- Nav Pagination -->
-    <!-- <nav class="nav-pagination">
+    <nav class="nav-pagination">
       <ul class="pagination justify-content-center">
-        {% if vineyards.paginator.num_pages > 1 %}
-          {% if vineyards.has_previous %}
-            <a class="btn pagination-btn my-2" href="?page1=1">First</a>
-            <a class="btn pagination-btn my-2" href="?page1={{ vineyards.previous_page_number }}">Previous</a>
+        {% if num_pages > 1 %}
+          {% if current_page > 1 %}
+            <a class="btn pagination-btn my-2" onclick="loadMore('{{ 1 }}')">First</a>
+            <a class="btn pagination-btn my-2" onclick="loadMore('{{ current_page|add:-1 }}')">Previous</a>
           {% endif %}
   
-          {% for num in vineyards.paginator.page_range %}
-            {% if vineyards.number == num %}
-              <a class="btn btn-secondary my-2" href="?page1={{ num }}">{{ num }}</a>
-            {% elif num > vineyards.number|add:'-3' and num < vineyards.number|add:'3' %}
-              <a class="btn pagination-btn my-2" href="?page1={{ num }}">{{ num }}</a>
+          {% for num in page_range %}
+            {% if current_page == num %}
+              <a class="btn btn-secondary my-2" onclick="loadMore('{{ num }}')">{{ num }}</a>
+            {% elif num > current_page|add:'-3' and num < current_page|add:'3' %}
+              <a class="btn pagination-btn my-2" onclick="loadMore('{{ num }}')">{{ num }}</a>
             {% endif %}
           {% endfor %}
   
-          {% if vineyards.has_next %}
-            <a class="btn pagination-btn my-2" href="?page1={{ vineyards.next_page_number }}">Next</a>
-            <a class="btn pagination-btn my-2" href="?page1={{ vineyards.paginator.num_pages }}">Last</a>
+          {% if current_page < num_pages %}
+            <a class="btn pagination-btn my-2" onclick="loadMore('{{ current_page|add:1 }}')">Next</a>
+            <a class="btn pagination-btn my-2" onclick="loadMore('{{ num_pages }}')">Last</a>
           {% endif %}
         {% endif %}
       </ul>
-    </nav> -->
+    </nav>
   </div>
 </div>
 {% endif %} {% if content_page.additional_content %}

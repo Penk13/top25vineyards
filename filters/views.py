@@ -5,12 +5,6 @@ from .models import WineRegion, Country, WorldRegion, Wine, Facility, Service, R
 
 
 def filter_data(request):
-    defaultVineyards = request.GET.get('defaultVineyards')
-    per_page = request.GET.get('perPage')
-    num_pages = request.GET.get('numPages')
-    current_page = request.GET.get('currentPage')
-    page_range = request.GET.get('pageRange')
-
     world_region = request.GET.getlist('world_region[]')
     country = request.GET.getlist('country[]')
     wine_region = request.GET.getlist('wine_region[]')
@@ -19,6 +13,7 @@ def filter_data(request):
     service = request.GET.getlist('service[]')
     rating = request.GET.getlist('rating[]')
 
+    defaultVineyards = request.GET.get('defaultVineyards')
     defaultVineyards = defaultVineyards.strip('][').split(', ')
     vineyardList = Vineyard.objects.filter(id__in=defaultVineyards)
 
@@ -47,8 +42,16 @@ def filter_data(request):
         vineyardList = vineyardList.filter(rating_filter__in=qs)
 
     vineyards_qs = vineyardList.filter(display=True).distinct().order_by("-rating")
-    vineyards = vineyards_qs
+    total_vineyards = vineyards_qs.count()
     vineyards_id = list(vineyards_qs.values_list('id', flat=True))
+
+    # Pagination
+    per_page = int(request.GET.get('perPage'))
+    num_pages = int(total_vineyards/per_page) + (total_vineyards % per_page > 0)
+    current_page = 1
+    page_range = [i for i in range(1, num_pages + 1)]
+
+    vineyards = vineyards_qs[((current_page-1)*per_page):(current_page*per_page)]
 
     data = render_to_string("ajax/vineyard_list.html", {
         "vineyards": vineyards,
@@ -63,14 +66,14 @@ def filter_data(request):
 
 def load_more_data(request):
     currentVineyards = request.GET.get('currentVineyards')
-    per_page = request.GET.get('perPage')
-    num_pages = request.GET.get('numPages')
-    current_page = request.GET.get('currentPage')
-    page_range = request.GET.get('pageRange')
+    per_page = int(request.GET.get('perPage'))
+    num_pages = int(request.GET.get('numPages'))
+    current_page = int(request.GET.get('currentPage'))
+    page_range = [i for i in range(1, num_pages + 1)]
 
     currentVineyards = currentVineyards.strip('][').split(', ')
-    vineyards_qs = Vineyard.objects.filter(display=True).distinct().order_by("-rating")
-    vineyards = vineyards_qs
+    vineyards_qs = Vineyard.objects.filter(id__in=currentVineyards, display=True).distinct().order_by("-rating")
+    vineyards = vineyards_qs[((current_page-1)*per_page):(current_page*per_page)]
     vineyards_id = list(vineyards_qs.values_list('id', flat=True))
 
     data = render_to_string("ajax/vineyard_list.html", {

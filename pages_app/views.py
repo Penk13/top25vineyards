@@ -18,15 +18,16 @@ def mainpage(request):
 
     # List Section 1: Vineyards
     vineyards_qs = Vineyard.objects.filter(regions__in=content_page.category.all(), display=True).distinct().order_by("-rating")
-    vineyards = vineyards_qs
     total_vineyards = vineyards_qs.count()
     vineyards_id = list(vineyards_qs.values_list('id', flat=True))
 
     # Pagination
-    per_page = 1
+    per_page = 10
     num_pages = int(total_vineyards/per_page) + (total_vineyards % per_page > 0)
     current_page = 1
     page_range = [i for i in range(1, num_pages + 1)]
+
+    vineyards = vineyards_qs[:per_page]
 
     # List Section 2: List Section
     p = Paginator(Post.objects.filter(category__in=content_page.list_section.all()), 10)

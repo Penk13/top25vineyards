@@ -198,7 +198,7 @@ $(document).ready(function(){
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
 		var _data={};
-    _data = {defaultVineyards, perPage, numPages, currentPage, pageRange};
+    _data = {defaultVineyards, perPage, numPages, pageRange};
 		$(".filter-checkbox").each(function(index,ele){
 			var _filterVal=$(this).val();
 			var _filterKey=$(this).data('filter');
@@ -232,31 +232,23 @@ function resetAllFilters(){
 }
 
 // Vineyard Section Pagination
-$(document).ready(function(){
-	$("#loadMore").on('click',function(){
-		var _data={};
-    _data = {currentVineyards, perPage, numPages, currentPage, pageRange};
+function loadMore(currentPage){
+  var _data={};
+  _data = {currentVineyards, perPage, numPages, currentPage, pageRange};
 
-    // Run Ajax
-		$.ajax({
-			url:'/load-more-data',
-			data:_data,
-			dataType:'json',
-			beforeSend:function(){
-				$("#loadMore").attr('disabled',true);
-				// $(".load-more-icon").addClass('fa-spin');
-			},
-			success:function(res){
-				$("#filteredVineyards").append(res.data);
-				$("#loadMore").attr('disabled',false);
-				// $(".load-more-icon").removeClass('fa-spin');
+  console.log(_data);
 
-				var _totalShowing=$(".vineyard-box").length;
-				if(_totalShowing==_total){
-					$("#loadMore").remove();
-				}
-			}
-		});
-
+  // Run Ajax
+  $.ajax({
+    url:'/load-more-data',
+    data:_data,
+    dataType:'json',
+    beforeSend:function(){
+      $(".ajaxLoader").show();
+    },
+    success:function(res){
+      $("#filteredVineyards").html(res.data);
+      $(".ajaxLoader").hide();
+    }
   });
-});
+};
