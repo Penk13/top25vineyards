@@ -9,6 +9,12 @@ class WineRegion(models.Model):
     def __str__(self):
         return self.name
 
+    def get_world_region_id(self):
+        return WorldRegion.objects.get(country=Country.objects.get(wine_rg=self)).id
+
+    def get_country_id(self):
+        return Country.objects.get(wine_rg=self).id
+
 
 class Country(models.Model):
     name = models.CharField(max_length=255)
@@ -23,6 +29,14 @@ class Country(models.Model):
         else:
             return self.name + " - " + wine_region_list[0:-2]
 
+    def get_wine_region_id(self):
+        result = list(self.wine_rg.values_list('id', flat=True))
+        final_result = ','.join(str(num) for num in result)
+        return final_result
+
+    def get_world_region_id(self):
+        return WorldRegion.objects.get(country=self).id
+
 
 class WorldRegion(models.Model):
     name = models.CharField(max_length=255)
@@ -31,6 +45,20 @@ class WorldRegion(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_country_id(self):
+        result = list(self.country.values_list('id', flat=True))
+        final_result = ','.join(str(num) for num in result)
+        return final_result
+
+    def get_wine_region_id(self):
+        wine_region_list = []
+        for country in self.country.all():
+            for wine_region in country.wine_rg.all():
+                wine_region_list.append(wine_region.id)
+        result = list(dict.fromkeys(wine_region_list))
+        final_result = ','.join(str(num) for num in result)
+        return final_result
 
 
 class Wine(models.Model):

@@ -25,14 +25,30 @@
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownWorldRegionFilter" style="width: 300px">
 			{% for world_region in world_region_filters %}
-			<li id="worldRegionItem">
+			{% if world_region.name == "America-North" %}
+			<p class="fw-bold mx-3 my-1">Americas</p>
+			{% endif %}
+			{% if world_region.name != "America-North" and world_region.name != "America-Latin" %}
+			<li class="worldRegionItem" id="{{ world_region.id }}">
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_region" value="{{ world_region.id }}" id="worldRegionInput">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_region" id="worldRegionInput"
+						value="{{ world_region.id }}" country="{{ world_region.get_country_id }}" wine_region="{{ world_region.get_wine_region_id }}">
 					<label class="form-check-label" for="worldRegionInput">
 						{{ world_region.name }}
 					</label>
 				</div>
 			</li>
+			{% else %}
+			<li class="worldRegionItem" id="{{ world_region.id }}">
+				<div class="form-check mx-4">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_region" id="worldRegionInput"
+						value="{{ world_region.id }}" country="{{ world_region.get_country_id }}" wine_region="{{ world_region.get_wine_region_id }}">
+					<label class="form-check-label" for="worldRegionInput">
+						{{ world_region.name }}
+					</label>
+				</div>
+			</li>
+			{% endif %}
 			{% endfor %}
 		</ul>
 	</div>
@@ -42,9 +58,10 @@
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownCountryFilter" style="width: 300px">
 			{% for country in country_filters|dictsort:"name.lower" %}
-			<li id="countryItem">
+			<li class="countryItem" id="{{ country.id }}">
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" value="{{ country.id }}" id="countryInput">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" id="countryInput"
+						value="{{ country.id }}" world_region="{{ country.get_world_region_id }}"  wine_region="{{ country.get_wine_region_id }}">
 					<label class="form-check-label" for="countryInput">
 						{{ country.name }}
 					</label>
@@ -59,9 +76,10 @@
 		</button>
 		<ul class="dropdown-menu" aria-labelledby="dropdownWineRegionFilter" style="width: 300px">
 			{% for wine_region in wine_region_filters|dictsort:"name.lower" %}
-			<li id="wineRegionItem">
+			<li class="wineRegionItem" id="{{ wine_region.id }}">
 				<div class="form-check mx-3">
-					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" value="{{ wine_region.id }}" id="wineRegionInput">
+					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" id="wineRegionInput"
+						value="{{ wine_region.id }}" world_region="{{ wine_region.get_world_region_id }}" country="{{ wine_region.get_country_id }}">
 					<label class="form-check-label" for="wineRegionInput">
 						{{ wine_region.name }}
 					</label>
