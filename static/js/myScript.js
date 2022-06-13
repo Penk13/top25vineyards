@@ -139,8 +139,8 @@ $(document).ready(function () {
 $(function() {
   // Add refresh button after field (this can be done in the template as well)
   $('img.captcha').after(
-          $('<a href="#void" class="captcha-refresh btn btn-secondary m-3">Refresh</a>')
-          );
+    $('<a href="#void" class="captcha-refresh btn btn-secondary m-3">Refresh</a>')
+  );
 
   // Click-handler for the refresh-link
   $('.captcha-refresh').click(function(){
@@ -164,123 +164,10 @@ $(document).ready(function(){
 
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
-    // From World Region
-    var world_region = $('.worldRegionItem div').children('input[type="checkbox"]:checked').val();
-    var world_region_country = $('.worldRegionItem div').children('input[type="checkbox"]:checked').attr("country");
-    var world_region_wine_region = $('.worldRegionItem div').children('input[type="checkbox"]:checked').attr("wine_region");
 
-    // From Country
-    var country = $('.countryItem div').children('input[type="checkbox"]:checked').val();
-    var country_world_region = $('.countryItem div').children('input[type="checkbox"]:checked').attr("world_region");
-    var country_wine_region = $('.countryItem div').children('input[type="checkbox"]:checked').attr("wine_region");
+    showSelectedFilter();
 
-    // From Wine Region
-    var wine_region = $('.wineRegionItem div').children('input[type="checkbox"]:checked').val();
-    var wine_region_world_region = $('.wineRegionItem div').children('input[type="checkbox"]:checked').attr("world_region");
-    var wine_region_country = $('.wineRegionItem div').children('input[type="checkbox"]:checked').attr("country");
-
-    // Convert to JS Array
-    world_region !== undefined ? world_region = world_region.split(',') : world_region = [];
-    world_region_country !== undefined ? world_region_country = world_region_country.split(',') : world_region_country = [];
-    world_region_wine_region !== undefined ? world_region_wine_region = world_region_wine_region.split(',') : world_region_wine_region = [];
-    country !== undefined ? country = country.split(',') : country = [];
-    country_world_region !== undefined ? country_world_region = country_world_region.split(',') : country_world_region = [];
-    country_wine_region !== undefined ? country_wine_region = country_wine_region.split(',') : country_wine_region = [];
-    wine_region !== undefined ? wine_region = wine_region.split(',') : wine_region = [];
-    wine_region_world_region !== undefined ? wine_region_world_region = wine_region_world_region.split(',') : wine_region_world_region = [];
-    wine_region_country !== undefined ? wine_region_country = wine_region_country.split(',') : wine_region_country = [];
-    
-    function matching(left, right) {
-      const right_indices = right.map(r=>r.index);
-      return left.filter(l=>right_indices.includes(l.index))
-    }
-
-    function showAllFilter() {
-      $('.worldRegionItem').show();
-      $('.countryItem').show();
-      $('.wineRegionItem').show();
-      $('.worldRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
-      $('.countryItem div').children('input[type="checkbox"]').attr("disabled", false);
-      $('.wineRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
-    }
-
-    // Case 1: Select World Region
-    if(world_region.length == 1 && country.length == 0 && wine_region == 0) {
-      showAllFilter();
-      $('.worldRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
-      if(world_region_country!==undefined){
-        $('.countryItem').each(function(i, obj) {        
-          if ($.inArray($(obj).attr('id'), world_region_country) == -1)
-          {
-            $(obj).hide();
-          }
-        });
-      }
-      if(world_region_wine_region!==undefined){
-        $('.wineRegionItem').each(function(i, obj) {        
-          if ($.inArray($(obj).attr('id'), world_region_wine_region) == -1)
-          {
-            $(obj).hide();
-          }
-        });
-      }
-    } 
-    // Case 2: Select Country
-    else if(world_region.length == 0 && country.length == 1 && wine_region == 0){
-      showAllFilter();
-      $('.countryItem div').children(':checkbox:not(:checked)').attr("disabled", true);
-      $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
-      if(country_wine_region!==undefined){
-        $('.wineRegionItem').each(function(i, obj) {        
-          if ($.inArray($(obj).attr('id'), country_wine_region) == -1)
-          {
-            $(obj).hide();
-          }
-        });
-      }
-    }
-    // Case 3: Select Wine Region
-    else if(world_region.length == 0 && country.length == 0 && wine_region.length == 1) {
-      showAllFilter();
-      $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
-      $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
-      $('.countryItem div').children(':checkbox').attr("disabled", true);
-    }
-    // Case 4: Select World Region and Country
-    else if(world_region.length == 1 && country.length == 1 && wine_region.length == 0) {
-      showAllFilter();
-      $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
-      $('.countryItem div').children(':checkbox:not(:checked)').attr("disabled", true);
-      if(country_wine_region!==undefined){
-        $('.wineRegionItem').each(function(i, obj) {        
-          if ($.inArray($(obj).attr('id'), country_wine_region) == -1)
-          {
-            $(obj).hide();
-          }
-        });
-      }
-    }
-    // Case 5: Select World Region and Wine Region
-    else if(world_region.length == 1 && country.length == 0 && wine_region.length == 1) {
-      showAllFilter();
-      $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
-      $('.countryItem div').children(':checkbox').attr("disabled", true);
-      $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
-    }
-    // Case 6: Select World Region, Country, and Wine Region
-    else if(world_region.length == 1 && country.length == 1 && wine_region.length == 1) {
-      showAllFilter();
-      $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
-      $('.countryItem div').children(':checkbox').attr("disabled", true);
-      $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
-    }
-    // Case 7: Nothing Selected
-    else if(world_region.length == 0 && country.length == 0 && wine_region.length == 0) {
-      showAllFilter();
-    }
-    else {
-      alert("Error");
-    }
+    filterBar();
 
 		var _data={};
     _data = {currentVineyards, perPage};
@@ -309,6 +196,136 @@ $(document).ready(function(){
 
 	});
 });
+
+// Show Selected Filters
+function showSelectedFilter(){
+  var $checkedCheckbox = $('input[type="checkbox"]:checked');
+  var selectedFilters = $checkedCheckbox.map(function() {
+    return $(this).next("label").text();
+  }).get();
+  
+  var list = "";
+  for(i=0; i<selectedFilters.length; i++){
+    list += "<button class='btn btn-secondary btn-sm px-3 mx-1 selected-filter' type='button'>"+selectedFilters[i]+"<i class='bi bi-x-lg ps-1'></i>"+"</button>";
+  }
+  $(".selectedFilters").html(list);
+}
+
+// Filter Bar
+function filterBar(){
+  // From World Region
+  var world_region = $('.worldRegionItem div').children('input[type="checkbox"]:checked').val();
+  var world_region_country = $('.worldRegionItem div').children('input[type="checkbox"]:checked').attr("country");
+  var world_region_wine_region = $('.worldRegionItem div').children('input[type="checkbox"]:checked').attr("wine_region");
+
+  // From Country
+  var country = $('.countryItem div').children('input[type="checkbox"]:checked').val();
+  var country_world_region = $('.countryItem div').children('input[type="checkbox"]:checked').attr("world_region");
+  var country_wine_region = $('.countryItem div').children('input[type="checkbox"]:checked').attr("wine_region");
+
+  // From Wine Region
+  var wine_region = $('.wineRegionItem div').children('input[type="checkbox"]:checked').val();
+  var wine_region_world_region = $('.wineRegionItem div').children('input[type="checkbox"]:checked').attr("world_region");
+  var wine_region_country = $('.wineRegionItem div').children('input[type="checkbox"]:checked').attr("country");
+
+  // Convert to JS Array
+  world_region !== undefined ? world_region = world_region.split(',') : world_region = [];
+  world_region_country !== undefined ? world_region_country = world_region_country.split(',') : world_region_country = [];
+  world_region_wine_region !== undefined ? world_region_wine_region = world_region_wine_region.split(',') : world_region_wine_region = [];
+  country !== undefined ? country = country.split(',') : country = [];
+  country_world_region !== undefined ? country_world_region = country_world_region.split(',') : country_world_region = [];
+  country_wine_region !== undefined ? country_wine_region = country_wine_region.split(',') : country_wine_region = [];
+  wine_region !== undefined ? wine_region = wine_region.split(',') : wine_region = [];
+  wine_region_world_region !== undefined ? wine_region_world_region = wine_region_world_region.split(',') : wine_region_world_region = [];
+  wine_region_country !== undefined ? wine_region_country = wine_region_country.split(',') : wine_region_country = [];
+
+  function showAllFilter() {
+    $('.worldRegionItem').show();
+    $('.countryItem').show();
+    $('.wineRegionItem').show();
+    $('.worldRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
+    $('.countryItem div').children('input[type="checkbox"]').attr("disabled", false);
+    $('.wineRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
+  }
+
+  // Case 1: Select World Region
+  if(world_region.length == 1 && country.length == 0 && wine_region == 0) {
+    showAllFilter();
+    $('.worldRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
+    if(world_region_country!==undefined){
+      $('.countryItem').each(function(i, obj) {        
+        if ($.inArray($(obj).attr('id'), world_region_country) == -1)
+        {
+          $(obj).hide();
+        }
+      });
+    }
+    if(world_region_wine_region!==undefined){
+      $('.wineRegionItem').each(function(i, obj) {        
+        if ($.inArray($(obj).attr('id'), world_region_wine_region) == -1)
+        {
+          $(obj).hide();
+        }
+      });
+    }
+  } 
+  // Case 2: Select Country
+  else if(world_region.length == 0 && country.length == 1 && wine_region == 0){
+    showAllFilter();
+    $('.countryItem div').children(':checkbox:not(:checked)').attr("disabled", true);
+    $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
+    if(country_wine_region!==undefined){
+      $('.wineRegionItem').each(function(i, obj) {        
+        if ($.inArray($(obj).attr('id'), country_wine_region) == -1)
+        {
+          $(obj).hide();
+        }
+      });
+    }
+  }
+  // Case 3: Select Wine Region
+  else if(world_region.length == 0 && country.length == 0 && wine_region.length == 1) {
+    showAllFilter();
+    $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
+    $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
+    $('.countryItem div').children(':checkbox').attr("disabled", true);
+  }
+  // Case 4: Select World Region and Country
+  else if(world_region.length == 1 && country.length == 1 && wine_region.length == 0) {
+    showAllFilter();
+    $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
+    $('.countryItem div').children(':checkbox:not(:checked)').attr("disabled", true);
+    if(country_wine_region!==undefined){
+      $('.wineRegionItem').each(function(i, obj) {        
+        if ($.inArray($(obj).attr('id'), country_wine_region) == -1)
+        {
+          $(obj).hide();
+        }
+      });
+    }
+  }
+  // Case 5: Select World Region and Wine Region
+  else if(world_region.length == 1 && country.length == 0 && wine_region.length == 1) {
+    showAllFilter();
+    $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
+    $('.countryItem div').children(':checkbox').attr("disabled", true);
+    $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
+  }
+  // Case 6: Select World Region, Country, and Wine Region
+  else if(world_region.length == 1 && country.length == 1 && wine_region.length == 1) {
+    showAllFilter();
+    $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
+    $('.countryItem div').children(':checkbox').attr("disabled", true);
+    $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
+  }
+  // Case 7: Nothing Selected
+  else if(world_region.length == 0 && country.length == 0 && wine_region.length == 0) {
+    showAllFilter();
+  }
+  else {
+    alert("Error");
+  }
+}
 
 // Reset Filter
 function resetAllFilters(){
