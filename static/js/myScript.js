@@ -168,9 +168,28 @@ $(document).ready(function(){
     showSelectedFilter();
 
     filterBar();
+    
+    filterData();
+  
+	});
 
-		var _data={};
-    _data = {currentVineyards, perPage};
+  
+});
+
+// Remove Selected Filter
+function removeSelectedFilter(text){
+  $('input[type=checkbox]:checked').each(function(index) {
+    if (text == $(this).next("label").text()) {
+      $(this).prop('checked', false).change();
+    }
+  });
+  $(this).remove();
+}
+
+// Filter Data
+function filterData(){
+  var _data={};
+    _data = {defaultVineyards, perPage};
 
 		$(".filter-checkbox").each(function(index,ele){
 			var _filterVal=$(this).val();
@@ -193,9 +212,7 @@ $(document).ready(function(){
 				$(".ajaxLoader").hide();
 			}
 		});
-
-	});
-});
+}
 
 // Show Selected Filters
 function showSelectedFilter(){
@@ -206,7 +223,7 @@ function showSelectedFilter(){
   
   var list = "";
   for(i=0; i<selectedFilters.length; i++){
-    list += "<button class='btn btn-secondary btn-sm px-3 mx-1 selected-filter' type='button'>"+selectedFilters[i]+"<i class='bi bi-x-lg ps-1'></i>"+"</button>";
+    list += "<button class='btn btn-secondary btn-sm px-3 mx-1 selected-filter' type='button' onclick='removeSelectedFilter(\""+selectedFilters[i]+"\")' >"+selectedFilters[i]+"<i class='bi bi-x-lg ps-1'></i>"+"</button>";
   }
   $(".selectedFilters").html(list);
 }

@@ -13,7 +13,7 @@ def filter_data(request):
     service = request.GET.getlist('service[]')
     rating = request.GET.getlist('rating[]')
 
-    currentVineyards = request.GET.get('currentVineyards')
+    currentVineyards = request.GET.get('defaultVineyards')
     currentVineyards = currentVineyards.strip('][').split(', ')
     vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
 
