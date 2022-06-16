@@ -116,3 +116,9 @@ input[type="range"]::-ms-thumb {
   background-color: #5c636a !important;
   border-color: #5c636a !important;
 }
+
+/* Scrollable Dropdown */
+.scrollable-dropdown {
+  max-height: 200px;
+  overflow-y: auto;
+}

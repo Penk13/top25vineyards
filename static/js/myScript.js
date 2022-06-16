@@ -164,17 +164,19 @@ $(document).ready(function(){
 
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
-
+    closeFilterDropdown();
     showSelectedFilter();
-
     filterBar();
-    
     filterData();
-  
 	});
-
   
 });
+
+// Close Filter Dropdown
+function closeFilterDropdown(){
+  $('.dropdown-btn.show').removeClass('show');
+  $('.dropdown-menu.show').removeClass('show');
+}
 
 // Remove Selected Filter
 function removeSelectedFilter(text){
@@ -210,6 +212,7 @@ function filterData(){
 			success:function(res){
 				$("#filteredVineyards").html(res.data);
 				$(".ajaxLoader").hide();
+        $('html, body').animate({scrollTop: $("#filteredVineyards").offset().top-300}, 100); 
 			}
 		});
 }
@@ -223,7 +226,7 @@ function showSelectedFilter(){
   
   var list = "";
   for(i=0; i<selectedFilters.length; i++){
-    list += "<button class='btn btn-secondary btn-sm px-3 mx-1 selected-filter' type='button' onclick='removeSelectedFilter(\""+selectedFilters[i]+"\")' >"+selectedFilters[i]+"<i class='bi bi-x-lg ps-1'></i>"+"</button>";
+    list += "<button class='btn btn-secondary btn-sm ps-3 pe-2 mx-1 selected-filter' type='button' onclick='removeSelectedFilter(\""+selectedFilters[i]+"\")' >"+selectedFilters[i]+"<span class='ps-2 pe-1'>x</span>"+"</button>";
   }
   $(".selectedFilters").html(list);
 }
@@ -328,14 +331,21 @@ function filterBar(){
     $('.countryItem div').children(':checkbox').attr("disabled", true);
     $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
   }
-  // Case 6: Select World Region, Country, and Wine Region
+  // Case 6: Select Country and Wine Region
+  else if(world_region.length == 0 && country.length == 1 && wine_region.length == 1) {
+    showAllFilter();
+    $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
+    $('.countryItem div').children(':checkbox').attr("disabled", true);
+    $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
+  }
+  // Case 7: Select World Region, Country, and Wine Region
   else if(world_region.length == 1 && country.length == 1 && wine_region.length == 1) {
     showAllFilter();
     $('.worldRegionItem div').children(':checkbox').attr("disabled", true);
     $('.countryItem div').children(':checkbox').attr("disabled", true);
     $('.wineRegionItem div').children(':checkbox:not(:checked)').attr("disabled", true);
   }
-  // Case 7: Nothing Selected
+  // Case 8: Nothing Selected
   else if(world_region.length == 0 && country.length == 0 && wine_region.length == 0) {
     showAllFilter();
   }
@@ -365,6 +375,7 @@ function loadMore(currentPage){
     success:function(res){
       $("#filteredVineyards").html(res.data);
       $(".ajaxLoader").hide();
+      $('html, body').animate({scrollTop: $("#filteredVineyards").offset().top-300}, 100); 
     }
   });
 };
