@@ -356,7 +356,10 @@ function filterBar(){
 
 // Reset Filter
 function resetAllFilters(){
-  $('.filter-checkbox').prop('checked', false).change();
+  $('input[type=checkbox]:checked').each(function(index) {
+    $(this).prop('checked', false).change();
+  });
+  $(this).remove();
 }
 
 // Vineyard Section Pagination
