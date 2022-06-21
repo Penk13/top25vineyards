@@ -11,7 +11,7 @@
 			<li class="ratingItem" id="{{ rating.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="rating" value="{{ rating.id }}" id="ratingInput">
-					<label class="form-check-label" for="ratingInput">{{ rating.name }}</label>
+					<label class="form-check-label" for="ratingInput">{{ rating.name }}</label><span class="count-vineyards"> ({{ rating.count_vineyards }})</span>
 				</div>
 			</li>
 			{% endfor %}
@@ -27,7 +27,7 @@
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_region" id="worldRegionInput"
 						value="{{ world_region.id }}" country="{{ world_region.get_country_id }}" wine_region="{{ world_region.get_wine_region_id }}">
-					<label class="form-check-label" for="worldRegionInput">{{ world_region.name }}</label>
+					<label class="form-check-label" for="worldRegionInput">{{ world_region.name }}</label><span class="count-vineyards"> ({{ world_region.count_vineyards }})</span>
 				</div>
 			</li>
 			{% endfor %}
@@ -43,7 +43,7 @@
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" id="countryInput"
 						value="{{ country.id }}" world_region="{{ country.get_world_region_id }}"  wine_region="{{ country.get_wine_region_id }}">
-					<label class="form-check-label" for="countryInput">{{ country.name }}</label>
+					<label class="form-check-label" for="countryInput">{{ country.name }}</label><span class="count-vineyards"> ({{ country.count_vineyards }})</span>
 				</div>
 			</li>
 			{% endfor %}
@@ -59,7 +59,7 @@
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" id="wineRegionInput"
 						value="{{ wine_region.id }}" world_region="{{ wine_region.get_world_region_id }}" country="{{ wine_region.get_country_id }}">
-					<label class="form-check-label" for="wineRegionInput">{{ wine_region.name }}</label>
+					<label class="form-check-label" for="wineRegionInput">{{ wine_region.name }}</label><span class="count-vineyards"> ({{ wine_region.count_vineyards }})</span>
 				</div>
 			</li>
 			{% endfor %}
@@ -74,7 +74,7 @@
 			<li class="wineItem" id="{{ wine.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine" value="{{ wine.id }}" id="wineInput">
-					<label class="form-check-label" for="wineInput">{{ wine.name }}</label>
+					<label class="form-check-label" for="wineInput">{{ wine.name }}</label><span class="count-vineyards"> ({{ wine.count_vineyards }})</span>
 				</div>
 			</li>
 			{% endfor %}
@@ -89,7 +89,7 @@
 			<li class="facilityItem" id="{{ facility.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="facility" value="{{ facility.id }}" id="facilityInput">
-					<label class="form-check-label" for="facilityInput">{{ facility.name }}</label>
+					<label class="form-check-label" for="facilityInput">{{ facility.name }}</label><span class="count-vineyards"> ({{ facility.count_vineyards }})</span>
 				</div>
 			</li>
 			{% endfor %}
@@ -104,7 +104,7 @@
 			<li class="serviceItem" id="{{ service.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="service" value="{{ service.id }}" id="serviceInput">
-					<label class="form-check-label" for="serviceInput">{{ service.name }}</label>
+					<label class="form-check-label" for="serviceInput">{{ service.name }}</label><span class="count-vineyards"> ({{ service.count_vineyards }})</span>
 				</div>
 			</li>
 			{% endfor %}

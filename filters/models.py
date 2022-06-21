@@ -15,6 +15,9 @@ class WineRegion(models.Model):
     def get_country_id(self):
         return Country.objects.get(wine_rg=self).id
 
+    def count_vineyards(self):
+        return self.vineyards.count()
+
 
 class Country(models.Model):
     name = models.CharField(max_length=255)
@@ -36,6 +39,14 @@ class Country(models.Model):
 
     def get_world_region_id(self):
         return WorldRegion.objects.get(country=self).id
+
+    def count_vineyards(self):
+        vineyard_list = []
+        for wine_rg in self.wine_rg.all():
+            for vineyard in wine_rg.vineyards.all():
+                vineyard_list.append(vineyard.id)
+        result = list(dict.fromkeys(vineyard_list))
+        return len(result)
 
 
 class WorldRegion(models.Model):
@@ -60,6 +71,15 @@ class WorldRegion(models.Model):
         final_result = ','.join(str(num) for num in result)
         return final_result
 
+    def count_vineyards(self):
+        vineyard_list = []
+        for country in self.country.all():
+            for wine_region in country.wine_rg.all():
+                for vineyard in wine_region.vineyards.all():
+                    vineyard_list.append(vineyard.id)
+        result = list(dict.fromkeys(vineyard_list))
+        return len(result)
+
 
 class Wine(models.Model):
     name = models.CharField(max_length=255)
@@ -67,6 +87,9 @@ class Wine(models.Model):
 
     def __str__(self):
         return self.name
+
+    def count_vineyards(self):
+        return self.vineyards.count()
 
 
 class Facility(models.Model):
@@ -76,6 +99,9 @@ class Facility(models.Model):
     def __str__(self):
         return self.name
 
+    def count_vineyards(self):
+        return self.vineyards.count()
+
 
 class Service(models.Model):
     name = models.CharField(max_length=255)
@@ -83,6 +109,9 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+    def count_vineyards(self):
+        return self.vineyards.count()
 
 
 class Rating(models.Model):
@@ -92,3 +121,6 @@ class Rating(models.Model):
 
     def __str__(self):
         return self.name
+
+    def count_vineyards(self):
+        return self.vineyards.count()
