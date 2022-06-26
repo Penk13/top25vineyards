@@ -61,7 +61,7 @@ def filter_data(request):
         "current_page": current_page,
         "page_range": page_range,
     })
-    return JsonResponse({'data': data})
+    return JsonResponse({'data': data, 'total_vineyards': total_vineyards})
 
 
 def load_more_data(request):
@@ -88,4 +88,4 @@ def load_more_data(request):
         "current_page": current_page,
         "page_range": page_range,
     })
-    return JsonResponse({'data': data})
+    return JsonResponse({'data': data, 'total_vineyards': total_vineyards})

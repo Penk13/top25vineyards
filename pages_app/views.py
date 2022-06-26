@@ -42,6 +42,7 @@ def mainpage(request):
                "image_carousel": image_carousel,
                "vineyards": vineyards,
                "vineyards_id": vineyards_id,
+               "total_vineyards": total_vineyards,
                "per_page": per_page,
                "num_pages": num_pages,
                "current_page": current_page,

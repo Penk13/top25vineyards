@@ -65,7 +65,7 @@
     <h5 class="fw-bold">{{ content_page.listing_title1 }}</h5>
   </div>
   {% endif %}
-  {% include 'filter_vineyard.html' %}
+  {% include 'filter_vineyard.html' with total_vineyards=total_vineyards %}
   <div class="" id="filteredVineyards">
     <p class="ajaxLoader">Loading...</p>
     <script type="text/javascript"> 

@@ -165,12 +165,22 @@ $(document).ready(function(){
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
     closeFilterDropdown();
+    syncFilterCheckbox($(this));
     showSelectedFilter();
     filterBar();
     filterData();
 	});
   
 });
+
+// Sync Filter Checkbox on Filter Bar and Offcanvas
+function syncFilterCheckbox(current){
+  $('input[type=checkbox]').each(function(index) {
+    if (current.next("label").text() == $(this).next("label").text()) {
+      $(this).prop('checked', current.prop('checked'));
+    }
+  });
+}
 
 // Close Filter Dropdown
 function closeFilterDropdown(){
@@ -213,6 +223,7 @@ function filterData(){
 				$("#filteredVineyards").html(res.data);
 				$(".ajaxLoader").hide();
         $('html, body').animate({scrollTop: $("#filteredVineyards").offset().top-300}, 100); 
+        $('#view-filtered-vineyards').text("View all " + res.total_vineyards + " Vineyards");
 			}
 		});
 }
@@ -223,6 +234,9 @@ function showSelectedFilter(){
   var selectedFilters = $checkedCheckbox.map(function() {
     return $(this).next("label").text();
   }).get();
+
+  // Remove Duplicate
+  selectedFilters = [...new Set(selectedFilters)];
   
   var list = "";
   for(i=0; i<selectedFilters.length; i++){
@@ -397,6 +411,7 @@ function loadMore(currentPage){
       $("#filteredVineyards").html(res.data);
       $(".ajaxLoader").hide();
       $('html, body').animate({scrollTop: $("#filteredVineyards").offset().top-300}, 100); 
+      $('#view-filtered-vineyards').text("View all " + res.total_vineyards + " Vineyards");
     }
   });
 };
