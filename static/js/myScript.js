@@ -186,6 +186,8 @@ function syncFilterCheckbox(current){
 function closeFilterDropdown(){
   $('.dropdown-btn.show').removeClass('show');
   $('.dropdown-menu.show').removeClass('show');
+  $('.collapse-btn').addClass('collapsed');
+  $('.list-group.show').removeClass('show');
 }
 
 // Remove Selected Filter

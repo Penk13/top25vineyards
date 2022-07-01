@@ -67,7 +67,7 @@
 		</ul>
 	</div>
 	<div class="dropdown my-2 mx-1" id="dropdownWine">
-		<button class="btn btn-outline-secondary btn-sm px-2 dropdown-btn dropdown-btn" type="button" id="dropdownWineFilter" data-bs-toggle="dropdown" aria-expanded="false">
+		<button class="btn btn-outline-secondary btn-sm px-2 dropdown-btn" type="button" id="dropdownWineFilter" data-bs-toggle="dropdown" aria-expanded="false">
 			<div class="pe-3">Wines<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
 		</button>
 		<ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownWineFilter" style="width: 300px">
@@ -116,52 +116,56 @@
 
 <!-- Filter on Small Screen -->
 <div class="d-block d-lg-none my-1 mx-1 p-0" style="width: 97%;">
-	<button 
-		class="btn btn-outline-secondary my-3 mx-1 w-100"
-		data-bs-toggle="offcanvas"
-		data-bs-target="#offcanvasFilter"
-		aria-controls="offcanvasFilter"
-	>
-	Filters
-	</button>
+	<div class="d-flex text-center">
+		<h6 
+			class="my-3 w-100"
+			data-bs-toggle="offcanvas"
+			data-bs-target="#offcanvasFilter"
+			aria-controls="offcanvasFilter"
+			id="filters-mobile"
+		>
+			<i class="fa-solid fa-sliders mx-2"></i>Filters
+		</h6>
+	</div>
 	<div
-		class="offcanvas offcanvas-end bg-dark"
+		class="offcanvas offcanvas-end bg-light"
 		tabindex="-1"
 		id="offcanvasFilter"
 		aria-labelledby="offcanvasFilterLabel"
+		style="width: 75%;"
 	>
-		<div class="offcanvas-header">
-			<h5 class="my-0 text-light" style="cursor: pointer;" onclick="resetAllFilters()">Reset</h5>
-			<h5 class="my-0 text-light" id="offcanvasFilterLabel">Filters</h5>
-			<h5 class="my-0 text-light" data-bs-dismiss="offcanvas" style="cursor: pointer;">Apply</h5>
+		<div class="offcanvas-header" style="color: #2a415e;">
+			<h5 class="my-0 fw-normal fs-6" style="cursor: pointer;" onclick="resetAllFilters()">Reset</h5>
+			<h5 class="my-0 fw-normal fs-6" id="offcanvasFilterLabel">Filters</h5>
+			<h5 class="my-0 fw-normal fs-6" data-bs-dismiss="offcanvas" style="cursor: pointer;">Apply</h5>
 		</div>
-		<hr class="p-0 m-0" style="color: white;">
-		<div class="p-0 offcanvas-body">
-			<div class="dropdown my-2" id="dropdownRating" style="cursor: pointer;">
-				<div class="text-white d-flex mx-3 dropdown-btn" id="dropdownRatingFilter" data-bs-toggle="dropdown" aria-expanded="false">
+		<hr class="p-0 m-0 text-secondary">
+		<div class="p-0 offcanvas-body h-100 d-flex flex-column">
+			<div class="my-3" id="dropdownRating" style="cursor: pointer;">
+				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownRatingFilter" data-bs-toggle="collapse" data-bs-target="#collapseRatingFilter" aria-expanded="false">
 					Rating<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
-				<ul class="dropdown-menu scrollable-dropdown w-100 my-2" aria-labelledby="dropdownRatingFilter">
+				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseRatingFilter" id="collapseRatingFilter">
 					{% for rating in rating_filters %}
 					<li class="ratingItem" id="{{ rating.id }}">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="rating" value="{{ rating.id }}" id="ratingInput">
+						<div class="form-check mx-3 my-2">
+							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="rating" value="{{ rating.id }}" id="ratingInput">
 							<label class="form-check-label" for="ratingInput">{{ rating.name }}</label><span class="count-vineyards"> ({{ rating.count_vineyards }})</span>
 						</div>
 					</li>
 					{% endfor %}
 				</ul>
 			</div>
-			<hr class="p-0 m-0" style="color: white;">
-			<div class="dropdown my-2" id="dropdownWorldRegion" style="cursor: pointer;">
-				<div class="text-white d-flex mx-3 dropdown-btn" id="dropdownWorldRegionFilter" data-bs-toggle="dropdown" aria-expanded="false">
+			<hr class="p-0 m-0 text-secondary">
+			<div class="my-3" id="dropdownWorldRegion" style="cursor: pointer;">
+				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownWorldRegionFilter" data-bs-toggle="collapse" data-bs-target="#collapseWorldRegionFilter" aria-expanded="false">
 					World<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
-				<ul class="dropdown-menu scrollable-dropdown w-100 my-2" aria-labelledby="dropdownWorldRegionFilter">
+				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWorldRegionFilter" id="collapseWorldRegionFilter">
 					{% for world_region in world_region_filters %}
 					<li class="worldRegionItem" id="{{ world_region.id }}">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="world_region" id="worldRegionInput"
+						<div class="form-check mx-3 my-2">
+							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="world_region" id="worldRegionInput"
 								value="{{ world_region.id }}" country="{{ world_region.get_country_id }}" wine_region="{{ world_region.get_wine_region_id }}">
 							<label class="form-check-label" for="worldRegionInput">{{ world_region.name }}</label><span class="count-vineyards"> ({{ world_region.count_vineyards }})</span>
 						</div>
@@ -169,16 +173,16 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<hr class="p-0 m-0" style="color: white;">
-			<div class="dropdown my-2" id="dropdownCountry" style="cursor: pointer;">
-				<div class="text-white d-flex mx-3 dropdown-btn" id="dropdownCountryFilter" data-bs-toggle="dropdown" aria-expanded="false">
+			<hr class="p-0 m-0 text-secondary">
+			<div class="my-3" id="dropdownCountry" style="cursor: pointer;">
+				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownCountryFilter" data-bs-toggle="collapse" data-bs-target="#collapseCountryFilter" aria-expanded="false">
 					Countries<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
-				<ul class="dropdown-menu scrollable-dropdown w-100 my-2" aria-labelledby="dropdownCountryFilter">
+				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseCountryFilter" id="collapseCountryFilter">
 					{% for country in country_filters|dictsort:"name.lower" %}
 					<li class="countryItem" id="{{ country.id }}">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" id="countryInput"
+						<div class="form-check mx-3 my-2">
+							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="country" id="countryInput"
 								value="{{ country.id }}" world_region="{{ country.get_world_region_id }}"  wine_region="{{ country.get_wine_region_id }}">
 							<label class="form-check-label" for="countryInput">{{ country.name }}</label><span class="count-vineyards"> ({{ country.count_vineyards }})</span>
 						</div>
@@ -186,16 +190,16 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<hr class="p-0 m-0" style="color: white;">
-			<div class="dropdown my-2" id="dropdownWineRegion" style="cursor: pointer;">
-				<div class="text-white d-flex mx-3 dropdown-btn" id="dropdownWineRegionFilter" data-bs-toggle="dropdown" aria-expanded="false">
+			<hr class="p-0 m-0 text-secondary">
+			<div class="my-3" id="dropdownWineRegion" style="cursor: pointer;">
+				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownWineRegionFilter" data-bs-toggle="collapse" data-bs-target="#collapseWineRegionFilter" aria-expanded="false">
 					Wine Regions<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
-				<ul class="dropdown-menu scrollable-dropdown w-100 my-2" aria-labelledby="dropdownWineRegionFilter">
+				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWineRegionFilter" id="collapseWineRegionFilter">
 					{% for wine_region in wine_region_filters|dictsort:"name.lower" %}
 					<li class="wineRegionItem" id="{{ wine_region.id }}">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" id="wineRegionInput"
+						<div class="form-check mx-3 my-2">
+							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="wine_region" id="wineRegionInput"
 								value="{{ wine_region.id }}" world_region="{{ wine_region.get_world_region_id }}" country="{{ wine_region.get_country_id }}">
 							<label class="form-check-label" for="wineRegionInput">{{ wine_region.name }}</label><span class="count-vineyards"> ({{ wine_region.count_vineyards }})</span>
 						</div>
@@ -203,57 +207,57 @@
 					{% endfor %}
 				</ul>
 			</div>
-			<hr class="p-0 m-0" style="color: white;">
-			<div class="dropdown my-2" id="dropdownWine" style="cursor: pointer;">
-				<div class="text-white d-flex mx-3 dropdown-btn dropdown-btn" id="dropdownWineFilter" data-bs-toggle="dropdown" aria-expanded="false">
+			<hr class="p-0 m-0 text-secondary">
+			<div class="my-3" id="dropdownWine" style="cursor: pointer;">
+				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownWineFilter" data-bs-toggle="collapse" data-bs-target="#collapseWineFilter" aria-expanded="false">
 					Wines<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
-				<ul class="dropdown-menu scrollable-dropdown w-100 my-2" aria-labelledby="dropdownWineFilter">
+				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWineFilter" id="collapseWineFilter">
 					{% for wine in wine_filters|dictsort:"name.lower" %}
 					<li class="wineItem" id="{{ wine.id }}">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine" value="{{ wine.id }}" id="wineInput">
+						<div class="form-check mx-3 my-2">
+							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="wine" value="{{ wine.id }}" id="wineInput">
 							<label class="form-check-label" for="wineInput">{{ wine.name }}</label><span class="count-vineyards"> ({{ wine.count_vineyards }})</span>
 						</div>
 					</li>
 					{% endfor %}
 				</ul>
 			</div>
-			<hr class="p-0 m-0" style="color: white;">
-			<div class="dropdown my-2" id="dropdownFacility" style="cursor: pointer;">
-				<div class="text-white d-flex mx-3 dropdown-btn" id="dropdownFacilityFilter" data-bs-toggle="dropdown" aria-expanded="false">
+			<hr class="p-0 m-0 text-secondary">
+			<div class="my-3" id="dropdownFacility" style="cursor: pointer;">
+				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownFacilityFilter" data-bs-toggle="collapse" data-bs-target="#collapseFacilityFilter" aria-expanded="false">
 					Facilities<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
-				<ul class="dropdown-menu scrollable-dropdown w-100 my-2" aria-labelledby="dropdownFacilityFilter">
+				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseFacilityFilter" id="collapseFacilityFilter">
 					{% for facility in facility_filters|dictsort:"name.lower" %}
 					<li class="facilityItem" id="{{ facility.id }}">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="facility" value="{{ facility.id }}" id="facilityInput">
+						<div class="form-check mx-3 my-2">
+							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="facility" value="{{ facility.id }}" id="facilityInput">
 							<label class="form-check-label" for="facilityInput">{{ facility.name }}</label><span class="count-vineyards"> ({{ facility.count_vineyards }})</span>
 						</div>
 					</li>
 					{% endfor %}
 				</ul>
 			</div>
-			<hr class="p-0 m-0" style="color: white;">
-			<div class="dropdown my-2" id="dropdownService" style="cursor: pointer;">
-				<div class="text-white d-flex mx-3 dropdown-btn" id="dropdownServiceFilter" data-bs-toggle="dropdown" aria-expanded="false">
+			<hr class="p-0 m-0 text-secondary">
+			<div class="my-3" id="dropdownService" style="cursor: pointer;">
+				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownServiceFilter" data-bs-toggle="collapse" data-bs-target="#collapseServiceFilter" aria-expanded="false">
 					Services<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
-				<ul class="dropdown-menu scrollable-dropdown w-100 my-2" aria-labelledby="dropdownServiceFilter">
+				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseServiceFilter" id="collapseServiceFilter">
 					{% for service in service_filters|dictsort:"name.lower" %}
 					<li class="serviceItem" id="{{ service.id }}">
-						<div class="form-check mx-3">
-							<input class="form-check-input filter-checkbox" type="checkbox" data-filter="service" value="{{ service.id }}" id="serviceInput">
+						<div class="form-check mx-3 my-2">
+							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="service" value="{{ service.id }}" id="serviceInput">
 							<label class="form-check-label" for="serviceInput">{{ service.name }}</label><span class="count-vineyards"> ({{ service.count_vineyards }})</span>
 						</div>
 					</li>
 					{% endfor %}
 				</ul>
 			</div>
-			<hr class="p-0 m-0" style="color: white;">
-			<div class="text-white px-3 py-2 bg-secondary text-center" style="cursor: pointer;" id="view-filtered-vineyards" data-bs-dismiss="offcanvas">View all {{ total_vineyards }} Vineyards</div>
-			<hr class="p-0 m-0" style="color: white;">
+			<hr class="p-0 m-0 text-secondary">
+			<div class="px-3 py-2 text-center text-white" style="cursor: pointer; background-color: #2a415e;" id="view-filtered-vineyards" data-bs-dismiss="offcanvas">View all {{ total_vineyards }} Vineyards</div>
+			<div class="row flex-grow-1 overflow-auto m-0" style="background-color: #2a415e;"></div>
 		</div>
 	</div>
 </div>
