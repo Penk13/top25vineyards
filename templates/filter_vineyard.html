@@ -5,7 +5,7 @@
 	<p class="fw-bold mx-1 my-auto" style="font-size: 12px;">Filter by:</p>
 	<div class="dropdown my-2 mx-1" id="dropdownRating">
 		<button class="btn btn-outline-secondary btn-sm px-2 dropdown-btn" type="button" id="dropdownRatingFilter" data-bs-toggle="dropdown" aria-expanded="false">
-			<div class="pe-3">Rating<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
+			<div class="pe-3">Top Rated<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
 		</button>
 		<ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownRatingFilter" style="width: 300px">
 			{% for rating in rating_filters %}
@@ -143,7 +143,7 @@
 		<div class="p-0 offcanvas-body h-100 d-flex flex-column">
 			<div class="my-3" id="dropdownRating" style="cursor: pointer;">
 				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownRatingFilter" data-bs-toggle="collapse" data-bs-target="#collapseRatingFilter" aria-expanded="false">
-					Rating<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
+					<i class="bi bi-trophy me-3"></i>Top Rated<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseRatingFilter" id="collapseRatingFilter">
 					{% for rating in rating_filters %}
@@ -159,7 +159,7 @@
 			<hr class="p-0 m-0 text-secondary">
 			<div class="my-3" id="dropdownWorldRegion" style="cursor: pointer;">
 				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownWorldRegionFilter" data-bs-toggle="collapse" data-bs-target="#collapseWorldRegionFilter" aria-expanded="false">
-					World<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
+					<i class="bi bi-globe2 me-3"></i>World<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWorldRegionFilter" id="collapseWorldRegionFilter">
 					{% for world_region in world_region_filters %}
@@ -176,7 +176,7 @@
 			<hr class="p-0 m-0 text-secondary">
 			<div class="my-3" id="dropdownCountry" style="cursor: pointer;">
 				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownCountryFilter" data-bs-toggle="collapse" data-bs-target="#collapseCountryFilter" aria-expanded="false">
-					Countries<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
+					<i class="bi bi-geo-alt me-3"></i>Countries<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseCountryFilter" id="collapseCountryFilter">
 					{% for country in country_filters|dictsort:"name.lower" %}
@@ -193,7 +193,7 @@
 			<hr class="p-0 m-0 text-secondary">
 			<div class="my-3" id="dropdownWineRegion" style="cursor: pointer;">
 				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownWineRegionFilter" data-bs-toggle="collapse" data-bs-target="#collapseWineRegionFilter" aria-expanded="false">
-					Wine Regions<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
+					<i class="bi bi-geo-fill me-3"></i></i>Wine Regions<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWineRegionFilter" id="collapseWineRegionFilter">
 					{% for wine_region in wine_region_filters|dictsort:"name.lower" %}
@@ -210,7 +210,7 @@
 			<hr class="p-0 m-0 text-secondary">
 			<div class="my-3" id="dropdownWine" style="cursor: pointer;">
 				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownWineFilter" data-bs-toggle="collapse" data-bs-target="#collapseWineFilter" aria-expanded="false">
-					Wines<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
+					<i class="bi bi-droplet me-3"></i>Wines<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWineFilter" id="collapseWineFilter">
 					{% for wine in wine_filters|dictsort:"name.lower" %}
@@ -226,7 +226,7 @@
 			<hr class="p-0 m-0 text-secondary">
 			<div class="my-3" id="dropdownFacility" style="cursor: pointer;">
 				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownFacilityFilter" data-bs-toggle="collapse" data-bs-target="#collapseFacilityFilter" aria-expanded="false">
-					Facilities<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
+					<i class="bi bi-flower2 me-3"></i>Facilities<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseFacilityFilter" id="collapseFacilityFilter">
 					{% for facility in facility_filters|dictsort:"name.lower" %}
@@ -242,7 +242,7 @@
 			<hr class="p-0 m-0 text-secondary">
 			<div class="my-3" id="dropdownService" style="cursor: pointer;">
 				<div class="d-flex mx-3 collapse-btn collapsed" id="dropdownServiceFilter" data-bs-toggle="collapse" data-bs-target="#collapseServiceFilter" aria-expanded="false">
-					Services<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
+					<i class="bi bi-people me-3"></i>Services<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseServiceFilter" id="collapseServiceFilter">
 					{% for service in service_filters|dictsort:"name.lower" %}
