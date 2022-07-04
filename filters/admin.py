@@ -9,7 +9,7 @@ class WineRegionAdmin(admin.ModelAdmin):
             obj_id = request.resolver_match.kwargs["object_id"]
             obj = WineRegion.objects.get(id=obj_id)
             if db_field.name == "vineyards":
-                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+                kwargs["queryset"] = Vineyard.objects.filter(filter_tags__icontains=obj.name).distinct()
         except:
             pass
         return super(WineRegionAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
@@ -23,7 +23,7 @@ class WineAdmin(admin.ModelAdmin):
             obj_id = request.resolver_match.kwargs["object_id"]
             obj = Wine.objects.get(id=obj_id)
             if db_field.name == "vineyards":
-                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+                kwargs["queryset"] = Vineyard.objects.filter(filter_tags__icontains=obj.name).distinct()
         except:
             pass
         return super(WineAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
@@ -36,7 +36,7 @@ class FacilityAdmin(admin.ModelAdmin):
             obj_id = request.resolver_match.kwargs["object_id"]
             obj = Facility.objects.get(id=obj_id)
             if db_field.name == "vineyards":
-                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+                kwargs["queryset"] = Vineyard.objects.filter(filter_tags__icontains=obj.name).distinct()
         except:
             pass
         return super(FacilityAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
@@ -49,7 +49,7 @@ class ServiceAdmin(admin.ModelAdmin):
             obj_id = request.resolver_match.kwargs["object_id"]
             obj = Service.objects.get(id=obj_id)
             if db_field.name == "vineyards":
-                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+                kwargs["queryset"] = Vineyard.objects.filter(filter_tags__icontains=obj.name).distinct()
         except:
             pass
         return super(ServiceAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)
@@ -62,7 +62,7 @@ class RatingAdmin(admin.ModelAdmin):
             obj_id = request.resolver_match.kwargs["object_id"]
             obj = Rating.objects.get(id=obj_id)
             if db_field.name == "vineyards":
-                kwargs["queryset"] = Vineyard.objects.filter(tags__icontains=obj.name).distinct()
+                kwargs["queryset"] = Vineyard.objects.filter(filter_tags__icontains=obj.name).distinct()
         except:
             pass
         return super(RatingAdmin, self).formfield_for_manytomany(db_field, request, **kwargs)

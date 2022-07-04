@@ -128,7 +128,7 @@ class Vineyard(models.Model):
     send_email = models.BooleanField(default=True)
     display_list = models.BooleanField(default=True)
     display_billboard = models.BooleanField(default=True)
-    tags = models.TextField(blank=True)
+    filter_tags = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     username = models.CharField(max_length=30, blank=True)
     email1 = models.EmailField(blank=True)

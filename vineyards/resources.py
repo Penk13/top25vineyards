@@ -24,6 +24,7 @@ class VineyardResource(resources.ModelResource):
     wine_rg_url = fields.Field(attribute="wine_rg_url", column_name="wine_rg_url", widget=widgets.CharWidget(), default="")
     wines_url = fields.Field(attribute="wines_url", column_name="wines_url", widget=widgets.CharWidget(), default="")
     owner_url = fields.Field(attribute="owner_url", column_name="owner_url", widget=widgets.CharWidget(), default="")
+    filter_tags = fields.Field(attribute="filter_tags", column_name="filter_tags", widget=widgets.CharWidget(), default="")
 
     class Meta:
         model = Vineyard
@@ -31,12 +32,12 @@ class VineyardResource(resources.ModelResource):
         'text', 'address', 'website', 'web_text', 'number', 'wine_rg', 
         'region', 'regions', 'wines', 'size', 'grapes', 'owner', 'visits', 
         'google_map', 'cover', 'wine_rg_url', 'wines_url', 'owner_url', 
-        'hide_rating', 'display', 'send_email',)
+        'hide_rating', 'display', 'send_email', 'filter_tags')
         export_order = ('id', 'name', 'rating', 'username', 'email2', 
         'text', 'address', 'website', 'web_text', 'number', 'wine_rg', 
         'region', 'regions', 'wines', 'size', 'grapes', 'owner', 'visits', 
         'google_map', 'cover', 'wine_rg_url', 'wines_url', 'owner_url', 
-        'hide_rating', 'display', 'send_email',)
+        'hide_rating', 'display', 'send_email', 'filter_tags')
         import_id_fields = ['id']
         skip_unchanged = True
         report_skipped = True
