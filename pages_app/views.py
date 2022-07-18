@@ -87,16 +87,19 @@ def footerpage(request, slug):
 
     if slug == "contact-us":
         contact_entry_form = ContactEntryForm()
-        if request.method == "POST":
-            contact_entry_form = ContactEntryForm(request.POST)
-            if contact_entry_form.is_valid():
-                ContactEntry.objects.create(
-                    name = contact_entry_form.cleaned_data["name"],
-                    email = contact_entry_form.cleaned_data["email"],
-                    subject = contact_entry_form.cleaned_data["subject"],
-                    message = contact_entry_form.cleaned_data["message"])
-                request.session["contact_form_msg"] = "Your message has been sent! Thank you!"
-                return redirect("mainpage")
+        if request.user.is_authenticated:
+            if request.method == "POST":
+                contact_entry_form = ContactEntryForm(request.POST)
+                if contact_entry_form.is_valid():
+                    ContactEntry.objects.create(
+                        name = contact_entry_form.cleaned_data["name"],
+                        email = contact_entry_form.cleaned_data["email"],
+                        subject = contact_entry_form.cleaned_data["subject"],
+                        message = contact_entry_form.cleaned_data["message"])
+                    request.session["contact_form_msg"] = "Your message has been sent! Thank you!"
+                    return redirect("mainpage")
+        else:
+            return redirect("account_login")
 
     elif slug == "newsletter":
         subscriber_form = SubscriberForm()
