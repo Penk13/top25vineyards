@@ -6,11 +6,11 @@ from filters.models import WorldRegion, Country, WineRegion, Wine, Facility, Ser
 def base_variable(request):
     # Filter Vineyard
     world_region_filters = WorldRegion.objects.all().order_by("order")
-    country_filters = Country.objects.all()
-    wine_region_filters = WineRegion.objects.all()
-    wine_filters = Wine.objects.all()
-    facility_filters = Facility.objects.all()
-    service_filters = Service.objects.all()
+    country_filters = Country.objects.all().order_by("name")
+    wine_region_filters = WineRegion.objects.all().order_by("name")
+    wine_filters = Wine.objects.all().order_by("name")
+    facility_filters = Facility.objects.all().order_by("name")
+    service_filters = Service.objects.all().order_by("name")
     rating_filters = Rating.objects.all().order_by("order")
 
     # Base

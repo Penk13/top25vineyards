@@ -89,3 +89,64 @@ def load_more_data(request):
         "page_range": page_range,
     })
     return JsonResponse({'data': data, 'total_vineyards': total_vineyards})
+
+
+def count_vineyards(request):
+    currentVineyards = request.GET.get('currentVineyards')
+    currentVineyards = currentVineyards.strip('][').split(', ')
+
+    world_region = WorldRegion.objects.all().order_by("order")
+    country = Country.objects.all().order_by("name")
+    wine_region = WineRegion.objects.all().order_by("name")
+    wine = Wine.objects.all().order_by("name")
+    facility = Facility.objects.all().order_by("name")
+    service = Service.objects.all().order_by("name")
+    rating = Rating.objects.all().order_by("order")
+
+    count_list = []
+    for i in rating:
+        vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
+        vineyardList = vineyardList.filter(rating_filter=i)
+        vineyards_qs = vineyardList.filter(display=True).distinct()
+        count_list.append(vineyards_qs.count())
+
+    for i in world_region:
+        vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
+        qs2 = Country.objects.filter(worldregion=i).values_list('wine_rg', flat=True)
+        vineyardList = vineyardList.filter(wineregion_filter__in=qs2)
+        vineyards_qs = vineyardList.filter(display=True).distinct()
+        count_list.append(vineyards_qs.count())
+
+    for i in country:
+        vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
+        qs = WineRegion.objects.filter(country=i).values_list('id', flat=True)
+        vineyardList = vineyardList.filter(wineregion_filter__in=qs)
+        vineyards_qs = vineyardList.filter(display=True).distinct()
+        count_list.append(vineyards_qs.count())
+
+    for i in wine_region:
+        vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
+        vineyardList = vineyardList.filter(wineregion_filter=i)
+        vineyards_qs = vineyardList.filter(display=True).distinct()
+        count_list.append(vineyards_qs.count())
+
+    for i in wine:
+        vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
+        vineyardList = vineyardList.filter(wine_filter=i)
+        vineyards_qs = vineyardList.filter(display=True).distinct()
+        count_list.append(vineyards_qs.count())
+
+    for i in facility:
+        vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
+        vineyardList = vineyardList.filter(facility_filter=i)
+        vineyards_qs = vineyardList.filter(display=True).distinct()
+        count_list.append(vineyards_qs.count())
+
+    for i in service:
+        vineyardList = Vineyard.objects.filter(id__in=currentVineyards)
+        vineyardList = vineyardList.filter(service_filter=i)
+        vineyards_qs = vineyardList.filter(display=True).distinct()
+        count_list.append(vineyards_qs.count())
+
+    count_result = count_list + count_list
+    return JsonResponse({'count_result': count_result})

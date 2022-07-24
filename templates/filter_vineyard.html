@@ -39,7 +39,7 @@
 			<div class="pe-3">Countries<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
 		</button>
 		<ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownCountryFilter" style="width: 300px">
-			{% for country in country_filters|dictsort:"name.lower" %}
+			{% for country in country_filters %}
 			<li class="countryItem" id="{{ country.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="country" id="countryInput"
@@ -55,7 +55,7 @@
 			<div class="pe-3">Wine Regions<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
 		</button>
 		<ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownWineRegionFilter" style="width: 300px">
-			{% for wine_region in wine_region_filters|dictsort:"name.lower" %}
+			{% for wine_region in wine_region_filters %}
 			<li class="wineRegionItem" id="{{ wine_region.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine_region" id="wineRegionInput"
@@ -71,7 +71,7 @@
 			<div class="pe-3">Wines<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
 		</button>
 		<ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownWineFilter" style="width: 300px">
-			{% for wine in wine_filters|dictsort:"name.lower" %}
+			{% for wine in wine_filters %}
 			<li class="wineItem" id="{{ wine.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="wine" value="{{ wine.id }}" id="wineInput">
@@ -86,7 +86,7 @@
 			<div class="pe-3">Facilities<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
 		</button>
 		<ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownFacilityFilter" style="width: 300px">
-			{% for facility in facility_filters|dictsort:"name.lower" %}
+			{% for facility in facility_filters %}
 			<li class="facilityItem" id="{{ facility.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="facility" value="{{ facility.id }}" id="facilityInput">
@@ -101,7 +101,7 @@
 			<div class="pe-3">Services<i class="fa-solid fa-sort-down ms-1" style="position: absolute; top: 20%;"></i></div>
 		</button>
 		<ul class="dropdown-menu scrollable-dropdown" aria-labelledby="dropdownServiceFilter" style="width: 300px">
-			{% for service in service_filters|dictsort:"name.lower" %}
+			{% for service in service_filters %}
 			<li class="serviceItem" id="{{ service.id }}">
 				<div class="form-check mx-3">
 					<input class="form-check-input filter-checkbox" type="checkbox" data-filter="service" value="{{ service.id }}" id="serviceInput">
@@ -179,7 +179,7 @@
 					<i class="bi bi-geo-alt me-3"></i>Countries<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseCountryFilter" id="collapseCountryFilter">
-					{% for country in country_filters|dictsort:"name.lower" %}
+					{% for country in country_filters %}
 					<li class="countryItem" id="{{ country.id }}">
 						<div class="form-check mx-3 my-2">
 							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="country" id="countryInput"
@@ -196,7 +196,7 @@
 					<i class="bi bi-geo-fill me-3"></i></i>Wine Regions<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWineRegionFilter" id="collapseWineRegionFilter">
-					{% for wine_region in wine_region_filters|dictsort:"name.lower" %}
+					{% for wine_region in wine_region_filters %}
 					<li class="wineRegionItem" id="{{ wine_region.id }}">
 						<div class="form-check mx-3 my-2">
 							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="wine_region" id="wineRegionInput"
@@ -213,7 +213,7 @@
 					<i class="bi bi-droplet me-3"></i>Wines<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseWineFilter" id="collapseWineFilter">
-					{% for wine in wine_filters|dictsort:"name.lower" %}
+					{% for wine in wine_filters %}
 					<li class="wineItem" id="{{ wine.id }}">
 						<div class="form-check mx-3 my-2">
 							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="wine" value="{{ wine.id }}" id="wineInput">
@@ -229,7 +229,7 @@
 					<i class="bi bi-flower2 me-3"></i>Facilities<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseFacilityFilter" id="collapseFacilityFilter">
-					{% for facility in facility_filters|dictsort:"name.lower" %}
+					{% for facility in facility_filters %}
 					<li class="facilityItem" id="{{ facility.id }}">
 						<div class="form-check mx-3 my-2">
 							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="facility" value="{{ facility.id }}" id="facilityInput">
@@ -245,7 +245,7 @@
 					<i class="bi bi-people me-3"></i>Services<i class="fa-solid fa-angle-down ms-auto my-auto"></i>
 				</div>
 				<ul class="collapse list-group scrollable-dropdown w-100 my-2" aria-labelledby="collapseServiceFilter" id="collapseServiceFilter">
-					{% for service in service_filters|dictsort:"name.lower" %}
+					{% for service in service_filters %}
 					<li class="serviceItem" id="{{ service.id }}">
 						<div class="form-check mx-3 my-2">
 							<input class="form-check-input filter-checkbox border-dark" type="checkbox" data-filter="service" value="{{ service.id }}" id="serviceInput">

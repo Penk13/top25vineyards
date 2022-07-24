@@ -16,7 +16,7 @@ class WineRegion(models.Model):
         return Country.objects.get(wine_rg=self).id
 
     def count_vineyards(self):
-        return self.vineyards.count()
+        return self.vineyards.filter(display=True).count()
 
 
 class Country(models.Model):
@@ -43,7 +43,7 @@ class Country(models.Model):
     def count_vineyards(self):
         vineyard_list = []
         for wine_rg in self.wine_rg.all():
-            for vineyard in wine_rg.vineyards.all():
+            for vineyard in wine_rg.vineyards.filter(display=True).all():
                 vineyard_list.append(vineyard.id)
         result = list(dict.fromkeys(vineyard_list))
         return len(result)
@@ -75,7 +75,7 @@ class WorldRegion(models.Model):
         vineyard_list = []
         for country in self.country.all():
             for wine_region in country.wine_rg.all():
-                for vineyard in wine_region.vineyards.all():
+                for vineyard in wine_region.vineyards.filter(display=True).all():
                     vineyard_list.append(vineyard.id)
         result = list(dict.fromkeys(vineyard_list))
         return len(result)
@@ -89,7 +89,7 @@ class Wine(models.Model):
         return self.name
 
     def count_vineyards(self):
-        return self.vineyards.count()
+        return self.vineyards.filter(display=True).count()
 
 
 class Facility(models.Model):
@@ -100,7 +100,7 @@ class Facility(models.Model):
         return self.name
 
     def count_vineyards(self):
-        return self.vineyards.count()
+        return self.vineyards.filter(display=True).count()
 
 
 class Service(models.Model):
@@ -111,7 +111,7 @@ class Service(models.Model):
         return self.name
 
     def count_vineyards(self):
-        return self.vineyards.count()
+        return self.vineyards.filter(display=True).count()
 
 
 class Rating(models.Model):
@@ -123,4 +123,4 @@ class Rating(models.Model):
         return self.name
 
     def count_vineyards(self):
-        return self.vineyards.count()
+        return self.vineyards.filter(display=True).count()

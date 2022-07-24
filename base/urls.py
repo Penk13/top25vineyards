@@ -24,7 +24,7 @@ from accounts.views import profile
 from list.views import post_detail, autoblogging, pull_feeds
 from pages_app.views import mainpage, footerpage, searchpage, page, listpage
 from vineyards.views import vineyard_detail, vineyard_region, rr_form, edit_vineyard
-from filters.views import filter_data, load_more_data
+from filters.views import filter_data, load_more_data, count_vineyards
 
 urlpatterns = [
     # admin
@@ -35,7 +35,8 @@ urlpatterns = [
 
     # filters
     path('filter-data/', filter_data, name='filter-data'),
-    path('load-more-data', load_more_data, name='load-more-data'),
+    path('load-more-data/', load_more_data, name='load-more-data'),
+    path('count-vineyards/', count_vineyards, name='count-vineyards'),
 
     # accounts
     path('', include('allauth.urls')),

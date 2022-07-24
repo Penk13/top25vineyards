@@ -161,17 +161,44 @@ $(function() {
 // Filter Checkbox
 $(document).ready(function(){
   $(".ajaxLoader").hide();
+  countVineyards();
 
   // If user select anything
 	$(".filter-checkbox").on("change", function(){
     closeFilterDropdown();
     syncFilterCheckbox($(this));
     showSelectedFilter();
+    showAllFilter();
     filterBar();
     filterData();
 	});
   
 });
+
+// Count Vineyards
+function countVineyards(){
+  var _data = {};
+  _data = {currentVineyards};
+
+  // Run Ajax
+  $.ajax({
+    url:'/count-vineyards',
+    data:_data,
+    dataType:'json',
+    beforeSend:function(){
+      // $(".ajaxLoader").show();
+    },
+    success:function(res){
+      $(".filter-checkbox").each(function(index, ele){
+        $(this).next().next().text(" (" + res.count_result[index] + ")");
+        if ($(this).next().next().text() == " (0)") {
+          $(this).parent().parent().hide();
+        }
+      });
+    }
+  });
+  
+}
 
 // Sync Filter Checkbox on Filter Bar and Offcanvas
 function syncFilterCheckbox(current){
@@ -203,31 +230,32 @@ function removeSelectedFilter(text){
 // Filter Data
 function filterData(){
   var _data={};
-    _data = {defaultVineyards, perPage};
+  _data = {defaultVineyards, perPage};
 
-		$(".filter-checkbox").each(function(index,ele){
-			var _filterVal=$(this).val();
-			var _filterKey=$(this).data('filter');
-			_data[_filterKey]=Array.from(document.querySelectorAll('input[data-filter='+_filterKey+']:checked')).map(function(el){
-			 	return el.value;
-			});
-		});
-    
-    // Run Ajax
-		$.ajax({
-			url:'/filter-data',
-			data:_data,
-			dataType:'json',
-			beforeSend:function(){
-				$(".ajaxLoader").show();
-			},
-			success:function(res){
-				$("#filteredVineyards").html(res.data);
-				$(".ajaxLoader").hide();
-        $('html, body').animate({scrollTop: $("#filteredVineyards").offset().top-300}, 100); 
-        $('#view-filtered-vineyards').text("View all " + res.total_vineyards + " Vineyards");
-			}
-		});
+  $(".filter-checkbox").each(function(index,ele){
+    var _filterVal=$(this).val();
+    var _filterKey=$(this).data('filter');
+    _data[_filterKey]=Array.from(document.querySelectorAll('input[data-filter='+_filterKey+']:checked')).map(function(el){
+      return el.value;
+    });
+  });
+  
+  // Run Ajax
+  $.ajax({
+    url:'/filter-data',
+    data:_data,
+    dataType:'json',
+    beforeSend:function(){
+      $(".ajaxLoader").show();
+    },
+    success:function(res){
+      $("#filteredVineyards").html(res.data);
+      $(".ajaxLoader").hide();
+      $('html, body').animate({scrollTop: $("#filteredVineyards").offset().top-300}, 100); 
+      $('#view-filtered-vineyards').text("View all " + res.total_vineyards + " Vineyards");
+      countVineyards();
+    }
+  });
 }
 
 // Show Selected Filters
@@ -245,6 +273,25 @@ function showSelectedFilter(){
     list += "<button class='btn btn-secondary btn-sm ps-3 pe-2 mx-1 selected-filter' type='button' onclick='removeSelectedFilter(\""+selectedFilters[i]+"\")' >"+selectedFilters[i]+"<span class='ps-2 pe-1'>x</span>"+"</button>";
   }
   $(".selectedFilters").html(list);
+}
+
+// Show all filter
+function showAllFilter() {
+  $('.ratingItem').show();
+  $('.worldRegionItem').show();
+  $('.countryItem').show();
+  $('.wineRegionItem').show();
+  $('.wineItem').show();
+  $('.facilityItem').show();
+  $('.serviceItem').show();
+  $('.ratingItem div').children('input[type="checkbox"]').attr("disabled", false);
+  $('.worldRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
+  $('.countryItem div').children('input[type="checkbox"]').attr("disabled", false);
+  $('.wineRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
+  $('.wineItem div').children('input[type="checkbox"]').attr("disabled", false);
+  $('.facilityItem div').children('input[type="checkbox"]').attr("disabled", false);
+  $('.serviceItem div').children('input[type="checkbox"]').attr("disabled", false);
+  $('.count-vineyards').css("opacity", "1.0");
 }
 
 // Filter Bar
@@ -274,16 +321,6 @@ function filterBar(){
   wine_region !== undefined ? wine_region = wine_region.split(',') : wine_region = [];
   wine_region_world_region !== undefined ? wine_region_world_region = wine_region_world_region.split(',') : wine_region_world_region = [];
   wine_region_country !== undefined ? wine_region_country = wine_region_country.split(',') : wine_region_country = [];
-
-  function showAllFilter() {
-    $('.worldRegionItem').show();
-    $('.countryItem').show();
-    $('.wineRegionItem').show();
-    $('.worldRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
-    $('.countryItem div').children('input[type="checkbox"]').attr("disabled", false);
-    $('.wineRegionItem div').children('input[type="checkbox"]').attr("disabled", false);
-    $('.count-vineyards').css("opacity", "1.0");
-  }
 
   // Case 1: Select World Region
   if(world_region.length == 1 && country.length == 0 && wine_region == 0) {
